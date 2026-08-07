@@ -1,11 +1,11 @@
 name: Deploy preview to GitHub Pages
 
 # Internal preview channel only — the live site is hosted on SiteGround.
-# Runs on every push to master and produces a fresh static export.
+# Runs on every push to main and produces a fresh static export.
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
