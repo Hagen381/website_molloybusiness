@@ -49,5 +49,20 @@ Regeln dazu:
 
 ## GitHub-Pages-Basis-URL
 
-<!-- Wird nach Einrichtung des Pages-Deployments hier eingetragen und danach
-     bei jeder Änderung des Repo-Namens/Owners aktualisiert. -->
+**https://hagen381.github.io/website_molloybusiness/**
+
+(Homepage-Vorschau entsprechend: https://hagen381.github.io/website_molloybusiness/index.html
+bzw. einfach die Basis-URL, da `/` auf `index.html` zeigt.)
+
+Repo: `https://github.com/Hagen381/website_molloybusiness` (Owner: Hagen381),
+**public** (Pflicht — GitHub Pages ist auf dem aktuellen Plan für private
+Repos nicht verfügbar), Default-Branch `main`, Pages-Quelle: GitHub Actions.
+
+Hinweis für künftige Sessions in dieser Sandbox: `gh` CLI ist unter
+`C:\Program Files\GitHub CLI\gh.exe` installiert und war bereits einmal
+per Device-Code-Flow authentifiziert (Account Hagen381, Scopes inkl.
+`workflow`). Falls `git push` erneut an fehlender Auth scheitert
+(`terminal prompts disabled`), NICHT einen lokalen Terminal-Workaround
+vorschlagen, sondern zuerst prüfen ob `gh auth status` noch eingeloggt ist;
+falls nicht, denselben Device-Code-Weg (`gh auth login --web`, Code an den
+Nutzer weitergeben) erneut gehen.
