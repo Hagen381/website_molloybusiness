@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  /* Base colors, extracted from the live molloybusiness.com (OceanWP + Elementor) */
+  --cream: #f2ede7; /* page background */
+  --surface: #ffffff; /* header / card background */
+  --footer-bg: #595959; /* footer background, also default heading color */
+  --text: #545454; /* body text */
+  --heading: #595959; /* heading text */
+  --gold: #ac8343; /* primary accent: nav links, buttons, links */
+  --gold-light: #c49c5e; /* secondary accent: h3, icon accents */
+  --gray-light: #d9d9d9; /* secondary button bg, social icon bg */
+  --social-icon: #69727d;
+
+  --heading-font: "Antic Didone", Georgia, serif;
+  --body-font: Arial, Helvetica, sans-serif;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-surface: var(--surface);
+  --color-footer: var(--footer-bg);
+  --color-text: var(--text);
+  --color-heading: var(--heading);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gray-light: var(--gray-light);
+  --color-social-icon: var(--social-icon);
+
+  --font-heading: var(--heading-font);
+  --font-body: var(--body-font);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 1.4px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+h3 {
+  color: var(--color-gold-light);
+  font-weight: 400;
+}
+
+/* Shared button style matching the original site's Elementor buttons:
+   rounded pill, drop shadow, uppercase-free serif label. */
+.btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  letter-spacing: 1.4px;
+  padding: 5px 24px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 14px 0px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary {
+  background: var(--color-gold);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: var(--color-gray-light);
+  color: var(--color-gold-light);
+}
