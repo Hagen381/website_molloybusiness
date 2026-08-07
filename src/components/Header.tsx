@@ -5,6 +5,7 @@ import { useState } from "react";
 import ExportedImage from "next-image-export-optimizer";
 import logo from "@/assets/images/logo.png";
 import { navigation } from "@/lib/site-config";
+import { basePath } from "@/lib/base-path";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function Header() {
             width={72}
             height={72}
             priority
+            basePath={basePath}
             className="h-16 w-16 rounded-full"
           />
         </Link>

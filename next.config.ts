@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
+// Only set for the GitHub Pages preview build (see .github/workflows/gh-pages.yml).
+// The production build for SiteGround (npm run build, no env var set) stays at
+// basePath "" so the site keeps living at the domain root.
+const basePath = process.env.NEXT_BUILD_BASE_PATH || "";
+
 const nextConfig: NextConfig = {
   output: "export",
+  basePath: basePath || undefined,
   images: {
     loader: "custom",
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -16,6 +22,7 @@ const nextConfig: NextConfig = {
     nextImageExportOptimizer_exportFolderName: "nextImageExportOptimizer",
     nextImageExportOptimizer_generateAndUseBlurImages: "true",
     nextImageExportOptimizer_remoteImageCacheTTL: "0",
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 };
 

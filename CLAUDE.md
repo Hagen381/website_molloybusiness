@@ -1,1 +1,53 @@
 @AGENTS.md
+
+# Projekt-Richtlinien: molloybusiness.com Rebuild (WordPress → Next.js)
+
+## Kontext
+
+Dieses Repo ist der Next.js-Nachbau (App Router, Static Export) von
+molloybusiness.com (aktuell WordPress/Elementor). Ziel: pixelgenaues Design,
+gehostet später auf SiteGround (klassisches Shared Hosting, kein Node.js-Server).
+Deshalb bleibt `output: "export"` in `next.config.ts` verpflichtend, ebenso
+`next-image-export-optimizer` statt Next/Image-Serveroptimierung.
+
+Design-Tokens (Farben, Fonts, Button-Stil) sind aus dem Original extrahiert
+(siehe `src/app/globals.css`, `src/lib/site-config.ts`) und dürfen nicht ohne
+ausdrücklichen Auftrag geändert werden — Struktur, Texte und Technik werden
+modernisiert, das Erscheinungsbild bleibt erhalten.
+
+## Vorschau-Kanal: GitHub Pages
+
+Zusätzlich zum späteren SiteGround-Hosting gibt es einen GitHub-Pages-Kanal,
+der **ausschließlich der internen Kontrolle** dient (kein Ersatz für
+SiteGround). Bei jedem Push auf den Standard-Branch deployt eine GitHub
+Action automatisch einen frischen Static-Export-Build dorthin. Kein manueller
+Zusatzschritt nötig — nach jedem Push kurz warten, bis der Actions-Run grün
+ist, dann ist die Vorschau aktuell.
+
+## Automatische Abschluss-Zusammenfassung
+
+Am Ende JEDER Aufgabe (egal wie klein) IMMER eine Zusammenfassung in genau
+diesem Format ausgeben, ohne dass der Nutzer danach fragen muss:
+
+```
+- Erledigt: [was konkret gebaut/geändert wurde, stichpunktartig]
+- Geänderte/neue Dateien bzw. Routen: [Liste]
+- Abweichungen vom Original oder von der Anweisung (falls es welche gab) und warum
+- Offene Punkte / was noch fehlt für diesen Abschnitt
+- Vorschau-Link: [GitHub-Pages-URL, ggf. mit Hinweis auf betroffene Unterseite]
+```
+
+Regeln dazu:
+- Diese Zusammenfassung ersetzt keine sonstige Kommunikation während der
+  Arbeit, sie steht zusätzlich am Ende.
+- "Abweichungen" nur auflisten, wenn es welche gab — sonst kurz "keine".
+- Der Vorschau-Link muss die tatsächliche GitHub-Pages-Basis-URL dieses Repos
+  sein (siehe unten), nicht molloybusiness.com.
+- Vor der Zusammenfassung: sicherstellen, dass der Stand committet (und wenn
+  vom Nutzer für diese Aufgabe erlaubt) gepusht ist, damit der Vorschau-Link
+  auch tatsächlich den beschriebenen Stand zeigt.
+
+## GitHub-Pages-Basis-URL
+
+<!-- Wird nach Einrichtung des Pages-Deployments hier eingetragen und danach
+     bei jeder Änderung des Repo-Namens/Owners aktualisiert. -->

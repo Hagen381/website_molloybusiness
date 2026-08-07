@@ -3,7 +3,12 @@ import { Antic_Didone } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/lib/site-config";
+import { basePath } from "@/lib/base-path";
 import "./globals.css";
+
+// The GitHub Pages preview build sets NEXT_PUBLIC_BASE_PATH, which we use
+// here as the signal to keep that internal preview out of search engines.
+const isPreviewBuild = Boolean(basePath);
 
 const anticDidone = Antic_Didone({
   variable: "--heading-font",
@@ -21,6 +26,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  robots: isPreviewBuild
+    ? { index: false, follow: false }
+    : { index: true, follow: true },
   openGraph: {
     type: "website",
     locale: "de_DE",

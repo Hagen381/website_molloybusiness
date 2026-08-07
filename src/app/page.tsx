@@ -2,6 +2,7 @@ import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import heroImage from "@/assets/images/hero-juliette.jpg";
 import { services, siteConfig } from "@/lib/site-config";
+import { basePath } from "@/lib/base-path";
 
 const audiences = [
   "Touristische Unternehmen",
@@ -82,6 +83,7 @@ export default function Home() {
               alt="Juliette Oppel, Pinterest Marketing Expertin"
               className="rounded-2xl object-cover shadow-lg"
               sizes="(min-width: 1024px) 480px, 100vw"
+              basePath={basePath}
               priority
             />
           </div>
