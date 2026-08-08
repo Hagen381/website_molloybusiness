@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import { priceVatNote, services, siteConfig } from "@/lib/site-config";
 import { formatPrice } from "@/lib/format";
 
@@ -128,9 +129,11 @@ const pageJsonLd = {
 export default function PinterestAccountManagement() {
   return (
     <>
+      <Breadcrumb pageName={management.title} />
+
       {/* Intro */}
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
+        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Pinterest Account Management
         </p>
         <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
@@ -199,15 +202,15 @@ export default function PinterestAccountManagement() {
           richtige Startpunkt ist.
         </p>
         <p className="font-body mt-4 text-lg">
-          Einen Überblick über alle Leistungen als{" "}
-          <Link href="/" className="text-gold hover:underline">
+          Wie sich das Account Management in die übrigen Leistungen als{" "}
+          <Link href="/" className="text-gold-text hover:underline">
             Pinterest Marketing Agentur
           </Link>{" "}
-          gibt die Startseite von molloy business. Wer noch keinen
+          einfügt, zeigt die Startseite von molloy business. Wer noch keinen
           strukturierten Account hat, findet mit dem{" "}
           <Link
             href="/pinterest-account-aufbau/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Account Aufbau
           </Link>{" "}

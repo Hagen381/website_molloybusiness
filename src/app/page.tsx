@@ -169,7 +169,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 pt-14 pb-16 sm:pt-20">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
-            <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
+            <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
               Pinterest Marketing Agentur
             </p>
             <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
@@ -412,7 +412,7 @@ export default function Home() {
       <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="mb-12 text-center">
-            <p className="font-body text-gold text-sm tracking-[2px] uppercase">
+            <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
               Meine Angebote
             </p>
             <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
@@ -435,7 +435,7 @@ export default function Home() {
                   <strong>{formatPrice(service.price)}</strong>{" "}
                   {service.priceUnit}
                 </p>
-                <span className="text-gold font-body mt-2 text-sm group-hover:underline">
+                <span className="text-gold-text font-body mt-2 text-sm group-hover:underline">
                   mehr erfahren →
                 </span>
               </Link>
@@ -464,7 +464,7 @@ export default function Home() {
           molloy business arbeitet, arbeitet direkt mit ihr.
         </p>
         <p className="font-body mt-6">
-          <Link href="#" className="text-gold hover:underline">
+          <Link href="#" className="text-gold-text hover:underline">
             mehr über mich →
           </Link>
         </p>
@@ -474,7 +474,7 @@ export default function Home() {
       <section className="bg-surface">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="mb-12 text-center">
-            <p className="font-body text-gold text-sm tracking-[2px] uppercase">
+            <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
               Kundenstimmen
             </p>
             <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">

@@ -7,7 +7,8 @@
   --footer-bg: #595959; /* footer background, also default heading color */
   --text: #545454; /* body text */
   --heading: #595959; /* heading text */
-  --gold: #ac8343; /* primary accent: nav links, buttons, links */
+  --gold: #ac8343; /* primary accent: nav links, buttons, active state */
+  --gold-text: #856434; /* darker gold for small/body text — meets 4.5:1 contrast on cream */
   --gold-light: #c49c5e; /* secondary accent: h3, icon accents */
   --gray-light: #d9d9d9; /* secondary button bg, social icon bg */
   --social-icon: #69727d;
@@ -23,6 +24,7 @@
   --color-text: var(--text);
   --color-heading: var(--heading);
   --color-gold: var(--gold);
+  --color-gold-text: var(--gold-text);
   --color-gold-light: var(--gold-light);
   --color-gray-light: var(--gray-light);
   --color-social-icon: var(--social-icon);

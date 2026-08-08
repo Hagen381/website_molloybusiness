@@ -26,6 +26,10 @@ modernisiert, das Erscheinungsbild bleibt erhalten.
   damit `src/app/sitemap.ts` sie automatisch mit aufnimmt.
 - `trailingSlash: true` in `next.config.ts` ist Pflicht (alle URLs enden auf
   `/`, wichtig für die späteren 301-Redirects von den alten WordPress-URLs).
+- Jede neue Unterseite bekommt die `Breadcrumb`-Komponente
+  (`src/components/Breadcrumb.tsx`) oberhalb der H1, mit demselben
+  Seitennamen wie im `BreadcrumbList`-Schema der Seite (am sichersten durch
+  Übergabe derselben Variable, die auch im `pageJsonLd` verwendet wird).
 
 ## Vorschau-Kanal: GitHub Pages
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import { priceVatNote, services, siteConfig } from "@/lib/site-config";
 import { formatPrice } from "@/lib/format";
 
@@ -125,9 +126,11 @@ const pageJsonLd = {
 export default function PinterestContentPaket() {
   return (
     <>
+      <Breadcrumb pageName={contentPaket.title} />
+
       {/* Intro */}
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
+        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Pinterest Content Paket
         </p>
         <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
@@ -191,15 +194,16 @@ export default function PinterestContentPaket() {
           Preis enthalten – die Auswahl und der Einsatz bleiben bei dir.
         </p>
         <p className="font-body mt-4 text-lg">
-          Einen Überblick über alle Leistungen als{" "}
-          <Link href="/" className="text-gold hover:underline">
+          Als{" "}
+          <Link href="/" className="text-gold-text hover:underline">
             Pinterest Marketing Agentur
           </Link>{" "}
-          gibt die Startseite von molloy business. Soll auch die
-          Veröffentlichung abgegeben werden, ist das{" "}
+          bietet molloy business auf der Startseite einen Überblick über
+          alle Leistungen. Soll auch die Veröffentlichung abgegeben werden,
+          ist das{" "}
           <Link
             href="/pinterest-account-management/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Account Management
           </Link>{" "}

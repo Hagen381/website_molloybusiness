@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import { siteConfig } from "@/lib/site-config";
 
 const path = "/pinterest-marketing-finanzdienstleister/";
@@ -138,9 +139,11 @@ const pageJsonLd = {
 export default function PinterestMarketingFinanzdienstleister() {
   return (
     <>
+      <Breadcrumb pageName={service.name} />
+
       {/* Intro */}
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
+        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Pinterest Marketing Finanzdienstleister
         </p>
         <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
@@ -260,7 +263,7 @@ export default function PinterestMarketingFinanzdienstleister() {
           Fehlt noch ein strukturierter Account, entsteht er im{" "}
           <Link
             href="/pinterest-account-aufbau/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Account Aufbau
           </Link>{" "}
@@ -268,7 +271,7 @@ export default function PinterestMarketingFinanzdienstleister() {
           Steht der Account bereits, übernimmt das{" "}
           <Link
             href="/pinterest-account-management/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Account Management
           </Link>{" "}
@@ -280,28 +283,40 @@ export default function PinterestMarketingFinanzdienstleister() {
           findet im{" "}
           <Link
             href="/pinterest-content-paket/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Content Paket
           </Link>{" "}
           monatlich SEO-optimierte Pins zum eigenen Redaktionsplan. Für
           bestehende Accounts mit Optimierungsbedarf liefert das{" "}
-          <Link href="/pinterest-audit/" className="text-gold hover:underline">
+          <Link href="/pinterest-audit/" className="text-gold-text hover:underline">
             Pinterest Audit
           </Link>{" "}
           eine Analyse mit konkreten Handlungsempfehlungen, und ein{" "}
           <Link
             href="/pinterest-strategie-call/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Strategie Call
           </Link>{" "}
-          klärt vorab, welches Format zur eigenen Ausgangslage passt. Einen
-          Überblick über alle Leistungen als{" "}
-          <Link href="/" className="text-gold hover:underline">
+          klärt vorab, welches Format zur eigenen Ausgangslage passt. Wie
+          diese Formate zusammenspielen, zeigt die Startseite von molloy
+          business als{" "}
+          <Link href="/" className="text-gold-text hover:underline">
             Pinterest Marketing Agentur
           </Link>{" "}
-          gibt die Startseite von molloy business.
+          im Überblick.
+        </p>
+        <p className="font-body mt-4 text-lg">
+          Sollen Marketing- oder Kommunikationsteams die Grundlagen von
+          Pinterest Marketing intern selbst weitertragen, vermittelt der{" "}
+          <Link
+            href="/pinterest-workshop/"
+            className="text-gold-text hover:underline"
+          >
+            Pinterest Workshop
+          </Link>{" "}
+          das nötige Wissen kompakt in einer Stunde.
         </p>
       </section>
 
@@ -341,14 +356,14 @@ export default function PinterestMarketingFinanzdienstleister() {
           auf den Seiten{" "}
           <Link
             href="/pinterest-marketing-tourismus/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Marketing für touristische Unternehmen und Hotels
           </Link>{" "}
           und{" "}
           <Link
             href="/pinterest-marketing-food/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Marketing für Food-Marken
           </Link>

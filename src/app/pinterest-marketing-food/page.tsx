@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import { siteConfig } from "@/lib/site-config";
 
 const path = "/pinterest-marketing-food/";
@@ -81,7 +82,7 @@ const faq = [
     question:
       "Wie geht molloy business mit saisonalen Food-Themen wie Grillsaison oder Weihnachtsbäckerei um?",
     answer:
-      "molloy business plant Boards und Pins entlang des Food-Jahreskalenders: Saisonale Anlässe wie Grillsaison, Weihnachtsbäckerei oder Osterbrunch werden im Redaktionsplan vorab berücksichtigt, damit passende Pins rechtzeitig vor dem jeweiligen Anlass online sind und gefunden werden, bevor die Nachfrage einsetzt.",
+      "molloy business plant Boards und Pins entlang des Food-Jahreskalenders: Saisonale Anlässe wie Grillsaison, Weihnachtsbäckerei oder Osterbrunch werden im Redaktionsplan vorab berücksichtigt, damit passende Pins bereits einige Wochen vor dem jeweiligen Anlass online sind und rechtzeitig gefunden werden. Bestehende Rezept-Pins aus Vorjahren werden dabei regelmäßig aktualisiert statt komplett neu erstellt.",
   },
   {
     question: "Ersetzt Pinterest andere Social-Media-Kanäle für Food-Marken?",
@@ -138,9 +139,11 @@ const pageJsonLd = {
 export default function PinterestMarketingFood() {
   return (
     <>
+      <Breadcrumb pageName={service.name} />
+
       {/* Intro */}
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
+        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Pinterest Marketing Food
         </p>
         <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
@@ -254,7 +257,7 @@ export default function PinterestMarketingFood() {
           strukturierter Account, entsteht er im{" "}
           <Link
             href="/pinterest-account-aufbau/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Account Aufbau
           </Link>{" "}
@@ -262,7 +265,7 @@ export default function PinterestMarketingFood() {
           Account bereits, übernimmt das{" "}
           <Link
             href="/pinterest-account-management/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Account Management
           </Link>{" "}
@@ -274,28 +277,40 @@ export default function PinterestMarketingFood() {
           findet im{" "}
           <Link
             href="/pinterest-content-paket/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Content Paket
           </Link>{" "}
           monatlich SEO-optimierte Pins zum eigenen Redaktionsplan. Für
           bestehende Accounts mit Optimierungsbedarf liefert das{" "}
-          <Link href="/pinterest-audit/" className="text-gold hover:underline">
+          <Link href="/pinterest-audit/" className="text-gold-text hover:underline">
             Pinterest Audit
           </Link>{" "}
           eine Analyse mit konkreten Handlungsempfehlungen, und ein{" "}
           <Link
             href="/pinterest-strategie-call/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Strategie Call
           </Link>{" "}
-          klärt vorab, welches Format zur eigenen Ausgangslage passt. Einen
-          Überblick über alle Leistungen als{" "}
-          <Link href="/" className="text-gold hover:underline">
+          klärt vorab, welches Format zur eigenen Ausgangslage passt. Die
+          Startseite von molloy business fasst als{" "}
+          <Link href="/" className="text-gold-text hover:underline">
             Pinterest Marketing Agentur
           </Link>{" "}
-          gibt die Startseite von molloy business.
+          alle Leistungen zusammen.
+        </p>
+        <p className="font-body mt-4 text-lg">
+          Möchte dein Team die Grundlagen von Pinterest Marketing selbst
+          verstehen, um Rezept- und Produkt-Content langfristig eigenständig
+          weiterzuführen, vermittelt der{" "}
+          <Link
+            href="/pinterest-workshop/"
+            className="text-gold-text hover:underline"
+          >
+            Pinterest Workshop
+          </Link>{" "}
+          das nötige Wissen in einer kompakten Stunde.
         </p>
       </section>
 
@@ -335,14 +350,14 @@ export default function PinterestMarketingFood() {
           Branchen: mehr dazu auf den Seiten{" "}
           <Link
             href="/pinterest-marketing-tourismus/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Marketing für touristische Unternehmen und Hotels
           </Link>{" "}
           und{" "}
           <Link
             href="/pinterest-marketing-finanzdienstleister/"
-            className="text-gold hover:underline"
+            className="text-gold-text hover:underline"
           >
             Pinterest Marketing für Finanzdienstleister
           </Link>
