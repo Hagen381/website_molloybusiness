@@ -41,50 +41,59 @@ const testimonials = [
 ];
 
 // Feste Reihenfolge aus site-config.ts — für Preisnennungen im Text.
-const [management, aufbau, call, workshop, audit, contentPaket] = services;
+const [management, aufbau, call, , audit] = services;
 
 // Sichtbar als "Zuletzt aktualisiert: August 2026", im Schema als dateModified.
 const lastUpdatedLabel = "August 2026";
 const lastUpdatedIso = "2026-08-08";
 
-// FAQ-Daten: `answer` ist die eigenständige 40–60-Wort-Direktantwort,
-// `more` die optionale Vertiefung. Das FAQPage-Schema wird WORTGLEICH aus
-// genau diesen Strings gebaut — Texte nie nur an einer der beiden Stellen ändern.
-const faq = [
+// FAQ-Daten: `answer` ist die eigenständige 40–60-Wort-Direktantwort, `link`
+// hängt optional einen weiterführenden Blog-Verweis an denselben Absatz an.
+// Das FAQPage-Schema wird WORTGLEICH aus Antwort (+ Linktext) gebaut —
+// Texte nie nur an einer der beiden Stellen ändern.
+type FaqItem = {
+  question: string;
+  answer: string;
+  link?: { href: string; text: string };
+};
+
+const faq: FaqItem[] = [
   {
     question: "Was kostet eine Pinterest Marketing Agentur?",
-    answer: `Bei molloy business kostet Pinterest Marketing zwischen ${formatPrice(call.price)} einmalig für einen Strategie Call und ${formatPrice(aufbau.price)} einmalig für den kompletten Account Aufbau. Die laufende Betreuung liegt bei ${formatPrice(management.price)} pro Monat, ein Audit bei ${formatPrice(audit.price)}, das Content Paket bei ${formatPrice(contentPaket.price)} pro Monat und der Workshop bei ${formatPrice(workshop.price)}.`,
-    more: "Alle Leistungen sind einzeln buchbar. Der Strategie Call wird bei einer späteren Zusammenarbeit voll angerechnet.",
+    answer: `Der Preisunterschied erklärt sich über die Eigenleistung: Am günstigsten ist Beratung, bei der du selbst umsetzt – etwa der Strategie Call für ${formatPrice(call.price)} –, am teuersten die komplette Übernahme von Design, Texten und Veröffentlichung. Wer Orientierung sucht, steigt klein ein; wer den Kanal etablieren will, investiert größer. Die ausführliche Aufschlüsselung gibt der Beitrag`,
+    link: {
+      href: "/blog/was-kostet-pinterest-marketing/",
+      text: "Was kostet Pinterest Marketing?",
+    },
   },
   {
     question: "Lohnt sich Pinterest für kleine Unternehmen und Selbstständige?",
     answer:
-      "Ja – gerade für kleine Unternehmen und Selbstständige lohnt sich Pinterest, weil organische Pins über Monate sichtbar bleiben und ohne Werbebudget Reichweite aufbauen. Wer visuelle Produkte, Dienstleistungen oder Inhalte anbietet und eine eigene Website hat, kann mit überschaubarem Aufwand dauerhaft Besucherinnen und Besucher gewinnen – ohne täglich posten zu müssen.",
-    more: "Wichtig ist ein realistischer Rahmen: lieber wenige, gut gemachte Pins mit klarer Strategie als tägliches Posten ohne Plan. Genau dafür gibt es Einstiegsformate wie den Strategie Call oder das Audit.",
+      "Es lohnt sich unter zwei Voraussetzungen: Deine Website bietet etwas, worauf Pins verweisen können, und deine Themen werden dort aktiv gesucht. Fehlt eines davon – oder brauchst du kurzfristig Ergebnisse –, ist Pinterest nicht der richtige Kanal. Eine ehrliche Einordnung für deinen Fall gibt der Beitrag",
+    link: {
+      href: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
+      text: "Lohnt sich Pinterest für kleine Unternehmen?",
+    },
   },
   {
     question: "Pinterest Marketing selbst machen oder auslagern?",
     answer:
-      "Beides funktioniert: Wer Zeit hat und die Grundlagen lernen möchte, kann Pinterest Marketing selbst übernehmen – etwa mit einem Workshop oder Strategie Call als Startpunkt. Wer den Kanal dauerhaft und professionell bespielen will, ohne eigene Kapazitäten zu binden, lagert die Arbeit an eine Pinterest Marketing Agentur wie molloy business aus.",
-    more: "Ein Mittelweg ist das Content Paket: Du bekommst fertige, SEO-optimierte Pins geliefert und veröffentlichst selbst. So bleibt der Aufwand bei dir gering, ohne dass du das Design und die Texte übernehmen musst.",
+      "Die ehrliche Messlatte ist deine Zeit: Pinterest belohnt Regelmäßigkeit, nicht Perfektion. Kannst du Woche für Woche verlässlich Zeit fürs Gestalten und Texten freihalten – und macht dir das Freude –, ist Selbermachen gerade in der Startphase die richtige Wahl. Reißt das Tagesgeschäft diese Zeit immer wieder ein, wird Auslagern günstiger als ein brachliegender Account.",
   },
   {
     question: "Agentur oder freie Pinterest-Managerin — was ist besser?",
     answer:
-      "Entscheidend ist nicht die Bezeichnung, sondern Erfahrung, Arbeitsweise und Erreichbarkeit. molloy business verbindet beides: die persönliche Zusammenarbeit mit einer festen Ansprechpartnerin – Juliette Oppel – und strukturierte Abläufe wie in einer Agentur, von Strategie über Design und Texte bis zur Auswertung aus einer Hand.",
-    more: "Frage bei der Auswahl immer nach dem konkreten Ablauf: Wer erstellt die Pins, wer schreibt die Texte, wie oft gibt es Auswertungen? Klare Antworten darauf sagen mehr als jedes Etikett.",
+      "Der echte Unterschied liegt in Kapazität und Vertretung: Ein größeres Team kann Ausfälle abfangen und viele Accounts parallel betreuen, bindet dich aber oft an festere Strukturen. Bei einer spezialisierten Einzelunternehmerin arbeitest du direkt mit der Person, die auch umsetzt. molloy business gehört zur zweiten Sorte: ein spezialisierter Betrieb, kein großes Team.",
   },
   {
     question: "Pinterest organisch oder Pinterest Ads?",
     answer:
-      "Organisches Pinterest Marketing baut Sichtbarkeit auf, die über Monate bestehen bleibt – Pinterest Ads bringen schnelle, aber bezahlte Reichweite, die endet, sobald das Budget stoppt. Für nachhaltigen Website-Traffic ist der organische Weg meist die bessere Basis; Ads können ihn später gezielt ergänzen. molloy business ist auf den organischen Aufbau spezialisiert.",
-    more: "Ads sind kein schlechtes Werkzeug, sondern ein anderes: Sie eignen sich für zeitlich begrenzte Aktionen und schnelle Tests. Ein solides organisches Fundament macht jede spätere Kampagne günstiger und wirksamer.",
+      "Entscheidend ist dein Zeithorizont: Ads sind die richtige Wahl, wenn ein konkreter Anlass ein Datum hat – ein Launch, eine Saison-Aktion, ein schneller Markttest mit vorhandenem Werbebudget. Organisch ist die richtige Wahl, wenn du dauerhaft gefunden werden willst, ohne fortlaufend zu zahlen. Beides schließt sich nicht aus; molloy business übernimmt dabei den organischen Teil.",
   },
   {
     question: "Wie lange dauert es, bis Pinterest Ergebnisse bringt?",
     answer:
-      "Pinterest ist ein Marathon, kein Sprint: Erste Impressionen zeigen sich oft nach wenigen Wochen, spürbarer Website-Traffic braucht in der Regel drei bis sechs Monate kontinuierlicher Arbeit. Dafür wirken gute Pins langfristig weiter und können auch Monate nach der Veröffentlichung noch Besucherinnen und Besucher auf deine Website bringen.",
-    more: "Wie schnell es geht, hängt von Nische, Wettbewerb und Ausgangslage ab. Ein bestehender Account mit Grundstruktur startet meist schneller als ein kompletter Neuaufbau.",
+      "Eine seriöse Pauschalzahl gibt es nicht – die Dauer hängt von Ausgangslage, Nische und Veröffentlichungsrhythmus ab. Woran du erkennst, dass es in die richtige Richtung geht: Erst steigen die Impressionen, dann speichern Menschen deine Pins, danach folgen die Klicks zur Website. Diese Reihenfolge ist normal; eine realistische Einschätzung für deinen Fall gibt das Erstgespräch.",
   },
 ];
 
@@ -132,7 +141,7 @@ const pageJsonLd = {
         name: item.question,
         acceptedAnswer: {
           "@type": "Answer",
-          text: item.more ? `${item.answer} ${item.more}` : item.answer,
+          text: item.link ? `${item.answer} ${item.link.text}` : item.answer,
         },
       })),
     },
@@ -554,10 +563,20 @@ export default function Home() {
             {faq.map((item) => (
               <div key={item.question}>
                 <h3 className="text-[22px] leading-tight">{item.question}</h3>
-                <p className="font-body mt-3 text-lg">{item.answer}</p>
-                {item.more && (
-                  <p className="font-body mt-3 text-lg">{item.more}</p>
-                )}
+                <p className="font-body mt-3 text-lg">
+                  {item.answer}
+                  {item.link && (
+                    <>
+                      {" "}
+                      <Link
+                        href={item.link.href}
+                        className="text-gold-text hover:underline"
+                      >
+                        {item.link.text}
+                      </Link>
+                    </>
+                  )}
+                </p>
               </div>
             ))}
           </div>
