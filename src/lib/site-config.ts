@@ -44,7 +44,7 @@ export const navigation = {
       ],
     },
     { label: "Über mich", href: "#" },
-    { label: "Blog", href: "#" },
+    { label: "Blog", href: "/blog/" },
     { label: "Kontakt", href: "#" },
   ],
   legal: [
@@ -102,6 +102,42 @@ export const sitePages = [
     path: "/pinterest-marketing-finanzdienstleister/",
     changeFrequency: "monthly",
     priority: 0.8,
+  },
+  {
+    path: "/blog/",
+    changeFrequency: "weekly",
+    priority: 0.7,
+  },
+  {
+    path: "/blog/was-kostet-pinterest-marketing/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+] as const;
+
+// Zentrale Artikelliste für /blog/ — neue Artikel nur hier eintragen
+// (plus eigener Eintrag in sitePages oben), Übersicht und Schema bauen
+// daraus automatisch auf. `title` wird wortgleich in Übersicht, Breadcrumb
+// und BreadcrumbList-Schema des Artikels verwendet.
+export const blogPosts = [
+  {
+    slug: "was-kostet-pinterest-marketing",
+    title: "Was kostet Pinterest Marketing?",
+    date: "2026-08-08",
+    excerpt:
+      "Von Strategie Call bis laufender Betreuung: wovon der Preis für Pinterest Marketing abhängt, wie Angebote üblicherweise aufgebaut sind – und alle Preise von molloy business im Überblick.",
+  },
+  {
+    slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",
+    title: "Lohnt sich Pinterest für kleine Unternehmen?",
+    date: "2026-08-08",
+    excerpt:
+      "Eine ehrliche Einordnung: wann Pinterest für kleine Unternehmen und Selbstständige funktioniert, wann nicht – und wie du mit überschaubarem Aufwand anfängst.",
   },
 ] as const;
 
