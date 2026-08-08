@@ -1,0 +1,278 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { priceVatNote, services, siteConfig } from "@/lib/site-config";
+import { formatPrice } from "@/lib/format";
+
+const workshop = services.find((s) => s.title === "Pinterest Workshop")!;
+
+const path = "/pinterest-workshop/";
+
+export const metadata: Metadata = {
+  title: "Pinterest Workshop für Unternehmen & Teams",
+  description:
+    "Pinterest Workshop für Unternehmen und Teams: kompakte Pinterest Schulung in einer Stunde inklusive Q&A und Factsheet zum Download – 250 € einmalig.",
+  alternates: {
+    canonical: path,
+  },
+};
+
+const leistungen = [
+  {
+    title: "Einstündiger Online-Workshop",
+    text: "kompaktes Wissen zu Pinterest Marketing, verständlich vermittelt.",
+  },
+  {
+    title: "Q&A im Anschluss",
+    text: "Raum für deine konkreten Fragen direkt im Anschluss an den Workshop.",
+  },
+  {
+    title: "Factsheet zum Download",
+    text: "die wichtigsten Punkte zusammengefasst zum Nachlesen nach dem Workshop.",
+  },
+  {
+    title: "Format für Teams und Online-Events",
+    text: "geeignet für interne Teamrunden ebenso wie für externe Online-Veranstaltungen.",
+  },
+];
+
+const processSteps = [
+  {
+    title: "Terminabstimmung",
+    text: "Termin und Format werden gemeinsam festgelegt – ob interne Teamrunde oder öffentliches Online-Event, spielt für den Ablauf keine Rolle.",
+  },
+  {
+    title: "Der Workshop",
+    text: "Im einstündigen Online-Workshop werden die Grundlagen von Pinterest Marketing verständlich vermittelt. Im Anschluss ist Zeit für ein Q&A, in dem alle offenen Fragen Platz haben.",
+  },
+  {
+    title: "Nachbereitung",
+    text: "Du bekommst das Factsheet zum Download mit den wichtigsten Punkten des Workshops – zum Nachschlagen, auch für Teammitglieder, die nicht live dabei waren.",
+  },
+];
+
+// FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
+const faq = [
+  {
+    question: "Was ist im Pinterest Workshop enthalten?",
+    answer:
+      "Der Pinterest Workshop umfasst einen einstündigen Online-Workshop zu den Grundlagen von Pinterest Marketing, ein anschließendes Q&A für deine konkreten Fragen sowie ein Factsheet zum Download mit den wichtigsten Punkten. Das Format eignet sich sowohl für interne Teams als auch für externe Online-Events.",
+  },
+  {
+    question: "Wie läuft der Pinterest Workshop ab?",
+    answer:
+      "Der Pinterest Workshop findet als einstündiger Online-Termin statt, in dem die Grundlagen von Pinterest Marketing verständlich und praxisnah vermittelt werden. Im Anschluss ist Zeit für ein ausführliches Q&A, danach bekommst du ein Factsheet zum Download mit den wichtigsten Punkten zum Nachlesen.",
+  },
+  {
+    question: "Für wen eignet sich der Pinterest Workshop?",
+    answer:
+      "Der Pinterest Workshop eignet sich für Unternehmen und Teams, die gemeinsam die Grundlagen von Pinterest Marketing lernen möchten – etwa als internes Team-Format oder im Rahmen eines Online-Events. Er passt für touristische Unternehmen, Food-Marken und Finanzdienstleister genauso wie für KMU und Selbstständige.",
+  },
+];
+
+const pageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Start",
+          item: `${siteConfig.url}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: workshop.title,
+          item: `${siteConfig.url}${path}`,
+        },
+      ],
+    },
+    {
+      "@type": "Service",
+      name: workshop.title,
+      description: workshop.description,
+      provider: { "@id": `${siteConfig.url}/#organization` },
+      areaServed: ["DE", "AT", "CH"],
+      offers: {
+        "@type": "Offer",
+        price: String(workshop.price),
+        priceCurrency: "EUR",
+        description: `${workshop.priceUnit} · ${workshop.priceNote}`,
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
+
+export default function PinterestWorkshop() {
+  return (
+    <>
+      {/* Intro */}
+      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
+        <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
+          Pinterest Workshop
+        </p>
+        <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
+          Pinterest Workshop für Unternehmen und Teams
+        </h1>
+        <p className="font-body mt-6 text-lg">
+          Der Pinterest Workshop bei molloy business ist ein einstündiger
+          Online-Workshop, der die Grundlagen von Pinterest Marketing für
+          Unternehmen und Teams verständlich vermittelt – als Format geeignet
+          für interne Teams ebenso wie für Online-Events, inklusive Q&A im
+          Anschluss und einem Factsheet zum Download für die wichtigsten
+          Punkte.
+        </p>
+      </section>
+
+      {/* Was du bekommst */}
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-16">
+          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            Was du bekommst
+          </h2>
+          <p className="font-body mt-6 text-lg">
+            Der Pinterest Workshop von molloy business bringt dein Team in
+            einer Stunde auf einen gemeinsamen Wissensstand:
+          </p>
+          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+            {leistungen.map((item) => (
+              <li key={item.title}>
+                <strong className="text-heading">{item.title}:</strong>{" "}
+                {item.text}
+              </li>
+            ))}
+          </ul>
+          <p className="font-body mt-6 text-lg">
+            Am Ende steht nicht nur ein gemeinsames Verständnis für Pinterest
+            Marketing, sondern auch ein Factsheet, auf das du und dein Team
+            jederzeit zurückgreifen können.
+          </p>
+        </div>
+      </section>
+
+      {/* Für wen sich das eignet */}
+      <section className="mx-auto max-w-4xl px-6 py-16">
+        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+          Für wen sich das eignet
+        </h2>
+        <p className="font-body mt-6 text-lg">
+          Der Pinterest Workshop eignet sich für Unternehmen und Teams, die
+          gemeinsam einen Einstieg in Pinterest Marketing bekommen möchten –
+          etwa als Teil eines internen Teamtags oder eines Online-Events.
+          Besonders gut passt das Format zu touristischen Unternehmen,
+          Food-Marken und Finanzdienstleistern, deren Teams häufig mit
+          visuellen Inhalten arbeiten. Genauso profitieren KMU und
+          Selbstständige, die sich einen kompakten Überblick verschaffen
+          wollen, bevor sie selbst mit Pinterest starten.
+        </p>
+        <p className="font-body mt-4 text-lg">
+          Der Workshop ersetzt keine individuelle Beratung zu deinem
+          konkreten Account – dafür eignet sich eher ein persönliches
+          Format. Wer nach dem Workshop lieber auf die eigene Situation
+          eingehen möchte, findet mit dem{" "}
+          <Link
+            href="/pinterest-strategie-call/"
+            className="text-gold hover:underline"
+          >
+            Pinterest Strategie Call
+          </Link>{" "}
+          den passenden nächsten Schritt.
+        </p>
+        <p className="font-body mt-4 text-lg">
+          Einen Überblick über alle Leistungen als{" "}
+          <Link href="/" className="text-gold hover:underline">
+            Pinterest Marketing Agentur
+          </Link>{" "}
+          gibt die Startseite von molloy business.
+        </p>
+      </section>
+
+      {/* So läuft es ab */}
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-16">
+          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            So läuft es ab
+          </h2>
+          <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
+            {processSteps.map((step) => (
+              <li key={step.title}>
+                <strong className="text-heading">{step.title}:</strong>{" "}
+                {step.text}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Preis */}
+      <section className="mx-auto max-w-4xl px-6 py-16">
+        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+          Preis für den Pinterest Workshop
+        </h2>
+        <p className="font-body mt-6 text-lg">
+          Der Pinterest Workshop kostet{" "}
+          <strong className="text-heading">
+            {formatPrice(workshop.price)}
+          </strong>{" "}
+          {workshop.priceUnit}. Konditionen: {workshop.priceNote}.
+        </p>
+        <p className="font-body mt-4 text-lg">
+          Im Preis enthalten sind der einstündige Online-Workshop, das
+          anschließende Q&A sowie das Factsheet zum Download.
+        </p>
+        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-16">
+          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            Häufige Fragen zum Pinterest Workshop
+          </h2>
+          <div className="mt-8 space-y-10">
+            {faq.map((item) => (
+              <div key={item.question}>
+                <h3 className="text-[22px] leading-tight">{item.question}</h3>
+                <p className="font-body mt-3 text-lg">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
+        <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+          Lass uns deinen Pinterest Workshop planen
+        </h2>
+        <p className="font-body mt-6 text-lg">
+          In einem unverbindlichen Strategie Call schauen wir gemeinsam, wie
+          ein Workshop für dein Team oder Event aussehen kann.
+        </p>
+        <div className="mt-8">
+          <Link href="#" className="btn btn-primary">
+            strategie call vereinbaren
+          </Link>
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
+      />
+    </>
+  );
+}

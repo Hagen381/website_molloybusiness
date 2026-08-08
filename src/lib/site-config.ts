@@ -34,10 +34,13 @@ export const navigation = {
           label: "Pinterest Account Aufbau für Unternehmen",
           href: "/pinterest-account-aufbau/",
         },
-        { label: "Pinterest Strategie Call", href: "#" },
-        { label: "Pinterest Workshop", href: "#" },
-        { label: "Pinterest Audit", href: "#" },
-        { label: "Pinterest Content Paket", href: "#" },
+        { label: "Pinterest Strategie Call", href: "/pinterest-strategie-call/" },
+        { label: "Pinterest Workshop", href: "/pinterest-workshop/" },
+        { label: "Pinterest Audit", href: "/pinterest-audit/" },
+        {
+          label: "Pinterest Content Paket",
+          href: "/pinterest-content-paket/",
+        },
       ],
     },
     { label: "Über mich", href: "#" },
@@ -62,6 +65,26 @@ export const sitePages = [
   },
   {
     path: "/pinterest-account-aufbau/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-strategie-call/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-workshop/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-audit/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-content-paket/",
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -92,7 +115,7 @@ export const services = [
     title: "Pinterest Strategie Call",
     description:
       "Individuelle Beratung, um deine Pinterest-Strategie auf den Punkt zu bringen. In 90 Minuten klären wir deine Fragen und du bekommst konkrete nächste Schritte für deinen Account.",
-    href: "#",
+    href: "/pinterest-strategie-call/",
     price: 144,
     priceUnit: "einmalig",
     priceNote: "90 Minuten · wird bei einer Zusammenarbeit voll angerechnet",
@@ -101,7 +124,7 @@ export const services = [
     title: "Pinterest Workshop",
     description:
       "Praxisnahes Workshop-Format für Teams und Online-Events rund um Pinterest Marketing. Eine Stunde kompaktes Wissen, verständlich aufbereitet und mit Raum für deine Fragen.",
-    href: "#",
+    href: "/pinterest-workshop/",
     price: 250,
     priceUnit: "einmalig",
     priceNote: "1 Stunde online · inkl. Q&A und Factsheet",
@@ -110,7 +133,7 @@ export const services = [
     title: "Pinterest Audit",
     description:
       "Detaillierte Analyse deines bestehenden Accounts mit konkreten Handlungsempfehlungen. Du erfährst, was bereits funktioniert und an welchen Stellen dein Account Potenzial verschenkt.",
-    href: "#",
+    href: "/pinterest-audit/",
     price: 333,
     priceUnit: "einmalig",
     priceNote: "Vorkasse",
@@ -119,7 +142,7 @@ export const services = [
     title: "Pinterest Content Paket",
     description:
       "SEO-optimierte Pins, Headlines und Beschreibungen – fertig für deinen Redaktionsplan. Du veröffentlichst selbst, molloy business liefert dir den passenden Content.",
-    href: "#",
+    href: "/pinterest-content-paket/",
     price: 444,
     priceUnit: "pro Monat",
     priceNote: "30 Premium-Pins pro Monat",
