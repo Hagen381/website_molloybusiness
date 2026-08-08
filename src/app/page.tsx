@@ -34,7 +34,7 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-6 pt-14 pb-16 sm:pt-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid gap-12 lg:grid-cols-2">
           <div>
             <p className="font-body text-gold mb-3 text-sm tracking-[2px] uppercase">
               Pinterest Marketing Agentur
@@ -77,11 +77,12 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg lg:aspect-auto lg:h-auto lg:self-stretch">
             <ExportedImage
               src={heroImage}
               alt="Juliette Oppel, Pinterest Marketing Expertin"
-              className="rounded-2xl object-cover shadow-lg"
+              fill
+              className="object-cover"
               sizes="(min-width: 1024px) 480px, 100vw"
               basePath={basePath}
               priority

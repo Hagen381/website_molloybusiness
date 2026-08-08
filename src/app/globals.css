@@ -48,6 +48,10 @@ h4 {
   color: var(--color-heading);
   font-weight: 600;
   letter-spacing: 1px;
+  /* Explicit fallback so headings never fall back to the browser/font's own
+     (much taller) default line-height below the sm: breakpoint, where the
+     per-size `leading-[...]` utilities in JSX don't apply yet. */
+  line-height: 1.3;
 }
 
 h3 {
