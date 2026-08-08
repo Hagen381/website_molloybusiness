@@ -88,6 +88,21 @@ export const sitePages = [
     changeFrequency: "monthly",
     priority: 0.8,
   },
+  {
+    path: "/pinterest-marketing-tourismus/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-marketing-food/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-marketing-finanzdienstleister/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
 ] as const;
 
 // Preise zentral hier pflegen — JEDE Preisanzeige (Text wie Schema) liest aus

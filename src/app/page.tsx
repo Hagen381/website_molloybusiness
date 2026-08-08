@@ -331,7 +331,9 @@ export default function Home() {
           </h2>
 
           <h3 className="mt-10 text-[22px] leading-tight">
-            Touristische Unternehmen
+            <Link href="/pinterest-marketing-tourismus/" className="hover:underline">
+              Touristische Unternehmen
+            </Link>
           </h3>
           <p className="font-body mt-3 text-lg">
             Reiseinspiration ist eines der stärksten Themen auf Pinterest:
@@ -345,7 +347,11 @@ export default function Home() {
             Website bringt.
           </p>
 
-          <h3 className="mt-10 text-[22px] leading-tight">Food-Marken</h3>
+          <h3 className="mt-10 text-[22px] leading-tight">
+            <Link href="/pinterest-marketing-food/" className="hover:underline">
+              Food-Marken
+            </Link>
+          </h3>
           <p className="font-body mt-3 text-lg">
             Rezepte gehören zu den meistgesuchten Inhalten auf Pinterest –
             kaum eine Branche passt besser zur Plattform. Food-Marken können
@@ -358,7 +364,12 @@ export default function Home() {
           </p>
 
           <h3 className="mt-10 text-[22px] leading-tight">
-            Finanzdienstleister
+            <Link
+              href="/pinterest-marketing-finanzdienstleister/"
+              className="hover:underline"
+            >
+              Finanzdienstleister
+            </Link>
           </h3>
           <p className="font-body mt-3 text-lg">
             Finanzthemen werden auf Pinterest aktiv gesucht: Sparen,
