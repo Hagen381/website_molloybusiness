@@ -10,8 +10,7 @@ const path = "/pinterest-strategie-call/";
 
 export const metadata: Metadata = {
   title: "Pinterest Strategie Call für Unternehmen",
-  description:
-    "Pinterest Strategie Call: individuelle Pinterest Beratung in 90 Minuten zu Ausgangslage, Boards und Pin-Themen – 144 € einmalig, anrechenbar.",
+  description: `Pinterest Strategie Call: individuelle Pinterest Beratung in 90 Minuten zu Ausgangslage, Boards und Pin-Themen – ${formatPrice(call.price)} einmalig, anrechenbar.`,
   alternates: {
     canonical: path,
   },

@@ -10,8 +10,7 @@ const path = "/pinterest-audit/";
 
 export const metadata: Metadata = {
   title: "Pinterest Audit & Account Analyse",
-  description:
-    "Pinterest Audit für Unternehmen: Analyse von Profil, Boards, Pin-Performance und Wettbewerb mit konkreten Handlungsempfehlungen – für 333 € einmalig.",
+  description: `Pinterest Audit für Unternehmen: Analyse von Profil, Boards, Pin-Performance und Wettbewerb mit konkreten Handlungsempfehlungen – für ${formatPrice(audit.price)} einmalig.`,
   alternates: {
     canonical: path,
   },

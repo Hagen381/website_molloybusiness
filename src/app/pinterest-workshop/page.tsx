@@ -10,8 +10,7 @@ const path = "/pinterest-workshop/";
 
 export const metadata: Metadata = {
   title: "Pinterest Workshop für Unternehmen & Teams",
-  description:
-    "Pinterest Workshop für Unternehmen und Teams: kompakte Pinterest Schulung in einer Stunde inklusive Q&A und Factsheet zum Download – 250 € einmalig.",
+  description: `Pinterest Workshop für Unternehmen und Teams: kompakte Pinterest Schulung in einer Stunde inklusive Q&A und Factsheet zum Download – ${formatPrice(workshop.price)} einmalig.`,
   alternates: {
     canonical: path,
   },

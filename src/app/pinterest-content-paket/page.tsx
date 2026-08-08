@@ -12,8 +12,7 @@ const path = "/pinterest-content-paket/";
 
 export const metadata: Metadata = {
   title: "Pinterest Content Paket – Pins erstellen lassen",
-  description:
-    "Pins erstellen lassen bei molloy business: 30 SEO-optimierte Premium-Pins im Pinterest Content Paket pro Monat, markenangepasst – für 444 € pro Monat.",
+  description: `Pins erstellen lassen bei molloy business: 30 SEO-optimierte Premium-Pins im Pinterest Content Paket pro Monat, markenangepasst – für ${formatPrice(contentPaket.price)} pro Monat.`,
   alternates: {
     canonical: path,
   },
