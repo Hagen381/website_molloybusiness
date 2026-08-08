@@ -26,8 +26,14 @@ export const navigation = {
       label: "Angebote",
       href: "/",
       children: [
-        { label: "Pinterest Account Management für Unternehmen", href: "#" },
-        { label: "Pinterest Account Aufbau für Unternehmen", href: "#" },
+        {
+          label: "Pinterest Account Management für Unternehmen",
+          href: "/pinterest-account-management/",
+        },
+        {
+          label: "Pinterest Account Aufbau für Unternehmen",
+          href: "/pinterest-account-aufbau/",
+        },
         { label: "Pinterest Strategie Call", href: "#" },
         { label: "Pinterest Workshop", href: "#" },
         { label: "Pinterest Audit", href: "#" },
@@ -49,6 +55,16 @@ export const navigation = {
 // damit sie nicht vergessen wird.
 export const sitePages = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
+  {
+    path: "/pinterest-account-management/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-account-aufbau/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
 ] as const;
 
 // Preise zentral hier pflegen — JEDE Preisanzeige (Text wie Schema) liest aus
@@ -58,7 +74,7 @@ export const services = [
     title: "Pinterest Account Management",
     description:
       "Laufende Betreuung deines Pinterest-Accounts: Content, Pins und Strategie aus einer Hand. Du gibst den Kanal komplett ab und bekommst jeden Monat frische, SEO-optimierte Pins samt Auswertung.",
-    href: "#",
+    href: "/pinterest-account-management/",
     price: 666,
     priceUnit: "pro Monat",
     priceNote: "90 Pins pro Monat · Vorkasse · monatlich kündbar",
@@ -67,7 +83,7 @@ export const services = [
     title: "Pinterest Account Aufbau",
     description:
       "Professioneller Neuaufbau deines Accounts mit klarer Struktur von Anfang an. Von Profil und Boards bis zu den ersten Pins entsteht ein Fundament, auf dem dein Pinterest Marketing langfristig aufbaut.",
-    href: "#",
+    href: "/pinterest-account-aufbau/",
     price: 2777,
     priceUnit: "einmalig",
     priceNote: "50 % Vorkasse, 50 % nach Upload aller Pins",

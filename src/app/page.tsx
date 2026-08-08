@@ -491,7 +491,7 @@ export default function Home() {
       {/* Kosten */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Was kostet eine Pinterest Marketing Agentur?
+          Preise und Leistungen im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
           Eine Pinterest Marketing Agentur kostet bei molloy business zwischen{" "}
