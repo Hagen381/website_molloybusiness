@@ -7,6 +7,7 @@ const basePath = process.env.NEXT_BUILD_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
   basePath: basePath || undefined,
   images: {
     loader: "custom",

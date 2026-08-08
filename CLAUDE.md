@@ -15,6 +15,18 @@ Design-Tokens (Farben, Fonts, Button-Stil) sind aus dem Original extrahiert
 ausdrücklichen Auftrag geändert werden — Struktur, Texte und Technik werden
 modernisiert, das Erscheinungsbild bleibt erhalten.
 
+## SEO-Grundregeln
+
+- **Jede neue Seite MUSS ihr eigenes Canonical-Tag setzen** (`export const
+  metadata: Metadata = { alternates: { canonical: "/pfad/" } }` in der
+  jeweiligen `page.tsx`). Das globale `layout.tsx` setzt bewusst KEIN
+  Canonical mehr, weil Unterseiten das sonst erben und sich selbst
+  fälschlich als Startseite deklarieren würden.
+- **Jede neue Seite gehört in `sitePages` in `src/lib/site-config.ts`**,
+  damit `src/app/sitemap.ts` sie automatisch mit aufnimmt.
+- `trailingSlash: true` in `next.config.ts` ist Pflicht (alle URLs enden auf
+  `/`, wichtig für die späteren 301-Redirects von den alten WordPress-URLs).
+
 ## Vorschau-Kanal: GitHub Pages
 
 Zusätzlich zum späteren SiteGround-Hosting gibt es einen GitHub-Pages-Kanal,

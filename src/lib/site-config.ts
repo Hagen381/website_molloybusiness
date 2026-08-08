@@ -14,7 +14,7 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/profile.php?id=61554803184566",
     whatsapp: "https://wa.me/+4915678196744",
     linkedin: "https://www.linkedin.com/in/juliette-oppel-b8a112245/",
-    pinterest: "https://www.pinterest.com/",
+    pinterest: "https://www.pinterest.de/julietteoppel/",
   },
 } as const;
 
@@ -23,7 +23,7 @@ export const navigation = {
     { label: "Start", href: "/" },
     {
       label: "Angebote",
-      href: "/pinterest-marketing-agentur/",
+      href: "/",
       children: [
         { label: "Pinterest Account Management für Unternehmen", href: "#" },
         { label: "Pinterest Account Aufbau für Unternehmen", href: "#" },
@@ -43,6 +43,12 @@ export const navigation = {
     { label: "Datenschutz", href: "#" },
   ],
 } as const;
+
+// Zentrale Seitenliste für sitemap.ts — jede neue Route hier eintragen,
+// damit sie nicht vergessen wird.
+export const sitePages = [
+  { path: "/", changeFrequency: "weekly", priority: 1 },
+] as const;
 
 export const services = [
   {

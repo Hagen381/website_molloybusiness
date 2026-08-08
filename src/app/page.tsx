@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import heroImage from "@/assets/images/hero-juliette.jpg";
 import { services, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
+
+// Jede Seite setzt ihr eigenes Canonical-Tag (siehe CLAUDE.md) — sonst
+// erben Unterseiten das globale "/" aus layout.tsx und deklarieren sich
+// selbst fälschlich als Startseite.
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const audiences = [
   "Touristische Unternehmen",

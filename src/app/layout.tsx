@@ -23,9 +23,6 @@ export const metadata: Metadata = {
     template: siteConfig.titleTemplate,
   },
   description: siteConfig.description,
-  alternates: {
-    canonical: "/",
-  },
   robots: isPreviewBuild
     ? { index: false, follow: false }
     : { index: true, follow: true },
@@ -44,6 +41,10 @@ export const metadata: Metadata = {
   },
 };
 
+// LocalBusiness/ProfessionalService wird wieder ergänzt, sobald die
+// Impressumsdaten (Geschäftsadresse der estnischen OÜ) final vorliegen —
+// unvollständiges LocalBusiness-Markup erzeugt sonst Fehler in der Google
+// Search Console.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -54,26 +55,12 @@ const jsonLd = {
       url: siteConfig.url,
       email: siteConfig.email,
       telephone: siteConfig.phone,
-      founder: {
-        "@type": "Person",
-        name: siteConfig.owner,
-      },
-      sameAs: Object.values(siteConfig.social),
-    },
-    {
-      "@type": "LocalBusiness",
-      "@id": `${siteConfig.url}/#localbusiness`,
-      name: siteConfig.name,
-      image: `${siteConfig.url}/logo.png`,
-      url: siteConfig.url,
-      email: siteConfig.email,
-      telephone: siteConfig.phone,
-      priceRange: "€€",
       areaServed: ["DE", "AT", "CH"],
       founder: {
         "@type": "Person",
         name: siteConfig.owner,
       },
+      sameAs: Object.values(siteConfig.social),
     },
   ],
 };

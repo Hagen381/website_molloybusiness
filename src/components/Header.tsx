@@ -8,7 +8,11 @@ import logo from "@/assets/images/logo.png";
 import { navigation } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
-function isNavItemActive(pathname: string, href: string) {
+// Dropdown-Elternpunkte (z.B. "Angebote") zeigen aktuell mangels eigener
+// Unterseite auf "/", sollen dadurch aber nicht wie "Start" als aktive
+// Seite markiert werden — nur echte Einzel-Links bekommen den Active-Style.
+function isNavItemActive(pathname: string, href: string, hasChildren: boolean) {
+  if (hasChildren) return false;
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
@@ -35,8 +39,8 @@ export default function Header() {
         <nav className="hidden lg:block">
           <ul className="flex items-center">
             {navigation.main.map((item, index) => {
-              const active = isNavItemActive(pathname, item.href);
               const children = "children" in item ? item.children : undefined;
+              const active = isNavItemActive(pathname, item.href, Boolean(children));
               return (
                 <li key={item.label} className="flex items-center">
                   <span className="group relative">
@@ -99,8 +103,8 @@ export default function Header() {
         <nav className="border-cream border-t lg:hidden">
           <ul className="flex flex-col px-6 py-2">
             {navigation.main.map((item) => {
-              const active = isNavItemActive(pathname, item.href);
               const hasChildren = "children" in item && !!item.children;
+              const active = isNavItemActive(pathname, item.href, hasChildren);
               return (
               <li key={item.label}>
                 <Link
