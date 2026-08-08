@@ -299,6 +299,13 @@ export default function WasKostetPinterestMarketing() {
           Selbst machen oder auslagern?
         </h2>
         <p className="font-body mt-6 text-lg">
+          Selbermachen passt, wenn du Zeit zum Einarbeiten mitbringst und das
+          Budget knapp ist – auslagern lohnt sich, sobald deine Zeit teurer
+          ist als die Betreuung oder der Kanal im Tagesgeschäft liegen
+          bleibt. Dazwischen gibt es Mittelwege, bei denen du nur Design und
+          Texte abgibst und weiterhin selbst veröffentlichst.
+        </p>
+        <p className="font-body mt-4 text-lg">
           Die ehrliche Antwort: Selbermachen ist eine echte Option – wenn du
           Zeit mitbringst und Freude daran hast, dich einzuarbeiten.
           Pinterest ist kein Hexenwerk, und wer die Grundlagen einmal

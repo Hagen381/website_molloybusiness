@@ -63,19 +63,21 @@ const processSteps = [
 // FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
 const faq = [
   {
-    question: "Was ist im Pinterest Account Management enthalten?",
+    question:
+      "Was passiert, wenn wir Pinterest schon einmal erfolglos versucht haben?",
     answer:
-      "Das Pinterest Account Management umfasst 90 Pins pro Monat mit SEO-optimierten Headlines und Beschreibungen, die tägliche Einplanung über ein Planungstool, laufende Keyword- und Interessen-Recherche, Trendanalyse mit Content-Empfehlungen sowie die regelmäßige Auswertung der Pinterest Analytics. Du gibst den Kanal komplett ab und bekommst jeden Monat fertigen, veröffentlichten Content.",
+      "Ein früherer Anlauf ist kein Ausschlusskriterium, sondern ein Startvorteil: Die vorhandenen Daten zeigen, welche Themen und Pin-Formate bisher nicht gegriffen haben. Häufig liegt es an fehlenden Keywords oder unregelmäßiger Veröffentlichung – genau dort setzt die laufende Betreuung an. Ob das in deinem Fall realistisch ist, klärt das Erstgespräch ehrlich.",
   },
   {
-    question: "Brauche ich für das Account Management bereits einen bestehenden Pinterest-Account?",
+    question:
+      "Worin unterscheidet sich das Account Management vom Pinterest Content Paket?",
     answer:
-      "Ja, das Account Management setzt einen bestehenden Pinterest-Account voraus, den molloy business übernimmt und weiterbetreut. Fehlt noch ein strukturierter Account, ist der Pinterest Account Aufbau der passende erste Schritt – im Anschluss lässt sich die laufende Betreuung nahtlos daran anschließen.",
+      "Beim Content Paket bekommst du 30 upload-fertige Premium-Pins pro Monat und veröffentlichst selbst – beim Account Management übernimmt molloy business mit 90 Pins pro Monat auch Einplanung, Recherche und Auswertung komplett. Entscheidend ist also, ob du die Veröffentlichung behalten willst oder den Kanal vollständig abgeben möchtest.",
   },
   {
-    question: "Ist das Planungstool für die tägliche Einplanung im Preis enthalten?",
+    question: "Wann ist das Pinterest Account Management die falsche Wahl?",
     answer:
-      "Nein, das Planungstool für die tägliche Einplanung ist im monatlichen Preis nicht enthalten. molloy business übernimmt die Einplanung selbst, die Kosten für ein geeignetes Planungstool trägst du zusätzlich als eigene Ausgabe. So bleibt die Wahl des Anbieters bei dir, molloy business berät dich bei Bedarf zur Auswahl.",
+      "Die falsche Wahl ist das Format, wenn du dir kurzfristige Kampagnen-Effekte erhoffst: Pinterest ist ein Suchkanal, dessen Reichweite sich über längere Zeiträume entwickelt und der von Kontinuität lebt. Wer zunächst nur einen einmaligen Impuls sucht, ist mit Strategie Call oder Audit besser beraten – das Erstgespräch hilft bei dieser Einordnung.",
   },
 ];
 
@@ -186,9 +188,11 @@ export default function PinterestAccountManagement() {
           Pinterest Account Management eignet sich für Unternehmen, die
           bereits einen Pinterest-Account haben – oder gerade einen aufbauen
           lassen – und die laufende Betreuung komplett abgeben möchten.
-          Besonders gefragt ist das Format bei touristischen Unternehmen,
-          Food-Marken und Finanzdienstleistern, weil hier kontinuierlicher,
-          saisonal passender Content den größten Unterschied macht. Genauso
+          Besonders gefragt ist das Format in Branchen mit stark saisonalen
+          Themen: Ein Hotel braucht im Winter andere Pins als im Sommer, eine
+          Food-Marke lebt von Anlässen wie Grillsaison oder
+          Weihnachtsbäckerei – hier macht kontinuierlicher, saisonal
+          passender Content den größten Unterschied. Genauso
           profitieren KMU und Selbstständige mit einer eigenen Website, die
           Pinterest als Sichtbarkeitskanal nutzen wollen, aber keine Kapazität
           für die tägliche Umsetzung haben. Vorausgesetzt ist außerdem eine

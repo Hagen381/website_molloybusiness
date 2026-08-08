@@ -69,7 +69,7 @@ const faq = [
   {
     question: "Sind Finanzthemen auf Pinterest nicht zu trocken für Pins?",
     answer:
-      "Nein, sofern Inhalte visuell und verständlich aufbereitet sind: Ein komplexes Thema wie Altersvorsorge lässt sich in einfache Grafiken, Checklisten oder Schritt-für-Schritt-Erklärungen übersetzen, die auf Pinterest gut funktionieren. Entscheidend ist nicht das Thema selbst, sondern ob der Pin eine konkrete Frage klar und schnell beantwortet.",
+      "Nein – was im Feed anderer Netzwerke trocken wirkt, ist auf Pinterest gefragt, weil Menschen dort gezielt nach Hilfe für Entscheidungen suchen statt nach Unterhaltung. Ein Pin muss nicht unterhalten, sondern eine konkrete Frage klar beantworten. Gerade nüchterne Themen profitieren davon, dass Nützlichkeit auf Pinterest mehr zählt als Show-Effekte.",
   },
   {
     question:
@@ -215,10 +215,10 @@ export default function PinterestMarketingFinanzdienstleister() {
           Dazu kommen Suchanfragen nach konkreten Vergleichen und
           Entscheidungshilfen – etwa welche Versicherung für welche
           Lebenssituation sinnvoll ist oder wie eine erste Geldanlage
-          aufgebaut werden kann. Wer diese Fragen mit eigenen, unabhängig
-          wirkenden Pins beantwortet, wird in einer Phase sichtbar, in der
-          Vertrauen und Verständlichkeit wichtiger sind als ein konkretes
-          Angebot.
+          aufgebaut werden kann. Wer diese Fragen mit sachlichen,
+          verständlichen Pins ohne Produktwerbung beantwortet, wird in einer
+          Phase sichtbar, in der Vertrauen und Verständlichkeit wichtiger
+          sind als ein konkretes Angebot.
         </p>
         <p className="font-body mt-4 text-lg">
           Auch wiederkehrende Fragen zu bestimmten Lebenssituationen –

@@ -62,19 +62,21 @@ const processSteps = [
 // FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
 const faq = [
   {
-    question: "Was ist im Pinterest Audit enthalten?",
+    question: "Reicht nicht ein Strategie Call statt eines kompletten Audits?",
     answer:
-      "Das Pinterest Audit umfasst ein Erstgespräch zur Ausgangslage, die Analyse von Profil und Boards, die Auswertung der Pin-Performance, die Durchsicht der Pinterest Analytics sowie eine Wettbewerbsanalyse. Im Abschlussgespräch bekommst du konkrete, gezielte und umsetzbare Handlungsempfehlungen für deinen weiteren Weg auf Pinterest.",
+      "Der Strategie Call ist ein Beratungsgespräch, das auch ohne bestehenden Account funktioniert und die grobe Richtung klärt. Das Audit geht deutlich tiefer: Es wertet deinen vorhandenen Account samt Zahlen und Wettbewerbsumfeld im Detail aus. Kurz gesagt klärt der Call, wohin die Reise gehen soll – das Audit zeigt, warum dein Account bisher hinter den Erwartungen bleibt.",
   },
   {
-    question: "Für wen passt das Pinterest Audit?",
+    question:
+      "Was passiert mit den Ergebnissen, wenn ich danach nicht mit molloy business weiterarbeite?",
     answer:
-      "Das Pinterest Audit passt für Unternehmen mit bestehendem Pinterest-Account, deren Reichweite gering ist, denen die passenden Keywords fehlen oder deren Pinterest-Strategie unklar ist. Es eignet sich für touristische Unternehmen, Food-Marken und Finanzdienstleister ebenso wie für KMU und Selbstständige mit eigener Website.",
+      "Die Handlungsempfehlungen gehören dir und sind bewusst so formuliert, dass du sie eigenständig oder mit deinem Team umsetzen kannst – eine Folgebeauftragung ist keine Bedingung. Das Audit ist damit auch als einmalige, unabhängige Standortbestimmung nutzbar, bevor du entscheidest, ob und mit wem du dein Pinterest Marketing weiterentwickelst.",
   },
   {
-    question: "Brauche ich für das Pinterest Audit einen bestehenden Account?",
+    question:
+      "Welche Zugänge und Unterlagen muss ich für das Audit bereitstellen?",
     answer:
-      "Ja, das Pinterest Audit setzt einen bestehenden Pinterest-Account voraus, den molloy business im Detail analysiert. Fehlt noch ein Account, ist der Pinterest Strategie Call oder der Pinterest Account Aufbau der passendere erste Schritt, bevor ein Audit sinnvolle Ergebnisse liefern kann.",
+      "Für die Analyse braucht molloy business vor allem Einblick in deine Pinterest Analytics, denn öffentlich sichtbare Pins erzählen nur die halbe Geschichte. Wie dieser Zugriff eingerichtet wird, klären wir unkompliziert im Erstgespräch. Aufwendige Unterlagen musst du nicht vorbereiten – deine eigene Einschätzung der bisherigen Ziele ist hilfreicher als jedes Dokument.",
   },
 ];
 
@@ -183,10 +185,10 @@ export default function PinterestAudit() {
           Das Pinterest Audit passt für Unternehmen mit bestehendem Account,
           bei denen die Reichweite gering ist, die passenden Keywords fehlen
           oder die Strategie insgesamt unklar geworden ist. Besonders
-          hilfreich ist es für touristische Unternehmen, Food-Marken und
-          Finanzdienstleister, deren Themen sich schnell weiterentwickeln und
-          bei denen sich Fehlausrichtungen im Account besonders bemerkbar
-          machen. Ebenso geeignet ist es für KMU und Selbstständige, die
+          hilfreich ist es in Branchen, deren Themen sich schnell
+          weiterentwickeln – etwa im Tourismus, bei Food-Marken oder in der
+          Finanzkommunikation –, weil sich Fehlausrichtungen im Account dort
+          besonders bemerkbar machen. Ebenso geeignet ist es für KMU und Selbstständige, die
           ihren bestehenden Account einordnen lassen wollen, bevor sie
           weiter investieren.
         </p>

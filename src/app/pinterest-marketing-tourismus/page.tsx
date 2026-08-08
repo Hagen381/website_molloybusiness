@@ -89,9 +89,9 @@ const faq = [
   },
   {
     question:
-      "Braucht touristisches Pinterest Marketing viele Fotos oder reicht vorhandenes Material?",
+      "Was bringt Pinterest, wenn unsere Buchungen ohnehin über Portale laufen?",
     answer:
-      "Vorhandenes Fotomaterial reicht in der Regel als Grundlage, denn Pins werden aus bestehenden Bildern gestaltet und mit Text, Struktur und SEO-optimierten Beschreibungen ergänzt. Wichtiger als die Menge an Fotos ist, dass Motive zu konkreten Suchanfragen passen – etwa Zimmeransichten, Ausblicke oder Aktivitäten rund um die Unterkunft.",
+      "Gerade dann lohnt der Blick auf Pinterest: Pins verlinken auf deine eigene Website und stärken damit den direkten Kanal, der nicht von Portal-Rankings und Provisionen abhängt. Wer Reisende schon in der Inspirationsphase erreicht, wird als Unterkunft oder Region wahrgenommen, bevor der Preisvergleich auf Portalen überhaupt beginnt.",
   },
 ];
 

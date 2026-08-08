@@ -69,19 +69,20 @@ const processSteps = [
 // FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
 const faq = [
   {
-    question: "Was ist im Pinterest Account Aufbau enthalten?",
+    question: "Was passiert, wenn mir die gestalteten Entwürfe nicht gefallen?",
     answer:
-      "Der Pinterest Account Aufbau umfasst Wettbewerbsanalyse, Keyword- und Interessen-Recherche inklusive Keywordliste, ein individuelles Pinterest-Konzept, professionelles Profilbild-Cover und optimierte Profilbeschreibung, 8 strategische Boards mit Covern und SEO-Beschreibungen sowie 50 gestaltete Pins inklusive Headlines und Beschreibungen – inklusive 2 Korrekturschleifen für Anpassungen am Design und an den Texten.",
+      "Genau dafür gibt es die zwei Korrekturschleifen: Du sammelst dein Feedback zu Design und Texten möglichst gebündelt, die Anpassungen werden eingearbeitet – je konkreter die Rückmeldung, desto gezielter fällt die zweite Runde aus. Für Änderungswünsche, die deutlich über beide Schleifen hinausgehen, wird das weitere Vorgehen offen im Projekt besprochen.",
   },
   {
-    question: "Brauche ich schon einen bestehenden Pinterest-Account für den Aufbau?",
+    question: "Warum braucht ein neuer Account gleich 8 Boards und 50 Pins?",
     answer:
-      "Nein, der Pinterest Account Aufbau eignet sich sowohl für einen komplett neuen Pinterest-Account als auch für die grundlegende Neustrukturierung eines bestehenden Accounts. In beiden Fällen entstehen Profil, Boards und Pins auf Basis von Wettbewerbsanalyse und Keyword-Recherche neu, abgestimmt auf deine Zielgruppe und Branche. Wichtig ist in beiden Fällen eine eigene Website, auf die die Pins später verlinken.",
+      "Weil ein Account erst mit Substanz in der Pinterest-Suche bestehen kann: Acht Boards decken die wichtigsten Themen ab, ohne beliebig zu werden, und fünfzig Pins sorgen dafür, dass keines davon leer wirkt. So entsteht von Beginn an ein Profil, das Besucherinnen und Besuchern – und dem Pinterest-Algorithmus – ein klares Themenbild vermittelt.",
   },
   {
-    question: "Was passiert nach dem Pinterest Account Aufbau?",
+    question:
+      "Was brauche ich, um den Account nach dem Aufbau selbst weiterzuführen?",
     answer:
-      "Nach dem Pinterest Account Aufbau steht ein vollständig eingerichteter Account mit Profil, 8 Boards und 50 Pins – du kannst ihn ab diesem Zeitpunkt selbst weiterführen. Wer die laufende Betreuung nicht selbst übernehmen möchte, kann direkt im Anschluss in das Pinterest Account Management wechseln. Alle Zugänge und Inhalte gehören danach vollständig dir.",
+      "Vor allem regelmäßige Zeit für neue Pins, denn Pinterest belohnt Kontinuität stärker als einzelne Aktionen. Als Arbeitsgrundlage bleiben dir Keywordliste und Konzept aus dem Aufbau, an denen du dich bei neuen Inhalten orientieren kannst. Soll dein Team das nötige Wissen gebündelt bekommen, lässt sich das mit dem Pinterest Workshop vertiefen.",
   },
 ];
 

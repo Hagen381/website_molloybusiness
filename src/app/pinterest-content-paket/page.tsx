@@ -60,19 +60,21 @@ const processSteps = [
 // FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
 const faq = [
   {
-    question: "Was ist im Pinterest Content Paket enthalten?",
+    question:
+      "Warum nicht einfach Pins mit fertigen Vorlagen aus Design-Tools erstellen?",
     answer:
-      "Das Pinterest Content Paket umfasst 30 individuell gestaltete Premium-Pins pro Monat inklusive SEO-optimierter Headlines und Beschreibungen, angepasst an Farben, Logo und Schriften deiner Marke. Du bekommst upload-fertige Dateien mit Textbausteinen zum Kopieren und veröffentlichst die Pins anschließend selbst auf deinem Account.",
+      "Vorlagen liefern ein Layout, aber weder Suchlogik noch Markenbezug: Welche Headline in der Pinterest-Suche funktioniert und welche Begriffe deine Zielgruppe eingibt, steht in keiner Vorlage. Beim Content Paket werden Design und Texte für jeden Pin individuell entwickelt – abgestimmt auf deine Marke und darauf, wonach tatsächlich gesucht wird.",
   },
   {
-    question: "Wie viele Pins lassen sich aus dem Content Paket veröffentlichen?",
+    question:
+      "Wie viel Zeit muss ich einplanen, wenn ich die Pins selbst veröffentliche?",
     answer:
-      "Das Pinterest Content Paket liefert 30 individuell gestaltete Premium-Pins pro Monat als Basis. Durch Variationen dieser 30 Designs – etwa unterschiedliche Farben oder Textausschnitte – lassen sich daraus bis zu 90 Pins pro Monat veröffentlichen, die du selbst in deinen Redaktionsplan einplanst.",
+      "Dein Aufwand beschränkt sich auf das Einplanen und Hochladen: Die Dateien kommen upload-fertig, Headlines und Beschreibungen liegen als Textbausteine zum Kopieren bei, sodass keine eigene Design- oder Textarbeit anfällt. Plane vor allem einen festen Rhythmus ein – regelmäßiges Veröffentlichen wirkt auf Pinterest stärker als gelegentliche große Schübe.",
   },
   {
-    question: "Erstelle ich die Pins selbst oder übernimmt das molloy business?",
+    question: "Was passiert mit den Pins, wenn ich das Content Paket beende?",
     answer:
-      "molloy business erstellt beim Pinterest Content Paket den kompletten Content: 30 Premium-Pins pro Monat inklusive Headlines, Beschreibungen und Textbausteinen zum Kopieren, upload-fertig geliefert. Das Einplanen und Veröffentlichen auf deinem Account übernimmst du selbst, ein Planungstool ist im Preis nicht enthalten.",
+      "Bereits gelieferte Dateien und veröffentlichte Pins bleiben dir erhalten – sie liegen auf deinem Account und arbeiten dort weiter, denn Pinterest-Content bleibt langfristig auffindbar. Es entsteht also kein Bruch, sondern es kommen lediglich keine neuen Pins mehr dazu. Details zum Beenden der Zusammenarbeit klärst du unkompliziert im Gespräch mit molloy business.",
   },
 ];
 
@@ -182,10 +184,10 @@ export default function PinterestContentPaket() {
         <p className="font-body mt-6 text-lg">
           Das Pinterest Content Paket eignet sich für Unternehmen, die
           Pinterest selbst bespielen möchten, aber keine Kapazität für
-          Design und SEO-optimierte Texte haben. Besonders gefragt ist das
-          Format bei touristischen Unternehmen, Food-Marken und
-          Finanzdienstleistern, die regelmäßig visuellen Content brauchen,
-          ohne eigene Ressourcen für die Gestaltung aufzubauen. Ebenso
+          Design und SEO-optimierte Texte haben. Besonders gefragt ist es
+          überall dort, wo laufend visueller Content gebraucht wird – vom
+          Hotel über die Food-Marke bis zum Finanzdienstleister –, ohne dass
+          eigene Ressourcen für die Gestaltung aufgebaut werden sollen. Ebenso
           passend ist es für KMU und Selbstständige, die die Veröffentlichung
           selbst steuern, aber Design und Texte gerne abgeben möchten.
         </p>

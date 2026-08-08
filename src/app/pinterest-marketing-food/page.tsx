@@ -73,16 +73,15 @@ const faq = [
       "Eigenes Bild- oder Rezeptmaterial ist hilfreich, aber kein zwingender Startpunkt: Pins lassen sich auch auf Basis vorhandener Produktfotos gestalten, die mit Rezeptideen und Anwendungstipps ergänzt werden. Wichtiger als perfekte Foodfotografie ist, dass der Pin eine konkrete Suchanfrage beantwortet und auf eine passende Seite verlinkt.",
   },
   {
-    question:
-      "Funktioniert Pinterest auch für kleine Manufakturen ohne großes Sortiment?",
+    question: "Wie wird aus einem Rezept-Pin am Ende ein Produktkauf?",
     answer:
-      "Ja – gerade kleine Manufakturen mit einem klar erkennbaren Produkt können auf Pinterest gut sichtbar werden, weil ein einzelnes Produkt in mehreren Rezepten und Anwendungen wiederkehren kann. Entscheidend ist nicht die Sortimentsgröße, sondern wie klar das Produkt in nützliche, suchbare Inhalte übersetzt wird.",
+      "Der Weg führt über deine Website: Ein Rezept-Pin verlinkt auf die passende Rezept- oder Shopseite, auf der dein Produkt als Zutat eine natürliche Rolle spielt. Der Kauf entsteht nicht durch Werbedruck, sondern weil das Produkt Teil einer Idee ist, die jemand ohnehin nachkochen möchte. Deshalb ist die Verlinkung auf eine konkrete, passende Seite wichtiger als reine Reichweite.",
   },
   {
     question:
-      "Wie geht molloy business mit saisonalen Food-Themen wie Grillsaison oder Weihnachtsbäckerei um?",
+      "Wir verkaufen über den Handel – funktioniert Pinterest auch ohne eigenen Onlineshop?",
     answer:
-      "molloy business plant Boards und Pins entlang des Food-Jahreskalenders: Saisonale Anlässe wie Grillsaison, Weihnachtsbäckerei oder Osterbrunch werden im Redaktionsplan vorab berücksichtigt, damit passende Pins bereits einige Wochen vor dem jeweiligen Anlass online sind und rechtzeitig gefunden werden. Bestehende Rezept-Pins aus Vorjahren werden dabei regelmäßig aktualisiert statt komplett neu erstellt.",
+      "Auch ohne eigenen Onlineshop funktioniert Pinterest, solange eine eigene Website mit Rezepten oder Produktinformationen als Linkziel existiert. Das Ziel verschiebt sich dann vom direkten Verkauf zur Markenbekanntheit: Wer dein Produkt aus Rezept-Pins kennt, greift im Handel eher danach. Eine Händlersuche oder Bezugsquellen-Seite macht diesen Weg zusätzlich konkret.",
   },
   {
     question: "Ersetzt Pinterest andere Social-Media-Kanäle für Food-Marken?",

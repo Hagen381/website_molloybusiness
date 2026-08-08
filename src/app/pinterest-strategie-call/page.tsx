@@ -58,19 +58,21 @@ const processSteps = [
 // FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
 const faq = [
   {
-    question: "Was ist im Pinterest Strategie Call enthalten?",
+    question: "Wie bereite ich mich am besten auf den Strategie Call vor?",
     answer:
-      "Der Pinterest Strategie Call umfasst einen 90-minütigen Videocall mit Analyse deiner Ausgangslage (Thema, Zielgruppe, Website und Produkte), konkreten Strategie-Impulsen für den Start sowie ersten Ideen für Boards und Pin-Themen. Offene Fragen zu Pinterest werden dabei verständlich und ohne Fachchinesisch beantwortet.",
+      "Viel Vorbereitung braucht es nicht – am wertvollsten ist, wenn du vorab deine dringendsten Fragen sammelst und dir überlegst, welches Ziel Pinterest für dein Unternehmen erfüllen soll. Je klarer diese Punkte sind, desto konkreter können die 90 Minuten auf deine Situation eingehen, statt bei allgemeinen Grundlagen zu bleiben.",
   },
   {
-    question: "Wird der Betrag für den Strategie Call bei einer Zusammenarbeit angerechnet?",
+    question:
+      "Sollte ich mit dem Strategie Call oder dem Pinterest Workshop starten?",
     answer:
-      "Ja, der Betrag für den Pinterest Strategie Call wird bei einer anschließenden Zusammenarbeit mit molloy business vollständig angerechnet. Entscheidest du dich zum Beispiel für den Pinterest Account Aufbau oder das Account Management, reduziert sich der Preis dieser Leistung um den bereits gezahlten Betrag des Calls.",
+      "Der Workshop vermittelt Grundlagenwissen in einer Stunde und richtet sich an Teams und Events, während der Strategie Call 90 Minuten lang ausschließlich auf deine konkrete Ausgangslage eingeht. Vereinfacht gesagt: Der Workshop beantwortet, wie Pinterest grundsätzlich funktioniert – der Call beantwortet, was das für dein Unternehmen bedeutet und womit du startest.",
   },
   {
-    question: "Für wen eignet sich der Pinterest Strategie Call?",
+    question:
+      "Was passiert, wenn sich im Call zeigt, dass Pinterest nicht zu meinem Unternehmen passt?",
     answer:
-      "Der Pinterest Strategie Call eignet sich für Unternehmen, die vor dem Einstieg in Pinterest stehen oder ihre bestehende Strategie überprüfen wollen. Besonders gefragt ist er bei touristischen Unternehmen, Food-Marken und Finanzdienstleistern, genauso passt er für KMU und Selbstständige mit einer eigenen Website.",
+      "Dann sprechen wir das offen aus – der Call ist eine ehrliche Einschätzung, kein Verkaufsgespräch. Du erfährst in dem Fall, warum Pinterest für deine Ausgangslage gerade nicht der richtige Kanal ist, und ersparst dir eine größere Fehlinvestition. Genau diese Klarheit vor einer Entscheidung ist der eigentliche Zweck der 90 Minuten.",
   },
 ];
 

@@ -9,10 +9,17 @@ import { navigation } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 // Ein Pfad gilt als aktiv, wenn er exakt passt oder ein Unterpfad davon ist.
+// Wegen trailingSlash enden hrefs und Pfade auf "/" — ohne Normalisierung
+// entstünde beim Unterpfad-Check ein doppelter Schrägstrich.
 function isPathActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   if (href === "#") return false;
-  return pathname === href || pathname.startsWith(`${href}/`);
+  const normalizedPathname = pathname.replace(/\/+$/, "");
+  const normalizedHref = href.replace(/\/+$/, "");
+  return (
+    normalizedPathname === normalizedHref ||
+    normalizedPathname.startsWith(`${normalizedHref}/`)
+  );
 }
 
 // Dropdown-Elternpunkte (z.B. "Angebote") zeigen weiterhin selbst auf "/",

@@ -54,19 +54,21 @@ const processSteps = [
 // FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
 const faq = [
   {
-    question: "Was ist im Pinterest Workshop enthalten?",
+    question: "Brauchen die Teilnehmenden Vorkenntnisse für den Workshop?",
     answer:
-      "Der Pinterest Workshop umfasst einen einstündigen Online-Workshop zu den Grundlagen von Pinterest Marketing, ein anschließendes Q&A für deine konkreten Fragen sowie ein Factsheet zum Download mit den wichtigsten Punkten. Das Format eignet sich sowohl für interne Teams als auch für externe Online-Events.",
+      "Nein, der Workshop ist bewusst als Einstieg konzipiert und setzt keine Pinterest-Erfahrung voraus. Auch gemischte Gruppen funktionieren gut: Die Grundlagen werden so vermittelt, dass Einsteiger folgen können, während das anschließende Q&A Raum für speziellere Fragen erfahrener Teilnehmender bietet. Ein eigener Pinterest-Account ist für die Teilnahme nicht nötig.",
   },
   {
-    question: "Wie läuft der Pinterest Workshop ab?",
+    question:
+      "Warum ein bezahlter Workshop, wenn es kostenlose Pinterest-Tutorials gibt?",
     answer:
-      "Der Pinterest Workshop findet als einstündiger Online-Termin statt, in dem die Grundlagen von Pinterest Marketing verständlich und praxisnah vermittelt werden. Im Anschluss ist Zeit für ein ausführliches Q&A, danach bekommst du ein Factsheet zum Download mit den wichtigsten Punkten zum Nachlesen.",
+      "Frei verfügbare Tutorials richten sich oft an private Nutzerinnen und Nutzer und lassen offen, was davon für Unternehmen relevant ist. Der Workshop verdichtet die Grundlagen auf eine Stunde, ordnet sie aus Unternehmenssicht ein und bietet mit dem Q&A etwas, das kein Video leisten kann: direkte Antworten auf die Fragen deines Teams.",
   },
   {
-    question: "Für wen eignet sich der Pinterest Workshop?",
+    question:
+      "Lässt sich der Workshop mit den anderen Leistungen von molloy business kombinieren?",
     answer:
-      "Der Pinterest Workshop eignet sich für Unternehmen und Teams, die gemeinsam die Grundlagen von Pinterest Marketing lernen möchten – etwa als internes Team-Format oder im Rahmen eines Online-Events. Er passt für touristische Unternehmen, Food-Marken und Finanzdienstleister genauso wie für KMU und Selbstständige.",
+      "Ja, der Workshop ergänzt die übrigen Formate sinnvoll: Vor einem Account Aufbau schafft er im Team ein gemeinsames Verständnis dafür, was danach entsteht. Und begleitet molloy business deinen Account bereits laufend, hilft der Workshop deinem Team, die Strategie dahinter nachzuvollziehen und eigene Ideen gezielter beizusteuern.",
   },
 ];
 
@@ -175,9 +177,9 @@ export default function PinterestWorkshop() {
           Der Pinterest Workshop eignet sich für Unternehmen und Teams, die
           gemeinsam einen Einstieg in Pinterest Marketing bekommen möchten –
           etwa als Teil eines internen Teamtags oder eines Online-Events.
-          Besonders gut passt das Format zu touristischen Unternehmen,
-          Food-Marken und Finanzdienstleistern, deren Teams häufig mit
-          visuellen Inhalten arbeiten. Genauso profitieren KMU und
+          Besonders gut passt das Format zu Teams, die ohnehin viel mit
+          visuellen Inhalten arbeiten – im Tourismus ebenso wie bei
+          Food-Marken oder in der Finanzbranche. Genauso profitieren KMU und
           Selbstständige, die sich einen kompakten Überblick verschaffen
           wollen, bevor sie selbst mit Pinterest starten.
         </p>
