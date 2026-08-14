@@ -26,27 +26,35 @@ const audiences = [
   "Offen für alle Branchen",
 ];
 
+// Echte Kundenstimmen, schriftlich freigegeben — WORTGLEICH übernehmen,
+// nie umformulieren oder kürzen (Auszüge nur auf den Unterseiten, dort mit
+// […]-Kennzeichnung). Die Aussage "von Pinterest selbst positiv
+// wahrgenommen" darf ausschließlich innerhalb des Christ-Zitats stehen,
+// niemals als eigene Aussage der Website.
 const testimonials = [
   {
-    quote: "Platzhalter für eine Kundenstimme — wird mit echtem Feedback befüllt.",
-    name: "Referenz folgt",
-    role: "Unternehmen",
+    quote:
+      "Hervorragende Pinterest-Beratung! Juliette hat uns pragmatisch und fundiert in allen Fragen rund um Pinterest unterstützt. Sie hat unseren Pinterest-Account professionell aufgebaut, berät uns zu Inhalten und setzt organische Beiträge gekonnt um. Ihre Expertise hat dazu beigetragen, dass unser Auftritt sogar von Pinterest selbst positiv wahrgenommen wurde! Wer eine kompetente, praxisnahe und strategische Unterstützung für Pinterest sucht, ist bei Juliette genau richtig. Vielen Dank für die tolle Zusammenarbeit!",
+    name: "Fabian Christ",
+    role: "Social Media Manager, PostFinance",
   },
   {
-    quote: "Platzhalter für eine Kundenstimme — wird mit echtem Feedback befüllt.",
-    name: "Referenz folgt",
-    role: "Unternehmen",
+    quote:
+      "Ich habe Juliette für einen Online-Workshop zum Thema Pinterest Einsteigerwissen gebucht. Die Teilnehmenden und ich fühlen uns jetzt sehr gut in das Thema mitgenommen. Juliettes Präsentation war sehr interessant und mit vielen Praxisbeispielen ergänzt. Im Fragenteil konnte Juliette ihr umfassendes Fachwissen und ihre Erfahrung einbringen. Mit viel Geduld und vor allem für jede*n verständlich, hat Juliette Pinterest greifbar gemacht. Sollte nochmals Bedarf für dieses Thema aufkommen, würde ich Juliette wieder buchen!",
+    name: "Judith Kenk",
+    role: "Digitalisierungsbotschafterin Mecklenburg-Vorpommern",
   },
   {
-    quote: "Platzhalter für eine Kundenstimme — wird mit echtem Feedback befüllt.",
-    name: "Referenz folgt",
-    role: "Unternehmen",
+    quote:
+      "Juliette ist eine wunderbare Mischung aus Professionalität, Kompetenz, Zuverlässigkeit, Neugier, Liebenswürdigkeit, Offenheit, Flexibilität, Hartnäckigkeit und Kreativität. Mit ihr zusammenzuarbeiten, kann ich nur jedem empfehlen bzw. wünschen! :-)",
+    name: "Dr. Judith Gastner",
+    role: "Geschäftsführerin, PaarBalance GmbH",
   },
 ];
 
 // Sichtbar als "Zuletzt aktualisiert: August 2026", im Schema als dateModified.
 const lastUpdatedLabel = "August 2026";
-const lastUpdatedIso = "2026-08-08";
+const lastUpdatedIso = "2026-08-14";
 
 // FAQ-Daten: `answer` ist die eigenständige 40–60-Wort-Direktantwort, `link`
 // hängt optional einen weiterführenden Blog-Verweis an denselben Absatz an.
@@ -98,7 +106,8 @@ const faq: FaqItem[] = [
 // Seiten-spezifisches Schema: Person, Service je Leistung,
 // FAQPage und WebPage mit dateModified. Organization steht global in layout.tsx.
 // Bewusst KEIN BreadcrumbList (Startseite), KEIN AggregateRating/Review
-// (es gibt noch keine echten Bewertungen — erfundene wären ein Abstrafungsrisiko).
+// (Vorgabe der Zitat-Freigaben: Kundenstimmen erscheinen nur als sichtbarer
+// Text, nicht als strukturierte Bewertung).
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -293,10 +302,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust signals / testimonials placeholder — bewusst weit oben
-          (direkt nach dem ersten inhaltlichen Abschnitt); Inhalte bleiben
-          Platzhalter, bis die schriftlichen Freigaben der Zitatgeber
-          vorliegen. */}
+      {/* Kundenstimmen — bewusst weit oben (direkt nach dem ersten
+          inhaltlichen Abschnitt); echte, schriftlich freigegebene Zitate,
+          siehe Kommentar am `testimonials`-Array. */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-12 text-center">
           <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
@@ -305,6 +313,11 @@ export default function Home() {
           <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
             Feedback ist ein Geschenk
           </h2>
+          <p className="font-body mx-auto mt-6 max-w-3xl text-lg">
+            Was Kundinnen und Kunden über die Zusammenarbeit mit molloy
+            business sagen – wortgleich und mit ihrer Freigabe
+            veröffentlicht:
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -324,51 +337,53 @@ export default function Home() {
       </section>
 
       {/* Organisch statt Ads */}
-      <section className="mx-auto max-w-4xl px-6 py-16 text-center">
-        <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Organisch statt Ads: Sichtbarkeit, die bleibt
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Pinterest ist keine Social-Media-Plattform, sondern eine{" "}
-          <strong className="text-heading">
-            Suchmaschine für Ideen, Produkte und Inspiration
-          </strong>
-          . Menschen kommen nicht hierher, um Freunden zu folgen, sondern um
-          etwas zu finden: das nächste Reiseziel, ein Rezept fürs Wochenende,
-          eine Antwort auf eine Finanzfrage. Wer dort mit den passenden
-          Inhalten auftaucht, erreicht Menschen genau in dem Moment, in dem
-          sie suchen.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Genau daraus ergibt sich der größte Unterschied zu anderen Kanälen:
-          Ein Beitrag auf klassischen Social-Media-Plattformen verschwindet
-          nach Stunden aus den Feeds. Ein gut gemachter, SEO-optimierter Pin
-          wird dagegen über Monate – oft Jahre – in der Pinterest-Suche
-          gefunden und bringt in dieser Zeit kontinuierlich Besucherinnen und
-          Besucher auf deine Website. Die Arbeit, die du einmal investierst,
-          wirkt also dauerhaft weiter.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Und Pinterest Ads? Anzeigen sind nicht schlecht – sie sind ein
-          anderes Werkzeug. Sie bringen schnelle Reichweite, solange Budget
-          fließt, und enden in dem Moment, in dem die Kampagne stoppt.
-          Organische Pins bauen dagegen ein Fundament auf, das bleibt.{" "}
-          <strong className="text-heading">
-            molloy business ist auf den organischen Weg spezialisiert
-          </strong>
-          : Strategie, Struktur und Inhalte, die aus eigener Kraft gefunden
-          werden – ohne laufendes Werbebudget.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Das Ergebnis ist planbares, nachhaltiges Marketing: weniger
-          Abhängigkeit von Algorithmen und Anzeigenpreisen, mehr Ruhe im
-          Alltag – und ein Kanal, der im Hintergrund für dich arbeitet,
-          während du dich um dein Kerngeschäft kümmerst.
-        </p>
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
+          <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            Organisch statt Ads: Sichtbarkeit, die bleibt
+          </h2>
+          <p className="font-body mt-6 text-lg">
+            Pinterest ist keine Social-Media-Plattform, sondern eine{" "}
+            <strong className="text-heading">
+              Suchmaschine für Ideen, Produkte und Inspiration
+            </strong>
+            . Menschen kommen nicht hierher, um Freunden zu folgen, sondern um
+            etwas zu finden: das nächste Reiseziel, ein Rezept fürs Wochenende,
+            eine Antwort auf eine Finanzfrage. Wer dort mit den passenden
+            Inhalten auftaucht, erreicht Menschen genau in dem Moment, in dem
+            sie suchen.
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Genau daraus ergibt sich der größte Unterschied zu anderen Kanälen:
+            Ein Beitrag auf klassischen Social-Media-Plattformen verschwindet
+            nach Stunden aus den Feeds. Ein gut gemachter, SEO-optimierter Pin
+            wird dagegen über Monate – oft Jahre – in der Pinterest-Suche
+            gefunden und bringt in dieser Zeit kontinuierlich Besucherinnen und
+            Besucher auf deine Website. Die Arbeit, die du einmal investierst,
+            wirkt also dauerhaft weiter.
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Und Pinterest Ads? Anzeigen sind nicht schlecht – sie sind ein
+            anderes Werkzeug. Sie bringen schnelle Reichweite, solange Budget
+            fließt, und enden in dem Moment, in dem die Kampagne stoppt.
+            Organische Pins bauen dagegen ein Fundament auf, das bleibt.{" "}
+            <strong className="text-heading">
+              molloy business ist auf den organischen Weg spezialisiert
+            </strong>
+            : Strategie, Struktur und Inhalte, die aus eigener Kraft gefunden
+            werden – ohne laufendes Werbebudget.
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Das Ergebnis ist planbares, nachhaltiges Marketing: weniger
+            Abhängigkeit von Algorithmen und Anzeigenpreisen, mehr Ruhe im
+            Alltag – und ein Kanal, der im Hintergrund für dich arbeitet,
+            während du dich um dein Kerngeschäft kümmerst.
+          </p>
+        </div>
       </section>
 
       {/* Für wen sich Pinterest besonders lohnt */}
-      <section className="bg-surface">
+      <section>
         <div className="mx-auto max-w-4xl px-6 py-16">
           <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
             Für wen sich Pinterest besonders lohnt
@@ -473,22 +488,24 @@ export default function Home() {
       </section>
 
       {/* So läuft die Zusammenarbeit ab */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          So läuft die Zusammenarbeit ab
-        </h2>
-        <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
-          {processSteps.map((step) => (
-            <li key={step.title}>
-              <strong className="text-heading">{step.title}:</strong>{" "}
-              {step.text}
-            </li>
-          ))}
-        </ol>
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-16">
+          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            So läuft die Zusammenarbeit ab
+          </h2>
+          <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
+            {processSteps.map((step) => (
+              <li key={step.title}>
+                <strong className="text-heading">{step.title}:</strong>{" "}
+                {step.text}
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
       {/* Services */}
-      <section className="bg-surface">
+      <section>
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="mb-12 text-center">
             <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
@@ -513,7 +530,7 @@ export default function Home() {
               <Link
                 key={service.title}
                 href={service.href}
-                className="bg-cream group flex flex-col rounded-2xl p-6 shadow-sm transition hover:shadow-md"
+                className="bg-surface group flex flex-col rounded-2xl p-6 shadow-sm transition hover:shadow-md"
               >
                 <h3 className="text-[22px] leading-tight">{service.title}</h3>
                 <p className="font-body mt-3 flex-1 text-[15px] leading-relaxed">
@@ -534,29 +551,31 @@ export default function Home() {
       </section>
 
       {/* Hinter molloy business */}
-      <section className="mx-auto max-w-4xl px-6 py-16 text-center">
-        <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Hinter molloy business
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Hinter molloy business steht{" "}
-          <strong className="text-heading">Juliette Oppel</strong> –
-          Pinterest-Marketing-Expertin, erklärter Strukturprofi und das
-          Gesicht der Marke. Sie
-          betreut ihre Kundinnen und Kunden remote im gesamten
-          deutschsprachigen Raum und übernimmt dabei alles aus einer Hand:
-          Strategie, Pin-Design, Texte und die laufende Umsetzung.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Ihre Arbeitsweise ist bewusst unaufgeregt: ehrliche Einschätzungen
-          statt Hype-Versprechen, klare Abläufe statt Aktionismus – und nur
-          Angebote, hinter denen sie selbst zu hundert Prozent steht. Wer mit
-          molloy business arbeitet, arbeitet direkt mit ihr.
-        </p>
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
+          <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            Hinter molloy business
+          </h2>
+          <p className="font-body mt-6 text-lg">
+            Hinter molloy business steht{" "}
+            <strong className="text-heading">Juliette Oppel</strong> –
+            Pinterest-Marketing-Expertin, erklärter Strukturprofi und das
+            Gesicht der Marke. Sie
+            betreut ihre Kundinnen und Kunden remote im gesamten
+            deutschsprachigen Raum und übernimmt dabei alles aus einer Hand:
+            Strategie, Pin-Design, Texte und die laufende Umsetzung.
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Ihre Arbeitsweise ist bewusst unaufgeregt: ehrliche Einschätzungen
+            statt Hype-Versprechen, klare Abläufe statt Aktionismus – und nur
+            Angebote, hinter denen sie selbst zu hundert Prozent steht. Wer mit
+            molloy business arbeitet, arbeitet direkt mit ihr.
+          </p>
+        </div>
       </section>
 
       {/* FAQ */}
-      <section className="bg-surface">
+      <section>
         <div className="mx-auto max-w-4xl px-6 py-16">
           <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
             Häufige Fragen zu Pinterest Marketing
@@ -586,27 +605,29 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Lass uns über dein Pinterest Marketing sprechen
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          In einem unverbindlichen Strategie Call schauen wir gemeinsam, wie
-          Pinterest für dein Unternehmen arbeiten kann.
-        </p>
-        <div className="mt-8">
-          <a
-            href={siteConfig.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            let&apos;s talk
-          </a>
+      <section className="bg-surface">
+        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
+          <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            Lass uns über dein Pinterest Marketing sprechen
+          </h2>
+          <p className="font-body mt-6 text-lg">
+            In einem unverbindlichen Strategie Call schauen wir gemeinsam, wie
+            Pinterest für dein Unternehmen arbeiten kann.
+          </p>
+          <div className="mt-8">
+            <a
+              href={siteConfig.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              let&apos;s talk
+            </a>
+          </div>
+          <p className="font-body mt-12 text-xs">
+            Zuletzt aktualisiert: {lastUpdatedLabel}
+          </p>
         </div>
-        <p className="font-body mt-12 text-xs">
-          Zuletzt aktualisiert: {lastUpdatedLabel}
-        </p>
       </section>
 
       <script

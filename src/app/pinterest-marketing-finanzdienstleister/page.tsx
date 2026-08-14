@@ -334,6 +334,21 @@ export default function PinterestMarketingFinanzdienstleister() {
               </li>
             ))}
           </ol>
+
+          {/* Schriftlich freigegebene Kundenstimme aus der Finanzbranche —
+              WORTGLEICH übernehmen, nie umformulieren. Die Aussage "von
+              Pinterest selbst positiv wahrgenommen" darf nur innerhalb
+              dieses Zitats stehen. */}
+          <figure className="bg-cream mx-auto mt-10 max-w-2xl rounded-2xl p-6 shadow-sm">
+            <blockquote className="font-body text-[15px] leading-relaxed italic">
+              &ldquo;Hervorragende Pinterest-Beratung! Juliette hat uns pragmatisch und fundiert in allen Fragen rund um Pinterest unterstützt. Sie hat unseren Pinterest-Account professionell aufgebaut, berät uns zu Inhalten und setzt organische Beiträge gekonnt um. Ihre Expertise hat dazu beigetragen, dass unser Auftritt sogar von Pinterest selbst positiv wahrgenommen wurde! Wer eine kompetente, praxisnahe und strategische Unterstützung für Pinterest sucht, ist bei Juliette genau richtig. Vielen Dank für die tolle Zusammenarbeit!&rdquo;
+            </blockquote>
+            <figcaption className="font-body mt-4 text-sm">
+              <span className="text-heading font-semibold">Fabian Christ</span>
+              <br />
+              Social Media Manager, PostFinance
+            </figcaption>
+          </figure>
         </div>
       </section>
 

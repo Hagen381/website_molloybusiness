@@ -229,7 +229,21 @@ export default function PinterestWorkshop() {
           Teams und einem Factsheet zum Download für alle, die später
           nachlesen wollen.
         </p>
-        <p className="font-body mt-4 text-lg">
+
+        {/* Schriftlich freigegebene Kundenstimme zu genau diesem
+            Workshop-Format — WORTGLEICH übernehmen, nie umformulieren. */}
+        <figure className="bg-surface mx-auto mt-10 max-w-2xl rounded-2xl p-6 shadow-sm">
+          <blockquote className="font-body text-[15px] leading-relaxed italic">
+            &ldquo;Ich habe Juliette für einen Online-Workshop zum Thema Pinterest Einsteigerwissen gebucht. Die Teilnehmenden und ich fühlen uns jetzt sehr gut in das Thema mitgenommen. Juliettes Präsentation war sehr interessant und mit vielen Praxisbeispielen ergänzt. Im Fragenteil konnte Juliette ihr umfassendes Fachwissen und ihre Erfahrung einbringen. Mit viel Geduld und vor allem für jede*n verständlich, hat Juliette Pinterest greifbar gemacht. Sollte nochmals Bedarf für dieses Thema aufkommen, würde ich Juliette wieder buchen!&rdquo;
+          </blockquote>
+          <figcaption className="font-body mt-4 text-sm">
+            <span className="text-heading font-semibold">Judith Kenk</span>
+            <br />
+            Digitalisierungsbotschafterin Mecklenburg-Vorpommern
+          </figcaption>
+        </figure>
+
+        <p className="font-body mt-10 text-lg">
           Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
           bekommst du im Erstgespräch.
         </p>

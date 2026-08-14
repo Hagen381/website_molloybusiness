@@ -248,7 +248,22 @@ export default function PinterestAccountManagement() {
           Auswertung der Pinterest Analytics. Du gibst den Kanal ab und musst
           selbst nichts umsetzen.
         </p>
-        <p className="font-body mt-4 text-lg">
+
+        {/* Auszug aus einer schriftlich freigegebenen Kundenstimme —
+            WORTGLEICH, Auslassungen nur mit […]. Vollständiges Zitat siehe
+            Startseite. */}
+        <figure className="bg-surface mx-auto mt-10 max-w-2xl rounded-2xl p-6 shadow-sm">
+          <blockquote className="font-body text-[15px] leading-relaxed italic">
+            &ldquo;Juliette hat uns pragmatisch und fundiert in allen Fragen rund um Pinterest unterstützt. […] berät uns zu Inhalten und setzt organische Beiträge gekonnt um.&rdquo;
+          </blockquote>
+          <figcaption className="font-body mt-4 text-sm">
+            <span className="text-heading font-semibold">Fabian Christ</span>
+            <br />
+            Social Media Manager, PostFinance
+          </figcaption>
+        </figure>
+
+        <p className="font-body mt-10 text-lg">
           Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
           bekommst du im Erstgespräch.
         </p>

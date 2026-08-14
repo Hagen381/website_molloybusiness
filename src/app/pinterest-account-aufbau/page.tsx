@@ -253,7 +253,22 @@ export default function PinterestAccountAufbau() {
           zu deiner Marke passt. Danach ist dein Account bereit, live zu
           gehen.
         </p>
-        <p className="font-body mt-4 text-lg">
+
+        {/* Auszug aus einer schriftlich freigegebenen Kundenstimme —
+            WORTGLEICH, Auslassungen nur mit […]. Vollständiges Zitat siehe
+            Startseite. */}
+        <figure className="bg-surface mx-auto mt-10 max-w-2xl rounded-2xl p-6 shadow-sm">
+          <blockquote className="font-body text-[15px] leading-relaxed italic">
+            &ldquo;Sie hat unseren Pinterest-Account professionell aufgebaut […] Wer eine kompetente, praxisnahe und strategische Unterstützung für Pinterest sucht, ist bei Juliette genau richtig.&rdquo;
+          </blockquote>
+          <figcaption className="font-body mt-4 text-sm">
+            <span className="text-heading font-semibold">Fabian Christ</span>
+            <br />
+            Social Media Manager, PostFinance
+          </figcaption>
+        </figure>
+
+        <p className="font-body mt-10 text-lg">
           Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
           bekommst du im Erstgespräch.
         </p>
