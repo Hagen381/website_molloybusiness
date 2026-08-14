@@ -139,6 +139,36 @@ export const sitePages = [
     priority: 0.6,
   },
   {
+    path: "/blog/podcast-pinterest-marketing/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/telegram-gruppe-pinterest-marketing-profis/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/pinterest-mere-exposure-effekt/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/pinterest-openai-learnings/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/pinterest-predicts-report-2026/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/pinterest-marketing/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/impressum/",
     changeFrequency: "yearly",
     priority: 0.1,
@@ -161,6 +191,48 @@ export const blogPosts = [
     date: "2026-08-08",
     excerpt:
       "Eine ehrliche Einordnung: wann Pinterest für kleine Unternehmen und Selbstständige funktioniert, wann nicht – und wie du mit überschaubarem Aufwand anfängst.",
+  },
+  {
+    slug: "podcast-pinterest-marketing",
+    title: "Podcast Pinterest Marketing: Wie dein Podcast auf Pinterest gefunden wird",
+    date: "2026-06-30",
+    excerpt:
+      "Warum „neue Podcastfolge online“ selten jemanden interessiert – und wie dein Podcast über Themen statt Folgen auf Pinterest langfristig gefunden wird.",
+  },
+  {
+    slug: "telegram-gruppe-pinterest-marketing-profis",
+    title: "Pinterest Marketing Profis: Telegram-Gruppe für erfahrene Pinterest-Dienstleister",
+    date: "2026-06-17",
+    excerpt:
+      "Viele Communities richten sich an Einsteiger. Die Telegram-Gruppe „Pinterest Marketing Profis“ vernetzt erfahrene Dienstleister für echten Fach-Austausch.",
+  },
+  {
+    slug: "pinterest-mere-exposure-effekt",
+    title: "Pinterest, Loaded Fries und der Mere-Exposure-Effekt",
+    date: "2026-05-20",
+    excerpt:
+      "Warum wiederholte Bilder Kaufentscheidungen prägen: der Mere-Exposure-Effekt, erklärt am Beispiel Loaded Fries – und was Marken daraus für Pinterest lernen.",
+  },
+  {
+    slug: "pinterest-openai-learnings",
+    title: "4 Learnings aus dem OpenAI-Pinterest-Gerücht",
+    date: "2026-01-19",
+    excerpt:
+      "Ob OpenAI Pinterest übernimmt, ist offen. Spannend ist etwas anderes: was das Gerücht über den Wert visueller Suche und Suchintention für Unternehmen verrät.",
+  },
+  {
+    slug: "pinterest-predicts-report-2026",
+    title: "Pinterest Predicts Report 2026: Wie du als Marke von den Trends wirklich profitierst",
+    date: "2026-01-05",
+    excerpt:
+      "Der Pinterest Predicts Report zeigt, was morgen gesucht wird. So nutzt du die Trends 2026 strategisch für deine Inhalte, Produkte und Boards.",
+  },
+  {
+    slug: "pinterest-marketing",
+    title: "Was ist Pinterest Marketing und wie funktioniert es?",
+    date: "2024-04-23",
+    excerpt:
+      "Pinterest ist keine Social-Media-Plattform, sondern eine visuelle Suchmaschine. Was Pinterest Marketing bedeutet und wie deine Inhalte dort gefunden werden.",
   },
 ] as const;
 
