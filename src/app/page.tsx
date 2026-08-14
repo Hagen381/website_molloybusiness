@@ -9,16 +9,21 @@ import { basePath } from "@/lib/base-path";
 // erben Unterseiten das globale "/" aus layout.tsx und deklarieren sich
 // selbst fälschlich als Startseite.
 export const metadata: Metadata = {
+  // Title bleibt bewusst der Default aus layout.tsx (Kern-Keyword) — nur die
+  // Description ist Startseiten-spezifisch (Touristik-Fokusschicht).
+  description:
+    "Pinterest Marketing Agentur: organisch statt Ads sichtbar werden – Schwerpunkt Reiseveranstalter & Touristik, offen für Unternehmen aller Branchen.",
   alternates: {
     canonical: "/",
   },
 };
 
+// Hero-Chips folgen der Erzählung "Fokus, nicht Ausschluss": Touristik als
+// Schwerpunkt, ohne Branchen-Rangfolge dahinter.
 const audiences = [
-  "Touristische Unternehmen",
-  "Food-Marken",
-  "Finanzdienstleister",
+  "Reiseveranstalter & Touristik",
   "KMU & Selbstständige",
+  "Offen für alle Branchen",
 ];
 
 const testimonials = [
@@ -180,12 +185,25 @@ export default function Home() {
               Unternehmen im deutschsprachigen Raum organisch auf Pinterest
               sichtbar macht – mit Strategie, SEO-optimierten Pins und
               verlässlicher Umsetzung statt bezahlter Werbeanzeigen. Der
-              Schwerpunkt liegt auf touristischen Unternehmen, Food-Marken und
-              Finanzdienstleistern; ebenso unterstützt molloy business KMU und
-              Selbstständige, die Pinterest als langfristigen
-              Sichtbarkeitskanal nutzen wollen.
+              Schwerpunkt liegt auf Reiseveranstaltern und
+              Touristikunternehmen; daneben arbeitet molloy business mit
+              Unternehmen aller Branchen, deren Angebote sich visuell zeigen
+              lassen und auf Pinterest gesucht werden.
             </p>
-            <p className="font-body mt-4 text-lg">
+
+            {/* CTA folgt bewusst UNMITTELBAR auf die Antwort-Kapsel. */}
+            <div className="mt-6">
+              <a
+                href={siteConfig.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Erstgespräch vereinbaren
+              </a>
+            </div>
+
+            <p className="font-body mt-6 text-lg">
               Ich bin{" "}
               <strong className="text-heading">Juliette Oppel</strong>, das
               Gesicht von molloy business. Ich übernehme
@@ -203,19 +221,14 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-
-            <div className="mt-8">
-              <a
-                href={siteConfig.calendly}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                strategie call vereinbaren
-              </a>
-            </div>
           </div>
 
+          {/* VIDEO-SLOT: hier später ein selbst gehostetes <video> einbauen
+              (mit poster-Bild und preload="none") — KEIN YouTube-Embed und
+              kein externes Player-Script, die Website bleibt cookie- und
+              trackerfrei. Bis dahin bleibt das Hero-Bild unverändert der
+              einzige visuelle Inhalt; hier darf nichts sichtbar gerendert
+              werden. */}
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg lg:aspect-auto lg:h-auto lg:self-stretch">
             <ExportedImage
               src={heroImage}
@@ -280,6 +293,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust signals / testimonials placeholder — bewusst weit oben
+          (direkt nach dem ersten inhaltlichen Abschnitt); Inhalte bleiben
+          Platzhalter, bis die schriftlichen Freigaben der Zitatgeber
+          vorliegen. */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-12 text-center">
+          <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
+            Kundenstimmen
+          </p>
+          <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+            Feedback ist ein Geschenk
+          </h2>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <figure key={i} className="bg-surface rounded-2xl p-6 shadow-sm">
+              <blockquote className="font-body text-[15px] leading-relaxed italic">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <figcaption className="font-body mt-4 text-sm">
+                <span className="text-heading font-semibold">{t.name}</span>
+                <br />
+                {t.role}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       {/* Organisch statt Ads */}
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
@@ -331,65 +374,100 @@ export default function Home() {
             Für wen sich Pinterest besonders lohnt
           </h2>
 
+          {/* Aufbau "Fokus, nicht Ausschluss": Touristik als gelebter
+              Schwerpunkt, danach die Öffnung für zahlreiche Branchen (mit
+              den Links auf die Food- und Finanz-Seiten als Service-Hinweis,
+              nicht als Rangfolge), zum Schluss der inklusive Abschluss. */}
           <h3 className="mt-10 text-[22px] leading-tight">
             <Link href="/pinterest-marketing-tourismus/" className="hover:underline">
-              Touristische Unternehmen
+              Reiseveranstalter und Touristikunternehmen
             </Link>
           </h3>
           <p className="font-body mt-3 text-lg">
-            Reiseinspiration ist eines der stärksten Themen auf Pinterest:
-            Menschen planen dort ihren nächsten Urlaub, oft Monate im Voraus.
-            Hotels, Regionen und Reiseanbieter erreichen mit stimmungsvollen
-            Pins genau die Menschen, die gerade nach ihrem nächsten Ziel
-            suchen. Ein Pin zu einem Reiseziel bleibt über Saisons hinweg
-            relevant und führt Interessierte direkt auf Unterkunfts- oder
-            Angebotsseiten. So entsteht ein Kanal, der unabhängig von teuren
-            Buchungsplattformen Besucherinnen und Besucher auf die eigene
-            Website bringt.
+            Reiseplanung ist einer der klassischen Anwendungsfälle von
+            Pinterest: Menschen sammeln dort Reiseziele, Routen und
+            Unterkünfte – oft Monate, bevor sie tatsächlich buchen. Wer in
+            dieser frühen Phase mit den passenden Pins auftaucht, erreicht
+            Reisende genau in dem Moment, in dem die Entscheidung entsteht,
+            und führt sie direkt auf die eigenen Angebotsseiten statt auf
+            teure Buchungsplattformen. Ein guter Pin zu einem Reiseziel
+            bleibt dabei über Saisons hinweg auffindbar.
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Dazu kommt: Kaum ein Produkt ist so visuell wie eine Reise. Ob
+            Spezialreiseanbieter, Anbieter von Gruppen- und Rundreisen und
+            geführten Touren, Camper- und Wohnmobilvermietungen,
+            Yachtcharter-Anbieter oder Anbieter besonderer Unterkünfte –
+            Landschaften, Routen, Fahrzeuge und Unterkünfte lassen sich in
+            Pins zeigen, ohne dass es viele Worte braucht. Genau solche
+            Bilder speichern Menschen auf Pinterest, wenn sie eine Reise
+            planen. Deshalb liegt der Schwerpunkt von molloy business auf
+            mittelständischen Reiseveranstaltern und Touristikunternehmen im
+            deutschsprachigen Raum. Wie die Zusammenarbeit in dieser Branche
+            konkret aussieht, zeigt die Seite{" "}
+            <Link
+              href="/pinterest-marketing-tourismus/"
+              className="text-gold-text hover:underline"
+            >
+              Pinterest Marketing für Tourismus
+            </Link>
+            .
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Für die Zusammenarbeit heißt das konkret: Aus deinen Reisen,
+            Routen und Unterkünften entstehen suchoptimierte Pins, die auf
+            die passenden Angebots- und Themenseiten deiner Website führen.
+            Saisonale Inhalte werden so eingeplant, dass sie sichtbar sind,
+            wenn die Reiseplanung deiner Zielgruppe beginnt – nicht erst
+            dann, wenn die Saison schon läuft. So baut sich über die Monate
+            ein wachsender Bestand an Pins auf, der kontinuierlich neue
+            Interessierte auf deine Website bringt.
           </p>
 
           <h3 className="mt-10 text-[22px] leading-tight">
-            <Link href="/pinterest-marketing-food/" className="hover:underline">
-              Food-Marken
-            </Link>
+            Zahlreiche weitere Branchen
           </h3>
           <p className="font-body mt-3 text-lg">
-            Rezepte gehören zu den meistgesuchten Inhalten auf Pinterest –
-            kaum eine Branche passt besser zur Plattform. Food-Marken können
-            ihre Produkte in Rezept-Pins einbetten und werden damit genau dann
-            gefunden, wenn jemand nach Ideen fürs Kochen oder Backen sucht.
-            Saisonale Themen wie Grillen, Weihnachtsbäckerei oder schnelle
-            Feierabendküche kehren jedes Jahr wieder und geben bestehenden
-            Pins immer neue Reichweite. Wer hier kontinuierlich veröffentlicht,
-            baut sich eine dauerhaft sichtbare Rezeptbibliothek auf.
-          </p>
-
-          <h3 className="mt-10 text-[22px] leading-tight">
+            Ein Schwerpunkt ist kein Ausschluss: Pinterest funktioniert
+            überall dort, wo Produkte visuell sind und Entscheidungen geplant
+            werden – bei Wohnen und Einrichtung genauso wie bei Rezepten und
+            Food, bei DIY, Hochzeiten, Garten und Mode, und ebenso bei
+            beratungsnahen Themen wie Finanzen. Menschen nutzen Pinterest,
+            um solche Vorhaben zu sammeln und vorzubereiten – und genau
+            dabei können Unternehmen mit ihren Inhalten sichtbar werden.
+            Entscheidend ist dabei weniger die Branche als zwei Fragen:
+            Suchen Menschen dein Thema auf Pinterest – und bietet deine
+            Website Inhalte, auf die Pins verweisen können? Auch
+            Dienstleistungen funktionieren, wenn sich ihr Ergebnis zeigen
+            lässt: ein eingerichteter Raum, ein gedeckter Tisch, ein
+            geplantes Fest. Für Food-Marken und Finanzdienstleister gibt es
+            auf dieser Website eigene Seiten mit vertiefenden
+            Informationen:{" "}
+            <Link
+              href="/pinterest-marketing-food/"
+              className="text-gold-text hover:underline"
+            >
+              Pinterest Marketing für Food-Marken
+            </Link>{" "}
+            und{" "}
             <Link
               href="/pinterest-marketing-finanzdienstleister/"
-              className="hover:underline"
+              className="text-gold-text hover:underline"
             >
-              Finanzdienstleister
+              Pinterest Marketing für Finanzdienstleister
             </Link>
-          </h3>
-          <p className="font-body mt-3 text-lg">
-            Finanzthemen werden auf Pinterest aktiv gesucht: Sparen,
-            Altersvorsorge, Haushaltsplanung, Geldanlage für Einsteiger. Die
-            Konkurrenz ist hier deutlich kleiner als in anderen Branchen –
-            eine echte Chance für Finanzdienstleister, die verständliche
-            Inhalte anbieten. Wer komplexe Themen in klare, hilfreiche Pins
-            übersetzt, positioniert sich als vertrauenswürdige Anlaufstelle
-            und gewinnt Leserinnen und Leser für Blog, Newsletter oder
-            Beratungsangebote.
+            .
           </p>
 
           <p className="font-body mt-10 text-lg">
-            Und außerhalb dieser drei Branchen? Auch dann lohnt sich ein
-            Blick: KMU und Selbstständige mit einer eigenen Website und
-            visuell darstellbaren Angeboten – vom Handwerk über Coaching bis
-            zum Onlineshop – sind bei molloy business genauso willkommen. Ob
-            Pinterest für dein Unternehmen passt, klären wir am einfachsten in
-            einem kurzen Gespräch.
+            Und wenn deine Branche hier nicht auftaucht? Das ist kein
+            Hindernis: KMU und Selbstständige aller Branchen sind bei molloy
+            business willkommen – vom Handwerk über Coaching bis zum
+            Onlineshop. Ehrlich ist aber auch: Pinterest passt nicht zu jedem
+            Geschäftsmodell. Ob sich der Kanal für dein Unternehmen lohnt,
+            klären wir deshalb offen im Erstgespräch – bevor du Zeit oder
+            Geld investierst. Dafür schauen wir uns gemeinsam deine Website,
+            dein Angebot und das Suchverhalten deiner Zielgruppe an.
           </p>
         </div>
       </section>
@@ -416,9 +494,18 @@ export default function Home() {
             <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
               Meine Angebote
             </p>
+            {/* Überschrift bewusst ohne Anzahl — bleibt korrekt, wenn
+                Leistungen dazukommen oder wegfallen. */}
             <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-              6 Pinterest Marketing Angebote für Unternehmen
+              Pinterest Marketing Angebote für Unternehmen
             </h2>
+            <p className="font-body mx-auto mt-6 max-w-3xl text-lg">
+              Von der einmaligen Beratung bis zur laufenden Betreuung: Die
+              Leistungen von molloy business unterscheiden sich vor allem
+              darin, wie viel du selbst übernimmst – vom Strategie Call, nach
+              dem du eigenständig weiterarbeitest, bis zum Account
+              Management, das den Kanal komplett abdeckt.
+            </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -430,17 +517,19 @@ export default function Home() {
               >
                 <h3 className="text-[22px] leading-tight">{service.title}</h3>
                 <p className="font-body mt-3 flex-1 text-[15px] leading-relaxed">
-                  {service.description}
-                </p>
-                <p className="font-body text-heading mt-4 text-sm">
                   {service.scope}
                 </p>
-                <span className="text-gold-text font-body mt-2 text-sm group-hover:underline">
+                <span className="text-gold-text font-body mt-4 text-sm group-hover:underline">
                   mehr erfahren →
                 </span>
               </Link>
             ))}
           </div>
+
+          <p className="font-body mt-10 text-center text-lg">
+            Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+            bekommst du im Erstgespräch.
+          </p>
         </div>
       </section>
 
@@ -463,73 +552,6 @@ export default function Home() {
           statt Hype-Versprechen, klare Abläufe statt Aktionismus – und nur
           Angebote, hinter denen sie selbst zu hundert Prozent steht. Wer mit
           molloy business arbeitet, arbeitet direkt mit ihr.
-        </p>
-      </section>
-
-      {/* Trust signals / testimonials placeholder */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="mb-12 text-center">
-            <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
-              Kundenstimmen
-            </p>
-            <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-              Feedback ist ein Geschenk
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <figure key={i} className="bg-cream rounded-2xl p-6 shadow-sm">
-                <blockquote className="font-body text-[15px] leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="font-body mt-4 text-sm">
-                  <span className="text-heading font-semibold">{t.name}</span>
-                  <br />
-                  {t.role}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Leistungsübersicht */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Leistungen im Überblick
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Von der einmaligen Beratung bis zur laufenden Betreuung: Die sechs
-          Leistungen von molloy business unterscheiden sich vor allem darin,
-          wie viel du selbst übernimmst – vom Strategie Call, nach dem du
-          eigenständig weiterarbeitest, bis zum Account Management, das den
-          Kanal komplett abdeckt.
-        </p>
-
-        <ul className="font-body mt-8 space-y-4 text-lg">
-          {services.map((service) => (
-            <li
-              key={service.title}
-              className="border-gray-light flex flex-col gap-1 border-b pb-4 sm:flex-row sm:items-baseline sm:justify-between"
-            >
-              <span className="text-heading shrink-0 font-semibold">
-                {service.title}
-              </span>
-              <span className="sm:max-w-md sm:text-right">
-                {service.scope}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <p className="font-body mt-8 text-lg">
-          Welcher Umfang für dein Unternehmen passt, hängt von deiner
-          Ausgangslage ab – etwa davon, ob ein Account komplett neu aufgebaut
-          oder ein bestehender weiterbetreut wird und wie viel du selbst
-          übernehmen möchtest. Ein konkretes, auf dein Unternehmen
-          zugeschnittenes Angebot bekommst du im Erstgespräch.
         </p>
       </section>
 
