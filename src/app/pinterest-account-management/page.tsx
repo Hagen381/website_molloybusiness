@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 
 const management = services.find(
   (s) => s.title === "Pinterest Account Management",
@@ -12,7 +11,8 @@ const path = "/pinterest-account-management/";
 
 export const metadata: Metadata = {
   title: "Pinterest Account Management für Unternehmen",
-  description: `Pinterest Account Management für Unternehmen: ${formatPrice(management.price)} pro Monat für 90 SEO-optimierte Pins, Recherche und Auswertung.`,
+  description:
+    "Pinterest Account Management für Unternehmen: 90 SEO-optimierte Pins pro Monat, täglich eingeplant – mit Keyword-Recherche, Trendanalyse und Auswertung.",
   alternates: {
     canonical: path,
   },
@@ -25,7 +25,7 @@ const leistungen = [
   },
   {
     title: "Tägliche Einplanung",
-    text: "Veröffentlichung nach festem Rhythmus über ein Planungstool (das Tool selbst ist nicht im Preis enthalten).",
+    text: "Veröffentlichung nach festem Rhythmus über ein Planungstool (das Tool selbst ist nicht Teil der Leistung).",
   },
   {
     title: "Keyword- und Interessen-Recherche",
@@ -107,12 +107,6 @@ const pageJsonLd = {
       description: management.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(management.price),
-        priceCurrency: "EUR",
-        description: `${management.priceUnit} · ${management.priceNote}`,
-      },
     },
     {
       "@type": "FAQPage",
@@ -239,26 +233,25 @@ export default function PinterestAccountManagement() {
         </div>
       </section>
 
-      {/* Preis */}
+      {/* Umfang */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preis für Pinterest Account Management
+          Dein Account Management im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Das Pinterest Account Management kostet{" "}
+          Das Pinterest Account Management ist die{" "}
           <strong className="text-heading">
-            {formatPrice(management.price)}
-          </strong>{" "}
-          {management.priceUnit}. Konditionen: {management.priceNote}.
+            komplette laufende Betreuung deines Accounts
+          </strong>
+          : 90 SEO-optimierte Pins pro Monat, täglich eingeplant, dazu
+          Keyword- und Interessen-Recherche, Trendanalyse und die regelmäßige
+          Auswertung der Pinterest Analytics. Du gibst den Kanal ab und musst
+          selbst nichts umsetzen.
         </p>
         <p className="font-body mt-4 text-lg">
-          &bdquo;Vorkasse&rdquo; bedeutet, dass die monatliche Rechnung
-          jeweils zu Monatsbeginn gestellt wird. &bdquo;Monatlich
-          kündbar&rdquo; heißt, dass du dich nicht langfristig bindest,
-          sondern die Zusammenarbeit von Monat zu Monat fortsetzt oder
-          beendest.
+          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+          bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

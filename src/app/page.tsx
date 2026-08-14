@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import heroImage from "@/assets/images/hero-juliette.jpg";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 // Jede Seite setzt ihr eigenes Canonical-Tag (siehe CLAUDE.md) — sonst
@@ -40,9 +39,6 @@ const testimonials = [
   },
 ];
 
-// Feste Reihenfolge aus site-config.ts — für Preisnennungen im Text.
-const [management, aufbau, call, , audit] = services;
-
 // Sichtbar als "Zuletzt aktualisiert: August 2026", im Schema als dateModified.
 const lastUpdatedLabel = "August 2026";
 const lastUpdatedIso = "2026-08-08";
@@ -60,11 +56,8 @@ type FaqItem = {
 const faq: FaqItem[] = [
   {
     question: "Was kostet eine Pinterest Marketing Agentur?",
-    answer: `Der Preisunterschied erklärt sich über die Eigenleistung: Am günstigsten ist Beratung, bei der du selbst umsetzt – etwa der Strategie Call für ${formatPrice(call.price)} –, am teuersten die komplette Übernahme von Design, Texten und Veröffentlichung. Wer Orientierung sucht, steigt klein ein; wer den Kanal etablieren will, investiert größer. Die ausführliche Aufschlüsselung gibt der Beitrag`,
-    link: {
-      href: "/blog/was-kostet-pinterest-marketing/",
-      text: "Was kostet Pinterest Marketing?",
-    },
+    answer:
+      "Die Kosten richten sich nach dem Umfang der Zusammenarbeit: Am kleinsten ist eine einmalige Beratung, bei der du selbst umsetzt, am größten die komplette Übernahme von Design, Texten und Veröffentlichung. Entscheidend ist deshalb, wie viel Eigenleistung du behalten willst. Ein konkretes Angebot für dein Unternehmen bekommst du nach dem Erstgespräch.",
   },
   {
     question: "Lohnt sich Pinterest für kleine Unternehmen und Selbstständige?",
@@ -97,7 +90,7 @@ const faq: FaqItem[] = [
   },
 ];
 
-// Seiten-spezifisches Schema: Person, Service je Leistung (mit Offer),
+// Seiten-spezifisches Schema: Person, Service je Leistung,
 // FAQPage und WebPage mit dateModified. Organization steht global in layout.tsx.
 // Bewusst KEIN BreadcrumbList (Startseite), KEIN AggregateRating/Review
 // (es gibt noch keine echten Bewertungen — erfundene wären ein Abstrafungsrisiko).
@@ -127,12 +120,6 @@ const pageJsonLd = {
       description: service.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(service.price),
-        priceCurrency: "EUR",
-        description: `${service.priceUnit} · ${service.priceNote}`,
-      },
     })),
     {
       "@type": "FAQPage",
@@ -446,8 +433,7 @@ export default function Home() {
                   {service.description}
                 </p>
                 <p className="font-body text-heading mt-4 text-sm">
-                  <strong>{formatPrice(service.price)}</strong>{" "}
-                  {service.priceUnit}
+                  {service.scope}
                 </p>
                 <span className="text-gold-text font-body mt-2 text-sm group-hover:underline">
                   mehr erfahren →
@@ -509,18 +495,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Kosten */}
+      {/* Leistungsübersicht */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preise und Leistungen im Überblick
+          Leistungen im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Eine Pinterest Marketing Agentur kostet bei molloy business zwischen{" "}
-          {formatPrice(call.price)} für einen einzelnen Strategie Call und{" "}
-          {formatPrice(aufbau.price)} für den kompletten Account Aufbau. Die
-          laufende Betreuung kostet {formatPrice(management.price)} pro Monat.
-          Was du zahlst, hängt vom Umfang ab – vom einmaligen Audit für{" "}
-          {formatPrice(audit.price)} bis zum vollständigen Account Management.
+          Von der einmaligen Beratung bis zur laufenden Betreuung: Die sechs
+          Leistungen von molloy business unterscheiden sich vor allem darin,
+          wie viel du selbst übernimmst – vom Strategie Call, nach dem du
+          eigenständig weiterarbeitest, bis zum Account Management, das den
+          Kanal komplett abdeckt.
         </p>
 
         <ul className="font-body mt-8 space-y-4 text-lg">
@@ -529,29 +514,23 @@ export default function Home() {
               key={service.title}
               className="border-gray-light flex flex-col gap-1 border-b pb-4 sm:flex-row sm:items-baseline sm:justify-between"
             >
-              <span className="text-heading font-semibold">
+              <span className="text-heading shrink-0 font-semibold">
                 {service.title}
               </span>
-              <span className="text-right">
-                <strong className="text-heading">
-                  {formatPrice(service.price)}
-                </strong>{" "}
-                {service.priceUnit}
-                <br />
-                <span className="text-sm">{service.priceNote}</span>
+              <span className="sm:max-w-md sm:text-right">
+                {service.scope}
               </span>
             </li>
           ))}
         </ul>
 
         <p className="font-body mt-8 text-lg">
-          Wovon der Preis abhängt: vom Umfang der Betreuung und der Anzahl der
-          Pins pro Monat, vom Design-Aufwand deiner Marke – und davon, ob ein
-          Account komplett neu aufgebaut oder ein bestehender weiterbetreut
-          wird. Nach dem Erstgespräch bekommst du ein klares Angebot ohne
-          versteckte Posten.
+          Welcher Umfang für dein Unternehmen passt, hängt von deiner
+          Ausgangslage ab – etwa davon, ob ein Account komplett neu aufgebaut
+          oder ein bestehender weiterbetreut wird und wie viel du selbst
+          übernehmen möchtest. Ein konkretes, auf dein Unternehmen
+          zugeschnittenes Angebot bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

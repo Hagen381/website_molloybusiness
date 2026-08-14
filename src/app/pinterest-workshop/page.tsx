@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 
 const workshop = services.find((s) => s.title === "Pinterest Workshop")!;
 
@@ -10,7 +9,8 @@ const path = "/pinterest-workshop/";
 
 export const metadata: Metadata = {
   title: "Pinterest Workshop für Unternehmen & Teams",
-  description: `Pinterest Workshop für Unternehmen und Teams: kompakte Pinterest Schulung in einer Stunde inklusive Q&A und Factsheet zum Download – ${formatPrice(workshop.price)} einmalig.`,
+  description:
+    "Pinterest Workshop für Unternehmen und Teams: kompakte Pinterest Schulung in einer Stunde inklusive Q&A und Factsheet zum Download – praxisnah erklärt.",
   alternates: {
     canonical: path,
   },
@@ -97,12 +97,6 @@ const pageJsonLd = {
       description: workshop.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(workshop.price),
-        priceCurrency: "EUR",
-        description: `${workshop.priceUnit} · ${workshop.priceNote}`,
-      },
     },
     {
       "@type": "FAQPage",
@@ -222,23 +216,23 @@ export default function PinterestWorkshop() {
         </div>
       </section>
 
-      {/* Preis */}
+      {/* Umfang */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preis für den Pinterest Workshop
+          Dein Workshop im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Der Pinterest Workshop kostet{" "}
-          <strong className="text-heading">
-            {formatPrice(workshop.price)}
-          </strong>{" "}
-          {workshop.priceUnit}. Konditionen: {workshop.priceNote}.
+          Der Pinterest Workshop ist ein{" "}
+          <strong className="text-heading">kompaktes Einmalformat</strong>:
+          eine Stunde online, die die Grundlagen von Pinterest Marketing
+          verständlich vermittelt – inklusive Q&A für die Fragen deines
+          Teams und einem Factsheet zum Download für alle, die später
+          nachlesen wollen.
         </p>
         <p className="font-body mt-4 text-lg">
-          Im Preis enthalten sind der einstündige Online-Workshop, das
-          anschließende Q&A sowie das Factsheet zum Download.
+          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+          bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

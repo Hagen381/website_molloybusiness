@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 
 const contentPaket = services.find(
   (s) => s.title === "Pinterest Content Paket",
@@ -12,7 +11,8 @@ const path = "/pinterest-content-paket/";
 
 export const metadata: Metadata = {
   title: "Pinterest Content Paket – Pins erstellen lassen",
-  description: `Pins erstellen lassen bei molloy business: 30 SEO-optimierte Premium-Pins im Pinterest Content Paket pro Monat, markenangepasst – für ${formatPrice(contentPaket.price)} pro Monat.`,
+  description:
+    "Pins erstellen lassen bei molloy business: 30 SEO-optimierte Premium-Pins pro Monat im Pinterest Content Paket, markenangepasst und upload-fertig geliefert.",
   alternates: {
     canonical: path,
   },
@@ -103,12 +103,6 @@ const pageJsonLd = {
       description: contentPaket.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(contentPaket.price),
-        priceCurrency: "EUR",
-        description: `${contentPaket.priceUnit} · ${contentPaket.priceNote}`,
-      },
     },
     {
       "@type": "FAQPage",
@@ -191,8 +185,8 @@ export default function PinterestContentPaket() {
           selbst steuern, aber Design und Texte gerne abgeben möchten.
         </p>
         <p className="font-body mt-4 text-lg">
-          Ein eigenes Planungstool für die Veröffentlichung ist nicht im
-          Preis enthalten – die Auswahl und der Einsatz bleiben bei dir.
+          Ein eigenes Planungstool für die Veröffentlichung ist nicht Teil
+          des Pakets – die Auswahl und der Einsatz bleiben bei dir.
         </p>
         <p className="font-body mt-4 text-lg">
           Als{" "}
@@ -229,24 +223,24 @@ export default function PinterestContentPaket() {
         </div>
       </section>
 
-      {/* Preis */}
+      {/* Umfang */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preis für das Pinterest Content Paket
+          Dein Content Paket im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Das Pinterest Content Paket kostet{" "}
+          Das Pinterest Content Paket liefert dir jeden Monat{" "}
           <strong className="text-heading">
-            {formatPrice(contentPaket.price)}
+            30 individuell gestaltete Premium-Pins
           </strong>{" "}
-          {contentPaket.priceUnit}. Konditionen: {contentPaket.priceNote}.
+          samt SEO-optimierten Headlines und Beschreibungen – upload-fertig
+          und an deine Marke angepasst. Die Veröffentlichung übernimmst du
+          selbst und behältst damit die volle Kontrolle über deinen Account.
         </p>
         <p className="font-body mt-4 text-lg">
-          Ein Planungstool für die Veröffentlichung ist im Preis nicht
-          enthalten – die Wahl des Anbieters und die Einplanung übernimmst du
-          selbst.
+          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+          bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

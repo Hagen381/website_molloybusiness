@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 
 const audit = services.find((s) => s.title === "Pinterest Audit")!;
 
@@ -10,7 +9,8 @@ const path = "/pinterest-audit/";
 
 export const metadata: Metadata = {
   title: "Pinterest Audit & Account Analyse",
-  description: `Pinterest Audit für Unternehmen: Analyse von Profil, Boards, Pin-Performance und Wettbewerb mit konkreten Handlungsempfehlungen – für ${formatPrice(audit.price)} einmalig.`,
+  description:
+    "Pinterest Audit für Unternehmen: Analyse von Profil, Boards, Pin-Performance und Wettbewerb – mit konkreten, priorisierten Handlungsempfehlungen.",
   alternates: {
     canonical: path,
   },
@@ -105,12 +105,6 @@ const pageJsonLd = {
       description: audit.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(audit.price),
-        priceCurrency: "EUR",
-        description: `${audit.priceUnit} · ${audit.priceNote}`,
-      },
     },
     {
       "@type": "FAQPage",
@@ -231,21 +225,25 @@ export default function PinterestAudit() {
         </div>
       </section>
 
-      {/* Preis */}
+      {/* Umfang */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preis für das Pinterest Audit
+          Dein Audit im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Das Pinterest Audit kostet{" "}
-          <strong className="text-heading">{formatPrice(audit.price)}</strong>{" "}
-          {audit.priceUnit}. Konditionen: {audit.priceNote}.
+          Das Pinterest Audit ist eine{" "}
+          <strong className="text-heading">
+            einmalige Standortbestimmung für deinen bestehenden Account
+          </strong>
+          : Profil, Boards, Pin-Performance, Pinterest Analytics und
+          Wettbewerb werden geprüft – mit einem persönlichen
+          Abschlussgespräch, in dem du konkrete, priorisierte
+          Handlungsempfehlungen bekommst.
         </p>
         <p className="font-body mt-4 text-lg">
-          &bdquo;Vorkasse&rdquo; bedeutet, dass die Rechnung zu Beginn des
-          Audits gestellt wird, bevor mit der Analyse gestartet wird.
+          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+          bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

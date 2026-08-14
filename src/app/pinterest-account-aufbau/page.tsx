@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 
 const aufbau = services.find((s) => s.title === "Pinterest Account Aufbau")!;
 
@@ -10,7 +9,8 @@ const path = "/pinterest-account-aufbau/";
 
 export const metadata: Metadata = {
   title: "Pinterest Account Aufbau für Unternehmen",
-  description: `Pinterest Account Aufbau für Unternehmen: Profil, 8 Boards und 50 Pins – strukturiert aufgebaut ab ${formatPrice(aufbau.price)} einmalig.`,
+  description:
+    "Pinterest Account Aufbau für Unternehmen: Profil, 8 strategische Boards und 50 gestaltete Pins – strukturiert aufgebaut, inklusive zwei Korrekturschleifen.",
   alternates: {
     canonical: path,
   },
@@ -112,12 +112,6 @@ const pageJsonLd = {
       description: aufbau.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(aufbau.price),
-        priceCurrency: "EUR",
-        description: `${aufbau.priceUnit} · ${aufbau.priceNote}`,
-      },
     },
     {
       "@type": "FAQPage",
@@ -243,24 +237,26 @@ export default function PinterestAccountAufbau() {
         </div>
       </section>
 
-      {/* Preis */}
+      {/* Umfang */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preis für Pinterest Account Aufbau
+          Dein Account Aufbau im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Der Pinterest Account Aufbau kostet{" "}
+          Der Pinterest Account Aufbau ist ein{" "}
           <strong className="text-heading">
-            {formatPrice(aufbau.price)}
-          </strong>{" "}
-          {aufbau.priceUnit}. Konditionen: {aufbau.priceNote}.
+            einmaliges Projekt mit klarem Endpunkt
+          </strong>
+          : Wettbewerbsanalyse, Keywordliste und Konzept bilden die
+          Grundlage, darauf entstehen Profil, 8 strategische Boards und 50
+          gestaltete Pins – abgestimmt in zwei Korrekturschleifen, bis alles
+          zu deiner Marke passt. Danach ist dein Account bereit, live zu
+          gehen.
         </p>
         <p className="font-body mt-4 text-lg">
-          Die erste Hälfte wird zu Beginn des Projekts fällig, die zweite
-          Hälfte nach dem Upload aller 50 Pins in deinen Account. So ist die
-          Zahlung an den tatsächlichen Fortschritt des Aufbaus gekoppelt.
+          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+          bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

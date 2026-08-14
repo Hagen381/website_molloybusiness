@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import { priceVatNote, services, siteConfig } from "@/lib/site-config";
-import { formatPrice } from "@/lib/format";
+import { services, siteConfig } from "@/lib/site-config";
 
 const call = services.find((s) => s.title === "Pinterest Strategie Call")!;
 
@@ -10,7 +9,8 @@ const path = "/pinterest-strategie-call/";
 
 export const metadata: Metadata = {
   title: "Pinterest Strategie Call für Unternehmen",
-  description: `Pinterest Strategie Call: individuelle Pinterest Beratung in 90 Minuten zu Ausgangslage, Boards und Pin-Themen – ${formatPrice(call.price)} einmalig, anrechenbar.`,
+  description:
+    "Pinterest Strategie Call: individuelle Pinterest Beratung in 90 Minuten zu Ausgangslage, Boards und Pin-Themen – mit konkreten nächsten Schritten.",
   alternates: {
     canonical: path,
   },
@@ -50,7 +50,7 @@ const processSteps = [
   },
   {
     title: "Nächste Schritte",
-    text: "Du gehst mit konkreten Impulsen für den Start aus dem Call. Entscheidest du dich anschließend für eine Zusammenarbeit mit molloy business, wird der Betrag des Calls vollständig angerechnet.",
+    text: "Du gehst mit konkreten Impulsen für den Start aus dem Call. Ob du sie eigenständig umsetzt oder eine weitere Zusammenarbeit mit molloy business startest, entscheidest du danach in Ruhe.",
   },
 ];
 
@@ -101,12 +101,6 @@ const pageJsonLd = {
       description: call.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-      offers: {
-        "@type": "Offer",
-        price: String(call.price),
-        priceCurrency: "EUR",
-        description: `${call.priceUnit} · ${call.priceNote}`,
-      },
     },
     {
       "@type": "FAQPage",
@@ -165,9 +159,9 @@ export default function PinterestStrategieCall() {
             ))}
           </ul>
           <p className="font-body mt-6 text-lg">
-            Der Betrag des Calls wird bei einer anschließenden Zusammenarbeit
-            vollständig angerechnet – der Call kostet dich also nur dann
-            etwas zusätzlich, wenn du danach nicht weitermachst.
+            Alle Impulse aus dem Call gehören dir – du kannst sie
+            eigenständig umsetzen oder als Grundlage für eine weitere
+            Zusammenarbeit mit molloy business nutzen.
           </p>
         </div>
       </section>
@@ -227,22 +221,25 @@ export default function PinterestStrategieCall() {
         </div>
       </section>
 
-      {/* Preis */}
+      {/* Umfang */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Preis für den Pinterest Strategie Call
+          Dein Strategie Call im Überblick
         </h2>
         <p className="font-body mt-6 text-lg">
-          Der Pinterest Strategie Call kostet{" "}
-          <strong className="text-heading">{formatPrice(call.price)}</strong>{" "}
-          {call.priceUnit}. Konditionen: {call.priceNote}.
+          Der Pinterest Strategie Call ist ein{" "}
+          <strong className="text-heading">
+            einmaliges Beratungsformat
+          </strong>
+          : 90 Minuten Videocall, in denen deine Ausgangslage analysiert wird
+          und du konkrete Strategie-Impulse sowie erste Ideen für Boards und
+          Pin-Themen bekommst – verständlich beantwortet, ohne
+          Fachchinesisch.
         </p>
         <p className="font-body mt-4 text-lg">
-          Entscheidest du dich im Anschluss für eine Zusammenarbeit mit
-          molloy business, wird der Betrag des Calls vollständig auf die
-          gebuchte Leistung angerechnet.
+          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
+          bekommst du im Erstgespräch.
         </p>
-        <p className="font-body mt-6 text-sm">{priceVatNote}</p>
       </section>
 
       {/* FAQ */}

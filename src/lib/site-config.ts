@@ -129,11 +129,6 @@ export const sitePages = [
     priority: 0.7,
   },
   {
-    path: "/blog/was-kostet-pinterest-marketing/",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
     path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
     changeFrequency: "monthly",
     priority: 0.6,
@@ -156,13 +151,6 @@ export const sitePages = [
 // und BreadcrumbList-Schema des Artikels verwendet.
 export const blogPosts = [
   {
-    slug: "was-kostet-pinterest-marketing",
-    title: "Was kostet Pinterest Marketing?",
-    date: "2026-08-08",
-    excerpt:
-      "Von Strategie Call bis laufender Betreuung: wovon der Preis für Pinterest Marketing abhängt, wie Angebote üblicherweise aufgebaut sind – und alle Preise von molloy business im Überblick.",
-  },
-  {
     slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",
     title: "Lohnt sich Pinterest für kleine Unternehmen?",
     date: "2026-08-08",
@@ -171,65 +159,66 @@ export const blogPosts = [
   },
 ] as const;
 
-// Preise zentral hier pflegen — JEDE Preisanzeige (Text wie Schema) liest aus
-// diesen Feldern, niemals Zahlen direkt in Komponenten schreiben.
+// Leistungen zentral hier pflegen — Kacheln, Leistungsübersicht und
+// Service-Schemas lesen aus diesen Feldern. `scope` ist der prägnante
+// Umfangs-Satz, der überall dort steht, wo früher der Preis stand.
+//
+// NICHT RENDERN — historische Preise, Stand August 2026 (Referenz für eine
+// spätere Reaktivierung):
+//   Pinterest Account Management: 666 € pro Monat — 90 Pins pro Monat · Vorkasse · monatlich kündbar
+//   Pinterest Account Aufbau:     2777 € einmalig — 50 % Vorkasse, 50 % nach Upload aller Pins
+//   Pinterest Strategie Call:     144 € einmalig — 90 Minuten · wird bei einer Zusammenarbeit voll angerechnet
+//   Pinterest Workshop:           250 € einmalig — 1 Stunde online · inkl. Q&A und Factsheet
+//   Pinterest Audit:              333 € einmalig — Vorkasse
+//   Pinterest Content Paket:      444 € pro Monat — 30 Premium-Pins pro Monat
+//   (dazu gehörte: priceVatNote = "Alle Preise in Euro.")
 export const services = [
   {
     title: "Pinterest Account Management",
     description:
       "Laufende Betreuung deines Pinterest-Accounts: Content, Pins und Strategie aus einer Hand. Du gibst den Kanal komplett ab und bekommst jeden Monat frische, SEO-optimierte Pins samt Auswertung.",
     href: "/pinterest-account-management/",
-    price: 666,
-    priceUnit: "pro Monat",
-    priceNote: "90 Pins pro Monat · Vorkasse · monatlich kündbar",
+    scope:
+      "90 SEO-optimierte Pins pro Monat – Einplanung, Recherche und Auswertung inklusive.",
   },
   {
     title: "Pinterest Account Aufbau",
     description:
       "Professioneller Neuaufbau deines Accounts mit klarer Struktur von Anfang an. Von Profil und Boards bis zu den ersten Pins entsteht ein Fundament, auf dem dein Pinterest Marketing langfristig aufbaut.",
     href: "/pinterest-account-aufbau/",
-    price: 2777,
-    priceUnit: "einmalig",
-    priceNote: "50 % Vorkasse, 50 % nach Upload aller Pins",
+    scope:
+      "Profil, 8 strategische Boards und 50 gestaltete Pins – inklusive zwei Korrekturschleifen.",
   },
   {
     title: "Pinterest Strategie Call",
     description:
       "Individuelle Beratung, um deine Pinterest-Strategie auf den Punkt zu bringen. In 90 Minuten klären wir deine Fragen und du bekommst konkrete nächste Schritte für deinen Account.",
     href: "/pinterest-strategie-call/",
-    price: 144,
-    priceUnit: "einmalig",
-    priceNote: "90 Minuten · wird bei einer Zusammenarbeit voll angerechnet",
+    scope:
+      "90 Minuten individuelle Beratung mit konkreten nächsten Schritten für deinen Account.",
   },
   {
     title: "Pinterest Workshop",
     description:
       "Praxisnahes Workshop-Format für Teams und Online-Events rund um Pinterest Marketing. Eine Stunde kompaktes Wissen, verständlich aufbereitet und mit Raum für deine Fragen.",
     href: "/pinterest-workshop/",
-    price: 250,
-    priceUnit: "einmalig",
-    priceNote: "1 Stunde online · inkl. Q&A und Factsheet",
+    scope:
+      "Eine Stunde online für dein Team – inklusive Q&A und Factsheet zum Download.",
   },
   {
     title: "Pinterest Audit",
     description:
       "Detaillierte Analyse deines bestehenden Accounts mit konkreten Handlungsempfehlungen. Du erfährst, was bereits funktioniert und an welchen Stellen dein Account Potenzial verschenkt.",
     href: "/pinterest-audit/",
-    price: 333,
-    priceUnit: "einmalig",
-    priceNote: "Vorkasse",
+    scope:
+      "Analyse von Profil, Boards, Pin-Performance und Wettbewerb – mit priorisierten Empfehlungen.",
   },
   {
     title: "Pinterest Content Paket",
     description:
       "SEO-optimierte Pins, Headlines und Beschreibungen – fertig für deinen Redaktionsplan. Du veröffentlichst selbst, molloy business liefert dir den passenden Content.",
     href: "/pinterest-content-paket/",
-    price: 444,
-    priceUnit: "pro Monat",
-    priceNote: "30 Premium-Pins pro Monat",
+    scope:
+      "30 upload-fertige Premium-Pins pro Monat – markenangepasst, mit Headlines und Beschreibungen.",
   },
 ] as const;
-
-// TODO: Formulierung zur Umsatzsteuer wird nach Rücksprache mit dem
-// Steuerberater ergänzt.
-export const priceVatNote = "Alle Preise in Euro.";
