@@ -569,7 +569,11 @@ export default function Home() {
             Ihre Arbeitsweise ist bewusst unaufgeregt: ehrliche Einschätzungen
             statt Hype-Versprechen, klare Abläufe statt Aktionismus – und nur
             Angebote, hinter denen sie selbst zu hundert Prozent steht. Wer mit
-            molloy business arbeitet, arbeitet direkt mit ihr.
+            molloy business arbeitet, arbeitet direkt mit ihr –{" "}
+            <Link href="/ueber-mich/" className="text-gold-text hover:underline">
+              mehr über Juliette
+            </Link>{" "}
+            und ihren Weg aus der Touristik.
           </p>
         </div>
       </section>

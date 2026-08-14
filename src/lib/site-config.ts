@@ -63,7 +63,7 @@ export const navigation = {
         },
       ],
     },
-    { label: "Über mich", href: "#" },
+    { label: "Über mich", href: "/ueber-mich/" },
     { label: "Blog", href: "/blog/" },
     { label: "Kontakt", href: `mailto:${siteConfig.email}` },
   ],
@@ -122,6 +122,11 @@ export const sitePages = [
     path: "/pinterest-marketing-finanzdienstleister/",
     changeFrequency: "monthly",
     priority: 0.8,
+  },
+  {
+    path: "/ueber-mich/",
+    changeFrequency: "monthly",
+    priority: 0.7,
   },
   {
     path: "/blog/",

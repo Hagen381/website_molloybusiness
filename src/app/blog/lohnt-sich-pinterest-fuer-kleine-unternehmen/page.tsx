@@ -110,10 +110,9 @@ const pageJsonLd = {
       datePublished: post.date,
       dateModified: post.date,
       mainEntityOfPage: `${siteConfig.url}${path}`,
-      author: {
-        "@type": "Person",
-        name: siteConfig.brandFace,
-      },
+      // Referenz auf die website-weit eine Person-Entität (definiert auf
+      // Startseite und /ueber-mich/) — kein zweites unverknüpftes Objekt.
+      author: { "@id": `${siteConfig.url}/#juliette-oppel` },
       publisher: {
         "@type": "Organization",
         "@id": `${siteConfig.url}/#organization`,
