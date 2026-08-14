@@ -8,63 +8,37 @@ const path = "/pinterest-marketing-tourismus/";
 const service = {
   name: "Pinterest Marketing Tourismus",
   description:
-    "Organische Pinterest-Sichtbarkeit für Hotels, Ferienunterkünfte, Regionen und Reiseanbieter – mit SEO-optimierten Pins, die Reisende in der Planungsphase erreichen.",
+    "Organische Pinterest-Sichtbarkeit für Reiseveranstalter und Touristikunternehmen – SEO-optimierte Pins, die Reisende in der Planungsphase erreichen: von Gruppen- und Rundreisen über Camper und Yachtcharter bis zu besonderen Unterkünften.",
   audienceType:
-    "Hotels, Ferienunterkünfte, Regionen und Tourismusverbände, Reiseanbieter, Ausflugsziele",
+    "Reiseveranstalter, Spezialreiseanbieter, Anbieter von Gruppen- und Rundreisen und geführten Touren, Camper- und Wohnmobilvermietungen, Yachtcharter-Anbieter, Anbieter besonderer Unterkünfte, Hotels und Ferienunterkünfte",
 };
 
 export const metadata: Metadata = {
-  title: "Pinterest Marketing für Tourismus & Hotels",
+  title: "Pinterest Marketing für Tourismus & Reiseveranstalter",
   description:
-    "Pinterest Marketing Tourismus für Hotels und Reiseanbieter: organische, SEO-optimierte Pins, die Reisende in der Planungsphase erreichen.",
+    "Pinterest Marketing für Reiseveranstalter und Touristikunternehmen: organische Pins für die Reiseplanung – von Rundreisen über Camper bis Yachtcharter.",
   alternates: {
     canonical: path,
   },
 };
 
-const contentIdeen = [
+// Segment-Abschnitte — je ein konkreter inhaltlicher Ansatz pro Zielsegment.
+const segmente = [
   {
-    title: "Reiseziel-Boards",
-    text: "ein eigenes Board je Ziel oder Region, das Unterkunft, Aktivitäten und Sehenswürdigkeiten bündelt.",
+    title: "Gruppen- und Rundreisen sowie geführte Touren",
+    text: "Für Anbieter von Gruppen- und Rundreisen sowie geführten Touren funktionieren Inhalte, die den Ablauf greifbar machen: Routen-Pins mit Etappen und Reisedauer, ein Board je Land oder Region und Pins, die typische Fragen vor der Buchung beantworten – etwa zu Gruppengröße, Reisetempo oder den Zwischenstopps. Wer auf Pinterest nach einer Rundreise durch ein bestimmtes Land sucht, vergleicht noch Konzepte statt Preise; genau in dieser Phase setzt eigener Content an.",
   },
   {
-    title: "Packlisten-Pins",
-    text: "„Was du für [Ziel/Jahreszeit] einpacken solltest“ – praktisch und leicht zu merken.",
+    title: "Camper- und Wohnmobilvermietung",
+    text: "Camper- und Wohnmobilvermietungen profitieren davon, dass Roadtrips zu den klassischen Pinterest-Themen gehören: Routenvorschläge mit Stationen und Fahrzeiten, Packlisten für den ersten Wohnmobil-Urlaub und Pins, die Einsteiger-Fragen rund ums Fahren, Übernachten und die Ausstattung beantworten. Solche Inhalte bringen Menschen auf deine Website, bevor feststeht, bei wem sie mieten – und mit eigenen Routen für Frühjahr und Herbst lässt sich gezielt die Nebensaison bespielen.",
   },
   {
-    title: "Zimmer- und Ausstattungs-Pins",
-    text: "einzelne Zimmerkategorien oder Ausstattungsmerkmale als eigene Pins, statt einem allgemeinen Hotelbild.",
+    title: "Yachtcharter",
+    text: "Yachtcharter ist erklärungsbedürftig – und gerade deshalb gut für Pinterest geeignet: Törnvorschläge je Revier mit Etappen und Häfen, Pins zum Unterschied zwischen Charter mit und ohne Skipper und Inhalte zur Crew-Planung geben Interessierten Orientierung, lange bevor sie ein konkretes Boot suchen. Weil Törns meist mit großem Vorlauf geplant werden, passt der lange Planungshorizont der Plattform besonders gut zu diesem Segment.",
   },
   {
-    title: "Ausflugsziele in der Umgebung",
-    text: "Pins zu Sehenswürdigkeiten und Aktivitäten rund um die Unterkunft.",
-  },
-  {
-    title: "Saisonale Boards",
-    text: "eigene Boards für Winterurlaub, Sommerferien, Ostern oder Weihnachtsreisen, die jedes Jahr neu relevant werden.",
-  },
-  {
-    title: "Reiserouten-Pins",
-    text: "„Ein Wochenende in [Region]“ oder komplette Roadtrip-Vorschläge mit mehreren Stationen.",
-  },
-  {
-    title: "Zielgruppen-Guides",
-    text: "eigene Pins für Familien, Paare oder Alleinreisende, die jeweils unterschiedliche Fragen stellen.",
-  },
-];
-
-const processSteps = [
-  {
-    title: "Erstgespräch",
-    text: "Wir klären deine Ausgangslage, deine Zielgruppen – etwa Familien, Paare oder Geschäftsreisende – und ob ein neuer Account, laufende Betreuung oder fertiger Content am besten passt.",
-  },
-  {
-    title: "Strategie & Struktur",
-    text: "Auf Basis von Zielgruppen und Saisonthemen entstehen Boards, ein Keyword-Set und ein Redaktionsplan, der zu deinem Buchungskalender passt.",
-  },
-  {
-    title: "Umsetzung & Auswertung",
-    text: "Pins werden gestaltet, veröffentlicht und regelmäßig ausgewertet, damit Themen und Saisonzeiten laufend nachgeschärft werden.",
+    title: "Besondere Unterkünfte",
+    text: "Bei besonderen Unterkünften – vom Baumhaus über das Hausboot bis zur abgelegenen Berghütte – ist das Produkt selbst der Content: Solche Orte werden auf Pinterest gezielt gesucht und in Merklisten für Anlässe wie Jahrestage, Geburtstage oder Auszeiten gesammelt. Pins, die einzelne Unterkünfte mit ihrer Umgebung und passenden Anlässen zeigen, funktionieren besser als allgemeine Übersichtsbilder – und verlinken direkt auf die jeweilige Angebotsseite.",
   },
 ];
 
@@ -92,6 +66,30 @@ const faq = [
       "Was bringt Pinterest, wenn unsere Buchungen ohnehin über Portale laufen?",
     answer:
       "Gerade dann lohnt der Blick auf Pinterest: Pins verlinken auf deine eigene Website und stärken damit den direkten Kanal, der nicht von Portal-Rankings und Provisionen abhängt. Wer Reisende schon in der Inspirationsphase erreicht, wird als Unterkunft oder Region wahrgenommen, bevor der Preisvergleich auf Portalen überhaupt beginnt.",
+  },
+  {
+    question:
+      "Unsere Camper sind im Sommer ausgebucht – was bringt Pinterest dann noch?",
+    answer:
+      "In diesem Fall liegt der Nutzen weniger in mehr Sommer-Anfragen als in der Steuerung: Pins zu Frühjahrs- und Herbstrouten stärken die Nebensaison, in der Fahrzeuge frei sind. Außerdem verschiebt frühe Sichtbarkeit die Nachfrage nach vorn – wer im Winter plant und direkt bei dir anfragt, bucht, bevor die Vergleichsportale ins Spiel kommen.",
+  },
+  {
+    question:
+      "Ist die Zielgruppe für Yachtcharter auf Pinterest nicht viel zu klein?",
+    answer:
+      "Die Nische ist klein, aber genau das ist auf einem Suchkanal ein Vorteil: Wer nach Törnrouten oder Charter-Themen sucht, hat ein konkretes Interesse und kaum organische Konkurrenz – ein Kontrast zu umkämpften Reisezielen. Für Nischenanbieter zählt deshalb nicht die Gesamtreichweite der Plattform, sondern dass die wenigen relevanten Suchanfragen fast ausschließlich bei ihnen landen können.",
+  },
+  {
+    question:
+      "Wie unterscheidet sich Pinterest-Content für Gruppenreisen von dem für Individualreisen?",
+    answer:
+      "Bei Gruppen- und Rundreisen entscheidet oft das Vertrauen in den Ablauf, nicht das Ziel allein: Content sollte deshalb Reiseleitung, typische Tagesstruktur und die Atmosphäre in der Gruppe zeigen – Themen, die Individualreisende nicht beschäftigen. Einwände wie die Sorge, als Alleinreisende nicht anzukommen, lassen sich in eigenen Pins direkt aufgreifen und entkräften.",
+  },
+  {
+    question:
+      "Sollten Reiseveranstalter für jedes Reiseziel einen eigenen Pinterest-Account anlegen?",
+    answer:
+      "Nein, in der Regel nicht: Ein gemeinsamer Account mit klar getrennten Boards je Ziel oder Reiseart bündelt die aufgebaute Sichtbarkeit und ist im Alltag pflegbar. Mehrere Accounts vervielfachen den Aufwand und verteilen die Wirkung. Sinnvoll wird eine Trennung erst, wenn Marken mit eigenständigen Websites und getrennten Zielgruppen dahinterstehen.",
   },
 ];
 
@@ -151,52 +149,62 @@ export default function PinterestMarketingTourismus() {
           Pinterest Marketing Tourismus
         </p>
         <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
-          Pinterest Marketing für touristische Unternehmen und Hotels
+          Pinterest Marketing für Tourismus &amp; Reiseveranstalter
         </h1>
+        {/* Antwort-Kapsel: 40–60 Wörter, eigenständig verständlich */}
         <p className="font-body mt-6 text-lg">
-          Pinterest Marketing für touristische Unternehmen bedeutet, Hotels,
-          Ferienunterkünfte, Regionen und Reiseanbieter mit organischen,
-          SEO-optimierten Pins in der Pinterest-Suche sichtbar zu machen –
-          dort, wo Reisende ihr nächstes Ziel oft Monate im Voraus
-          recherchieren. molloy business entwickelt Strategie, Boards und
-          Pin-Content, die Interessierte direkt auf Buchungs- und
-          Angebotsseiten führen, ganz ohne laufendes Werbebudget.
+          Pinterest Marketing für Tourismus und Reiseveranstalter bedeutet,
+          Reiseangebote dort sichtbar zu machen, wo Menschen ihre nächste
+          Reise planen – oft Monate vor der Buchung. molloy business
+          entwickelt dafür Strategie, Boards und SEO-optimierte Pins, die
+          Interessierte organisch auf deine Angebotsseiten führen: von
+          Rundreisen über Camper und Yachtcharter bis zu besonderen
+          Unterkünften.
+        </p>
+        <p className="font-body mt-4 text-lg">
+          Diese Seite richtet sich an mittelständische Touristikunternehmen,
+          die ihre Reisen selbst konzipieren und verkaufen – nicht an
+          Konzerne oder Buchungsportale. Ob Gruppen- und Rundreisen, geführte
+          Touren, Camper- und Wohnmobilvermietung, Yachtcharter oder
+          besondere Unterkünfte: Für jedes dieser Segmente findest du hier
+          den passenden inhaltlichen Ansatz.
         </p>
       </section>
 
-      {/* Warum funktioniert Pinterest */}
+      {/* Warum Pinterest und Reiseplanung zusammengehören */}
       <section className="bg-surface">
         <div className="mx-auto max-w-4xl px-6 py-16">
           <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Warum funktioniert Pinterest für die Tourismusbranche?
+            Warum gehören Pinterest und Reiseplanung zusammen?
           </h2>
+          {/* Erstantwort: 40–60 Wörter */}
           <p className="font-body mt-6 text-lg">
-            Pinterest funktioniert für die Tourismusbranche, weil Menschen
-            dort ihre nächste Reise recherchieren, lange bevor sie buchen –
-            oft Wochen bis Monate im Voraus. Als Suchmaschine für Ideen
-            bleibt ein einmal veröffentlichter Pin zu einem Reiseziel
-            dauerhaft auffindbar und erreicht Reisende genau in der Phase, in
-            der sie noch offen für Inspiration sind.
+            Pinterest und Reiseplanung gehören zusammen, weil Reisen dort
+            geplant statt gebucht werden: Menschen sammeln Ziele, Routen und
+            Unterkünfte in Merklisten, lange bevor eine Entscheidung fällt.
+            Wer als Reiseveranstalter oder Touristikunternehmen in dieser
+            frühen Phase mit eigenen Pins auftaucht, prägt die Auswahl mit,
+            bevor der Vergleich konkreter Angebote überhaupt beginnt.
           </p>
           <p className="font-body mt-4 text-lg">
-            Anders als auf klassischen Social-Media-Kanälen suchen Menschen
-            auf Pinterest aktiv nach Inspiration für ihre nächste Reise –
-            nach Zielen, Unterkünften, Aktivitäten und ganzen Reiserouten.
-            Diese Suche beginnt häufig, lange bevor eine Buchung feststeht,
-            in einer Phase, in der Reisende noch offen für neue Ideen sind.
-            Wer in dieser frühen Planungsphase mit passenden Pins sichtbar
-            ist, prägt die Entscheidung mit, bevor der Wettbewerb um die
-            eigentliche Buchung überhaupt beginnt.
+            Das Suchverhalten auf Pinterest ist planungsgetrieben statt
+            unterhaltungsgetrieben: Gesucht wird nicht nach Zeitvertreib,
+            sondern nach der nächsten Rundreise, der passenden Route für den
+            Camper-Urlaub oder einer Unterkunft, die zum Anlass passt.
+            Reise-Content ist dafür ideal, weil er visuell und langlebig ist
+            – ein guter Pin bleibt über Monate auffindbar und arbeitet
+            weiter, während Beiträge auf klassischen Social-Media-Kanälen
+            nach wenigen Tagen aus dem Feed verschwinden.
           </p>
           <p className="font-body mt-4 text-lg">
-            Pinterest zählt weltweit rund 619 Millionen monatlich aktive
-            Nutzerinnen und Nutzer (Stand: Quartalsbericht Q4 2025), ein
-            erheblicher Teil davon nutzt die Plattform gezielt zur
-            Reiseplanung. Für Hotels, Regionen und Reiseanbieter bedeutet
-            das: Ein Pin zu einem Reiseziel oder einer Unterkunft bleibt über
-            Saisons hinweg auffindbar und arbeitet weiter, auch lange nachdem
-            er veröffentlicht wurde – ohne dass dafür fortlaufend neues
-            Budget nötig ist.
+            Dazu kommt die Saisonalität: Weil Nutzerinnen und Nutzer ihre
+            Reisen Monate im Voraus planen, lässt sich der Redaktionsplan am
+            Buchungskalender ausrichten – Sommerziele werden im Winter
+            vorbereitet, Wintertouren im Sommer. Pinterest zählt dabei rund
+            619 Millionen monatlich aktive Nutzerinnen und Nutzer (Stand:
+            Quartalsbericht Q4 2025). Entscheidend ist aber weniger die
+            Größe der Plattform als der Zeitpunkt: Du erreichst Menschen,
+            während die Reiseentscheidung noch offen ist.
           </p>
         </div>
       </section>
@@ -208,54 +216,67 @@ export default function PinterestMarketingTourismus() {
         </h2>
         <p className="font-body mt-6 text-lg">
           Auf Pinterest suchen Menschen sehr konkret nach ihrer nächsten
-          Reise: nach Reisezielen für bestimmte Anlässe, nach Unterkünften
-          mit bestimmten Merkmalen – etwa Ausblick, Wellnessbereich oder
-          Familienfreundlichkeit – und nach fertigen Reiserouten, an denen
-          sie sich orientieren können. Auch Packlisten, Budget-Tipps und
-          saisonale Themen wie Winterurlaub, Sommerferien oder Kurztrips über
-          Feiertage gehören zu den wiederkehrenden Suchanfragen.
+          Reise: nach Zielen für bestimmte Anlässe, nach fertigen Routen und
+          Reiserouten, an denen sie sich orientieren können, und nach
+          Unterkünften mit bestimmten Merkmalen. Auch Packlisten,
+          Budget-Tipps und saisonale Themen wie Winterurlaub, Sommerferien
+          oder Kurztrips über Feiertage gehören zu den wiederkehrenden
+          Suchanfragen.
         </p>
         <p className="font-body mt-4 text-lg">
-          Dazu kommen regionale Suchanfragen: Ausflugsziele in der Umgebung,
-          Sehenswürdigkeiten, Aktivitäten für Familien oder Paare und lokale
-          Geheimtipps abseits der bekannten Attraktionen. Wer als Hotel,
-          Region oder Reiseanbieter genau diese Fragen mit eigenen Pins
-          beantwortet, taucht in dem Moment auf, in dem die Entscheidung für
-          ein Ziel noch offen ist.
+          Für Reiseveranstalter besonders interessant sind die planenden
+          Fragen dazwischen: Wie lange braucht man für eine Rundreise durch
+          ein bestimmtes Land? Welche Route passt für zwei Wochen mit dem
+          Camper? Was muss die Crew beim ersten Segeltörn beachten? Wer diese
+          Fragen mit eigenen Pins beantwortet, taucht genau in dem Moment
+          auf, in dem die Entscheidung für Ziel und Anbieter noch offen ist.
         </p>
       </section>
 
-      {/* Welche Inhalte funktionieren */}
+      {/* Segment-Abschnitte */}
       <section className="bg-surface">
         <div className="mx-auto max-w-4xl px-6 py-16">
           <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Welche Inhalte funktionieren
+            Welche Inhalte funktionieren für welches Segment?
           </h2>
+          {/* Erstantwort: 40–60 Wörter */}
           <p className="font-body mt-6 text-lg">
-            Für touristische Unternehmen funktionieren auf Pinterest vor
-            allem Inhalte, die eine konkrete Reiseentscheidung unterstützen –
-            nicht allgemeine Imagebilder, sondern Pins mit klarem Nutzen für
-            die Planung. Dazu zählen zum Beispiel:
+            Pinterest Marketing für Reiseveranstalter ist kein
+            Einheitsrezept: Was für eine Wohnmobilvermietung funktioniert,
+            greift bei einem Rundreise-Veranstalter zu kurz. Die verbindende
+            Klammer ist die Spezialisierung – die meisten Unternehmen, mit
+            denen molloy business im Tourismus arbeitet, sind
+            Spezialreiseanbieter: mittelständische Betriebe mit klarem
+            Profil statt einem Katalog für alles. Genau diese
+            Spezialisierung lässt sich auf Pinterest in konkrete Boards und
+            Suchbegriffe übersetzen.
           </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {contentIdeen.map((item) => (
-              <li key={item.title}>
-                <strong className="text-heading">{item.title}:</strong>{" "}
-                {item.text}
-              </li>
+          <div className="mt-10 space-y-10">
+            {segmente.map((segment) => (
+              <div key={segment.title}>
+                <h3 className="text-[22px] leading-tight">{segment.title}</h3>
+                <p className="font-body mt-3 text-lg">{segment.text}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      {/* Was molloy business übernimmt */}
+      {/* Zusammenarbeit */}
       <section className="mx-auto max-w-4xl px-6 py-16">
         <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Was molloy business für touristische Unternehmen übernimmt
+          Wie sieht die Zusammenarbeit für Touristikunternehmen konkret aus?
         </h2>
+        {/* Erstantwort: 40–60 Wörter */}
         <p className="font-body mt-6 text-lg">
-          Für touristische Unternehmen deckt molloy business die gesamte
-          Bandbreite ab, vom ersten Fundament bis zur laufenden Betreuung.
+          Die Zusammenarbeit beginnt mit einem Erstgespräch zur Ausgangslage:
+          Welche Segmente und Saisonzeiten tragen dein Geschäft, was soll
+          Pinterest dazu beitragen? Daraus entsteht eine Empfehlung, ob ein
+          neuer Account aufgebaut, ein bestehender laufend betreut oder
+          zunächst nur die Strategie geschärft wird – umgesetzt in klar
+          abgegrenzten Formaten statt einem Pauschalpaket.
+        </p>
+        <p className="font-body mt-4 text-lg">
           Fehlt noch ein strukturierter Account, entsteht er im{" "}
           <Link
             href="/pinterest-account-aufbau/"
@@ -263,8 +284,8 @@ export default function PinterestMarketingTourismus() {
           >
             Pinterest Account Aufbau
           </Link>{" "}
-          mit passenden Boards für Reiseziele, Zielgruppen und Saisonthemen.
-          Steht der Account bereits, übernimmt das{" "}
+          mit Boards für Reiseziele, Reisearten und Saisonthemen. Steht der
+          Account bereits, übernimmt das{" "}
           <Link
             href="/pinterest-account-management/"
             className="text-gold-text hover:underline"
@@ -272,7 +293,8 @@ export default function PinterestMarketingTourismus() {
             Pinterest Account Management
           </Link>{" "}
           die laufende Veröffentlichung inklusive Keyword-Recherche und
-          Trendanalyse.
+          Trendanalyse – gerade bei saisonalen Angeboten der Weg, um über
+          das ganze Jahr sichtbar zu bleiben.
         </p>
         <p className="font-body mt-4 text-lg">
           Wer lieber selbst veröffentlicht, aber fertigen Content braucht,
@@ -304,9 +326,10 @@ export default function PinterestMarketingTourismus() {
           Überblick.
         </p>
         <p className="font-body mt-4 text-lg">
-          Sollen die Grundlagen von Pinterest Marketing zusätzlich im eigenen
-          Team verankert werden – etwa bei Rezeptions- oder Marketingteams
-          einer Hotelkette –, vermittelt der{" "}
+          Sollen die Grundlagen von Pinterest Marketing zusätzlich im
+          eigenen Team verankert werden – etwa im Marketing eines
+          Reiseveranstalters oder bei den Teams einer Vermietstation –,
+          vermittelt der{" "}
           <Link
             href="/pinterest-workshop/"
             className="text-gold-text hover:underline"
@@ -317,20 +340,29 @@ export default function PinterestMarketingTourismus() {
         </p>
       </section>
 
-      {/* So läuft die Zusammenarbeit ab */}
+      {/* Wann Pinterest (noch) nicht passt */}
       <section className="bg-surface">
         <div className="mx-auto max-w-4xl px-6 py-16">
           <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            So läuft die Zusammenarbeit ab
+            Wann Pinterest für dich (noch) nicht passt
           </h2>
-          <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
-            {processSteps.map((step) => (
-              <li key={step.title}>
-                <strong className="text-heading">{step.title}:</strong>{" "}
-                {step.text}
-              </li>
-            ))}
-          </ol>
+          <p className="font-body mt-6 text-lg">
+            Ehrlicherweise ist Pinterest nicht für jedes Touristikunternehmen
+            der richtige Kanal. Lebt dein Geschäft fast ausschließlich von
+            Last-Minute-Buchungen, fehlt die Planungsphase, in der Pinterest
+            seine Stärke ausspielt – dann sind Kanäle mit kurzfristiger
+            Reichweite die bessere Wahl. Auch ohne eigene Website mit
+            aussagekräftigen Angebotsseiten fehlt das Ziel, auf das Pins
+            verlinken können; in dem Fall lohnt es sich, zuerst dort zu
+            investieren.
+          </p>
+          <p className="font-body mt-4 text-lg">
+            Und wer in den nächsten Wochen volle Auslastung braucht, sollte
+            nicht auf einen Suchkanal setzen, der seine Wirkung über Monate
+            aufbaut. In solchen Fällen sagt molloy business das auch so –
+            gegebenenfalls mit dem Hinweis, womit du stattdessen sinnvoller
+            starten kannst.
+          </p>
         </div>
       </section>
 
@@ -375,9 +407,10 @@ export default function PinterestMarketingTourismus() {
             Lass uns über dein Pinterest Marketing für Tourismus sprechen
           </h2>
           <p className="font-body mt-6 text-lg">
-            In einem unverbindlichen Strategie Call schauen wir gemeinsam,
-            wie Pinterest für dein Hotel, deine Ferienunterkunft oder dein
-            touristisches Unternehmen arbeiten kann.
+            In einem unverbindlichen Erstgespräch schauen wir gemeinsam, wie
+            Pinterest für deine Reisen, deine Vermietung oder deine
+            Unterkünfte arbeiten kann – und ob der Kanal zu deiner
+            Ausgangslage passt.
           </p>
           <div className="mt-8">
             <a
