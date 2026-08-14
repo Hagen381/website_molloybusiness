@@ -83,7 +83,7 @@ const faq: FaqItem[] = [
   {
     question: "Agentur oder freie Pinterest-Managerin — was ist besser?",
     answer:
-      "Der echte Unterschied liegt in Kapazität und Vertretung: Ein größeres Team kann Ausfälle abfangen und viele Accounts parallel betreuen, bindet dich aber oft an festere Strukturen. Bei einer spezialisierten Einzelunternehmerin arbeitest du direkt mit der Person, die auch umsetzt. molloy business gehört zur zweiten Sorte: ein spezialisierter Betrieb, kein großes Team.",
+      "Der echte Unterschied liegt in Kapazität und Vertretung: Ein größeres Team kann Ausfälle abfangen und viele Accounts parallel betreuen, bindet dich aber oft an festere Strukturen. Bei einem kleinen, spezialisierten Anbieter arbeitest du direkt mit der Person, die auch umsetzt. molloy business gehört zur zweiten Sorte: ein spezialisierter Betrieb, kein großes Team.",
   },
   {
     question: "Pinterest organisch oder Pinterest Ads?",
@@ -115,8 +115,8 @@ const pageJsonLd = {
     {
       "@type": "Person",
       "@id": `${siteConfig.url}/#juliette-oppel`,
-      name: siteConfig.owner,
-      jobTitle: "Inhaberin",
+      name: siteConfig.brandFace,
+      jobTitle: "Pinterest Marketing Expertin",
       worksFor: { "@id": `${siteConfig.url}/#organization` },
       knowsAbout: "Pinterest Marketing",
       sameAs: [siteConfig.social.linkedin, siteConfig.social.pinterest],
@@ -200,8 +200,8 @@ export default function Home() {
             </p>
             <p className="font-body mt-4 text-lg">
               Ich bin{" "}
-              <strong className="text-heading">Juliette Oppel</strong>,
-              Inhaberin und Gesicht von molloy business. Ich übernehme
+              <strong className="text-heading">Juliette Oppel</strong>, das
+              Gesicht von molloy business. Ich übernehme
               Strategie, Design, Texte und Umsetzung, damit Pinterest für dich
               arbeitet – nicht umgekehrt.
             </p>
@@ -218,19 +218,24 @@ export default function Home() {
             </ul>
 
             <div className="mt-8">
-              <Link href="#" className="btn btn-primary">
+              <a
+                href={siteConfig.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
                 strategie call vereinbaren
-              </Link>
+              </a>
             </div>
           </div>
 
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg lg:aspect-auto lg:h-auto lg:self-stretch">
             <ExportedImage
               src={heroImage}
-              alt="Juliette Oppel, Inhaberin der Pinterest Marketing Agentur molloy business"
+              alt="Juliette Oppel, Gesicht der Pinterest Marketing Agentur molloy business"
               fill
               className="object-cover"
-              sizes="(min-width: 1024px) 480px, 100vw"
+              sizes="(min-width: 1024px) 60vw, 100vw"
               basePath={basePath}
               priority
             />
@@ -460,8 +465,9 @@ export default function Home() {
         </h2>
         <p className="font-body mt-6 text-lg">
           Hinter molloy business steht{" "}
-          <strong className="text-heading">Juliette Oppel</strong> – Inhaberin,
-          Pinterest-Marketing-Expertin und erklärter Strukturprofi. Sie
+          <strong className="text-heading">Juliette Oppel</strong> –
+          Pinterest-Marketing-Expertin, erklärter Strukturprofi und das
+          Gesicht der Marke. Sie
           betreut ihre Kundinnen und Kunden remote im gesamten
           deutschsprachigen Raum und übernimmt dabei alles aus einer Hand:
           Strategie, Pin-Design, Texte und die laufende Umsetzung.
@@ -471,11 +477,6 @@ export default function Home() {
           statt Hype-Versprechen, klare Abläufe statt Aktionismus – und nur
           Angebote, hinter denen sie selbst zu hundert Prozent steht. Wer mit
           molloy business arbeitet, arbeitet direkt mit ihr.
-        </p>
-        <p className="font-body mt-6">
-          <Link href="#" className="text-gold-text hover:underline">
-            mehr über mich →
-          </Link>
         </p>
       </section>
 
@@ -593,9 +594,14 @@ export default function Home() {
           Pinterest für dein Unternehmen arbeiten kann.
         </p>
         <div className="mt-8">
-          <Link href="#" className="btn btn-primary">
+          <a
+            href={siteConfig.calendly}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+          >
             let&apos;s talk
-          </Link>
+          </a>
         </div>
         <p className="font-body mt-12 text-xs">
           Zuletzt aktualisiert: {lastUpdatedLabel}

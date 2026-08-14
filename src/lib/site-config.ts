@@ -1,6 +1,11 @@
 export const siteConfig = {
   name: "molloy business",
-  owner: "Juliette Oppel",
+  // Rechtsträger der Website — erscheint in Copyright, Impressum und JSON-LD.
+  legalName: "molloy Management OÜ",
+  // Gesicht der Marke (Marketing-Kontext) — Rechtsträger ist allein die OÜ.
+  brandFace: "Juliette Oppel",
+  // Vorstand der OÜ — für Impressum und rechtliche Angaben.
+  legalRepresentative: "Hagen Winkler",
   // Ohne www — die Live-Domain läuft auf molloybusiness.com, www leitet dorthin um.
   url: "https://molloybusiness.com",
   titleTemplate: "%s | molloy business",
@@ -10,10 +15,25 @@ export const siteConfig = {
   email: "info@molloybusiness.com",
   phone: "+49 15678 196744",
   locations: "Deutschland, Schweiz, Österreich & weltweit (remote)",
+  // Firmendaten der molloy Management OÜ — Impressum, Datenschutzerklärung
+  // und JSON-LD lesen ausschließlich aus diesem Block (keine Duplikate in
+  // Komponenten).
+  legal: {
+    street: "Sepapaja tn 6",
+    zip: "15551",
+    city: "Tallinn",
+    country: "Estland",
+    countryCode: "EE",
+    registerNumber: "17268439",
+    vatId: "EE102875722",
+  },
+  // Terminbuchung läuft über einen normalen Link zu Calendly — niemals das
+  // Calendly-Widget oder deren JavaScript einbinden (Website bleibt
+  // cookie- und trackerfrei). Alle CTA-Buttons lesen NUR aus diesem Feld.
+  calendly: "https://calendly.com/molloybusiness-erstgespraech/30min",
   social: {
     instagram: "https://www.instagram.com/molloy_business/",
     facebook: "https://www.facebook.com/profile.php?id=61554803184566",
-    whatsapp: "https://wa.me/+4915678196744",
     linkedin: "https://www.linkedin.com/in/juliette-oppel-b8a112245/",
     pinterest: "https://www.pinterest.de/julietteoppel/",
   },
@@ -45,12 +65,12 @@ export const navigation = {
     },
     { label: "Über mich", href: "#" },
     { label: "Blog", href: "/blog/" },
-    { label: "Kontakt", href: "#" },
+    { label: "Kontakt", href: `mailto:${siteConfig.email}` },
   ],
   legal: [
-    { label: "Kontakt", href: "#" },
-    { label: "Impressum", href: "#" },
-    { label: "Datenschutz", href: "#" },
+    { label: "Kontakt", href: `mailto:${siteConfig.email}` },
+    { label: "Impressum", href: "/impressum/" },
+    { label: "Datenschutz", href: "/datenschutz/" },
   ],
 } as const;
 
@@ -117,6 +137,16 @@ export const sitePages = [
     path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
     changeFrequency: "monthly",
     priority: 0.6,
+  },
+  {
+    path: "/impressum/",
+    changeFrequency: "yearly",
+    priority: 0.1,
+  },
+  {
+    path: "/datenschutz/",
+    changeFrequency: "yearly",
+    priority: 0.1,
   },
 ] as const;
 

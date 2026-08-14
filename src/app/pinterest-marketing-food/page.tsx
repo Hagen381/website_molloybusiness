@@ -376,9 +376,14 @@ export default function PinterestMarketingFood() {
             wie Pinterest für deine Rezepte und Produkte arbeiten kann.
           </p>
           <div className="mt-8">
-            <Link href="#" className="btn btn-primary">
+            <a
+              href={siteConfig.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
               strategie call vereinbaren
-            </Link>
+            </a>
           </div>
         </div>
       </section>

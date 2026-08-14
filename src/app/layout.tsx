@@ -39,12 +39,11 @@ export const metadata: Metadata = {
     title: siteConfig.defaultTitle,
     description: siteConfig.description,
   },
+  verification: {
+    google: "ypFkgkb-mDpRPgtiWqVRNaf1T4PdY_vAyTlGqBqg_QY",
+  },
 };
 
-// LocalBusiness/ProfessionalService wird wieder ergänzt, sobald die
-// Impressumsdaten (Geschäftsadresse der estnischen OÜ) final vorliegen —
-// unvollständiges LocalBusiness-Markup erzeugt sonst Fehler in der Google
-// Search Console.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -52,14 +51,19 @@ const jsonLd = {
       "@type": "Organization",
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
+      legalName: siteConfig.legalName,
       url: siteConfig.url,
       email: siteConfig.email,
       telephone: siteConfig.phone,
       areaServed: ["DE", "AT", "CH"],
-      founder: {
-        "@type": "Person",
-        name: siteConfig.owner,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: siteConfig.legal.street,
+        postalCode: siteConfig.legal.zip,
+        addressLocality: siteConfig.legal.city,
+        addressCountry: siteConfig.legal.countryCode,
       },
+      vatID: siteConfig.legal.vatId,
       sameAs: Object.values(siteConfig.social),
     },
   ],

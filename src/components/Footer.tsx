@@ -4,7 +4,6 @@ import { navigation, siteConfig } from "@/lib/site-config";
 const socialLinks = [
   { label: "Instagram", href: siteConfig.social.instagram },
   { label: "Facebook", href: siteConfig.social.facebook },
-  { label: "Whatsapp", href: siteConfig.social.whatsapp },
   { label: "Pinterest", href: siteConfig.social.pinterest },
   { label: "Linkedin", href: siteConfig.social.linkedin },
 ];
@@ -16,7 +15,6 @@ export default function Footer() {
         <div className="font-body text-sm leading-relaxed text-white/80">
           <p>{siteConfig.phone}</p>
           <p>{siteConfig.email}</p>
-          <p>aktuell: Koh Samui</p>
         </div>
 
         <ul className="font-body flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80">
@@ -47,7 +45,7 @@ export default function Footer() {
       </div>
 
       <div className="font-body border-t border-white/10 px-6 py-4 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} {siteConfig.name} — {siteConfig.owner}
+        © {new Date().getFullYear()} {siteConfig.name} · {siteConfig.legalName}
       </div>
     </footer>
   );
