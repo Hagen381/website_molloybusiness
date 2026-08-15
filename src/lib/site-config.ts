@@ -149,6 +149,11 @@ export const sitePages = [
     priority: 0.6,
   },
   {
+    path: "/blog/pinterest-seo-reiseangebote/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
     changeFrequency: "monthly",
     priority: 0.6,
@@ -275,6 +280,13 @@ export const blogPosts = [
     date: "2026-08-15",
     excerpt:
       "Organische Pins bleiben auffindbar, Anzeigen enden mit dem Budget. Warum molloy business auf organische Sichtbarkeit setzt – und wann Pinterest Ads trotzdem das richtige Werkzeug sind.",
+  },
+  {
+    slug: "pinterest-seo-reiseangebote",
+    title: "Pinterest SEO: So werden deine Reiseangebote gefunden",
+    date: "2026-08-15",
+    excerpt:
+      "Pinterest ist eine Suchmaschine: Gefunden wird, was beschriftet ist. Wie du die Suchbegriffe deiner Wunschkunden findest und an Profil, Boards und Pins richtig einsetzt.",
   },
   {
     slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",

@@ -338,6 +338,25 @@ export default function PinterestMarketingTourismus() {
           </Link>{" "}
           das nötige Wissen kompakt in einer Stunde.
         </p>
+        <p className="font-body mt-4 text-lg">
+          Wenn du dich vorab selbst einlesen willst: Der Ratgeber{" "}
+          <Link
+            href="/blog/pinterest-fuer-reiseveranstalter/"
+            className="text-gold-text hover:underline"
+          >
+            Pinterest für Reiseveranstalter
+          </Link>{" "}
+          erklärt den Einstieg Schritt für Schritt, und wie du die
+          Suchbegriffe deiner Wunschkunden findest und richtig einsetzt,
+          zeigt der Artikel{" "}
+          <Link
+            href="/blog/pinterest-seo-reiseangebote/"
+            className="text-gold-text hover:underline"
+          >
+            Pinterest SEO für Reiseangebote
+          </Link>
+          .
+        </p>
       </section>
 
       {/* Wann Pinterest (noch) nicht passt */}

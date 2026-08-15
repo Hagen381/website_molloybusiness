@@ -244,7 +244,15 @@ export default function PinterestFuerReiseveranstalter() {
           Pinterest-Suchleiste, welche Begriffe deine Zielgruppe eintippt, und
           verwende sie in Pin-Titel, Pin-Beschreibung und Board-Namen. Keine
           Keyword-Listen, sondern natürliche Sätze, in denen die Suchbegriffe
-          vorkommen.
+          vorkommen. Wie du diese Recherche Schritt für Schritt angehst,
+          zeigt der Ratgeber{" "}
+          <Link
+            href="/blog/pinterest-seo-reiseangebote/"
+            className="text-gold-text hover:underline"
+          >
+            Pinterest SEO für Reiseangebote
+          </Link>{" "}
+          im Detail.
         </p>
       </section>
 
