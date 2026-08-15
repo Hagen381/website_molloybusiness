@@ -199,6 +199,31 @@ export const sitePages = [
     priority: 0.6,
   },
   {
+    path: "/blog/online-schuelerpraktika/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/10-dinge-im-online-business/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/geschenkideen-homeoffice/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/affiliate-marketing/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/kunden-abgelehnt/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/impressum/",
     changeFrequency: "yearly",
     priority: 0.1,
@@ -279,6 +304,34 @@ export const blogPosts = [
       "Aufbauen, lernen, planen – und am Monatsende kein Gehalt. Warum sich die Anfangszeit der Selbstständigkeit so seltsam anfühlt und was sich mit dem ersten Kunden verändert.",
   },
   {
+    slug: "online-schuelerpraktika",
+    title: "Online-Fachkräftegewinnung durch Online-Schülerpraktika",
+    date: "2025-02-28",
+    excerpt:
+      "Transkript des Gastauftritts bei Local Lights: Wie Unternehmen mit Online-Schülerpraktika früh Nachwuchs gewinnen – mit Antworten auf typische Vorurteile und fünf Tipps für den Start.",
+  },
+  {
+    slug: "10-dinge-im-online-business",
+    title: "10 Dinge, die ich dieses Jahr in meinem Online-Business zum ersten Mal gemacht habe",
+    date: "2024-12-23",
+    excerpt:
+      "Für eine Bank gearbeitet, einen Videokurs erstellt, das Firmenkonto bis auf 92 Cent ausgereizt: ein ehrlicher Jahresrückblick über zehn Premieren im Online-Business.",
+  },
+  {
+    slug: "geschenkideen-homeoffice",
+    title: "15 Geschenkideen fürs Homeoffice",
+    date: "2024-11-12",
+    excerpt:
+      "Von der Zwitscherbox bis zum Massage-Sitzkissen: 15 durchdachte Geschenkideen für alle, die im Homeoffice arbeiten oder ihr eigenes Online-Business führen.",
+  },
+  {
+    slug: "affiliate-marketing",
+    title: "Was ist eigentlich Affiliate Marketing?",
+    date: "2024-09-26",
+    excerpt:
+      "Was Affiliate Marketing bedeutet, wie das Provisionsmodell funktioniert und worin es sich vom Network Marketing unterscheidet – nüchtern erklärt, ohne große Einnahme-Versprechen.",
+  },
+  {
     slug: "social-media-strategie-chatgpt",
     title: "Social-Media-Strategie von ChatGPT zum Nachmachen",
     date: "2024-09-13",
@@ -291,6 +344,13 @@ export const blogPosts = [
     date: "2024-07-08",
     excerpt:
       "1 Stunde Arbeitszeit = 1 Stunde Lebenszeit. Warum es keine unterschiedlichen Stundensätze für „einfache“ und „schwere“ Aufgaben braucht – und wie du deinen Preis findest.",
+  },
+  {
+    slug: "kunden-abgelehnt",
+    title: "Warum ich einen potenziellen Kunden abgelehnt habe, obwohl ich 0 Aufträge hatte",
+    date: "2024-05-28",
+    excerpt:
+      "Kein einziger Auftrag – und trotzdem Nein gesagt: warum Bauchgefühl und klare Grenzen wichtiger sind als der erste Umsatz und was ein fauler Apfel damit zu tun hat.",
   },
   {
     slug: "pinterest-marketing",

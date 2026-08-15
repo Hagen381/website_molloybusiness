@@ -146,7 +146,7 @@ export default function PinterestMarketing() {
           allem, warum du Pinterest mehr Beachtung schenken solltest. Wenn du
           keine Lust zu lesen hast, kannst du auch hier meinen{" "}
           <a
-            href="https://www.udemy.com/course/pinterest-crash-kurs/?referralCode=495B7E92BA673E699CF0"
+            href="https://www.udemy.com/course/pinterest-crash-kurs/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gold-text hover:underline"
