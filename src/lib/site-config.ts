@@ -134,6 +134,11 @@ export const sitePages = [
     priority: 0.7,
   },
   {
+    path: "/blog/pinterest-fuer-reiseveranstalter/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
     changeFrequency: "monthly",
     priority: 0.6,
@@ -240,6 +245,13 @@ export const sitePages = [
 // daraus automatisch auf. `title` wird wortgleich in Übersicht, Breadcrumb
 // und BreadcrumbList-Schema des Artikels verwendet.
 export const blogPosts = [
+  {
+    slug: "pinterest-fuer-reiseveranstalter",
+    title: "Pinterest für Reiseveranstalter: So funktioniert der Einstieg",
+    date: "2026-08-15",
+    excerpt:
+      "Reiseplanung beginnt auf Pinterest – oft Monate vor der Buchung. Wie du als Reiseveranstalter dort startest: Business-Account, Boards, Pin-Design und der Weg vom Pin zur Buchungsanfrage.",
+  },
   {
     slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",
     title: "Lohnt sich Pinterest für kleine Unternehmen?",
