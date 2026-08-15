@@ -144,6 +144,11 @@ export const sitePages = [
     priority: 0.6,
   },
   {
+    path: "/blog/organisch-statt-ads/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
     changeFrequency: "monthly",
     priority: 0.6,
@@ -263,6 +268,13 @@ export const blogPosts = [
     date: "2026-08-15",
     excerpt:
       "Selbst betreuen oder abgeben? Ehrliche Kriterien für beide Wege: wie viel laufende Arbeit Pinterest wirklich bedeutet, wann Selbermachen die richtige Wahl ist – und wann Auslagern.",
+  },
+  {
+    slug: "organisch-statt-ads",
+    title: "Pinterest organisch oder mit Werbeanzeigen?",
+    date: "2026-08-15",
+    excerpt:
+      "Organische Pins bleiben auffindbar, Anzeigen enden mit dem Budget. Warum molloy business auf organische Sichtbarkeit setzt – und wann Pinterest Ads trotzdem das richtige Werkzeug sind.",
   },
   {
     slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",
