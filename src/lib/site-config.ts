@@ -169,6 +169,36 @@ export const sitePages = [
     priority: 0.6,
   },
   {
+    path: "/blog/online-business-management/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/online-business-vs-realitaet/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/selbststaendigkeit-unsichtbare-arbeit/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/social-media-strategie-chatgpt/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/formel-60-minuten-arbeitszeit/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/blog/website-fuer-dein-business/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/impressum/",
     changeFrequency: "yearly",
     priority: 0.1,
@@ -228,11 +258,53 @@ export const blogPosts = [
       "Der Pinterest Predicts Report zeigt, was morgen gesucht wird. So nutzt du die Trends 2026 strategisch für deine Inhalte, Produkte und Boards.",
   },
   {
+    slug: "online-business-management",
+    title: "Warum ich mich gegen OBM und für Pinterest Marketing entschieden habe",
+    date: "2025-11-29",
+    excerpt:
+      "Online Business Management war lange Teil von molloy business. Die Geschichte einer Fokus-Entscheidung: warum OBM nicht mehr zur Vision passte und Pinterest zum Kern wurde.",
+  },
+  {
+    slug: "online-business-vs-realitaet",
+    title: "Freiheit durch Online-Business? Warum der Traum oft an der Realität scheitert",
+    date: "2025-07-08",
+    excerpt:
+      "Laptop, Freiheit, Selbstbestimmung – der Traum vom Online-Business klingt verlockend. Warum die Realität oft anders aussieht und wie aus dem Wunsch ein tragfähiges Konzept wird.",
+  },
+  {
+    slug: "selbststaendigkeit-unsichtbare-arbeit",
+    title: "Warum sich Selbstständigkeit oft nicht nach Arbeit anfühlt – und trotzdem Arbeit ist",
+    date: "2025-05-12",
+    excerpt:
+      "Aufbauen, lernen, planen – und am Monatsende kein Gehalt. Warum sich die Anfangszeit der Selbstständigkeit so seltsam anfühlt und was sich mit dem ersten Kunden verändert.",
+  },
+  {
+    slug: "social-media-strategie-chatgpt",
+    title: "Social-Media-Strategie von ChatGPT zum Nachmachen",
+    date: "2024-09-13",
+    excerpt:
+      "Eine Rolle, drei Prompts, ein kompletter Action-Plan: wie ChatGPT eine Social-Media-Strategie samt 4-Wochen-Zeitplan erstellt hat – mit allen Prompts zum Nachmachen.",
+  },
+  {
+    slug: "formel-60-minuten-arbeitszeit",
+    title: "Meine Formel für 60 Minuten Arbeitszeit",
+    date: "2024-07-08",
+    excerpt:
+      "1 Stunde Arbeitszeit = 1 Stunde Lebenszeit. Warum es keine unterschiedlichen Stundensätze für „einfache“ und „schwere“ Aufgaben braucht – und wie du deinen Preis findest.",
+  },
+  {
     slug: "pinterest-marketing",
     title: "Was ist Pinterest Marketing und wie funktioniert es?",
     date: "2024-04-23",
     excerpt:
       "Pinterest ist keine Social-Media-Plattform, sondern eine visuelle Suchmaschine. Was Pinterest Marketing bedeutet und wie deine Inhalte dort gefunden werden.",
+  },
+  {
+    slug: "website-fuer-dein-business",
+    title: "Brauchst du eine Website für dein Business?",
+    date: "2024-03-08",
+    excerpt:
+      "Instagram reicht doch – oder? Warum eine eigene Website das Zuhause deines Business ist und Social-Media-Kanäle nur Cafés sind: eine persönliche Antwort auf eine alte Streitfrage.",
   },
 ] as const;
 

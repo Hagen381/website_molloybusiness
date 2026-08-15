@@ -397,7 +397,14 @@ export default function PodcastPinterestMarketing() {
         </h2>
         <p className="font-body mt-6 text-lg">
           Wenn du Pinterest für deinen Podcast nutzen möchtest, dann solltest
-          du eine eigene Website haben. Ja, ich weiß. Noch eine Baustelle.
+          du{" "}
+          <Link
+            href="/blog/website-fuer-dein-business/"
+            className="text-gold-text hover:underline"
+          >
+            eine eigene Website
+          </Link>{" "}
+          haben. Ja, ich weiß. Noch eine Baustelle.
         </p>
         <p className="font-body mt-4 text-lg">
           Theoretisch kannst du Pins direkt auf{" "}

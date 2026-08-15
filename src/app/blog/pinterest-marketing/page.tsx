@@ -238,7 +238,15 @@ export default function PinterestMarketing() {
         <p className="font-body mt-6 text-lg">
           Im Grunde genommen möchtest du doch, dass deine Kunden zu dir nach
           Hause kommen. Also auf deine Homepage. Nur dort kannst du wirklich zu
-          100 % selbst steuern, was die Besucher wann und wie sehen. Allerdings
+          100 % selbst steuern, was die Besucher wann und wie sehen. Warum eine
+          eigene Website so wichtig für dein Business ist, liest du übrigens in{" "}
+          <Link
+            href="/blog/website-fuer-dein-business/"
+            className="text-gold-text hover:underline"
+          >
+            diesem Blogartikel
+          </Link>
+          . Allerdings
           machen wir uns alle immer abhängiger von Social Media und erstellen
           guten Content, der leider viel zu schnell verpufft. Natürlich ist
           Pinterest kein Ersatz für irgendeinen anderen Marketing-Kanal. Die
