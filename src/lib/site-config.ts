@@ -139,6 +139,11 @@ export const sitePages = [
     priority: 0.6,
   },
   {
+    path: "/blog/pinterest-selbst-machen-oder-auslagern/",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
     changeFrequency: "monthly",
     priority: 0.6,
@@ -251,6 +256,13 @@ export const blogPosts = [
     date: "2026-08-15",
     excerpt:
       "Reiseplanung beginnt auf Pinterest – oft Monate vor der Buchung. Wie du als Reiseveranstalter dort startest: Business-Account, Boards, Pin-Design und der Weg vom Pin zur Buchungsanfrage.",
+  },
+  {
+    slug: "pinterest-selbst-machen-oder-auslagern",
+    title: "Pinterest Marketing: selbst machen oder auslagern?",
+    date: "2026-08-15",
+    excerpt:
+      "Selbst betreuen oder abgeben? Ehrliche Kriterien für beide Wege: wie viel laufende Arbeit Pinterest wirklich bedeutet, wann Selbermachen die richtige Wahl ist – und wann Auslagern.",
   },
   {
     slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",
