@@ -11,7 +11,8 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="bg-footer text-gray-light mt-auto">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
+      {/* Gleicher 1140px-Rahmen wie die Inhaltsabschnitte. */}
+      <div className="container-page flex flex-col gap-8 py-12 sm:flex-row sm:items-center sm:justify-between">
         <div className="font-body text-sm leading-relaxed text-white/80">
           <p>{siteConfig.phone}</p>
           <p>{siteConfig.email}</p>

@@ -64,6 +64,15 @@ const KICKER = `${KICKER_BASE} text-[18px] leading-[28px] md:text-[20px] md:lead
 // globals.css, hier nur die Schriftfamilie absichern.
 const BODY = "font-body";
 
+// ---------------------------------------------------------------------------
+// Spaltenmodell, am Original (Elementor) nachgemessen: Der 1140px-Rahmen wird
+// ohne Grid-Gap in Prozentspalten geteilt (60/40, 45/55, 50/50), der sichtbare
+// Abstand entsteht wie bei Elementor durch 10px Innenabstand je Spalte
+// ("column gap: default"). Deshalb `lg:gap-x-0` + COL auf jeder Spalte.
+// Unter 1024px stapeln die Spalten wie bisher.
+// ---------------------------------------------------------------------------
+const COL = "lg:px-[10px]";
+
 // Seiten-spezifisches Schema: WebPage + Person. Organization steht global in
 // layout.tsx. Bewusst KEIN BreadcrumbList (Startseite) und — seit dem
 // optischen Nachbau — auch kein FAQPage/Service mehr: die Startseite bildet
@@ -120,9 +129,10 @@ export default function Home() {
           Das Bild steht rechts und läuft neben beiden Textblöcken durch.
           ------------------------------------------------------------------ */}
       <section className="bg-gray-light">
-        <div className="mx-auto max-w-6xl px-6 pt-[80px] pb-[50px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-            <div>
+        <div className="container-page pt-[80px] pb-[50px]">
+          {/* 60 % Text / 40 % Bild — im Original 684px / 456px bei 1140px Rahmen */}
+          <div className="grid gap-10 lg:grid-cols-[60%_40%] lg:gap-x-0">
+            <div className={COL}>
               <h1 className={H1}>
                 Pinterest Marketing mit Struktur – für Marken, die sichtbar
                 bleiben wollen
@@ -198,18 +208,22 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Bild rechts, oben bündig im Seitenverhältnis 2:3 (am Original
-                gemessen); unter 1024px rutscht es unter den Text. */}
-            <div className="relative aspect-[2/3] self-start overflow-hidden rounded-t-[200px]">
-              <ExportedImage
-                src={heroImage}
-                alt="pinterest marketing"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                basePath={basePath}
-                priority
-              />
+            {/* Bild rechts, oben bündig. Ab 1024px feste 336×500px, mittig in
+                der 456px-Spalte (Elementor-Bild-Widget ist zentriert und das
+                Bild schmaler als seine Spalte). Darunter volle Breite im
+                Seitenverhältnis 336:500. */}
+            <div className={`self-start ${COL}`}>
+              <div className="relative mx-auto aspect-[336/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
+                <ExportedImage
+                  src={heroImage}
+                  alt="pinterest marketing"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 336px, 100vw"
+                  basePath={basePath}
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -220,9 +234,10 @@ export default function Home() {
           Links Überschriftenblock mit Trennlinie, rechts der Fließtext.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
-        <div className="mx-auto max-w-6xl px-6 py-[100px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-            <div>
+        <div className="container-page py-[100px]">
+          {/* 45 % / 55 % — im Original 513px / 627px */}
+          <div className="grid gap-10 lg:grid-cols-[45%_55%] lg:gap-x-0">
+            <div className={COL}>
               <p className={`${KICKER} text-gold-light`}>
                 Was erwartet dich hier?
               </p>
@@ -233,7 +248,7 @@ export default function Home() {
               <hr className="border-gold-light mt-6 w-[330px] max-w-full border-t-[1.6px]" />
             </div>
 
-            <div>
+            <div className={COL}>
               <p className={BODY}>
                 Wie du hierher gefunden hast – über{" "}
                 <strong>Google, Pinterest oder eine Empfehlung</strong> – ist
@@ -273,9 +288,10 @@ export default function Home() {
           liegt der Textblock im Markup vorn und wird ab lg in Spalte 2 gesetzt.
           ------------------------------------------------------------------ */}
       <section className="bg-gray-light">
-        <div className="mx-auto max-w-6xl px-6 py-[100px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="lg:col-start-2 lg:row-start-1">
+        <div className="container-page py-[100px]">
+          {/* 45 % Bild / 55 % Text — im Original 513px / 627px */}
+          <div className="grid gap-10 lg:grid-cols-[45%_55%] lg:gap-x-0">
+            <div className={`lg:col-start-2 lg:row-start-1 ${COL}`}>
               <p className={`${KICKER} text-heading`}>
                 Warum bin ich mir da so sicher?
               </p>
@@ -324,15 +340,18 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative aspect-[2/3] overflow-hidden rounded-tl-[200px] lg:col-start-1 lg:row-start-1">
-              <ExportedImage
-                src={julietteChairImage}
-                alt="Juliette sitzt auf einem Stuhl, schaut in die Ferne, hat Laptop auf dem Schoß und Köpfhörer in den Ohren"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                basePath={basePath}
-              />
+            {/* Ab 1024px feste 421×500px, mittig in der 513px-Spalte. */}
+            <div className={`lg:col-start-1 lg:row-start-1 ${COL}`}>
+              <div className="relative mx-auto aspect-[421/500] w-full overflow-hidden rounded-tl-[200px] lg:aspect-auto lg:h-[500px] lg:w-[421px] lg:max-w-full">
+                <ExportedImage
+                  src={julietteChairImage}
+                  alt="Juliette sitzt auf einem Stuhl, schaut in die Ferne, hat Laptop auf dem Schoß und Köpfhörer in den Ohren"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 421px, 100vw"
+                  basePath={basePath}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -343,14 +362,14 @@ export default function Home() {
           Hintergrund #FFFFFF, oberer Teil 50px/10px, Kachelbereich 0/100px.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
-        <div className="mx-auto max-w-6xl px-6 pt-[50px] pb-[10px] text-center">
+        <div className="container-page pt-[50px] pb-[10px] text-center">
           <h6 className={H6_KICKER}>Meine Werte</h6>
           <h3 className={`${H3_CENTERED} text-gold-light mt-2`}>
             Dafür stehe ich mit meinem Namen
           </h3>
         </div>
 
-        <div className="mx-auto max-w-6xl px-6 pt-0 pb-[100px]">
+        <div className="container-page pt-0 pb-[100px]">
           <div className="grid gap-10 md:grid-cols-3">
             {values.map((value) => (
               <div key={value.title} className="text-center">
@@ -376,9 +395,10 @@ export default function Home() {
           Links Text, rechts Bild.
           ------------------------------------------------------------------ */}
       <section className="bg-footer">
-        <div className="mx-auto max-w-6xl px-6 pt-[80px] pb-[80px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-            <div>
+        <div className="container-page pt-[80px] pb-[80px]">
+          {/* 50 % / 50 % — im Original 570px / 570px */}
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
+            <div className={COL}>
               {/* Abweichende Zeilenhöhe (50px statt 30px) — so im Original. */}
               <p
                 className={`${KICKER_BASE} text-gray-light text-[18px] leading-[34px] md:text-[20px] md:leading-[50px]`}
@@ -408,15 +428,19 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative aspect-[2/3] overflow-hidden rounded-t-[200px]">
-              <ExportedImage
-                src={juliettePortraitImage}
-                alt="pinterest marketing expertin"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                basePath={basePath}
-              />
+            {/* Ab 1024px feste 374×500px, mittig in der 570px-Spalte.
+                Eckenradius im Original 150px (nicht 200px wie die anderen). */}
+            <div className={COL}>
+              <div className="relative mx-auto aspect-[374/500] w-full overflow-hidden rounded-t-[150px] lg:aspect-auto lg:h-[500px] lg:w-[374px] lg:max-w-full">
+                <ExportedImage
+                  src={juliettePortraitImage}
+                  alt="pinterest marketing expertin"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 374px, 100vw"
+                  basePath={basePath}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -427,7 +451,7 @@ export default function Home() {
           Schließt ohne Farbwechsel an Abschnitt 6 an (#595959).
           ------------------------------------------------------------------ */}
       <section className="bg-footer">
-        <div className="mx-auto max-w-6xl px-6 pt-0 pb-[80px] text-center">
+        <div className="container-page pt-0 pb-[80px] text-center">
           <h3 className={`${H3_CENTERED} text-surface`}>
             Zusammenarbeit – so kommst du zu mir
           </h3>

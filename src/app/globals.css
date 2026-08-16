@@ -72,6 +72,23 @@ body {
   }
 }
 
+/* Inhaltsrahmen. Im Original (Elementor "boxed") ist der zentrale Container
+   exakt 1140px breit und hat selbst KEINEN Seitenabstand — die 10px je Spalte
+   (Elementor "column gap: default") sitzen in den Spalten, siehe page.tsx.
+   Unterhalb von 1188px (1140 + 2×24) greift ein 24px-Seitenabstand, damit der
+   Text auf schmalen Screens nicht am Fensterrand klebt; bei genau 1188px ist
+   der Übergang stufenlos (beide Male 1140px Inhaltsbreite). */
+@utility container-page {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 1188px) {
+    padding-inline: 0;
+  }
+}
+
 /* Shared button style matching the original site's Elementor buttons:
    rounded pill, drop shadow, uppercase-free serif label. Werte am Original
    nachgemessen — Beschriftungen bleiben klein geschrieben wie dort. */

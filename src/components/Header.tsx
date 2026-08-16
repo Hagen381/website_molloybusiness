@@ -43,7 +43,9 @@ export default function Header() {
 
   return (
     <header className="bg-surface relative z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3">
+      {/* Gleicher 1140px-Rahmen wie die Inhaltsabschnitte, damit Logo und
+          Navigation bündig mit dem Seiteninhalt stehen. */}
+      <div className="container-page flex items-center justify-between gap-6 py-3">
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <ExportedImage
             src={logo}
