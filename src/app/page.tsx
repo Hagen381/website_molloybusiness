@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
-import heroImage from "@/assets/images/hero-juliette.jpg";
-import { services, siteConfig } from "@/lib/site-config";
+import heroImage from "@/assets/images/start/DSC01156-scaled-e1763214118889.jpg";
+import julietteChairImage from "@/assets/images/start/Juliette-Oppel-Pinterest-Businessmanagement.jpg";
+import juliettePortraitImage from "@/assets/images/start/DSC01285-scaled.jpg";
+import iconAuthenzitaet from "@/assets/images/start/Authenzitaet.png";
+import iconVerlaesslichkeit from "@/assets/images/start/1.png";
+import iconWeitblick from "@/assets/images/start/3.png";
+import { siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 // Jede Seite setzt ihr eigenes Canonical-Tag (siehe CLAUDE.md) — sonst
@@ -18,96 +23,52 @@ export const metadata: Metadata = {
   },
 };
 
-// Hero-Chips folgen der Erzählung "Fokus, nicht Ausschluss": Touristik als
-// Schwerpunkt, ohne Branchen-Rangfolge dahinter.
-const audiences = [
-  "Reiseveranstalter & Touristik",
-  "KMU & Selbstständige",
-  "Offen für alle Branchen",
-];
+// ---------------------------------------------------------------------------
+// Typografie, am Original (OceanWP + Elementor) nachgemessen. Die Werte hinter
+// `md:` sind die gemessenen Desktop-Werte; die Basiswerte sind die mobile
+// Verkleinerung (~72 %), die das Größenverhältnis der Ebenen zueinander
+// erhält. NICHT ohne ausdrücklichen Auftrag ändern.
+// ---------------------------------------------------------------------------
 
-// Echte Kundenstimmen, schriftlich freigegeben — WORTGLEICH übernehmen,
-// nie umformulieren oder kürzen (Auszüge nur auf den Unterseiten, dort mit
-// […]-Kennzeichnung). Die Aussage "von Pinterest selbst positiv
-// wahrgenommen" darf ausschließlich innerhalb des Christ-Zitats stehen,
-// niemals als eigene Aussage der Website.
-const testimonials = [
-  {
-    quote:
-      "Hervorragende Pinterest-Beratung! Juliette hat uns pragmatisch und fundiert in allen Fragen rund um Pinterest unterstützt. Sie hat unseren Pinterest-Account professionell aufgebaut, berät uns zu Inhalten und setzt organische Beiträge gekonnt um. Ihre Expertise hat dazu beigetragen, dass unser Auftritt sogar von Pinterest selbst positiv wahrgenommen wurde! Wer eine kompetente, praxisnahe und strategische Unterstützung für Pinterest sucht, ist bei Juliette genau richtig. Vielen Dank für die tolle Zusammenarbeit!",
-    name: "Fabian Christ",
-    role: "Social Media Manager, PostFinance",
-  },
-  {
-    quote:
-      "Ich habe Juliette für einen Online-Workshop zum Thema Pinterest Einsteigerwissen gebucht. Die Teilnehmenden und ich fühlen uns jetzt sehr gut in das Thema mitgenommen. Juliettes Präsentation war sehr interessant und mit vielen Praxisbeispielen ergänzt. Im Fragenteil konnte Juliette ihr umfassendes Fachwissen und ihre Erfahrung einbringen. Mit viel Geduld und vor allem für jede*n verständlich, hat Juliette Pinterest greifbar gemacht. Sollte nochmals Bedarf für dieses Thema aufkommen, würde ich Juliette wieder buchen!",
-    name: "Judith Kenk",
-    role: "Digitalisierungsbotschafterin Mecklenburg-Vorpommern",
-  },
-  {
-    quote:
-      "Juliette ist eine wunderbare Mischung aus Professionalität, Kompetenz, Zuverlässigkeit, Neugier, Liebenswürdigkeit, Offenheit, Flexibilität, Hartnäckigkeit und Kreativität. Mit ihr zusammenzuarbeiten, kann ich nur jedem empfehlen bzw. wünschen! :-)",
-    name: "Dr. Judith Gastner",
-    role: "Geschäftsführerin, PaarBalance GmbH",
-  },
-];
+// H1 — Antic Didone 47/65.8, 600, ls 1px, #595959 (Default aus globals.css)
+const H1 = "text-[34px] leading-[47.6px] md:text-[47px] md:leading-[65.8px]";
+// H2 Standard — Antic Didone 37/51.8, 600, ls 1px, #595959
+const H2_STANDARD =
+  "text-[27px] leading-[37.8px] md:text-[37px] md:leading-[51.8px]";
+// H2 gold — Antic Didone 37/40, 400, ls 1.4px, #C49C5E
+const H2_GOLD =
+  "font-normal tracking-[1.4px] text-gold-light text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
+// H2 auf dunkel — Antic Didone 37/40, 400, ls 1.4px, #D9D9D9
+const H2_DARK =
+  "font-normal tracking-[1.4px] text-gray-light text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
+// H2 in Abschnitt 4 — Antic Didone 35/40, 400, ls 1.4px, #595959
+const H2_35 =
+  "font-normal tracking-[1.4px] text-[26px] leading-[30px] md:text-[35px] md:leading-[40px]";
+// H3 zentriert — Antic Didone 37/40, 400, ls 1.4px; Farbe je Abschnitt
+// (#C49C5E hell, #FFFFFF auf dunklem Grund) — deshalb hier ohne Farbe.
+const H3_CENTERED =
+  "text-center tracking-[1.4px] text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
+// H5 Wert-Titel — Antic Didone 24/40, 500, ls 1.4px, #C49C5E
+const H5_VALUE =
+  "font-heading font-medium tracking-[1.4px] text-gold-light text-[21px] leading-[32px] md:text-[24px] md:leading-[40px]";
+// H6 Kicker — Antic Didone 24/40, 400, ls 1.4px, #C49C5E
+const H6_KICKER =
+  "font-heading font-normal tracking-[1.4px] text-gold-light text-[21px] leading-[32px] md:text-[24px] md:leading-[40px]";
+// Kicker-Absatz — Antic Didone, 500, ls 1.4px. Farbe und (im dunklen
+// Abschnitt) Größe wechseln, deshalb ohne beides; KICKER ergänzt die
+// Standardgröße 20/30.
+const KICKER_BASE = "font-heading font-medium tracking-[1.4px]";
+const KICKER = `${KICKER_BASE} text-[18px] leading-[28px] md:text-[20px] md:leading-[30px]`;
 
-// Sichtbar als "Zuletzt aktualisiert: August 2026", im Schema als dateModified.
-const lastUpdatedLabel = "August 2026";
-const lastUpdatedIso = "2026-08-14";
+// Fließtext: 18/30, ls 1.4px, #545454 — kommt aus den <body>-Regeln in
+// globals.css, hier nur die Schriftfamilie absichern.
+const BODY = "font-body";
 
-// FAQ-Daten: `answer` ist die eigenständige 40–60-Wort-Direktantwort, `link`
-// hängt optional einen weiterführenden Blog-Verweis an denselben Absatz an.
-// Das FAQPage-Schema wird WORTGLEICH aus Antwort (+ Linktext) gebaut —
-// Texte nie nur an einer der beiden Stellen ändern.
-type FaqItem = {
-  question: string;
-  answer: string;
-  link?: { href: string; text: string };
-};
-
-const faq: FaqItem[] = [
-  {
-    question: "Was kostet eine Pinterest Marketing Agentur?",
-    answer:
-      "Die Kosten richten sich nach dem Umfang der Zusammenarbeit: Am kleinsten ist eine einmalige Beratung, bei der du selbst umsetzt, am größten die komplette Übernahme von Design, Texten und Veröffentlichung. Entscheidend ist deshalb, wie viel Eigenleistung du behalten willst. Ein konkretes Angebot für dein Unternehmen bekommst du nach dem Erstgespräch.",
-  },
-  {
-    question: "Lohnt sich Pinterest für kleine Unternehmen und Selbstständige?",
-    answer:
-      "Es lohnt sich unter zwei Voraussetzungen: Deine Website bietet etwas, worauf Pins verweisen können, und deine Themen werden dort aktiv gesucht. Fehlt eines davon – oder brauchst du kurzfristig Ergebnisse –, ist Pinterest nicht der richtige Kanal. Eine ehrliche Einordnung für deinen Fall gibt der Beitrag",
-    link: {
-      href: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
-      text: "Lohnt sich Pinterest für kleine Unternehmen?",
-    },
-  },
-  {
-    question: "Pinterest Marketing selbst machen oder auslagern?",
-    answer:
-      "Die ehrliche Messlatte ist deine Zeit: Pinterest belohnt Regelmäßigkeit, nicht Perfektion. Kannst du Woche für Woche verlässlich Zeit fürs Gestalten und Texten freihalten – und macht dir das Freude –, ist Selbermachen gerade in der Startphase die richtige Wahl. Reißt das Tagesgeschäft diese Zeit immer wieder ein, wird Auslagern günstiger als ein brachliegender Account.",
-  },
-  {
-    question: "Agentur oder freie Pinterest-Managerin — was ist besser?",
-    answer:
-      "Der echte Unterschied liegt in Kapazität und Vertretung: Ein größeres Team kann Ausfälle abfangen und viele Accounts parallel betreuen, bindet dich aber oft an festere Strukturen. Bei einem kleinen, spezialisierten Anbieter arbeitest du direkt mit der Person, die auch umsetzt. molloy business gehört zur zweiten Sorte: ein spezialisierter Betrieb, kein großes Team.",
-  },
-  {
-    question: "Pinterest organisch oder Pinterest Ads?",
-    answer:
-      "Entscheidend ist dein Zeithorizont: Ads sind die richtige Wahl, wenn ein konkreter Anlass ein Datum hat – ein Launch, eine Saison-Aktion, ein schneller Markttest mit vorhandenem Werbebudget. Organisch ist die richtige Wahl, wenn du dauerhaft gefunden werden willst, ohne fortlaufend zu zahlen. Beides schließt sich nicht aus; molloy business übernimmt dabei den organischen Teil.",
-  },
-  {
-    question: "Wie lange dauert es, bis Pinterest Ergebnisse bringt?",
-    answer:
-      "Eine seriöse Pauschalzahl gibt es nicht – die Dauer hängt von Ausgangslage, Nische und Veröffentlichungsrhythmus ab. Woran du erkennst, dass es in die richtige Richtung geht: Erst steigen die Impressionen, dann speichern Menschen deine Pins, danach folgen die Klicks zur Website. Diese Reihenfolge ist normal; eine realistische Einschätzung für deinen Fall gibt das Erstgespräch.",
-  },
-];
-
-// Seiten-spezifisches Schema: Person, Service je Leistung,
-// FAQPage und WebPage mit dateModified. Organization steht global in layout.tsx.
-// Bewusst KEIN BreadcrumbList (Startseite), KEIN AggregateRating/Review
-// (Vorgabe der Zitat-Freigaben: Kundenstimmen erscheinen nur als sichtbarer
-// Text, nicht als strukturierte Bewertung).
+// Seiten-spezifisches Schema: WebPage + Person. Organization steht global in
+// layout.tsx. Bewusst KEIN BreadcrumbList (Startseite) und — seit dem
+// optischen Nachbau — auch kein FAQPage/Service mehr: die Startseite bildet
+// jetzt das Original ab und zeigt weder FAQ noch Angebots-Kacheln, ein Schema
+// ohne sichtbare Entsprechung wäre falsch.
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -116,7 +77,6 @@ const pageJsonLd = {
       "@id": `${siteConfig.url}/#webpage`,
       url: `${siteConfig.url}/`,
       name: siteConfig.defaultTitle,
-      dateModified: lastUpdatedIso,
       about: { "@id": `${siteConfig.url}/#organization` },
     },
     {
@@ -128,509 +88,371 @@ const pageJsonLd = {
       knowsAbout: "Pinterest Marketing",
       sameAs: [siteConfig.social.linkedin, siteConfig.social.pinterest],
     },
-    ...services.map((service) => ({
-      "@type": "Service",
-      name: service.title,
-      description: service.description,
-      provider: { "@id": `${siteConfig.url}/#organization` },
-      areaServed: ["DE", "AT", "CH"],
-    })),
-    {
-      "@type": "FAQPage",
-      mainEntity: faq.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.link ? `${item.answer} ${item.link.text}` : item.answer,
-        },
-      })),
-    },
   ],
 };
 
-const processSteps = [
+// Abschnitt 5 — Wert-Kacheln. Die Titel sind im Original Links auf "#";
+// hier bewusst schlichter Text, ein Link ins Leere ist ein Fehler.
+const values = [
   {
-    title: "Erstgespräch",
-    text: "Wir lernen uns kennen und klären, was du anbietest, wen du erreichen willst und ob Pinterest für dein Unternehmen der passende Kanal ist. Das Gespräch ist unverbindlich und kostet dich nichts außer Zeit.",
+    title: "Authenzität",
+    icon: iconAuthenzitaet,
+    text: "Ich sage was ich denke oder ich sage nichts. Auf jeden Fall sage ich nichts, was ich nicht denke. Ich bin mir klar über meine Stärken und ich kenne meine Schwächen und mit beidem gehe ich offen um. In der Zusammenarbeit mit mir bekommst du ehrliche Einschätzungen, keine Hype-Versprechen.",
   },
   {
-    title: "Analyse",
-    text: "molloy business schaut sich deine Ausgangslage an: Website, bestehender Account (falls vorhanden), Wettbewerb und Suchverhalten deiner Zielgruppe auf Pinterest. Daraus entsteht ein klares Bild, wo du stehst.",
+    title: "Verlässlichkeit",
+    icon: iconVerlaesslichkeit,
+    text: "Ich gehöre zu den Menschen, bei denen ein Wort ein Wort ist, ein Verabredung eine Verabredung ist und eine Deadline eine Deadline ist. So sehr ich auch die Flexibilität liebe, ist Verlässlichkeit ein wichtiger Wert für mich – beruflich wie privat.",
   },
   {
-    title: "Strategie & Struktur",
-    text: "Auf Basis der Analyse entstehen Keyword-Set, Board-Struktur und ein Redaktionsplan. Du weißt danach genau, welche Inhalte in welchem Rhythmus veröffentlicht werden und warum.",
-  },
-  {
-    title: "Umsetzung",
-    text: "Pins werden gestaltet, Titel und Beschreibungen für die Pinterest-Suche optimiert und nach Plan veröffentlicht. Je nach Leistung übernimmst du das selbst oder gibst es komplett ab.",
-  },
-  {
-    title: "Auswertung",
-    text: "Regelmäßige Auswertungen zeigen, welche Pins und Themen funktionieren. Die Strategie wird danach angepasst – so wird der Kanal von Monat zu Monat treffsicherer.",
+    title: "Weitblick",
+    icon: iconWeitblick,
+    text: "Ich sehe das große Ganze: Wie Content, Struktur und Strategie zusammenwirken, damit dein Business wächst – ohne Aktionismus.",
   },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pt-14 pb-16 sm:pt-20">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
-              Pinterest Marketing Agentur
-            </p>
-            <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
-              Pinterest Marketing Agentur für Unternehmen im deutschsprachigen
-              Raum
-            </h1>
-            {/* Antwort-Kapsel: eigenständiger, in sich geschlossener Absatz —
-                der wichtigste Textblock der Website (wird von KI-Suchsystemen
-                bevorzugt zitiert). Nicht kürzen, nicht aufteilen. */}
-            <p className="font-body mt-6 text-lg">
-              molloy business ist eine Pinterest Marketing Agentur, die
-              Unternehmen im deutschsprachigen Raum organisch auf Pinterest
-              sichtbar macht – mit Strategie, SEO-optimierten Pins und
-              verlässlicher Umsetzung statt bezahlter Werbeanzeigen. Der
-              Schwerpunkt liegt auf Reiseveranstaltern und
-              Touristikunternehmen; daneben arbeitet molloy business mit
-              Unternehmen aller Branchen, deren Angebote sich visuell zeigen
-              lassen und auf Pinterest gesucht werden.
-            </p>
+      {/* ------------------------------------------------------------------
+          1) HERO + 2) "Pinterest Marketing für Unternehmen"
+          Ein gemeinsamer Block: Hintergrund #D9D9D9, 80px oben / 50px unten.
+          Das Bild steht rechts und läuft neben beiden Textblöcken durch.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="mx-auto max-w-6xl px-6 pt-[80px] pb-[50px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <h1 className={H1}>
+                Pinterest Marketing mit Struktur – für Marken, die sichtbar
+                bleiben wollen
+              </h1>
 
-            {/* CTA folgt bewusst UNMITTELBAR auf die Antwort-Kapsel. */}
-            <div className="mt-6">
-              <a
-                href={siteConfig.calendly}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Erstgespräch vereinbaren
-              </a>
+              <p className={`${BODY} mt-6`}>
+                Ich bin <strong>Juliette Oppel</strong>,
+                Pinterest-Marketing-Expertin und Strukturprofi für
+                Lifestyle-Marken und KMU.
+                <br />
+                Ich helfe dir, Pinterest als{" "}
+                <strong>langfristigen Sichtbarkeitskanal</strong> zu nutzen –
+                mit klarer Strategie, professionellen Designs und ehrlicher
+                Umsetzung.
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Du möchtest dich wieder auf dein <strong>Kerngeschäft</strong>{" "}
+                konzentrieren, statt dich in Social-Media-Hektik zu verlieren?
+                <br />
+                Dann bist du hier richtig. Ich übernehme{" "}
+                <strong>Strategie, Design, Texte und Umsetzung</strong>, damit
+                Pinterest <strong>für dich arbeitet – nicht umgekehrt.</strong>
+              </p>
+
+              {/* 2) — gleicher Hintergrund, kein neuer Abschnitt */}
+              <h2 className={`${H2_STANDARD} mt-12`}>
+                Pinterest Marketing für Unternehmen – sichtbar werden mit Plan
+              </h2>
+
+              <p className={`${BODY} mt-6`}>
+                Pinterest ist keine Social-Media-Plattform, sondern eine{" "}
+                <strong>
+                  Suchmaschine für Ideen, Produkte und Inspiration
+                </strong>
+                .
+                <br />
+                Richtig genutzt, kann sie für dich{" "}
+                <strong>
+                  dauerhaft Traffic, Reichweite und Kundenanfragen
+                </strong>{" "}
+                generieren – auch Monate nach dem Posting.
+              </p>
+
+              <p className={`${BODY} mt-6`}>Ich unterstütze dich dabei,</p>
+
+              <ul className={`${BODY} mt-2 list-disc space-y-2 pl-6`}>
+                <li>
+                  die <strong>richtige Pinterest-Strategie</strong> für deine
+                  Marke zu entwickeln,
+                </li>
+                <li>
+                  <strong>SEO-optimierte Pins</strong> zu gestalten,
+                </li>
+                <li>
+                  und einen <strong>Ablauf zu schaffen</strong>, der sich
+                  einfach in deinen Alltag integrieren lässt.
+                </li>
+              </ul>
+
+              <p className={`${BODY} mt-6`}>
+                📌 <strong>Ergebnis:</strong> Mehr Sichtbarkeit, weniger
+                Stress, nachhaltiges Marketing.
+              </p>
+
+              {/* Interne Route statt der alten WordPress-URL. Bewusst ein
+                  einfaches <a>: /angebote/ existiert als Route noch nicht,
+                  next/link würde daran typgeprüft scheitern. */}
+              <div className="mt-8">
+                <a href="/angebote/" className="btn btn-primary">
+                  direkt zu den angeboten
+                </a>
+              </div>
             </div>
 
-            <p className="font-body mt-6 text-lg">
-              Ich bin{" "}
-              <strong className="text-heading">Juliette Oppel</strong>, das
-              Gesicht von molloy business. Ich übernehme
-              Strategie, Design, Texte und Umsetzung, damit Pinterest für dich
-              arbeitet – nicht umgekehrt.
-            </p>
-
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {audiences.map((a) => (
-                <li
-                  key={a}
-                  className="font-body bg-surface text-heading rounded-full px-4 py-1.5 text-sm shadow-sm"
-                >
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* VIDEO-SLOT: hier später ein selbst gehostetes <video> einbauen
-              (mit poster-Bild und preload="none") — KEIN YouTube-Embed und
-              kein externes Player-Script, die Website bleibt cookie- und
-              trackerfrei. Bis dahin bleibt das Hero-Bild unverändert der
-              einzige visuelle Inhalt; hier darf nichts sichtbar gerendert
-              werden. */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg lg:aspect-auto lg:h-auto lg:self-stretch">
-            <ExportedImage
-              src={heroImage}
-              alt="Juliette Oppel, Gesicht der Pinterest Marketing Agentur molloy business"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 60vw, 100vw"
-              basePath={basePath}
-              priority
-            />
+            {/* Bild rechts, oben bündig im Seitenverhältnis 2:3 (am Original
+                gemessen); unter 1024px rutscht es unter den Text. */}
+            <div className="relative aspect-[2/3] self-start overflow-hidden rounded-t-[200px]">
+              <ExportedImage
+                src={heroImage}
+                alt="pinterest marketing"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                basePath={basePath}
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Was macht eine Pinterest Marketing Agentur? */}
+      {/* ------------------------------------------------------------------
+          3) "Wie bist du hier gelandet?" — Hintergrund #FFFFFF, 100px/100px
+          Links Überschriftenblock mit Trennlinie, rechts der Fließtext.
+          ------------------------------------------------------------------ */}
       <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was macht eine Pinterest Marketing Agentur?
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Eine Pinterest Marketing Agentur macht Unternehmen auf Pinterest
-            sichtbar: Sie entwickelt die Strategie, baut Account und Boards
-            strukturiert auf, gestaltet Pins, optimiert Titel und
-            Beschreibungen für die Pinterest-Suche und plant die
-            Veröffentlichungen. Anschließend wertet sie aus, was funktioniert,
-            und passt Inhalte und Keywords laufend an.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Konkret gehören dazu diese Aufgaben:
-          </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            <li>
-              <strong className="text-heading">Account-Struktur:</strong>{" "}
-              Profil, Beschreibung und Einstellungen so aufsetzen, dass
-              Pinterest versteht, wofür dein Unternehmen steht.
-            </li>
-            <li>
-              <strong className="text-heading">Boards:</strong> Themenwelten
-              anlegen, die zu den Suchanfragen deiner Zielgruppe passen.
-            </li>
-            <li>
-              <strong className="text-heading">Pin-Design:</strong> Grafiken
-              gestalten, die zu deiner Marke passen und zum Klicken einladen.
-            </li>
-            <li>
-              <strong className="text-heading">Pinterest-SEO:</strong>{" "}
-              Keywords recherchieren und in Titeln und Beschreibungen so
-              einsetzen, dass deine Pins gefunden werden.
-            </li>
-            <li>
-              <strong className="text-heading">Redaktionsplanung:</strong>{" "}
-              festlegen, welche Inhalte wann veröffentlicht werden – planbar
-              statt spontan.
-            </li>
-            <li>
-              <strong className="text-heading">Auswertung:</strong> messen,
-              welche Pins Reichweite und Website-Besuche bringen, und die
-              Strategie danach ausrichten.
-            </li>
-          </ul>
-        </div>
-      </section>
+        <div className="mx-auto max-w-6xl px-6 py-[100px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p className={`${KICKER} text-gold-light`}>
+                Was erwartet dich hier?
+              </p>
 
-      {/* Kundenstimmen — bewusst weit oben (direkt nach dem ersten
-          inhaltlichen Abschnitt); echte, schriftlich freigegebene Zitate,
-          siehe Kommentar am `testimonials`-Array. */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mb-12 text-center">
-          <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
-            Kundenstimmen
-          </p>
-          <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Feedback ist ein Geschenk
-          </h2>
-          <p className="font-body mx-auto mt-6 max-w-3xl text-lg">
-            Was Kundinnen und Kunden über die Zusammenarbeit mit molloy
-            business sagen – wortgleich und mit ihrer Freigabe
-            veröffentlicht:
-          </p>
-        </div>
+              <h2 className={`${H2_GOLD} mt-4`}>Wie bist du hier gelandet?</h2>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <figure key={i} className="bg-surface rounded-2xl p-6 shadow-sm">
-              <blockquote className="font-body text-[15px] leading-relaxed italic">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <figcaption className="font-body mt-4 text-sm">
-                <span className="text-heading font-semibold">{t.name}</span>
+              {/* Trennlinie: 1.6px, #C49C5E, 330px breit, linksbündig */}
+              <hr className="border-gold-light mt-6 w-[330px] max-w-full border-t-[1.6px]" />
+            </div>
+
+            <div>
+              <p className={BODY}>
+                Wie du hierher gefunden hast – über{" "}
+                <strong>Google, Pinterest oder eine Empfehlung</strong> – ist
+                kein Zufall.
                 <br />
-                {t.role}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+                Ich arbeite{" "}
+                <strong>datenbasiert, strukturiert und ehrlich</strong>, damit
+                dein Marketing wirkt, ohne dich zu überfordern.
+              </p>
 
-      {/* Organisch statt Ads */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-          <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Organisch statt Ads: Sichtbarkeit, die bleibt
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Pinterest ist keine Social-Media-Plattform, sondern eine{" "}
-            <strong className="text-heading">
-              Suchmaschine für Ideen, Produkte und Inspiration
-            </strong>
-            . Menschen kommen nicht hierher, um Freunden zu folgen, sondern um
-            etwas zu finden: das nächste Reiseziel, ein Rezept fürs Wochenende,
-            eine Antwort auf eine Finanzfrage. Wer dort mit den passenden
-            Inhalten auftaucht, erreicht Menschen genau in dem Moment, in dem
-            sie suchen.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Genau daraus ergibt sich der größte Unterschied zu anderen Kanälen:
-            Ein Beitrag auf klassischen Social-Media-Plattformen verschwindet
-            nach Stunden aus den Feeds. Ein gut gemachter, SEO-optimierter Pin
-            wird dagegen über Monate – oft Jahre – in der Pinterest-Suche
-            gefunden und bringt in dieser Zeit kontinuierlich Besucherinnen und
-            Besucher auf deine Website. Die Arbeit, die du einmal investierst,
-            wirkt also dauerhaft weiter.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Und Pinterest Ads? Anzeigen sind nicht schlecht – sie sind ein
-            anderes Werkzeug. Sie bringen schnelle Reichweite, solange Budget
-            fließt, und enden in dem Moment, in dem die Kampagne stoppt.
-            Organische Pins bauen dagegen ein Fundament auf, das bleibt.{" "}
-            <strong className="text-heading">
-              molloy business ist auf den organischen Weg spezialisiert
-            </strong>
-            : Strategie, Struktur und Inhalte, die aus eigener Kraft gefunden
-            werden – ohne laufendes Werbebudget.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Das Ergebnis ist planbares, nachhaltiges Marketing: weniger
-            Abhängigkeit von Algorithmen und Anzeigenpreisen, mehr Ruhe im
-            Alltag – und ein Kanal, der im Hintergrund für dich arbeitet,
-            während du dich um dein Kerngeschäft kümmerst.
-          </p>
-        </div>
-      </section>
+              <p className={`${BODY} mt-6`}>
+                <strong>Bei mir bekommst du:</strong>
+              </p>
 
-      {/* Für wen sich Pinterest besonders lohnt */}
-      <section>
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Für wen sich Pinterest besonders lohnt
-          </h2>
-
-          {/* Aufbau "Fokus, nicht Ausschluss": Touristik als gelebter
-              Schwerpunkt, danach die Öffnung für zahlreiche Branchen (mit
-              den Links auf die Food- und Finanz-Seiten als Service-Hinweis,
-              nicht als Rangfolge), zum Schluss der inklusive Abschluss. */}
-          <h3 className="mt-10 text-[22px] leading-tight">
-            <Link href="/pinterest-marketing-tourismus/" className="hover:underline">
-              Reiseveranstalter und Touristikunternehmen
-            </Link>
-          </h3>
-          <p className="font-body mt-3 text-lg">
-            Reiseplanung ist einer der klassischen Anwendungsfälle von
-            Pinterest: Menschen sammeln dort Reiseziele, Routen und
-            Unterkünfte – oft Monate, bevor sie tatsächlich buchen. Wer in
-            dieser frühen Phase mit den passenden Pins auftaucht, erreicht
-            Reisende genau in dem Moment, in dem die Entscheidung entsteht,
-            und führt sie direkt auf die eigenen Angebotsseiten statt auf
-            teure Buchungsplattformen. Ein guter Pin zu einem Reiseziel
-            bleibt dabei über Saisons hinweg auffindbar.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Dazu kommt: Kaum ein Produkt ist so visuell wie eine Reise. Ob
-            Spezialreiseanbieter, Anbieter von Gruppen- und Rundreisen und
-            geführten Touren, Camper- und Wohnmobilvermietungen,
-            Yachtcharter-Anbieter oder Anbieter besonderer Unterkünfte –
-            Landschaften, Routen, Fahrzeuge und Unterkünfte lassen sich in
-            Pins zeigen, ohne dass es viele Worte braucht. Genau solche
-            Bilder speichern Menschen auf Pinterest, wenn sie eine Reise
-            planen. Deshalb liegt der Schwerpunkt von molloy business auf
-            mittelständischen Reiseveranstaltern und Touristikunternehmen im
-            deutschsprachigen Raum. Wie die Zusammenarbeit in dieser Branche
-            konkret aussieht, zeigt die Seite{" "}
-            <Link
-              href="/pinterest-marketing-tourismus/"
-              className="text-gold-text hover:underline"
-            >
-              Pinterest Marketing für Tourismus
-            </Link>
-            .
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Für die Zusammenarbeit heißt das konkret: Aus deinen Reisen,
-            Routen und Unterkünften entstehen suchoptimierte Pins, die auf
-            die passenden Angebots- und Themenseiten deiner Website führen.
-            Saisonale Inhalte werden so eingeplant, dass sie sichtbar sind,
-            wenn die Reiseplanung deiner Zielgruppe beginnt – nicht erst
-            dann, wenn die Saison schon läuft. So baut sich über die Monate
-            ein wachsender Bestand an Pins auf, der kontinuierlich neue
-            Interessierte auf deine Website bringt.
-          </p>
-
-          <h3 className="mt-10 text-[22px] leading-tight">
-            Zahlreiche weitere Branchen
-          </h3>
-          <p className="font-body mt-3 text-lg">
-            Ein Schwerpunkt ist kein Ausschluss: Pinterest funktioniert
-            überall dort, wo Produkte visuell sind und Entscheidungen geplant
-            werden – bei Wohnen und Einrichtung genauso wie bei Rezepten und
-            Food, bei DIY, Hochzeiten, Garten und Mode, und ebenso bei
-            beratungsnahen Themen wie Finanzen. Menschen nutzen Pinterest,
-            um solche Vorhaben zu sammeln und vorzubereiten – und genau
-            dabei können Unternehmen mit ihren Inhalten sichtbar werden.
-            Entscheidend ist dabei weniger die Branche als zwei Fragen:
-            Suchen Menschen dein Thema auf Pinterest – und bietet deine
-            Website Inhalte, auf die Pins verweisen können? Auch
-            Dienstleistungen funktionieren, wenn sich ihr Ergebnis zeigen
-            lässt: ein eingerichteter Raum, ein gedeckter Tisch, ein
-            geplantes Fest. Für Food-Marken und Finanzdienstleister gibt es
-            auf dieser Website eigene Seiten mit vertiefenden
-            Informationen:{" "}
-            <Link
-              href="/pinterest-marketing-food/"
-              className="text-gold-text hover:underline"
-            >
-              Pinterest Marketing für Food-Marken
-            </Link>{" "}
-            und{" "}
-            <Link
-              href="/pinterest-marketing-finanzdienstleister/"
-              className="text-gold-text hover:underline"
-            >
-              Pinterest Marketing für Finanzdienstleister
-            </Link>
-            .
-          </p>
-
-          <p className="font-body mt-10 text-lg">
-            Und wenn deine Branche hier nicht auftaucht? Das ist kein
-            Hindernis: KMU und Selbstständige aller Branchen sind bei molloy
-            business willkommen – vom Handwerk über Coaching bis zum
-            Onlineshop. Ehrlich ist aber auch: Pinterest passt nicht zu jedem
-            Geschäftsmodell. Ob sich der Kanal für dein Unternehmen lohnt,
-            klären wir deshalb offen im Erstgespräch – bevor du Zeit oder
-            Geld investierst. Dafür schauen wir uns gemeinsam deine Website,
-            dein Angebot und das Suchverhalten deiner Zielgruppe an.
-          </p>
-        </div>
-      </section>
-
-      {/* So läuft die Zusammenarbeit ab */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            So läuft die Zusammenarbeit ab
-          </h2>
-          <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
-            {processSteps.map((step) => (
-              <li key={step.title}>
-                <strong className="text-heading">{step.title}:</strong>{" "}
-                {step.text}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section>
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="mb-12 text-center">
-            <p className="font-body text-gold-text text-sm tracking-[2px] uppercase">
-              Meine Angebote
-            </p>
-            {/* Überschrift bewusst ohne Anzahl — bleibt korrekt, wenn
-                Leistungen dazukommen oder wegfallen. */}
-            <h2 className="mt-2 text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-              Pinterest Marketing Angebote für Unternehmen
-            </h2>
-            <p className="font-body mx-auto mt-6 max-w-3xl text-lg">
-              Von der einmaligen Beratung bis zur laufenden Betreuung: Die
-              Leistungen von molloy business unterscheiden sich vor allem
-              darin, wie viel du selbst übernimmst – vom Strategie Call, nach
-              dem du eigenständig weiterarbeitest, bis zum Account
-              Management, das den Kanal komplett abdeckt.
-            </p>
+              <ul className={`${BODY} mt-2 list-disc space-y-2 pl-6`}>
+                <li>
+                  <strong>Pinterest Marketing mit Strategie und Struktur</strong>
+                </li>
+                <li>
+                  <strong>Designs &amp; Texte aus einer Hand</strong>
+                </li>
+                <li>
+                  <strong>Planbare Abläufe</strong> statt Social-Media-Chaos
+                </li>
+                <li>
+                  <strong>Langfristige Sichtbarkeit</strong> für Marken mit Stil
+                </li>
+              </ul>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <Link
-                key={service.title}
-                href={service.href}
-                className="bg-surface group flex flex-col rounded-2xl p-6 shadow-sm transition hover:shadow-md"
-              >
-                <h3 className="text-[22px] leading-tight">{service.title}</h3>
-                <p className="font-body mt-3 flex-1 text-[15px] leading-relaxed">
-                  {service.scope}
-                </p>
-                <span className="text-gold-text font-body mt-4 text-sm group-hover:underline">
-                  mehr erfahren →
-                </span>
-              </Link>
-            ))}
+      {/* ------------------------------------------------------------------
+          4) "Alles was ich für dich tun kann..." — #D9D9D9, 100px/100px
+          Links Bild, rechts Text. Unter 1024px steht der Text zuerst, deshalb
+          liegt der Textblock im Markup vorn und wird ab lg in Spalte 2 gesetzt.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="mx-auto max-w-6xl px-6 py-[100px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+            <div className="lg:col-start-2 lg:row-start-1">
+              <p className={`${KICKER} text-heading`}>
+                Warum bin ich mir da so sicher?
+              </p>
+
+              <h2 className={`${H2_35} mt-4`}>
+                Alles was ich für dich tun kann, habe ich selbst getan.
+              </h2>
+
+              <p className={`${BODY} mt-6`}>
+                All meine Angebote basieren auf langjähriger Erfahrung und
+                meinem Anspruch nur das zu tun, was ich auch{" "}
+                <strong>zu 100% verkörpere.</strong>
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Das Fundament meiner Arbeit ist Erfahrung, Struktur und einen
+                klarer Qualitätsanspruch.
+              </p>
+
+              {/* Häkchen-Zeilen: einfache Zeilenumbrüche im selben Absatz —
+                  kein Listenpunkt, kein Abstand dazwischen (wie im Original). */}
+              <p className={`${BODY} mt-6`}>
+                Ich verspreche nichts, was ich nicht halten kann – aber ich
+                liefere, was dich wirklich weiterbringt:
+                <br />✅ Pinterest-Accounts, die langfristig wachsen
+                <br />✅ Strukturierte Abläufe, die Ruhe in dein Business
+                bringen
+                <br />✅ Designs, die deine Marke widerspiegeln
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Ich stehe für{" "}
+                <strong>Ehrlichkeit, Struktur und Weitblick</strong> – und
+                arbeite nur mit Marken, die dieselben Werte teilen.
+              </p>
+
+              <div className="mt-8">
+                <a
+                  href={siteConfig.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  let&apos;s talk
+                </a>
+              </div>
+            </div>
+
+            <div className="relative aspect-[2/3] overflow-hidden rounded-tl-[200px] lg:col-start-1 lg:row-start-1">
+              <ExportedImage
+                src={julietteChairImage}
+                alt="Juliette sitzt auf einem Stuhl, schaut in die Ferne, hat Laptop auf dem Schoß und Köpfhörer in den Ohren"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                basePath={basePath}
+              />
+            </div>
           </div>
-
-          <p className="font-body mt-10 text-center text-lg">
-            Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
-            bekommst du im Erstgespräch.
-          </p>
         </div>
       </section>
 
-      {/* Hinter molloy business */}
+      {/* ------------------------------------------------------------------
+          5) "Meine Werte" / "Dafür stehe ich mit meinem Namen"
+          Hintergrund #FFFFFF, oberer Teil 50px/10px, Kachelbereich 0/100px.
+          ------------------------------------------------------------------ */}
       <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-          <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Hinter molloy business
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Hinter molloy business steht{" "}
-            <strong className="text-heading">Juliette Oppel</strong> –
-            Pinterest-Marketing-Expertin, erklärter Strukturprofi und das
-            Gesicht der Marke. Sie
-            betreut ihre Kundinnen und Kunden remote im gesamten
-            deutschsprachigen Raum und übernimmt dabei alles aus einer Hand:
-            Strategie, Pin-Design, Texte und die laufende Umsetzung.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Ihre Arbeitsweise ist bewusst unaufgeregt: ehrliche Einschätzungen
-            statt Hype-Versprechen, klare Abläufe statt Aktionismus – und nur
-            Angebote, hinter denen sie selbst zu hundert Prozent steht. Wer mit
-            molloy business arbeitet, arbeitet direkt mit ihr –{" "}
-            <Link href="/ueber-mich/" className="text-gold-text hover:underline">
-              mehr über Juliette
-            </Link>{" "}
-            und ihren Weg aus der Touristik.
-          </p>
+        <div className="mx-auto max-w-6xl px-6 pt-[50px] pb-[10px] text-center">
+          <h6 className={H6_KICKER}>Meine Werte</h6>
+          <h3 className={`${H3_CENTERED} text-gold-light mt-2`}>
+            Dafür stehe ich mit meinem Namen
+          </h3>
         </div>
-      </section>
 
-      {/* FAQ */}
-      <section>
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Häufige Fragen zu Pinterest Marketing
-          </h2>
-          <div className="mt-8 space-y-10">
-            {faq.map((item) => (
-              <div key={item.question}>
-                <h3 className="text-[22px] leading-tight">{item.question}</h3>
-                <p className="font-body mt-3 text-lg">
-                  {item.answer}
-                  {item.link && (
-                    <>
-                      {" "}
-                      <Link
-                        href={item.link.href}
-                        className="text-gold-text hover:underline"
-                      >
-                        {item.link.text}
-                      </Link>
-                    </>
-                  )}
-                </p>
+        <div className="mx-auto max-w-6xl px-6 pt-0 pb-[100px]">
+          <div className="grid gap-10 md:grid-cols-3">
+            {values.map((value) => (
+              <div key={value.title} className="text-center">
+                <ExportedImage
+                  src={value.icon}
+                  alt=""
+                  width={90}
+                  height={90}
+                  className="mx-auto h-auto w-[90px]"
+                  sizes="(min-width: 768px) 90px, 90px"
+                  basePath={basePath}
+                />
+                <h5 className={`${H5_VALUE} mt-4`}>{value.title}</h5>
+                <p className={`${BODY} mt-2`}>{value.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
-          <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Lass uns über dein Pinterest Marketing sprechen
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            In einem unverbindlichen Strategie Call schauen wir gemeinsam, wie
-            Pinterest für dein Unternehmen arbeiten kann.
+      {/* ------------------------------------------------------------------
+          6) "Hi, ich bin Juliette" — Hintergrund #595959, 80px/80px
+          Links Text, rechts Bild.
+          ------------------------------------------------------------------ */}
+      <section className="bg-footer">
+        <div className="mx-auto max-w-6xl px-6 pt-[80px] pb-[80px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              {/* Abweichende Zeilenhöhe (50px statt 30px) — so im Original. */}
+              <p
+                className={`${KICKER_BASE} text-gray-light text-[18px] leading-[34px] md:text-[20px] md:leading-[50px]`}
+              >
+                Über mich
+              </p>
+
+              <h2 className={H2_DARK}>Hi, ich bin Juliette</h2>
+
+              <p className={`${BODY} text-gray-light mt-6`}>
+                Pinterest-Marketing-Expertin, Struktur-Liebhaberin und digitale
+                Unternehmerin.
+                <br />
+                Ich lebe, was ich lehre: Klarheit, Verlässlichkeit und Freude an
+                nachhaltigem Marketing.
+              </p>
+
+              <p className={`${BODY} text-gray-light mt-6`}>
+                Wenn du wissen willst, warum ich Pinterest gewählt habe und wie
+                mein Weg hierher geführt hat, dann hüpf rüber…
+              </p>
+
+              <div className="mt-8">
+                <Link href="/ueber-mich/" className="btn btn-primary">
+                  rüber hüpfen
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative aspect-[2/3] overflow-hidden rounded-t-[200px]">
+              <ExportedImage
+                src={juliettePortraitImage}
+                alt="pinterest marketing expertin"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                basePath={basePath}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          7) "Zusammenarbeit – so kommst du zu mir"
+          Schließt ohne Farbwechsel an Abschnitt 6 an (#595959).
+          ------------------------------------------------------------------ */}
+      <section className="bg-footer">
+        <div className="mx-auto max-w-6xl px-6 pt-0 pb-[80px] text-center">
+          <h3 className={`${H3_CENTERED} text-surface`}>
+            Zusammenarbeit – so kommst du zu mir
+          </h3>
+
+          <p className={`${BODY} text-gray-light mx-auto mt-6 max-w-3xl`}>
+            Du möchtest Pinterest-Marketing, das wirklich funktioniert? Du
+            möchtest Zeit sparen und diesen Marketingkanal komplett outsourcen?
           </p>
+
+          <p className={`${BODY} text-gray-light mx-auto mt-6 max-w-3xl`}>
+            Dann lass uns sprechen.
+            <br />
+            Ich arbeite mit Marken, die{" "}
+            <strong>Qualität vor Quantität</strong>,{" "}
+            <strong>Langfristigkeit vor Schnellschüssen</strong> und{" "}
+            <strong>Ehrlichkeit vor leeren Versprechen</strong> stellen.
+          </p>
+
+          {/* Adresse kommt aus siteConfig — im Original steht hier eine
+              Mailadresse mit fehlendem "l", die es nicht gibt. */}
           <div className="mt-8">
-            <a
-              href={siteConfig.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              let&apos;s talk
+            <a href={`mailto:${siteConfig.email}`} className="btn btn-secondary">
+              schreib&apos; mir!
             </a>
           </div>
-          <p className="font-body mt-12 text-xs">
-            Zuletzt aktualisiert: {lastUpdatedLabel}
-          </p>
         </div>
       </section>
 
