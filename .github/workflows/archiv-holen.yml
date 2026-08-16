@@ -1,0 +1,54 @@
+name: Alt-Seite archivieren
+
+# Laedt die alte WordPress-Seite molloybusiness.com als Referenzmaterial ins Repo.
+# Laeuft ausschliesslich auf manuellen Zuruf — kein Zeitplan, kein Push-Trigger.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archivieren:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Abhaengigkeiten installieren
+        run: pip install requests pillow beautifulsoup4
+
+      - name: Archiv holen
+        shell: bash
+        run: |
+          python scripts/archiv-holen.py | tee archiv-log.txt
+          {
+            echo '## Zusammenfassung des Laufs'
+            echo ''
+            echo '```'
+            cat archiv-log.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          rm -f archiv-log.txt
+
+      - name: Ergebnis committen und pushen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/original src/assets/images
+          if git diff --cached --quiet; then
+            echo "Keine Aenderungen — kein Commit noetig."
+            exit 0
+          fi
+          git commit -m "Alt-Seite archiviert: HTML, Texte, Bilder, Inventare"
+          git push origin HEAD:main
