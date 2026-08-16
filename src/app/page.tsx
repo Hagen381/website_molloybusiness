@@ -208,18 +208,27 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Bild rechts, oben bündig. Ab 1024px feste 336×500px, mittig in
-                der 456px-Spalte (Elementor-Bild-Widget ist zentriert und das
-                Bild schmaler als seine Spalte). Darunter volle Breite im
-                Seitenverhältnis 336:500. */}
+            {/* Bild rechts, oben bündig. Ab 1024px feste 336×500px,
+                RECHTSBÜNDIG in der 456px-Spalte (am Original nachgemessen:
+                110px links, 10px rechts — das Bild liegt am äußeren
+                Seitenrand, die 10px sind der Elementor-Spalteninnenabstand).
+                Darunter volle Breite im Seitenverhältnis 336:500. */}
             <div className={`self-start ${COL}`}>
-              <div className="relative mx-auto aspect-[336/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
+              <div className="relative mx-auto aspect-[336/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
                 <ExportedImage
                   src={heroImage}
                   alt="pinterest marketing"
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 336px, 100vw"
+                  /* Die Quelle ist mit 1737×1707 nahezu quadratisch, der
+                     Ausschnitt mit 336×500 hochkant: object-fit: cover skaliert
+                     auf die Höhe von 500px, also ~509px Breite, von denen 336px
+                     sichtbar sind. sizes muss dieser internen Skalierung
+                     folgen, nicht der sichtbaren Breite — sonst wird das Bild
+                     unscharf. Bei den anderen beiden Bildern ist die Quelle
+                     hochformatiger als der Ausschnitt, dort genügt die
+                     sichtbare Breite. */
+                  sizes="(min-width: 1024px) 510px, 100vw"
                   basePath={basePath}
                   priority
                 />
@@ -340,9 +349,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Ab 1024px feste 421×500px, mittig in der 513px-Spalte. */}
+            {/* Ab 1024px feste 421×500px, LINKSBÜNDIG in der 513px-Spalte (am
+                Original nachgemessen: 0px links, 92px rechts). Das Bild liegt
+                bündig am äußeren Seitenrand, also noch vor dem 10px-Innen-
+                abstand der Spalte — daher der negative linke Rand. */}
             <div className={`lg:col-start-1 lg:row-start-1 ${COL}`}>
-              <div className="relative mx-auto aspect-[421/500] w-full overflow-hidden rounded-tl-[200px] lg:aspect-auto lg:h-[500px] lg:w-[421px] lg:max-w-full">
+              <div className="relative mx-auto aspect-[421/500] w-full overflow-hidden rounded-tl-[200px] lg:aspect-auto lg:-ml-[10px] lg:h-[500px] lg:w-[421px] lg:max-w-full lg:mr-auto">
                 <ExportedImage
                   src={julietteChairImage}
                   alt="Juliette sitzt auf einem Stuhl, schaut in die Ferne, hat Laptop auf dem Schoß und Köpfhörer in den Ohren"
