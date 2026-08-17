@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import type { StaticImageData } from "next/image";
 import Link from "next/link";
+import ExportedImage from "next-image-export-optimizer";
 import Breadcrumb from "@/components/Breadcrumb";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
+import { basePath } from "@/lib/base-path";
 
 const path = "/blog/";
 
@@ -14,6 +17,39 @@ export const metadata: Metadata = {
     canonical: path,
   },
 };
+
+// ---------------------------------------------------------------------------
+// Typografie wie auf src/app/page.tsx und src/app/angebote/page.tsx — dieselben
+// am Original nachgemessenen Werte. NICHT ohne ausdrücklichen Auftrag ändern.
+// ---------------------------------------------------------------------------
+const H1 = "text-[34px] leading-[47.6px] md:text-[47px] md:leading-[65.8px]";
+const COL = "lg:px-[10px]";
+
+// Artikelkarte, am Original gemessen: Titel in Antic Didone 24px/33.6px,
+// Stärke 600, Laufweite 1px, Goldhell #C49C5E, linksbündig.
+const KARTEN_TITEL =
+  "font-heading font-semibold tracking-[1px] text-gold-light text-[24px] leading-[33.6px]";
+
+// Anrisstext, am Original gemessen: Arial 16px/30px in #777777 — bewusst
+// kleiner und heller als der normale Fließtext (18px/30px, #545454).
+const KARTEN_ANRISS = "font-body text-[16px] leading-[30px] text-[#777777]";
+
+// Abschluss-Abschnitt, am Original gemessen: Antic Didone 37px/40px,
+// Stärke 400, Laufweite 1.4px, zentriert.
+const H3_ABSCHLUSS =
+  "text-center font-normal tracking-[1.4px] text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
+
+// ---------------------------------------------------------------------------
+// Vorschaubilder der Artikelliste. Die Beitragsbilder des Originals liegen noch
+// NICHT im Repo (siehe docs/fehlende-bilder.md) — bis sie nachgeladen sind,
+// steht in der Karte eine graue Fläche in exakt der Zielgröße 326×217, damit
+// das Layout schon jetzt dem Original entspricht. Sobald eine Datei da ist,
+// hier nur den Import unter dem passenden Slug eintragen.
+// ---------------------------------------------------------------------------
+const vorschaubilder: Record<
+  string,
+  { src: StaticImageData; alt: string } | undefined
+> = {};
 
 const pageJsonLd = {
   "@context": "https://schema.org",
@@ -55,45 +91,163 @@ export default function Blog() {
     <>
       <Breadcrumb pageName="Blog" />
 
-      {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
-          Blog
-        </p>
-        <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
-          Pinterest Marketing Blog
-        </h1>
-        <p className="font-body mt-6 text-lg">
-          Hier schreibt molloy business über Pinterest Marketing für
-          Unternehmen: verständlich, konkret und ohne Fachchinesisch. Die
-          Artikel beantworten die Fragen, die in Erstgesprächen am häufigsten
-          gestellt werden – damit du eine fundierte Entscheidung treffen
-          kannst, ob und wie Pinterest zu deinem Unternehmen passt.
-        </p>
+      {/* ------------------------------------------------------------------
+          1) HERO — am Original gemessen: Hintergrund #D9D9D9, 80px oben /
+          50px unten, Spalten 684/456 (60/40), Text links, Bild rechts.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="container-page pt-[80px] pb-[50px]">
+          <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-x-0">
+            <div className={COL}>
+              <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
+                Blog
+              </p>
+
+              <h1 className={H1}>Pinterest Marketing Blog</h1>
+
+              <p className="font-body mt-6">
+                Hier schreibt molloy business über Pinterest Marketing für
+                Unternehmen: verständlich, konkret und ohne Fachchinesisch. Die
+                Artikel beantworten die Fragen, die in Erstgesprächen am
+                häufigsten gestellt werden – damit du eine fundierte
+                Entscheidung treffen kannst, ob und wie Pinterest zu deinem
+                Unternehmen passt.
+              </p>
+            </div>
+
+            {/* Im Original steht hier das Foto Juliette-Oppel-Pinterest-Blog.jpg
+                (780×520). Die Datei fehlt noch im Repo, siehe
+                docs/fehlende-bilder.md — vorläufig hält eine weiße Fläche im
+                Seitenverhältnis des Originals den Platz. */}
+            <div className={`self-center ${COL}`}>
+              <div
+                aria-hidden="true"
+                className="bg-surface aspect-[780/520] w-full"
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Artikelliste */}
+      {/* ------------------------------------------------------------------
+          2) ARTIKELLISTE — am Original gemessen: Hintergrund #FFFFFF,
+          50px/50px, einspaltig über die volle Rahmenbreite. Zeilenabstand
+          35px (aus dem Archiv: classic_row_gap des Elementor-Posts-Widgets).
+
+          Die Karte hat KEINEN eigenen Hintergrund, keinen Rahmen und keinen
+          Eckenradius: Vorschaubild 326×217 links, Text rechts daneben.
+          ------------------------------------------------------------------ */}
       <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <div className="grid gap-6">
-            {blogPosts.map((post) => (
+        <div className="container-page py-[50px]">
+          <div className="flex flex-col gap-[35px]">
+            {blogPosts.map((post) => {
+              const bild = vorschaubilder[post.slug];
+              const href = `/blog/${post.slug}/`;
+
+              return (
+                <article key={post.slug} className="sm:flex sm:gap-[30px]">
+                  <Link
+                    href={href}
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    className="block shrink-0"
+                  >
+                    <div className="relative aspect-[326/217] w-full overflow-hidden sm:aspect-auto sm:h-[217px] sm:w-[326px]">
+                      {bild ? (
+                        /* ABWEICHUNG: das Original skaliert die Vorschaubilder
+                           mit object-fit: fill und verzerrt sie dadurch. Hier
+                           object-cover bei gleicher Kachelgröße — gleiche
+                           Optik, ohne Verzerrung. */
+                        <ExportedImage
+                          src={bild.src}
+                          alt={bild.alt}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 640px) 326px, 100vw"
+                          basePath={basePath}
+                        />
+                      ) : (
+                        <div className="bg-gray-light h-full w-full" />
+                      )}
+                    </div>
+                  </Link>
+
+                  <div className="mt-4 sm:mt-0">
+                    {/* Im Original ist der Kartentitel ein h1 — auf einer Seite
+                        mit 17 Artikeln ergibt das 18 H1. Hier h2, optisch
+                        identisch. */}
+                    <h2 className={KARTEN_TITEL}>
+                      <Link href={href} className="hover:underline">
+                        {post.title}
+                      </Link>
+                    </h2>
+
+                    <p className="font-body text-text mt-1 text-sm">
+                      {formatDateDe(post.date)}
+                    </p>
+
+                    <p className={`${KARTEN_ANRISS} mt-2`}>{post.excerpt}</p>
+
+                    <Link
+                      href={href}
+                      className="text-gold-text font-body mt-2 inline-block text-sm hover:underline"
+                    >
+                      weiterlesen →
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          3) ABSCHLUSS — am Original gemessen: 80px/80px, Inhaltsbreite 770px
+          zentriert, Überschrift zentriert.
+
+          vorläufig ohne Hintergrundfoto, Datei
+          Juliette-Oppel-Header-Kontakt-Pinterest.jpg fehlt noch
+
+          Im Original liegt hier ein Foto mit einem hellgrauen Schleier
+          (#D9D9D9 bei 21 % Deckkraft) und weißer Überschrift. Solange die
+          Datei fehlt: flächiges #D9D9D9 und Überschrift in #595959, damit sie
+          lesbar bleibt.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="container-page py-[80px]">
+          <div className="mx-auto w-full max-w-[770px]">
+            <h3 className={`text-heading ${H3_ABSCHLUSS}`}>
+              Du möchtest mit mir zusammenarbeiten?
+            </h3>
+
+            <p className="font-body mt-6 text-center">
+              Habe ich dein Interesse geweckt? Gerne unterstütze ich dich dabei
+              dein Unternehmen auf Pinterest sichtbar zu machen. Schau dir dazu
+              meine verschiedenen{" "}
               <Link
-                key={post.slug}
-                href={`/blog/${post.slug}/`}
-                className="bg-cream group flex flex-col rounded-2xl p-6 shadow-sm transition hover:shadow-md"
+                href="/angebote/"
+                className="text-gold-text font-bold italic underline"
               >
-                <h2 className="text-[22px] leading-tight">{post.title}</h2>
-                <p className="font-body mt-2 text-sm">
-                  {formatDateDe(post.date)}
-                </p>
-                <p className="font-body mt-3 text-[15px] leading-relaxed">
-                  {post.excerpt}
-                </p>
-                <span className="text-gold-text font-body mt-4 text-sm group-hover:underline">
-                  weiterlesen →
-                </span>
-              </Link>
-            ))}
+                Pinterest Angebote
+              </Link>{" "}
+              an oder schreib mir und wir schauen, was am besten zu dir und
+              deinen Bedürfnissen passt.
+            </p>
+
+            {/* Im Original zeigt der Button auf /kontakt-pinterest-marketing/ —
+                diese Seite gibt es hier noch nicht, deshalb wie überall sonst
+                der Calendly-Link. */}
+            <div className="mt-8 text-center">
+              <a
+                href={siteConfig.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                schreib&apos; mir!
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import Breadcrumb from "@/components/Breadcrumb";
+import TableOfContents from "@/components/TableOfContents";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
@@ -156,13 +157,25 @@ const pageJsonLd = {
   ],
 };
 
+// Sprungziele des Inhaltsverzeichnisses — Reihenfolge und Wortlaut
+// entsprechen den H2 dieser Seite.
+const toc = [
+  { id: "was-ist-der-pinterest-predicts-report-eigentlich", label: "Was ist der Pinterest Predicts Report eigentlich?" },
+  { id: "die-21-pinterest-trends-fuer-2026-im-ueberblick-auswahl", label: "Die 21 Pinterest-Trends für 2026 im Überblick (Auswahl)" },
+  { id: "und-jetzt-so-setzt-du-die-trends-fuer-dein-unternehmen-um", label: "Und jetzt? So setzt du die Trends für dein Unternehmen um" },
+  { id: "keiner-der-trends-passt-auf-dein-business", label: "Keiner der Trends passt auf dein Business?" },
+  { id: "was-du-jetzt-tun-solltest", label: "Was du JETZT tun solltest" },
+  { id: "du-willst-das-ganze-strategisch-aufziehen", label: "Du willst das Ganze strategisch aufziehen?" },
+  { id: "lieber-anhoeren", label: "Lieber anhören?" },
+] as const;
+
 export default function PinterestPredictsReport2026() {
   return (
     <>
       <Breadcrumb pageName={post.title} parent={{ label: "Blog", href: "/blog/" }} />
 
       {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
+      <section className="article-column pt-10 pb-[30px]">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Blog
         </p>
@@ -172,14 +185,16 @@ export default function PinterestPredictsReport2026() {
         <p className="font-body mt-3 text-sm">
           Veröffentlicht am {formatDateDe(post.date)}
         </p>
-        <p className="font-body mt-6 text-lg">
+
+        <TableOfContents items={toc} />
+        <p className="mt-6">
           Der Pinterest Predicts Report zeigt dir nicht, was aktuell im Trend
           liegt und alle nachmachen sollen, sondern was in Zukunft durch die
           Decke gehen wird. Denn Pinterest ist keine Plattform für schnelle
           Nummern oder virale Späßchen – Pinterest ist eine visuelle
           Suchmaschine mit Zukunftsblick.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Wenn du eine Lifestyle-Marke, ein KMU oder ein kreatives Unternehmen
           bist, kannst du die Trends nutzen, um deine Inhalte auf Pinterest
           strategisch auszurichten – weit bevor der Markt sie überhaupt auf dem
@@ -188,68 +203,66 @@ export default function PinterestPredictsReport2026() {
       </section>
 
       {/* Was ist der Report */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was ist der Pinterest Predicts Report eigentlich?
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Pinterest Predicts ist der Zukunftsreport von Pinterest. Jedes Jahr
-            analysiert das Pinterest-Team globale Suchtrends über einen
-            Zeitraum von zwei Jahren. Dabei geht es nicht darum, was Menschen{" "}
-            <strong className="text-heading">gestern</strong> gesucht haben,
-            sondern was sie{" "}
-            <strong className="text-heading">morgen</strong> brauchen werden.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Dazu werden Milliarden Suchanfragen ausgewertet, aufkommende
-            Suchvolumen identifiziert und mit demografischen Daten wie Alter
-            oder Generation verknüpft. Das Ergebnis: eine kuratierte Liste von
-            21 Trends, die laut Pinterest mit rund 80 % Trefferquote
-            eintreffen.
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="was-ist-der-pinterest-predicts-report-eigentlich" className="article-h2">
+          Was ist der Pinterest Predicts Report eigentlich?
+        </h2>
+        <p className="mt-6">
+          Pinterest Predicts ist der Zukunftsreport von Pinterest. Jedes Jahr
+          analysiert das Pinterest-Team globale Suchtrends über einen
+          Zeitraum von zwei Jahren. Dabei geht es nicht darum, was Menschen{" "}
+          <strong className="text-heading">gestern</strong> gesucht haben,
+          sondern was sie{" "}
+          <strong className="text-heading">morgen</strong> brauchen werden.
+        </p>
+        <p className="mt-4">
+          Dazu werden Milliarden Suchanfragen ausgewertet, aufkommende
+          Suchvolumen identifiziert und mit demografischen Daten wie Alter
+          oder Generation verknüpft. Das Ergebnis: eine kuratierte Liste von
+          21 Trends, die laut Pinterest mit rund 80 % Trefferquote
+          eintreffen.
+        </p>
 
-          <h3 className="mt-10 text-[22px] leading-tight">
-            Warum du diesen Report nicht ignorieren solltest
-          </h3>
-          <p className="font-body mt-4 text-lg">
-            Pinterest Predicts basiert nicht auf Meinungen oder Buzzwords,
-            sondern auf echtem Nutzerverhalten. Wenn du die Trends richtig
-            einsetzt, kannst du:
-          </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {reportNutzen.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Kurz gesagt: Du gehst mit dem Pinterest Predicts Report nicht dem
-            Trend hinterher, sondern surfst ganz vorne mit.
-          </p>
+        <h3 className="article-h3 mt-10">
+          Warum du diesen Report nicht ignorieren solltest
+        </h3>
+        <p className="mt-4">
+          Pinterest Predicts basiert nicht auf Meinungen oder Buzzwords,
+          sondern auf echtem Nutzerverhalten. Wenn du die Trends richtig
+          einsetzt, kannst du:
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-6">
+          {reportNutzen.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          Kurz gesagt: Du gehst mit dem Pinterest Predicts Report nicht dem
+          Trend hinterher, sondern surfst ganz vorne mit.
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgReport}
-              alt="Pinterest Predicts Report"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgReport}
+            alt="Pinterest Predicts Report"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Die Trends 2026 */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="die-21-pinterest-trends-fuer-2026-im-ueberblick-auswahl" className="article-h2">
           Die 21 Pinterest-Trends für 2026 im Überblick (Auswahl)
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Hier ist ein Auszug aus dem Pinterest Predicts Report 2026 inklusive
           der Keywords, die dahinter stecken:
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           {trends2026.map((trend) => (
             <li key={trend.name}>
               <strong className="text-heading">{trend.name}:</strong>{" "}
@@ -257,7 +270,7 @@ export default function PinterestPredictsReport2026() {
             </li>
           ))}
         </ul>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Die komplette Liste findest du direkt im{" "}
           <a
             href="https://pinterestpredicts.com"
@@ -283,54 +296,52 @@ export default function PinterestPredictsReport2026() {
       </section>
 
       {/* Umsetzung */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Und jetzt? So setzt du die Trends für dein Unternehmen um
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Manches hört sich schon absurd an, oder? Vor allem beim ersten
-            Lesen weiß man oft nichts damit anzufangen. Deshalb bekommst du
-            jetzt konkrete Ansätze, wie du die Trends im Business-Kontext
-            umsetzen kannst:
-          </p>
-          {beispiele.map((beispiel) => (
-            <div key={beispiel.title} className="mt-8">
-              <p className="font-body text-lg">
-                {beispiel.emoji}{" "}
-                <strong className="text-heading">{beispiel.title}</strong>
-              </p>
-              <ul className="font-body mt-3 list-disc space-y-2 pl-6 text-lg">
-                {beispiel.zeilen.map((zeile) => (
-                  <li key={zeile}>{zeile}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgUmsetzung}
-              alt="Pinterest Predicts Report als Inspirationsquelle für die eigene Content-Planung"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
+      <section className="article-column py-[30px]">
+        <h2 id="und-jetzt-so-setzt-du-die-trends-fuer-dein-unternehmen-um" className="article-h2">
+          Und jetzt? So setzt du die Trends für dein Unternehmen um
+        </h2>
+        <p className="mt-6">
+          Manches hört sich schon absurd an, oder? Vor allem beim ersten
+          Lesen weiß man oft nichts damit anzufangen. Deshalb bekommst du
+          jetzt konkrete Ansätze, wie du die Trends im Business-Kontext
+          umsetzen kannst:
+        </p>
+        {beispiele.map((beispiel) => (
+          <div key={beispiel.title} className="mt-8">
+            <p>
+              {beispiel.emoji}{" "}
+              <strong className="text-heading">{beispiel.title}</strong>
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-6">
+              {beispiel.zeilen.map((zeile) => (
+                <li key={zeile}>{zeile}</li>
+              ))}
+            </ul>
           </div>
+        ))}
+
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgUmsetzung}
+            alt="Pinterest Predicts Report als Inspirationsquelle für die eigene Content-Planung"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Kein Trend passt */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="keiner-der-trends-passt-auf-dein-business" className="article-h2">
           Keiner der Trends passt auf dein Business?
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Keine Sorge. Es geht nicht darum, dich zu verbiegen. Wichtig ist, zu
           verstehen, was hinter den Trends steckt:
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           <li>
             <strong className="text-heading">Cool Blue</strong> steht für
             Eleganz, Frische, Klarheit – ideal für Marken mit minimalistischer
@@ -347,7 +358,7 @@ export default function PinterestPredictsReport2026() {
             Lebendigkeit.
           </li>
         </ul>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Du kannst Trends auch abstrahieren und als Inspirationsquelle nutzen,
           um dein bestehendes Angebot in ein neues Licht zu rücken. Ein
           Steuerberater nutzt Neo Deco für seine Markenästhetik: clean, aber
@@ -356,16 +367,16 @@ export default function PinterestPredictsReport2026() {
           Sauerkraut auf ihren Pommes oder im Hot Dog und greift somit den
           Cabbage-Trend auf.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Kurz: Denk nicht nur in Produkten, sondern in Emotionen und
           Sehnsüchten. Und wenn wirklich gar kein Trend aus dem Pinterest
           Predicts Report zu dir passt, dann nutze das Pinterest Trend Tool.
         </p>
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           Alternative: Das Pinterest Trend Tool
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Das Pinterest Trend Tool findest du unter{" "}
           <a
             href="https://trends.pinterest.com"
@@ -379,19 +390,19 @@ export default function PinterestPredictsReport2026() {
           das Suchvolumen für diese Keywords im zeitlichen Verlauf entwickelt
           hat.
         </p>
-        <p className="font-body mt-4 text-lg">Du bekommst:</p>
-        <ul className="font-body mt-2 list-disc space-y-2 pl-6 text-lg">
+        <p className="mt-4">Du bekommst:</p>
+        <ul className="mt-2 list-disc space-y-2 pl-6">
           {trendToolBekommst.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-4 text-lg">Ideal, wenn du:</p>
-        <ul className="font-body mt-2 list-disc space-y-2 pl-6 text-lg">
+        <p className="mt-4">Ideal, wenn du:</p>
+        <ul className="mt-2 list-disc space-y-2 pl-6">
           {trendToolIdeal.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Nutze das Trend Tool z.&nbsp;B., um deine bestehenden Keywords zu
           prüfen oder um neue Themenideen zu entwickeln, die wirklich gesucht
           werden.
@@ -410,25 +421,23 @@ export default function PinterestPredictsReport2026() {
       </section>
 
       {/* Was jetzt tun */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was du JETZT tun solltest
-          </h2>
-          <ul className="font-body mt-6 list-disc space-y-2 pl-6 text-lg">
-            {jetztTun.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="was-du-jetzt-tun-solltest" className="article-h2">
+          Was du JETZT tun solltest
+        </h2>
+        <ul className="mt-6 list-disc space-y-2 pl-6">
+          {jetztTun.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="du-willst-das-ganze-strategisch-aufziehen" className="article-h2">
           Du willst das Ganze strategisch aufziehen?
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Dann lass uns gemeinsam daran arbeiten: Im{" "}
           <Link
             href="/pinterest-strategie-call/"
@@ -476,23 +485,21 @@ export default function PinterestPredictsReport2026() {
       </section>
 
       {/* Audio */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Lieber anhören?
-          </h2>
-          <p className="font-body mt-6 text-center text-lg">
-            Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
-            <a
-              href="https://youtu.be/SHYdi4d2Y3M"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-text hover:underline"
-            >
-              Blogartikel auf YouTube anhören
-            </a>
-          </p>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="lieber-anhoeren" className="article-h2">
+          Lieber anhören?
+        </h2>
+        <p className="mt-6 text-center">
+          Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
+          <a
+            href="https://youtu.be/SHYdi4d2Y3M"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold-text hover:underline"
+          >
+            Blogartikel auf YouTube anhören
+          </a>
+        </p>
       </section>
 
       <script

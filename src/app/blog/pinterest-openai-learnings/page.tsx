@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import Breadcrumb from "@/components/Breadcrumb";
+import TableOfContents from "@/components/TableOfContents";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
@@ -118,13 +119,25 @@ const pageJsonLd = {
   ],
 };
 
+// Sprungziele des Inhaltsverzeichnisses — Reihenfolge und Wortlaut
+// entsprechen den H2 dieser Seite.
+const toc = [
+  { id: "pinterest-ist-kein-social-media-sondern-eine-intent-plattform", label: "Pinterest ist kein Social Media – sondern eine Intent-Plattform" },
+  { id: "warum-suchintention-wertvoller-ist-als-reichweite", label: "Warum Suchintention wertvoller ist als Reichweite" },
+  { id: "pinterest-zeigt-nicht-was-menschen-liken-sondern-was-sie-planen", label: "Pinterest zeigt nicht, was Menschen liken – sondern was sie planen" },
+  { id: "was-unternehmen-daraus-lernen-koennen-unabhaengig-vom-geruecht", label: "Was Unternehmen daraus lernen können – unabhängig vom Gerücht" },
+  { id: "was-das-konkret-fuer-deine-pinterest-strategie-bedeutet", label: "Was das konkret für deine Pinterest-Strategie bedeutet" },
+  { id: "fazit-das-geruecht-ist-nebensaechlich-die-erkenntnis-nicht", label: "Fazit: Das Gerücht ist nebensächlich – die Erkenntnis nicht" },
+  { id: "lieber-anhoeren", label: "Lieber anhören?" },
+] as const;
+
 export default function PinterestOpenAiLearnings() {
   return (
     <>
       <Breadcrumb pageName={post.title} parent={{ label: "Blog", href: "/blog/" }} />
 
       {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
+      <section className="article-column pt-10 pb-[30px]">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Blog
         </p>
@@ -134,13 +147,15 @@ export default function PinterestOpenAiLearnings() {
         <p className="font-body mt-3 text-sm">
           Veröffentlicht am {formatDateDe(post.date)}
         </p>
-        <p className="font-body mt-6 text-lg">
+
+        <TableOfContents items={toc} />
+        <p className="mt-6">
           In den letzten Wochen tauchte ein Gerücht auf, das in der Tech- und
           Marketingwelt für Aufmerksamkeit gesorgt hat: OpenAI könnte Interesse
           an Pinterest haben. Ob das stimmt oder nicht, ist offen. Bestätigt
           ist nichts. Dennoch ist dieses Gerücht höchst interessant.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Nicht, weil es um eine mögliche Übernahme geht. Sondern weil es einen
           Blick auf etwas lenkt, das viele Unternehmen bislang unterschätzen:
           den strategischen Wert visueller Suchplattformen – und insbesondere
@@ -153,80 +168,78 @@ export default function PinterestOpenAiLearnings() {
       </section>
 
       {/* Intent-Plattform */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Pinterest ist kein Social Media – sondern eine Intent-Plattform
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Pinterest wird oft in eine Kategorie gesteckt, in die es nicht
-            gehört. Nicht aus böser Absicht, sondern aus Unwissenheit.
-            Pinterest sieht visuell aus. Pinterest hat Feeds. Pinterest hat
-            Inhalte. Also wird es schnell als Social-Media-Plattform behandelt.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Doch die Plattform funktioniert grundlegend anders als klassische
-            soziale Netzwerke. Während Social Media auf Aufmerksamkeit,
-            Interaktion und Aktualität ausgelegt ist, basiert Pinterest auf{" "}
-            <strong className="text-heading">
-              Suche, Planung und Entscheidung
-            </strong>
-            . Menschen kommen nicht auf Pinterest, um gesehen zu werden. Sie
-            kommen, weil sie etwas vorhaben:
-          </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {vorhaben.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Die visuelle Suchmaschine ist kein Ort des spontanen Konsums,
-            sondern ein Ort der{" "}
-            <strong className="text-heading">Absicht</strong>. Und genau diese
-            Absicht ist der Schlüssel.
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="pinterest-ist-kein-social-media-sondern-eine-intent-plattform" className="article-h2">
+          Pinterest ist kein Social Media – sondern eine Intent-Plattform
+        </h2>
+        <p className="mt-6">
+          Pinterest wird oft in eine Kategorie gesteckt, in die es nicht
+          gehört. Nicht aus böser Absicht, sondern aus Unwissenheit.
+          Pinterest sieht visuell aus. Pinterest hat Feeds. Pinterest hat
+          Inhalte. Also wird es schnell als Social-Media-Plattform behandelt.
+        </p>
+        <p className="mt-4">
+          Doch die Plattform funktioniert grundlegend anders als klassische
+          soziale Netzwerke. Während Social Media auf Aufmerksamkeit,
+          Interaktion und Aktualität ausgelegt ist, basiert Pinterest auf{" "}
+          <strong className="text-heading">
+            Suche, Planung und Entscheidung
+          </strong>
+          . Menschen kommen nicht auf Pinterest, um gesehen zu werden. Sie
+          kommen, weil sie etwas vorhaben:
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-6">
+          {vorhaben.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          Die visuelle Suchmaschine ist kein Ort des spontanen Konsums,
+          sondern ein Ort der{" "}
+          <strong className="text-heading">Absicht</strong>. Und genau diese
+          Absicht ist der Schlüssel.
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgIntent}
-              alt="Pinterest-App auf dem Smartphone als visuelle Suchmaschine"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgIntent}
+            alt="Pinterest-App auf dem Smartphone als visuelle Suchmaschine"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Suchintention */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="warum-suchintention-wertvoller-ist-als-reichweite" className="article-h2">
           Warum Suchintention wertvoller ist als Reichweite
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Für Unternehmen – und erst recht für technologiegetriebene
           Unternehmen – sind nicht alle Daten gleich wertvoll. Reichweite
           zeigt, <em>was</em> gesehen wird. Likes zeigen, <em>was</em> gefällt.
           Doch Suchintention zeigt etwas viel Wichtigeres:{" "}
           <strong className="text-heading">Was Menschen konkret wollen.</strong>
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Pinterest vereint mehrere Ebenen, die in dieser Kombination selten
           sind:
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           {ebenen.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Wenn jemand nach „Homeoffice einrichten“, „Business starten“,
           „Urlaub mit Kindern“ oder „Minimalistische Website“ sucht, ist das
           kein Zeitvertreib. Es ist ein Signal. Ein Signal dafür, dass eine
           Entscheidung vorbereitet wird.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Für Unternehmen wie OpenAI – deren Produkte auf Verstehen, Kontext
           und Entscheidungsunterstützung basieren – sind solche Signale extrem
           wertvoll. Nicht wegen der einzelnen Bilder, sondern wegen des{" "}
@@ -249,85 +262,83 @@ export default function PinterestOpenAiLearnings() {
       </section>
 
       {/* Planung statt Likes */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Pinterest zeigt nicht, was Menschen liken – sondern was sie planen
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Ein entscheidender Unterschied zu klassischen Plattformen liegt in
-            der Zeitdimension. Social Media lebt vom Jetzt. Pinterest lebt von
-            der Zukunft. Pins werden gespeichert, wiedergefunden, erneut
-            genutzt. Inhalte wirken nicht für Stunden oder Tage, sondern oft
-            für Monate oder Jahre. Ein Pin kann heute erstellt werden und in
-            einem halben Jahr erst richtig relevant werden.
-          </p>
-          <p className="font-body mt-4 text-lg">Das bedeutet:</p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {inhalteMuessenNicht.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Sie müssen <strong className="text-heading">passend</strong> sein.
-            Für Unternehmen bedeutet das eine völlig andere Logik von
-            Sichtbarkeit. Und für Technologieunternehmen bedeutet es eine
-            andere Qualität von Daten:{" "}
-            <strong className="text-heading">
-              langfristige, konsistente Intent-Signale statt kurzfristiger
-              Aufmerksamkeitsspitzen
-            </strong>
-            .
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="pinterest-zeigt-nicht-was-menschen-liken-sondern-was-sie-planen" className="article-h2">
+          Pinterest zeigt nicht, was Menschen liken – sondern was sie planen
+        </h2>
+        <p className="mt-6">
+          Ein entscheidender Unterschied zu klassischen Plattformen liegt in
+          der Zeitdimension. Social Media lebt vom Jetzt. Pinterest lebt von
+          der Zukunft. Pins werden gespeichert, wiedergefunden, erneut
+          genutzt. Inhalte wirken nicht für Stunden oder Tage, sondern oft
+          für Monate oder Jahre. Ein Pin kann heute erstellt werden und in
+          einem halben Jahr erst richtig relevant werden.
+        </p>
+        <p className="mt-4">Das bedeutet:</p>
+        <ul className="mt-4 list-disc space-y-2 pl-6">
+          {inhalteMuessenNicht.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          Sie müssen <strong className="text-heading">passend</strong> sein.
+          Für Unternehmen bedeutet das eine völlig andere Logik von
+          Sichtbarkeit. Und für Technologieunternehmen bedeutet es eine
+          andere Qualität von Daten:{" "}
+          <strong className="text-heading">
+            langfristige, konsistente Intent-Signale statt kurzfristiger
+            Aufmerksamkeitsspitzen
+          </strong>
+          .
+        </p>
 
-          <h3 className="mt-10 text-[22px] leading-tight">
-            Warum visuelle Suche so relevant ist
-          </h3>
-          <p className="font-body mt-4 text-lg">
-            Ein weiterer Punkt, der Pinterest strategisch interessant macht,
-            ist die Rolle von Bildern. Entscheidungen werden längst nicht mehr
-            nur über Text getroffen. Bilder transportieren Stimmungen,
-            Vergleiche, Möglichkeiten. Sie helfen dabei, etwas einzuordnen,
-            bevor es überhaupt benannt werden kann. Visuelle Suche bedeutet
-            daher:
-          </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {visuelleSuche.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Pinterest ist genau an dieser Schnittstelle positioniert.
-            Unternehmen erreichen Menschen, die{" "}
-            <strong className="text-heading">
-              nicht konsumieren, sondern konzipieren
-            </strong>
-            . Die ihre Vorstellungen sammeln, ordnen und weiterentwickeln. Das
-            erklärt, warum die Plattform immer wieder im Zusammenhang mit
-            Zukunftsthemen wie KI, Suche und Entscheidungsunterstützung genannt
-            wird – unabhängig davon, ob es jemals zu einer Übernahme durch
-            OpenAI kommt.
-          </p>
+        <h3 className="article-h3 mt-10">
+          Warum visuelle Suche so relevant ist
+        </h3>
+        <p className="mt-4">
+          Ein weiterer Punkt, der Pinterest strategisch interessant macht,
+          ist die Rolle von Bildern. Entscheidungen werden längst nicht mehr
+          nur über Text getroffen. Bilder transportieren Stimmungen,
+          Vergleiche, Möglichkeiten. Sie helfen dabei, etwas einzuordnen,
+          bevor es überhaupt benannt werden kann. Visuelle Suche bedeutet
+          daher:
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-6">
+          {visuelleSuche.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          Pinterest ist genau an dieser Schnittstelle positioniert.
+          Unternehmen erreichen Menschen, die{" "}
+          <strong className="text-heading">
+            nicht konsumieren, sondern konzipieren
+          </strong>
+          . Die ihre Vorstellungen sammeln, ordnen und weiterentwickeln. Das
+          erklärt, warum die Plattform immer wieder im Zusammenhang mit
+          Zukunftsthemen wie KI, Suche und Entscheidungsunterstützung genannt
+          wird – unabhängig davon, ob es jemals zu einer Übernahme durch
+          OpenAI kommt.
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgVisuelleSuche}
-              alt="Visuelle Suche auf Pinterest am Smartphone"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgVisuelleSuche}
+            alt="Visuelle Suche auf Pinterest am Smartphone"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Learnings */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="was-unternehmen-daraus-lernen-koennen-unabhaengig-vom-geruecht" className="article-h2">
           Was Unternehmen daraus lernen können – unabhängig vom Gerücht
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Der eigentliche Mehrwert dieser Diskussion liegt nicht bei OpenAI. Er
           liegt bei dir als Unternehmen. Denn die entscheidende Frage lautet
           nicht: „Wird Pinterest übernommen?“ Sondern:{" "}
@@ -338,10 +349,10 @@ export default function PinterestOpenAiLearnings() {
           Daraus lassen sich mehrere klare Erkenntnisse ableiten.
         </p>
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           1. Sichtbarkeit entsteht nicht mehr nur über Aufmerksamkeit
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Viele Marketingstrategien sind noch immer darauf ausgelegt,
           möglichst viel Aufmerksamkeit in möglichst kurzer Zeit zu erzeugen.
           Das funktioniert – kurzfristig. Pinterest funktioniert anders. Hier
@@ -352,10 +363,10 @@ export default function PinterestOpenAiLearnings() {
           zu Struktur.
         </p>
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           2. Inhalte müssen als Antworten gedacht werden
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Auf Pinterest funktionieren Inhalte dann, wenn sie als Lösung
           wahrgenommen werden. Nicht: „Schau dir unser Angebot an.“ Sondern:
           „Das hilft dir bei deinem nächsten Schritt.“ Eine gute Strategie
@@ -365,39 +376,39 @@ export default function PinterestOpenAiLearnings() {
           </strong>
         </p>
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           3. Pinterest ist ein langfristiger Content-Pool, kein Kurzzeitkanal
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Wenn Plattformen wie Pinterest für Technologieunternehmen interessant
           sind, dann auch deshalb, weil Inhalte dort nicht verpuffen. Für dein
           Unternehmen bedeutet das:
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           {contentPool.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Eine saubere Struktur aus Themenclustern, Suchbegriffen und passenden
           Inhalten ist wertvoller als tägliches Posten ohne System.
         </p>
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           4. Visuelle Auffindbarkeit wird immer wichtiger
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Ob KI-gestützte Suche, klassische Suchmaschinen oder visuelle
           Plattformen – Inhalte müssen heute nicht nur gefunden, sondern{" "}
           <strong className="text-heading">verstanden</strong> werden.
           Pinterest zwingt Unternehmen dazu, visuell klar zu kommunizieren:
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           {auffindbarkeit.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Das ist kein Nachteil. Es ist eine Chance.
         </p>
 
@@ -414,34 +425,32 @@ export default function PinterestOpenAiLearnings() {
       </section>
 
       {/* Strategie */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was das konkret für deine Pinterest-Strategie bedeutet
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Eine strategisch aufgebaute Pinterest-Präsenz orientiert sich nicht
-            an Trends, sondern an Prinzipien:
-          </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {prinzipien.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Pinterest ist kein Experiment. Es ist ein Asset. Wer das verstanden
-            hat, nutzt die Plattform nicht als Zusatzkanal, sondern als festen
-            Bestandteil der eigenen Marketingstruktur.
-          </p>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="was-das-konkret-fuer-deine-pinterest-strategie-bedeutet" className="article-h2">
+          Was das konkret für deine Pinterest-Strategie bedeutet
+        </h2>
+        <p className="mt-6">
+          Eine strategisch aufgebaute Pinterest-Präsenz orientiert sich nicht
+          an Trends, sondern an Prinzipien:
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-6">
+          {prinzipien.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-6">
+          Pinterest ist kein Experiment. Es ist ein Asset. Wer das verstanden
+          hat, nutzt die Plattform nicht als Zusatzkanal, sondern als festen
+          Bestandteil der eigenen Marketingstruktur.
+        </p>
       </section>
 
       {/* Fazit + CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="fazit-das-geruecht-ist-nebensaechlich-die-erkenntnis-nicht" className="article-h2">
           Fazit: Das Gerücht ist nebensächlich – die Erkenntnis nicht
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Ob OpenAI jemals Interesse an Pinterest hatte oder haben wird, spielt
           für dein Business am Ende keine Rolle. Relevant ist etwas anderes:
           Plattformen wie Pinterest zeigen, wohin sich Suche,
@@ -451,7 +460,7 @@ export default function PinterestOpenAiLearnings() {
           – sie bauen{" "}
           <strong className="text-heading">Auffindbarkeit</strong> auf.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Und wenn du zu einem dieser Unternehmen gehören willst, dann lass uns
           doch in einem{" "}
           <Link
@@ -490,23 +499,21 @@ export default function PinterestOpenAiLearnings() {
       </section>
 
       {/* Audio */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Lieber anhören?
-          </h2>
-          <p className="font-body mt-6 text-center text-lg">
-            Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
-            <a
-              href="https://youtu.be/nYjCQXmHwQI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-text hover:underline"
-            >
-              Blogartikel auf YouTube anhören
-            </a>
-          </p>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="lieber-anhoeren" className="article-h2">
+          Lieber anhören?
+        </h2>
+        <p className="mt-6 text-center">
+          Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
+          <a
+            href="https://youtu.be/nYjCQXmHwQI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold-text hover:underline"
+          >
+            Blogartikel auf YouTube anhören
+          </a>
+        </p>
       </section>
 
       <script

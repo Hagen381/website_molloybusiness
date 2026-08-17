@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import Breadcrumb from "@/components/Breadcrumb";
+import TableOfContents from "@/components/TableOfContents";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
@@ -83,13 +84,24 @@ const pageJsonLd = {
   ],
 };
 
+// Sprungziele des Inhaltsverzeichnisses — Reihenfolge und Wortlaut
+// entsprechen den H2 dieser Seite.
+const toc = [
+  { id: "wunschdenken-vs-realitaet-die-falschen-erwartungen-ans-online-business", label: "Wunschdenken vs. Realität: Die falschen Erwartungen ans Online-Business" },
+  { id: "zwischen-anlauf-und-stillstand-warum-du-nicht-ins-tun-kommst", label: "Zwischen Anlauf und Stillstand: Warum du nicht ins Tun kommst" },
+  { id: "der-gefaehrliche-vergleich-mit-den-anderen", label: "Der gefährliche Vergleich mit „den anderen“" },
+  { id: "der-wahre-preis-der-selbstverwirklichung", label: "Der wahre Preis der Selbstverwirklichung" },
+  { id: "fazit-klarheit-vor-geschwindigkeit", label: "Fazit: Klarheit vor Geschwindigkeit" },
+  { id: "lieber-anhoeren", label: "Lieber anhören?" },
+] as const;
+
 export default function OnlineBusinessVsRealitaet() {
   return (
     <>
       <Breadcrumb pageName={post.title} parent={{ label: "Blog", href: "/blog/" }} />
 
       {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
+      <section className="article-column pt-10 pb-[30px]">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Blog
         </p>
@@ -99,7 +111,9 @@ export default function OnlineBusinessVsRealitaet() {
         <p className="font-body mt-3 text-sm">
           Veröffentlicht am {formatDateDe(post.date)}
         </p>
-        <p className="font-body mt-6 text-lg">
+
+        <TableOfContents items={toc} />
+        <p className="mt-6">
           Viele Menschen träumen davon, sich mit einem Online-Business ein
           freies, selbstbestimmtes Leben aufzubauen. Sie stellen sich vor, wie
           sie morgens gemütlich mit dem Laptop auf dem Balkon sitzen, den Tag
@@ -108,7 +122,7 @@ export default function OnlineBusinessVsRealitaet() {
           ist echt. Aber genauso echt sind die Herausforderungen, die viele
           auf dem Weg dorthin unterschätzen.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           In diesem Artikel schauen wir uns an, warum die Realität oft nicht
           mit der Vision mithält. Und was du tun kannst, um aus dem Wunsch
           nach Selbstständigkeit ein tragfähiges Konzept zu machen – ohne dich
@@ -117,100 +131,98 @@ export default function OnlineBusinessVsRealitaet() {
       </section>
 
       {/* Wunschdenken */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Wunschdenken vs. Realität: Die falschen Erwartungen ans
-            Online-Business
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Online-Business verspricht die große Freiheit: arbeiten, wann und
-            wo man will, selbstbestimmt leben, niemandem Rechenschaft ablegen
-            müssen. Gerade in stressigen Lebensphasen wirkt dieser Traum wie
-            ein Rettungsanker.{" "}
-            <strong className="text-heading">
-              Raus aus dem Hamsterrad, rein ins Leben
-            </strong>{" "}
-            – so der Plan.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Was viele dabei vergessen:{" "}
-            <strong className="text-heading">
-              Ein Online-Business ist ein echtes Unternehmen.
-            </strong>{" "}
-            Und das bedeutet Verantwortung, Entscheidungen, Investitionen –
-            vor allem aber Zeit und Energie. Wer das unterschätzt, wird
-            schnell frustriert. Warum sich Selbstständigkeit oft nicht nach
-            Arbeit anfühlt, habe ich in{" "}
-            <Link
-              href="/blog/selbststaendigkeit-unsichtbare-arbeit/"
-              className="text-gold-text hover:underline"
-            >
-              diesem Blogartikel
-            </Link>{" "}
-            bereits näher erläutert. Schau gerne mal rein.
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="wunschdenken-vs-realitaet-die-falschen-erwartungen-ans-online-business" className="article-h2">
+          Wunschdenken vs. Realität: Die falschen Erwartungen ans
+          Online-Business
+        </h2>
+        <p className="mt-6">
+          Online-Business verspricht die große Freiheit: arbeiten, wann und
+          wo man will, selbstbestimmt leben, niemandem Rechenschaft ablegen
+          müssen. Gerade in stressigen Lebensphasen wirkt dieser Traum wie
+          ein Rettungsanker.{" "}
+          <strong className="text-heading">
+            Raus aus dem Hamsterrad, rein ins Leben
+          </strong>{" "}
+          – so der Plan.
+        </p>
+        <p className="mt-4">
+          Was viele dabei vergessen:{" "}
+          <strong className="text-heading">
+            Ein Online-Business ist ein echtes Unternehmen.
+          </strong>{" "}
+          Und das bedeutet Verantwortung, Entscheidungen, Investitionen –
+          vor allem aber Zeit und Energie. Wer das unterschätzt, wird
+          schnell frustriert. Warum sich Selbstständigkeit oft nicht nach
+          Arbeit anfühlt, habe ich in{" "}
+          <Link
+            href="/blog/selbststaendigkeit-unsichtbare-arbeit/"
+            className="text-gold-text hover:underline"
+          >
+            diesem Blogartikel
+          </Link>{" "}
+          bereits näher erläutert. Schau gerne mal rein.
+        </p>
 
-          <h3 className="mt-10 text-[22px] leading-tight">
-            Zeitfalle statt Zeitgewinn: Warum Selbstständigkeit kein
-            Selbstläufer ist
-          </h3>
-          <p className="font-body mt-4 text-lg">
-            Ein weitverbreiteter Irrtum lautet: „Wenn ich mich selbstständig
-            mache, habe ich mehr Zeit.“ Tatsächlich ist das Gegenteil der Fall
-            – zumindest am Anfang. Denn ein Business aufzubauen bedeutet,
-            viele neue Dinge zu lernen und umzusetzen. Es gibt keine klaren
-            Arbeitszeiten, keine Aufgabenverteilung, keinen Feierabend.{" "}
-            <strong className="text-heading">
-              Du bist Marketing, Produktentwicklung, Kundenservice und
-              Buchhaltung in einer Person.
-            </strong>
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Die Freiheit, die du dir wünschst, entsteht nicht automatisch. Sie
-            ist das Ergebnis von Planung, Struktur und Klarheit – und die
-            musst du dir erst erarbeiten.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            <strong className="text-heading">
-              Viele unterschätzen, dass ein Business nicht in der Stunde
-              entsteht, in der man sich „mal eben“ abends nach der Arbeit
-              dransetzt.
-            </strong>{" "}
-            Es braucht Vorbereitungszeit, Denkzeit, Umsetzungszeit – und vor
-            allem Wiederholung. Es ist ein kontinuierlicher Prozess, bei dem
-            du immer wieder neue Herausforderungen meistern musst.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Stell dir ein leeres Feld vor, auf dem du ein Haus bauen willst.
-            Der Traum ist da: ein schickes Haus mit Garten, mit Aussicht, mit
-            Wohlfühlfaktor. Aber das Feld ist voller Steine, Dornen, alter
-            Wurzeln. Bevor du überhaupt ans Fundament denken kannst, musst du
-            räumen, sortieren, planen.{" "}
-            <strong className="text-heading">Das kostet Kraft.</strong> Und
-            genau das ist der erste Teil der Selbstständigkeit: das Feld urbar
-            machen, bevor du aufbauen kannst.
-          </p>
+        <h3 className="article-h3 mt-10">
+          Zeitfalle statt Zeitgewinn: Warum Selbstständigkeit kein
+          Selbstläufer ist
+        </h3>
+        <p className="mt-4">
+          Ein weitverbreiteter Irrtum lautet: „Wenn ich mich selbstständig
+          mache, habe ich mehr Zeit.“ Tatsächlich ist das Gegenteil der Fall
+          – zumindest am Anfang. Denn ein Business aufzubauen bedeutet,
+          viele neue Dinge zu lernen und umzusetzen. Es gibt keine klaren
+          Arbeitszeiten, keine Aufgabenverteilung, keinen Feierabend.{" "}
+          <strong className="text-heading">
+            Du bist Marketing, Produktentwicklung, Kundenservice und
+            Buchhaltung in einer Person.
+          </strong>
+        </p>
+        <p className="mt-4">
+          Die Freiheit, die du dir wünschst, entsteht nicht automatisch. Sie
+          ist das Ergebnis von Planung, Struktur und Klarheit – und die
+          musst du dir erst erarbeiten.
+        </p>
+        <p className="mt-4">
+          <strong className="text-heading">
+            Viele unterschätzen, dass ein Business nicht in der Stunde
+            entsteht, in der man sich „mal eben“ abends nach der Arbeit
+            dransetzt.
+          </strong>{" "}
+          Es braucht Vorbereitungszeit, Denkzeit, Umsetzungszeit – und vor
+          allem Wiederholung. Es ist ein kontinuierlicher Prozess, bei dem
+          du immer wieder neue Herausforderungen meistern musst.
+        </p>
+        <p className="mt-4">
+          Stell dir ein leeres Feld vor, auf dem du ein Haus bauen willst.
+          Der Traum ist da: ein schickes Haus mit Garten, mit Aussicht, mit
+          Wohlfühlfaktor. Aber das Feld ist voller Steine, Dornen, alter
+          Wurzeln. Bevor du überhaupt ans Fundament denken kannst, musst du
+          räumen, sortieren, planen.{" "}
+          <strong className="text-heading">Das kostet Kraft.</strong> Und
+          genau das ist der erste Teil der Selbstständigkeit: das Feld urbar
+          machen, bevor du aufbauen kannst.
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgZeit}
-              alt="Online-Business Zeitmanagement"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgZeit}
+            alt="Online-Business Zeitmanagement"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Ins Tun kommen */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="zwischen-anlauf-und-stillstand-warum-du-nicht-ins-tun-kommst" className="article-h2">
           Zwischen Anlauf und Stillstand: Warum du nicht ins Tun kommst
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Vielleicht kennst du das Gefühl: Du willst so gern starten, hast
           Ideen im Kopf, vielleicht schon einen Blog, ein Produkt oder einen
           Kurs. Aber du kommst nicht voran.{" "}
@@ -219,14 +231,14 @@ export default function OnlineBusinessVsRealitaet() {
             wirklich loslaufen.
           </strong>
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Was du spürst, ist keine Faulheit oder Unfähigkeit. Es ist ein
           Mangel an Raum. Raum im Kalender, aber auch{" "}
           <strong className="text-heading">Raum im Kopf</strong>. Ein
           Online-Business braucht Zeit – aber nicht nur „verfügbare Stunden“,
           sondern auch mentale Kapazität.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Denn es ist ein gewaltiger Unterschied, ob du theoretisch 90 Minuten
           Zeit hast – oder ob du in diesen 90 Minuten auch praktisch klar
           denken, kreativ arbeiten und Entscheidungen treffen kannst. Zwischen
@@ -238,7 +250,7 @@ export default function OnlineBusinessVsRealitaet() {
           Das sind wiederum aber wichtige Ressourcen, wenn du etwas Neues
           erschaffen willst.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Wenn du dich also beim Starten so fühlst, als würdest du{" "}
           <strong className="text-heading">
             mit angezogener Handbremse fahren:
@@ -249,17 +261,17 @@ export default function OnlineBusinessVsRealitaet() {
           Commitment: Ich schaffe mir den Raum, den mein Traum verdient.
         </p>
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           Der 1-Stunden-Mythos: Warum gute Planung kein Allheilmittel ist
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           „Wenn ich mir meine Zeit nur besser einteile, klappt das schon.“
           Oder anders: „Du brauchst mit meinem Angebot{" "}
           <strong className="text-heading">nur eine Stunde am Tag,</strong> um
           ein funktionierendes Online-Business aufzubauen. Und hey, eine
           Stunde am Tag hat doch wohl jeder übrig.“
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Dir wird von außen suggeriert, dass du offenbar etwas falsch machst,
           wenn du diese Stunde nicht aufbringen kannst. Und by the way: Wer
           mit einer Stunde am Tag ein erfolgreiches Unternehmen aufbauen kann,
@@ -272,7 +284,7 @@ export default function OnlineBusinessVsRealitaet() {
           Der Aufbau eines eigenen Businesses dauert definitiv länger als eine
           Stunde am Tag.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Aber Zeitmanagement ist nicht das Problem. Das Problem ist, dass
           keine Ressourcen mehr da sind.{" "}
           <strong className="text-heading">
@@ -285,7 +297,7 @@ export default function OnlineBusinessVsRealitaet() {
             sondern du lässt Sicherheit los.
           </strong>
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Bleiben wir beim leeren Feld und dem Haus. Du kündigst deine
           bestehende Wohnung, die warm und sicher ist, und gehst erstmal mit
           einem Zelt los, um es auf das leere Feld zu stellen.{" "}
@@ -295,7 +307,7 @@ export default function OnlineBusinessVsRealitaet() {
           Vielleicht nur kurz, vielleicht dauert es aber auch zwei Jahre, bis
           dein Haus fertig ist.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Aber immerhin hast du jetzt eine Stunde Zeit am Tag 😉
         </p>
 
@@ -312,152 +324,150 @@ export default function OnlineBusinessVsRealitaet() {
       </section>
 
       {/* Vergleich */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Der gefährliche Vergleich mit „den anderen“
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Instagram, LinkedIn, Podcasts – überall sehen wir Beispiele von
-            Menschen, die scheinbar{" "}
-            <strong className="text-heading">
-              mühelos ihr Online-Business rocken.
-            </strong>{" "}
-            Sie sind sichtbar, erfolgreich, souverän. Und wir fragen uns:
-            Warum klappt das bei mir nicht?
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Die Antwort ist einfach: Weil du nicht sie bist. Du kennst nicht
-            ihre Geschichte, ihre Ressourcen, ihre Unterstützung im
-            Hintergrund. Die wenigsten erzählen zum Beispiel, dass ihr{" "}
-            <strong className="text-heading">
-              Online-Business nur eine nebenberufliche Selbstständigkeit ist.
-            </strong>{" "}
-            Das heißt, sie selbst halten an einer gewissen (finanziellen)
-            Sicherheit fest. Was ja auch total ok ist. Nur vermittelt es den
-            falschen Eindruck. Denn dir verkauft die gleiche Person ein{" "}
-            <strong className="text-heading">
-              Coaching- oder Mentoring-Programm für ein ortsunabhängiges
-              Leben.
-            </strong>{" "}
-            Ein Leben in Freiheit und Selbstbestimmtheit. Sie verkaufen dir
-            einen Traum. Den Traum, den sie selbst noch gar nicht zu 100 %
-            leben.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Andere haben vielleicht{" "}
-            <strong className="text-heading">
-              einen Partner, der Hauptverdiener ist (so wie ich).
-            </strong>{" "}
-            Das nimmt ebenfalls den Druck raus, dass das Unternehmen sofort
-            florieren muss und man sich davon ernähren können muss.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Wieder andere machen das, wovon du träumst, schon sehr, sehr
-            lange, und du siehst nur, wie das Unternehmen aktuell läuft.{" "}
-            <strong className="text-heading">
-              Du siehst nicht, wie sie vor zehn Jahren gehadert haben,
-            </strong>{" "}
-            welche Nebenjobs sie hatten und für wie viele Kunden sie
-            kostenfrei gearbeitet haben. All das würde sich schlecht
-            verkaufen.
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="der-gefaehrliche-vergleich-mit-den-anderen" className="article-h2">
+          Der gefährliche Vergleich mit „den anderen“
+        </h2>
+        <p className="mt-6">
+          Instagram, LinkedIn, Podcasts – überall sehen wir Beispiele von
+          Menschen, die scheinbar{" "}
+          <strong className="text-heading">
+            mühelos ihr Online-Business rocken.
+          </strong>{" "}
+          Sie sind sichtbar, erfolgreich, souverän. Und wir fragen uns:
+          Warum klappt das bei mir nicht?
+        </p>
+        <p className="mt-4">
+          Die Antwort ist einfach: Weil du nicht sie bist. Du kennst nicht
+          ihre Geschichte, ihre Ressourcen, ihre Unterstützung im
+          Hintergrund. Die wenigsten erzählen zum Beispiel, dass ihr{" "}
+          <strong className="text-heading">
+            Online-Business nur eine nebenberufliche Selbstständigkeit ist.
+          </strong>{" "}
+          Das heißt, sie selbst halten an einer gewissen (finanziellen)
+          Sicherheit fest. Was ja auch total ok ist. Nur vermittelt es den
+          falschen Eindruck. Denn dir verkauft die gleiche Person ein{" "}
+          <strong className="text-heading">
+            Coaching- oder Mentoring-Programm für ein ortsunabhängiges
+            Leben.
+          </strong>{" "}
+          Ein Leben in Freiheit und Selbstbestimmtheit. Sie verkaufen dir
+          einen Traum. Den Traum, den sie selbst noch gar nicht zu 100 %
+          leben.
+        </p>
+        <p className="mt-4">
+          Andere haben vielleicht{" "}
+          <strong className="text-heading">
+            einen Partner, der Hauptverdiener ist (so wie ich).
+          </strong>{" "}
+          Das nimmt ebenfalls den Druck raus, dass das Unternehmen sofort
+          florieren muss und man sich davon ernähren können muss.
+        </p>
+        <p className="mt-4">
+          Wieder andere machen das, wovon du träumst, schon sehr, sehr
+          lange, und du siehst nur, wie das Unternehmen aktuell läuft.{" "}
+          <strong className="text-heading">
+            Du siehst nicht, wie sie vor zehn Jahren gehadert haben,
+          </strong>{" "}
+          welche Nebenjobs sie hatten und für wie viele Kunden sie
+          kostenfrei gearbeitet haben. All das würde sich schlecht
+          verkaufen.
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgWaschmittel}
-              alt="Online-Business Waschmittel"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgWaschmittel}
+            alt="Online-Business Waschmittel"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
+        </div>
 
-          <h3 className="mt-10 text-[22px] leading-tight">Perspektivwechsel</h3>
-          <p className="font-body mt-4 text-lg">
-            Und auch das ist ok. Denn wenn du einen Traum – a.k.a. Online-Kurs,
-            Produkt etc. – verkauft bekommst, dann ist das{" "}
-            <strong className="text-heading">Marketing at its best.</strong>{" "}
-            So funktioniert Werbung schon immer. Jedes Waschmittel verspricht
-            dir, dass alles fleckenrein ist. Also kaufst du es. Weil du beim
-            Thema Flecken in den Klamotten an die Decke gehen könntest.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Und dann ist der Fleck doch noch da. Du denkst, du hast es
-            vielleicht nicht richtig angewendet. Immerhin waren die weißen
-            T-Shirts im Fernseher doch lupenrein.{" "}
-            <strong className="text-heading">
-              Also zweifelst du erstmal an dir.
-            </strong>{" "}
-            Wenn du an den Punkt gekommen bist, dass das Produkt schlecht ist
-            und nicht hält, was es verspricht, kaufst du ein anderes. Immer
-            wieder.{" "}
-            <strong className="text-heading">
-              Immer wieder von Anbietern, die sagen, dass bei ihnen alles
-              anders werden wird.
-            </strong>
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Aber wie wäre es damit: Wenn dich Flecken so triggern, dann
-            akzeptiere es entweder – oder kaufe dir alle paar Monate neue
-            T-Shirts oder steig auf eine Farbe um, auf der man Flecken nicht
-            so sieht, anstatt alle Waschmittelhersteller der Welt
-            auszuprobieren, um immer wieder an den gleichen Punkt zu kommen.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Was viele Menschen wirklich brauchen, ist kein weiterer Kurs oder
-            das x-te Coaching,{" "}
-            <strong className="text-heading">
-              sondern ein Perspektivwechsel und Vertrauen zu sich selbst.
-            </strong>{" "}
-            Klarheit darüber, was man will – und was man bereit ist, dafür zu
-            geben. Denn nur unendliches Wissen im Kopf anzuhäufen durch
-            unendlich viele Kurse{" "}
-            <strong className="text-heading">
-              bringt dir keinen einzigen Euro ein.
-            </strong>{" "}
-            Du musst das umsetzen – und dafür brauchst du Zeit und Commitment.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Und wenn du das gerade nicht hast – so sehr du es auch willst –
-            dann ist es völlig ok, noch eine Weile in dem weißen T-Shirt mit
-            dem minikleinen Fleck rumzulaufen. Irgendwann kommt der Tag und{" "}
-            <strong className="text-heading">
-              da fliegt das Ding in die Ecke,
-            </strong>{" "}
-            du wirfst dir das Camouflage-Top über und die Waschmittelhersteller
-            können dich mal kreuzweise.{" "}
-            <strong className="text-heading">
-              Denn du gehst jetzt deinen eigenen Weg.
-            </strong>{" "}
-            In der Geschwindigkeit und in dem Look, der genau dann in deine
-            aktuelle Lebensphase passt.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Denn ein Online-Business ist nicht nur eine unternehmerische,
-            sondern auch eine emotionale Reise.
-          </p>
+        <h3 className="article-h3 mt-10">Perspektivwechsel</h3>
+        <p className="mt-4">
+          Und auch das ist ok. Denn wenn du einen Traum – a.k.a. Online-Kurs,
+          Produkt etc. – verkauft bekommst, dann ist das{" "}
+          <strong className="text-heading">Marketing at its best.</strong>{" "}
+          So funktioniert Werbung schon immer. Jedes Waschmittel verspricht
+          dir, dass alles fleckenrein ist. Also kaufst du es. Weil du beim
+          Thema Flecken in den Klamotten an die Decke gehen könntest.
+        </p>
+        <p className="mt-4">
+          Und dann ist der Fleck doch noch da. Du denkst, du hast es
+          vielleicht nicht richtig angewendet. Immerhin waren die weißen
+          T-Shirts im Fernseher doch lupenrein.{" "}
+          <strong className="text-heading">
+            Also zweifelst du erstmal an dir.
+          </strong>{" "}
+          Wenn du an den Punkt gekommen bist, dass das Produkt schlecht ist
+          und nicht hält, was es verspricht, kaufst du ein anderes. Immer
+          wieder.{" "}
+          <strong className="text-heading">
+            Immer wieder von Anbietern, die sagen, dass bei ihnen alles
+            anders werden wird.
+          </strong>
+        </p>
+        <p className="mt-4">
+          Aber wie wäre es damit: Wenn dich Flecken so triggern, dann
+          akzeptiere es entweder – oder kaufe dir alle paar Monate neue
+          T-Shirts oder steig auf eine Farbe um, auf der man Flecken nicht
+          so sieht, anstatt alle Waschmittelhersteller der Welt
+          auszuprobieren, um immer wieder an den gleichen Punkt zu kommen.
+        </p>
+        <p className="mt-4">
+          Was viele Menschen wirklich brauchen, ist kein weiterer Kurs oder
+          das x-te Coaching,{" "}
+          <strong className="text-heading">
+            sondern ein Perspektivwechsel und Vertrauen zu sich selbst.
+          </strong>{" "}
+          Klarheit darüber, was man will – und was man bereit ist, dafür zu
+          geben. Denn nur unendliches Wissen im Kopf anzuhäufen durch
+          unendlich viele Kurse{" "}
+          <strong className="text-heading">
+            bringt dir keinen einzigen Euro ein.
+          </strong>{" "}
+          Du musst das umsetzen – und dafür brauchst du Zeit und Commitment.
+        </p>
+        <p className="mt-4">
+          Und wenn du das gerade nicht hast – so sehr du es auch willst –
+          dann ist es völlig ok, noch eine Weile in dem weißen T-Shirt mit
+          dem minikleinen Fleck rumzulaufen. Irgendwann kommt der Tag und{" "}
+          <strong className="text-heading">
+            da fliegt das Ding in die Ecke,
+          </strong>{" "}
+          du wirfst dir das Camouflage-Top über und die Waschmittelhersteller
+          können dich mal kreuzweise.{" "}
+          <strong className="text-heading">
+            Denn du gehst jetzt deinen eigenen Weg.
+          </strong>{" "}
+          In der Geschwindigkeit und in dem Look, der genau dann in deine
+          aktuelle Lebensphase passt.
+        </p>
+        <p className="mt-4">
+          Denn ein Online-Business ist nicht nur eine unternehmerische,
+          sondern auch eine emotionale Reise.
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgFragen}
-              alt="Online-Business Fragen stellen"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgFragen}
+            alt="Online-Business Fragen stellen"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Preis der Selbstverwirklichung */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="der-wahre-preis-der-selbstverwirklichung" className="article-h2">
           Der wahre Preis der Selbstverwirklichung
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Ein Online-Business zu starten bedeutet, in Vorleistung zu gehen –
           zeitlich, finanziell, emotional. Es bedeutet, sich{" "}
           <strong className="text-heading">
@@ -467,31 +477,31 @@ export default function OnlineBusinessVsRealitaet() {
           . Wer das nicht will oder kann, ist nicht schwach – sondern
           realistisch.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           <strong className="text-heading">Aber:</strong> Es bedeutet auch,
           dass du lernen darfst, dich selbst ernst zu nehmen. Deine
           Bedürfnisse, deine Grenzen, deine Träume. Und das beginnt nicht mit
           einem Business-Plan, sondern mit einem ehrlichen Blick auf dein
           aktuelles Leben.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           <strong className="text-heading">
             Bevor du in die Umsetzung gehst, stell dir diese zentralen Fragen:
           </strong>
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           {zentraleFragen.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           <strong className="text-heading">
             Wenn du diese Fragen beantwortest, entsteht ein Fundament.
           </strong>{" "}
           Das Fundament ist dein unbändiger Wille, es durchzuziehen. An guten
           und an schlechten Tagen.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Und natürlich darfst und sollst du dann auch Kurse machen, dich
           weiterbilden, dir Unterstützung holen, usw. Nur vorher solltest du
           eine <strong className="text-heading">klare Entscheidung</strong>{" "}
@@ -501,93 +511,91 @@ export default function OnlineBusinessVsRealitaet() {
       </section>
 
       {/* Fazit + CTA */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Fazit: Klarheit vor Geschwindigkeit
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Ein Online-Business kann dir Freiheit schenken. Aber es nimmt sich
-            nicht von allein den Platz in deinem Leben. Du musst ihn schaffen.
-            Und das{" "}
-            <strong className="text-heading">
-              bedeutet manchmal, zuerst andere Dinge loszulassen:
-            </strong>{" "}
-            Erwartungen, Perfektion, vermeintliche Verpflichtungen.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Sei ehrlich mit dir. Was brauchst du, um loszulegen? Was musst du
-            klären, bevor du investieren kannst – in Programme, in Technik, in
-            dich selbst?
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Wenn du soweit bist, wird der Weg nicht unbedingt leichter. Aber
-            klarer. Und das ist oft der entscheidende Unterschied.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            <strong className="text-heading">Und nun?</strong>
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Auf meinem Instagram-Kanal{" "}
-            <a
-              href="https://www.instagram.com/molloy_business/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-text hover:underline"
-            >
-              @molloy_business
-            </a>{" "}
-            bekommst du noch mehr Einblicke in die realen Abläufe der
-            Online-Business-Welt. Außerdem stellen sich dort regelmäßig
-            Gastautoren mit ihrem eigenen Online-Business vor. Hier findest du
-            vielleicht Inspirationen, welche Art von Produkt oder
-            Dienstleistung du selbst anbieten möchtest.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Und wenn dein Business schon steht und du es sichtbarer machen
-            möchtest: Als{" "}
-            <Link href="/" className="text-gold-text hover:underline">
-              Pinterest Marketing Agentur
-            </Link>{" "}
-            unterstützt molloy business Unternehmen dabei, über Pinterest
-            organisch gefunden zu werden – zum Beispiel mit einem{" "}
-            <Link
-              href="/pinterest-strategie-call/"
-              className="text-gold-text hover:underline"
-            >
-              Pinterest Strategie Call
-            </Link>
-            . Oder du vereinbarst direkt ein{" "}
-            <a
-              href={siteConfig.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-text hover:underline"
-            >
-              unverbindliches Erstgespräch
-            </a>
-            .
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="fazit-klarheit-vor-geschwindigkeit" className="article-h2">
+          Fazit: Klarheit vor Geschwindigkeit
+        </h2>
+        <p className="mt-6">
+          Ein Online-Business kann dir Freiheit schenken. Aber es nimmt sich
+          nicht von allein den Platz in deinem Leben. Du musst ihn schaffen.
+          Und das{" "}
+          <strong className="text-heading">
+            bedeutet manchmal, zuerst andere Dinge loszulassen:
+          </strong>{" "}
+          Erwartungen, Perfektion, vermeintliche Verpflichtungen.
+        </p>
+        <p className="mt-4">
+          Sei ehrlich mit dir. Was brauchst du, um loszulegen? Was musst du
+          klären, bevor du investieren kannst – in Programme, in Technik, in
+          dich selbst?
+        </p>
+        <p className="mt-4">
+          Wenn du soweit bist, wird der Weg nicht unbedingt leichter. Aber
+          klarer. Und das ist oft der entscheidende Unterschied.
+        </p>
+        <p className="mt-4">
+          <strong className="text-heading">Und nun?</strong>
+        </p>
+        <p className="mt-4">
+          Auf meinem Instagram-Kanal{" "}
+          <a
+            href="https://www.instagram.com/molloy_business/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold-text hover:underline"
+          >
+            @molloy_business
+          </a>{" "}
+          bekommst du noch mehr Einblicke in die realen Abläufe der
+          Online-Business-Welt. Außerdem stellen sich dort regelmäßig
+          Gastautoren mit ihrem eigenen Online-Business vor. Hier findest du
+          vielleicht Inspirationen, welche Art von Produkt oder
+          Dienstleistung du selbst anbieten möchtest.
+        </p>
+        <p className="mt-4">
+          Und wenn dein Business schon steht und du es sichtbarer machen
+          möchtest: Als{" "}
+          <Link href="/" className="text-gold-text hover:underline">
+            Pinterest Marketing Agentur
+          </Link>{" "}
+          unterstützt molloy business Unternehmen dabei, über Pinterest
+          organisch gefunden zu werden – zum Beispiel mit einem{" "}
+          <Link
+            href="/pinterest-strategie-call/"
+            className="text-gold-text hover:underline"
+          >
+            Pinterest Strategie Call
+          </Link>
+          . Oder du vereinbarst direkt ein{" "}
+          <a
+            href={siteConfig.calendly}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold-text hover:underline"
+          >
+            unverbindliches Erstgespräch
+          </a>
+          .
+        </p>
 
-          <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
-            <ExportedImage
-              src={imgKraft}
-              alt="Online-Business Kraft"
-              fill
-              className="object-cover"
-              sizes={imageSizes}
-              basePath={basePath}
-            />
-          </div>
+        <div className="relative mt-10 aspect-[3/2] overflow-hidden rounded-2xl shadow-lg">
+          <ExportedImage
+            src={imgKraft}
+            alt="Online-Business Kraft"
+            fill
+            className="object-cover"
+            sizes={imageSizes}
+            basePath={basePath}
+          />
         </div>
       </section>
 
       {/* Audio */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="lieber-anhoeren" className="article-h2">
           Lieber anhören?
         </h2>
-        <p className="font-body mt-6 text-center text-lg">
+        <p className="mt-6 text-center">
           Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
           <a
             href="https://youtu.be/ed5M1m286Fw"

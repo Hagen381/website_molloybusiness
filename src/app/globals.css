@@ -89,6 +89,44 @@ body {
   }
 }
 
+/* Textspalte der Artikelseiten. Am Original gemessen: 833px breit, zentriert,
+   OHNE eigenen Abschnittshintergrund — die Artikel stehen komplett auf dem
+   cremen Body-Grund. Der Fließtext ist dort #595959 (die Überschriftenfarbe),
+   nicht die sonst übliche Fließtextfarbe #545454; deshalb setzt die Spalte
+   `color` selbst. Unterhalb von 881px (833 + 2×24) greift ein 24px-Seitenrand. */
+@utility article-column {
+  width: 100%;
+  max-width: 833px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  color: var(--color-heading);
+
+  @media (width >= 881px) {
+    padding-inline: 0;
+  }
+}
+
+/* Zwischenüberschriften der Artikelseiten, am Original gemessen. Bewusst
+   unlayered (wie .btn): so schlagen sie die h2/h3-Defaults aus @layer base,
+   während Abstands-Utilities wie `mt-12` daneben weiter greifen. */
+.article-h2 {
+  font-family: var(--heading-font);
+  color: var(--gold-light);
+  font-size: 30px;
+  line-height: 50px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+}
+
+.article-h3 {
+  font-family: var(--heading-font);
+  color: var(--gold-light);
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+}
+
 /* Shared button style matching the original site's Elementor buttons:
    rounded pill, drop shadow, uppercase-free serif label. Werte am Original
    nachgemessen — Beschriftungen bleiben klein geschrieben wie dort. */

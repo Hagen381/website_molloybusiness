@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import Breadcrumb from "@/components/Breadcrumb";
+import TableOfContents from "@/components/TableOfContents";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
@@ -121,13 +122,25 @@ const pageJsonLd = {
   ],
 };
 
+// Sprungziele des Inhaltsverzeichnisses — Reihenfolge und Wortlaut
+// entsprechen den H2 dieser Seite.
+const toc = [
+  { id: "was-ist-pinterest-marketing", label: "Was ist Pinterest Marketing?" },
+  { id: "pinterest-strategie", label: "Pinterest-Strategie" },
+  { id: "produkte-oder-dienstleistungen-beides-geht-bei-pinterest", label: "Produkte oder Dienstleistungen – beides geht bei Pinterest" },
+  { id: "pinterest-predicts-report", label: "Pinterest Predicts Report" },
+  { id: "pinterest-und-keywords", label: "Pinterest und Keywords" },
+  { id: "fazit", label: "Fazit" },
+  { id: "lieber-anhoeren", label: "Lieber anhören?" },
+] as const;
+
 export default function PinterestMarketing() {
   return (
     <>
       <Breadcrumb pageName={post.title} parent={{ label: "Blog", href: "/blog/" }} />
 
       {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
+      <section className="article-column pt-10 pb-[30px]">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Blog
         </p>
@@ -137,7 +150,9 @@ export default function PinterestMarketing() {
         <p className="font-body mt-3 text-sm">
           Veröffentlicht am {formatDateDe(post.date)}
         </p>
-        <p className="font-body mt-6 text-lg">
+
+        <TableOfContents items={toc} />
+        <p className="mt-6">
           Pinterest Marketing bedeutet, dein Business über die visuelle
           Suchmaschine Pinterest sichtbar zu machen – mit Pins, die auf deine
           Website verlinken und über Monate Traffic bringen. Lege damit das
@@ -158,84 +173,82 @@ export default function PinterestMarketing() {
       </section>
 
       {/* Was ist Pinterest Marketing */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was ist Pinterest Marketing?
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Vermutlich hast du die Pinterest-App schon auf dem Handy
-            vorinstalliert. Und vielleicht nutzt du Pinterest auch schon, um
-            nach <strong className="text-heading">Rezepten</strong> zu schauen,{" "}
-            <strong className="text-heading">DIY-Ideen</strong> zu
-            recherchieren oder um dich von angesagten{" "}
-            <strong className="text-heading">Interior-Trends</strong>{" "}
-            inspirieren zu lassen. Doch bist du auch schon auf die Idee
-            gekommen, Pinterest als Marketing-Tool fürs eigene Business zu
-            nutzen?
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Dein Marketing-Mix enthält vermutlich einige Social-Media-Kanäle,
-            um easy und kostengünstig auf dich oder dein Produkt aufmerksam zu
-            machen. Und Pinterest gehört da ebenfalls rein.{" "}
-            <strong className="text-heading">
-              Streng genommen ist Pinterest kein soziales Netzwerk, sondern
-              eine Suchmaschine.
-            </strong>{" "}
-            Und zwar eine visuelle Suchmaschine. Genau das ist das Besondere
-            und eine perfekte Möglichkeit fürs Marketing. Pinterest verbindet
-            die SEO-Aspekte von Google mit den interessenbasierten Suchanfragen
-            auf Social Media.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Manchmal können potenzielle Kunden ihre Wünsche noch gar nicht
-            richtig in Worte fassen, wissen aber, was sie suchen, sobald sie
-            ein passendes Bild dazu sehen.{" "}
-            <strong className="text-heading">
-              Das Gehirn kann Bilder wesentlich schneller verarbeiten als
-              Texte.
-            </strong>{" "}
-            Man kennt es von sich selbst – bei einer Suchanfrage auf Google
-            scrollt man meistens nur bis zum Ende der ersten Seite. Bei
-            Pinterest scrollen die User bis zu 60 Pins durch. Hinter jedem
-            dieser Pins könnte dein Business verlinkt sein.
-          </p>
+      <section className="article-column py-[30px]">
+        <h2 id="was-ist-pinterest-marketing" className="article-h2">
+          Was ist Pinterest Marketing?
+        </h2>
+        <p className="mt-6">
+          Vermutlich hast du die Pinterest-App schon auf dem Handy
+          vorinstalliert. Und vielleicht nutzt du Pinterest auch schon, um
+          nach <strong className="text-heading">Rezepten</strong> zu schauen,{" "}
+          <strong className="text-heading">DIY-Ideen</strong> zu
+          recherchieren oder um dich von angesagten{" "}
+          <strong className="text-heading">Interior-Trends</strong>{" "}
+          inspirieren zu lassen. Doch bist du auch schon auf die Idee
+          gekommen, Pinterest als Marketing-Tool fürs eigene Business zu
+          nutzen?
+        </p>
+        <p className="mt-4">
+          Dein Marketing-Mix enthält vermutlich einige Social-Media-Kanäle,
+          um easy und kostengünstig auf dich oder dein Produkt aufmerksam zu
+          machen. Und Pinterest gehört da ebenfalls rein.{" "}
+          <strong className="text-heading">
+            Streng genommen ist Pinterest kein soziales Netzwerk, sondern
+            eine Suchmaschine.
+          </strong>{" "}
+          Und zwar eine visuelle Suchmaschine. Genau das ist das Besondere
+          und eine perfekte Möglichkeit fürs Marketing. Pinterest verbindet
+          die SEO-Aspekte von Google mit den interessenbasierten Suchanfragen
+          auf Social Media.
+        </p>
+        <p className="mt-4">
+          Manchmal können potenzielle Kunden ihre Wünsche noch gar nicht
+          richtig in Worte fassen, wissen aber, was sie suchen, sobald sie
+          ein passendes Bild dazu sehen.{" "}
+          <strong className="text-heading">
+            Das Gehirn kann Bilder wesentlich schneller verarbeiten als
+            Texte.
+          </strong>{" "}
+          Man kennt es von sich selbst – bei einer Suchanfrage auf Google
+          scrollt man meistens nur bis zum Ende der ersten Seite. Bei
+          Pinterest scrollen die User bis zu 60 Pins durch. Hinter jedem
+          dieser Pins könnte dein Business verlinkt sein.
+        </p>
 
-          <h3 className="mt-10 text-[22px] leading-tight">
-            Von Pinterest auf deine Website
-          </h3>
-          <p className="font-body mt-4 text-lg">
-            Ziel ist es, dass deine Wunschkunden vom Pinterest-Pin auf deine
-            Website gelangen. Es ist eben nicht so wie bei Social Media, dass
-            die User möglichst lange und vor allem möglichst ausschließlich in
-            der App verweilen sollen. Sondern Pinterest wirbt selbst damit,
-            dass bei Pinterest alles anders ist:{" "}
-            <strong className="text-heading">
-              „It’s different here“ ist der Leitspruch.
-            </strong>{" "}
-            Es ist ihnen wichtig, die Interessenten auf eine Zielseite zu
-            geleiten, die ihre Suchanfrage möglichst akkurat beantwortet. Wie
-            das eine Suchmaschine nun eben auch so machen soll.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Die Pins und somit die Verlinkung auf deine Website haben eine
-            Überlebensdauer von mehreren Monaten. Wohingegen ein Post auf
-            Instagram nur zwischen 24 und 72 Stunden relevant ist. Dadurch ist
-            Pinterest Marketing eine unglaublich nachhaltige Strategie im
-            Marketing-Mix. Und bei rund 20 Millionen Nutzern allein in
-            Deutschland wird dein Content garantiert von der richtigen
-            Zielgruppe gefunden, denn die Generationsverteilung ist recht
-            ausgeglichen.
-          </p>
-        </div>
+        <h3 className="article-h3 mt-10">
+          Von Pinterest auf deine Website
+        </h3>
+        <p className="mt-4">
+          Ziel ist es, dass deine Wunschkunden vom Pinterest-Pin auf deine
+          Website gelangen. Es ist eben nicht so wie bei Social Media, dass
+          die User möglichst lange und vor allem möglichst ausschließlich in
+          der App verweilen sollen. Sondern Pinterest wirbt selbst damit,
+          dass bei Pinterest alles anders ist:{" "}
+          <strong className="text-heading">
+            „It’s different here“ ist der Leitspruch.
+          </strong>{" "}
+          Es ist ihnen wichtig, die Interessenten auf eine Zielseite zu
+          geleiten, die ihre Suchanfrage möglichst akkurat beantwortet. Wie
+          das eine Suchmaschine nun eben auch so machen soll.
+        </p>
+        <p className="mt-4">
+          Die Pins und somit die Verlinkung auf deine Website haben eine
+          Überlebensdauer von mehreren Monaten. Wohingegen ein Post auf
+          Instagram nur zwischen 24 und 72 Stunden relevant ist. Dadurch ist
+          Pinterest Marketing eine unglaublich nachhaltige Strategie im
+          Marketing-Mix. Und bei rund 20 Millionen Nutzern allein in
+          Deutschland wird dein Content garantiert von der richtigen
+          Zielgruppe gefunden, denn die Generationsverteilung ist recht
+          ausgeglichen.
+        </p>
       </section>
 
       {/* Strategie */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="pinterest-strategie" className="article-h2">
           Pinterest-Strategie
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Im Grunde genommen möchtest du doch, dass deine Kunden zu dir nach
           Hause kommen. Also auf deine Homepage. Nur dort kannst du wirklich zu
           100 % selbst steuern, was die Besucher wann und wie sehen. Warum eine
@@ -252,7 +265,7 @@ export default function PinterestMarketing() {
           Pinterest kein Ersatz für irgendeinen anderen Marketing-Kanal. Die
           Mischung macht’s!
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Neben all den schnelllebigen Social-Media-Plattformen ist Pinterest
           quasi die Mutti, die alles ein bisschen zusammenhält. Denn du kannst
           natürlich mit deinen Pins auch all deine anderen
@@ -265,7 +278,7 @@ export default function PinterestMarketing() {
           Analyse-Tools schaust du dann, welche Pins dir den meisten Traffic
           gebracht haben.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Wenn du zum Beispiel einen Etsy-Shop hast, aber auch einen eigenen
           Online-Shop auf deiner Website, dann empfiehlt es sich natürlich, die
           Pinterest-Strategie so zu wählen, dass die Kunden möglichst direkt in
@@ -281,37 +294,35 @@ export default function PinterestMarketing() {
       </section>
 
       {/* Produkte oder Dienstleistungen */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Produkte oder Dienstleistungen – beides geht bei Pinterest
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Aber lass dich nicht abschrecken, wenn du kein physisches Produkt
-            zu vermarkten hast. Pinterest ist ebenfalls ein absoluter
-            Trafficbooster für alle Dienstleister. Pinterest-User wollen
-            langfristige Inspiration und vor allem Information. Laut Pinterest
-            geben 67 % der User an, dass sie bei Pinterest recherchieren, BEVOR
-            sie mit einem neuen Projekt starten. Sie merken sich dann also ein
-            paar Pins mit dem entsprechenden Thema und klicken entweder gleich
-            weiter oder kehren zu einem späteren Zeitpunkt auf ihre Pinnwände
-            zurück, um sich tiefer einzulesen. Somit bieten verlinkte
-            Blogbeiträge, How-to-Listen oder Dienstleistungsangebote den
-            optimalen Nutzen für die Interessenten, um sich zu informieren.
-            Thematisch kann sich hier jeder mit seinem Business sehen. Ob
-            Paartherapeuten, Wedding-Blogs, Business-Tipps, vegane
-            Hundeernährung, Winterurlaube für Großfamilien oder Finanztipps –
-            es wird alles gesucht.
-          </p>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="produkte-oder-dienstleistungen-beides-geht-bei-pinterest" className="article-h2">
+          Produkte oder Dienstleistungen – beides geht bei Pinterest
+        </h2>
+        <p className="mt-6">
+          Aber lass dich nicht abschrecken, wenn du kein physisches Produkt
+          zu vermarkten hast. Pinterest ist ebenfalls ein absoluter
+          Trafficbooster für alle Dienstleister. Pinterest-User wollen
+          langfristige Inspiration und vor allem Information. Laut Pinterest
+          geben 67 % der User an, dass sie bei Pinterest recherchieren, BEVOR
+          sie mit einem neuen Projekt starten. Sie merken sich dann also ein
+          paar Pins mit dem entsprechenden Thema und klicken entweder gleich
+          weiter oder kehren zu einem späteren Zeitpunkt auf ihre Pinnwände
+          zurück, um sich tiefer einzulesen. Somit bieten verlinkte
+          Blogbeiträge, How-to-Listen oder Dienstleistungsangebote den
+          optimalen Nutzen für die Interessenten, um sich zu informieren.
+          Thematisch kann sich hier jeder mit seinem Business sehen. Ob
+          Paartherapeuten, Wedding-Blogs, Business-Tipps, vegane
+          Hundeernährung, Winterurlaube für Großfamilien oder Finanztipps –
+          es wird alles gesucht.
+        </p>
       </section>
 
       {/* Predicts Report */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="pinterest-predicts-report" className="article-h2">
           Pinterest Predicts Report
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Wenn du keine richtige Idee bekommst, wie du deine eigene
           Pinterest-Marketing-Strategie ausfeilen kannst, hilft dir sicher der{" "}
           <a
@@ -324,7 +335,7 @@ export default function PinterestMarketing() {
           </a>
           .
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Da werden die vermuteten Trends für das kommende Jahr aufgelistet,
           inklusive vorgeschlagener Keywords, die voraussichtlich dazu genutzt
           werden. Hier muss man manchmal ein bisschen schmunzeln, was da so
@@ -352,26 +363,26 @@ export default function PinterestMarketing() {
           </figure>
         ))}
 
-        <h3 className="mt-10 text-[22px] leading-tight">
+        <h3 className="article-h3 mt-10">
           Was tun mit den Erkenntnissen?
         </h3>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Was kannst du nun mit den Erkenntnissen aus dem Pinterest Predicts
           Report anfangen? Manche Trends treffen vielleicht nicht den
           persönlichen Geschmack oder du hältst sie für unwahrscheinlich.
           Dennoch kann der eine oder andere wertvolle Erkenntnisse aus diesem
           Forecast ziehen.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Beispiel Beauty – neben Körperpflege erleben folgende Suchanfragen
           einen Aufschwung:
         </p>
-        <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
+        <ul className="mt-4 list-disc space-y-2 pl-6">
           {beautySuchanfragen.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Wenn du sowieso schon in diesem Bereich tätig bist, alles super. Wenn
           du aber gerade überlegst, ob du dich zum Beispiel mit{" "}
           <strong className="text-heading">
@@ -385,7 +396,7 @@ export default function PinterestMarketing() {
           dann auch noch bei TikTok und YouTube Shorts hochladen und so easy
           deinen Content recyclen – just saying…
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Wichtig für dein Pinterest-Konzept ist eigentlich nur, dass nichts in
           Stein gemeißelt ist. Du kannst dich ausprobieren und einfach sehen,
           welche Pins gut bei deiner Zielgruppe ankommen.
@@ -393,79 +404,77 @@ export default function PinterestMarketing() {
       </section>
 
       {/* Keywords */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Pinterest und Keywords
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Wenn Pinterest eine Suchmaschine ist, dann müsste man die Pins doch
-            auch suchmaschinenoptimiert anlegen können?! Richtig. Es ist sogar
-            mehr als gewünscht. Doch wo bringst du deine Keywords am besten
-            unter?
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Wenn du einen Pin anlegst, hast du für den Pin-Titel 100 Zeichen
-            zur Verfügung und 500 Zeichen für die Pin-Beschreibung.{" "}
-            <strong className="text-heading">
-              Und genau hier gehören die Keywords rein.
-            </strong>{" "}
-            Allerdings nicht nur stumpf aneinandergereiht (auch wenn das einige
-            so machen), sondern schon als schönen kleinen SEO-Text verpackt.{" "}
-            <strong className="text-heading">
-              Recherchiere deine Pinterest-Keywords über die Suchfunktion von
-              Pinterest
-            </strong>
-            , indem du einfach ein Wort zu deinem Thema eingibst und siehst,
-            welche Longtail-Keywords sich daraus ergeben. Zusätzlich kannst du
-            auch die ABC-Keyword-Suche heranziehen. Es lohnt sich auch, im
-            Google-Suchfeld parallel zu schauen und weitere Keywords von dort
-            zu ergänzen.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Dies sind nur die offensichtlichen Wege, deine Keywords zu finden.
-            Es gibt natürlich noch einige mehr, doch alle Vorgehensweisen für
-            Keyword-Recherche würden an dieser Stelle den Rahmen sprengen.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Wichtig ist, dass du eine{" "}
-            <strong className="text-heading">Keyword-Liste</strong> anlegst und
-            diese auch ausgiebig nutzt. Denn neben den Pins hast du auch bei
-            den Boards 100 Zeichen für den Titel und 500 Zeichen für die
-            Board-Beschreibungen. Im besten Fall pinnst du den Pin mit den
-            Keywords XYZ auf der Pinnwand mit den gleichen Keywords XYZ. Und
-            als Sahnehäubchen beinhaltet auch noch die Profilbeschreibung
-            deines Accounts die relevantesten Keywords.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Auf den Text-Overlays der Pins kannst du natürlich ebenso deine
-            Keywords unterbringen. Doch bedenke, dass die meisten User ihr
-            Smartphone für Internetaktivitäten nutzen. Somit sollten die
-            Overlays nur kurze und gut lesbare Texte beinhalten.
-          </p>
-          <p className="font-body mt-4 text-lg">
-            Da die Pins auf deine Website führen, sollten dort die wichtigsten
-            Keywords ebenfalls vorhanden sein und deine Website sollte im
-            Allgemeinen gut aufbereitet und optimiert sein. Also alle Links
-            müssen funktionieren und die Botschaft, die im Pin vermittelt wird,
-            sollte sich auch dahinter (also auf der Website) wiederfinden. Ein
-            Pin, der mit 7 Schritten zum perfekten Hundepool lockt, darf dann
-            nicht auf eine Seite führen, auf der du nur blaue
-            Plastik-Sandmuscheln verkaufst. Pinterest würde diesen Pin dann
-            nicht als relevant einstufen. Ein bisschen um die Ecke denken ist
-            in Ordnung, aber bei Pinterest geht es um Qualität. Also optimiere
-            nicht nur deine Pins, sondern auch die Ziele, zu denen die Pins
-            führen.
-          </p>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="pinterest-und-keywords" className="article-h2">
+          Pinterest und Keywords
+        </h2>
+        <p className="mt-6">
+          Wenn Pinterest eine Suchmaschine ist, dann müsste man die Pins doch
+          auch suchmaschinenoptimiert anlegen können?! Richtig. Es ist sogar
+          mehr als gewünscht. Doch wo bringst du deine Keywords am besten
+          unter?
+        </p>
+        <p className="mt-4">
+          Wenn du einen Pin anlegst, hast du für den Pin-Titel 100 Zeichen
+          zur Verfügung und 500 Zeichen für die Pin-Beschreibung.{" "}
+          <strong className="text-heading">
+            Und genau hier gehören die Keywords rein.
+          </strong>{" "}
+          Allerdings nicht nur stumpf aneinandergereiht (auch wenn das einige
+          so machen), sondern schon als schönen kleinen SEO-Text verpackt.{" "}
+          <strong className="text-heading">
+            Recherchiere deine Pinterest-Keywords über die Suchfunktion von
+            Pinterest
+          </strong>
+          , indem du einfach ein Wort zu deinem Thema eingibst und siehst,
+          welche Longtail-Keywords sich daraus ergeben. Zusätzlich kannst du
+          auch die ABC-Keyword-Suche heranziehen. Es lohnt sich auch, im
+          Google-Suchfeld parallel zu schauen und weitere Keywords von dort
+          zu ergänzen.
+        </p>
+        <p className="mt-4">
+          Dies sind nur die offensichtlichen Wege, deine Keywords zu finden.
+          Es gibt natürlich noch einige mehr, doch alle Vorgehensweisen für
+          Keyword-Recherche würden an dieser Stelle den Rahmen sprengen.
+        </p>
+        <p className="mt-4">
+          Wichtig ist, dass du eine{" "}
+          <strong className="text-heading">Keyword-Liste</strong> anlegst und
+          diese auch ausgiebig nutzt. Denn neben den Pins hast du auch bei
+          den Boards 100 Zeichen für den Titel und 500 Zeichen für die
+          Board-Beschreibungen. Im besten Fall pinnst du den Pin mit den
+          Keywords XYZ auf der Pinnwand mit den gleichen Keywords XYZ. Und
+          als Sahnehäubchen beinhaltet auch noch die Profilbeschreibung
+          deines Accounts die relevantesten Keywords.
+        </p>
+        <p className="mt-4">
+          Auf den Text-Overlays der Pins kannst du natürlich ebenso deine
+          Keywords unterbringen. Doch bedenke, dass die meisten User ihr
+          Smartphone für Internetaktivitäten nutzen. Somit sollten die
+          Overlays nur kurze und gut lesbare Texte beinhalten.
+        </p>
+        <p className="mt-4">
+          Da die Pins auf deine Website führen, sollten dort die wichtigsten
+          Keywords ebenfalls vorhanden sein und deine Website sollte im
+          Allgemeinen gut aufbereitet und optimiert sein. Also alle Links
+          müssen funktionieren und die Botschaft, die im Pin vermittelt wird,
+          sollte sich auch dahinter (also auf der Website) wiederfinden. Ein
+          Pin, der mit 7 Schritten zum perfekten Hundepool lockt, darf dann
+          nicht auf eine Seite führen, auf der du nur blaue
+          Plastik-Sandmuscheln verkaufst. Pinterest würde diesen Pin dann
+          nicht als relevant einstufen. Ein bisschen um die Ecke denken ist
+          in Ordnung, aber bei Pinterest geht es um Qualität. Also optimiere
+          nicht nur deine Pins, sondern auch die Ziele, zu denen die Pins
+          führen.
+        </p>
       </section>
 
       {/* Fazit + CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
+      <section className="article-column py-[30px]">
+        <h2 id="fazit" className="article-h2">
           Fazit
         </h2>
-        <p className="font-body mt-6 text-lg">
+        <p className="mt-6">
           Pinterest ist die Wohlfühloase des Internets. Hier geht es nicht um
           Bad Vibes und Hass-Kommentare, die manch eine Idee auf Social Media
           komplett durch den Kakao ziehen können. Hier wollen die Besucher sich
@@ -473,7 +482,7 @@ export default function PinterestMarketing() {
           Input bekommen und all die Ideen und Anreize dann auch im wahren
           Leben umsetzen.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           <strong className="text-heading">
             Du hast mit Pinterest eine einzigartige Plattform, um dein Business
             sichtbar zu machen
@@ -486,7 +495,7 @@ export default function PinterestMarketing() {
           macht einfach Spaß. Den Usern und auch dir! Pin your interest and see
           what happens.
         </p>
-        <p className="font-body mt-4 text-lg">
+        <p className="mt-4">
           Hast du auch Lust auf Pinterest für dein Unternehmen bekommen? Dann
           schau dir doch mal meinen{" "}
           <Link
@@ -515,23 +524,21 @@ export default function PinterestMarketing() {
       </section>
 
       {/* Audio */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Lieber anhören?
-          </h2>
-          <p className="font-body mt-6 text-center text-lg">
-            Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
-            <a
-              href="https://youtu.be/hgtRRVBYFvQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold-text hover:underline"
-            >
-              Blogartikel auf YouTube anhören
-            </a>
-          </p>
-        </div>
+      <section className="article-column py-[30px]">
+        <h2 id="lieber-anhoeren" className="article-h2">
+          Lieber anhören?
+        </h2>
+        <p className="mt-6 text-center">
+          Keine Zeit zum Lesen? Hier kannst du dir den Artikel auch anhören:{" "}
+          <a
+            href="https://youtu.be/hgtRRVBYFvQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold-text hover:underline"
+          >
+            Blogartikel auf YouTube anhören
+          </a>
+        </p>
       </section>
 
       <script
