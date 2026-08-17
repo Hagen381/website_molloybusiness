@@ -198,13 +198,11 @@ export default function Home() {
                 Stress, nachhaltiges Marketing.
               </p>
 
-              {/* Interne Route statt der alten WordPress-URL. Bewusst ein
-                  einfaches <a>: /angebote/ existiert als Route noch nicht,
-                  next/link würde daran typgeprüft scheitern. */}
+              {/* Interne Route statt der alten WordPress-URL. */}
               <div className="mt-8">
-                <a href="/angebote/" className="btn btn-primary">
+                <Link href="/angebote/" className="btn btn-primary">
                   direkt zu den angeboten
-                </a>
+                </Link>
               </div>
             </div>
 

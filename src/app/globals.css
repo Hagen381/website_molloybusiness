@@ -120,3 +120,11 @@ body {
   background: var(--color-gray-light);
   color: var(--color-gold-light);
 }
+
+/* Dritte Variante, bisher nur im Abschluss-Abschnitt von /angebote/: dunkles
+   Grau auf dem goldhellen Abschnittsgrund (#c49c5e), auf dem sowohl der
+   goldene Primär- als auch der graue Sekundär-Button untergehen würden. */
+.btn-dark {
+  background: var(--color-footer);
+  color: #ffffff;
+}
