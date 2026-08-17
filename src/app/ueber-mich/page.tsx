@@ -177,16 +177,8 @@ export default function UeberMich() {
           </p>
           <p className="font-body mt-4 text-lg">
             Genau deshalb passen Touristik und Pinterest so gut zusammen:
-            Beides lebt von der Planungsphase. Wie das für einzelne Segmente
-            konkret aussieht – von Rundreisen über Camper bis zu besonderen
-            Unterkünften –, zeigt die Seite{" "}
-            <Link
-              href="/pinterest-marketing-tourismus/"
-              className="text-gold-text hover:underline"
-            >
-              Pinterest Marketing für Tourismus
-            </Link>
-            .
+            Beides lebt von der Planungsphase – von Rundreisen über Camper
+            bis zu besonderen Unterkünften.
           </p>
         </div>
       </section>

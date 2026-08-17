@@ -331,16 +331,10 @@ export default function PinterestFuerReiseveranstalter() {
             Wie geht es weiter?
           </h2>
           <p className="font-body mt-6 text-lg">
-            Wenn du tiefer einsteigen willst: Auf der Seite{" "}
-            <Link
-              href="/pinterest-marketing-tourismus/"
-              className="text-gold-text hover:underline"
-            >
-              Pinterest Marketing für Tourismus &amp; Reiseveranstalter
-            </Link>{" "}
-            findest du gebündelt, wie molloy business touristische Unternehmen
-            bei Strategie, Pin-Design und laufender Betreuung unterstützt. Und
-            wenn du die Umsetzung lieber ganz abgibst: Welche Aufgaben eine{" "}
+            Wenn du tiefer einsteigen willst: molloy business unterstützt
+            touristische Unternehmen bei Strategie, Pin-Design und laufender
+            Betreuung. Und wenn du die Umsetzung lieber ganz abgibst: Welche
+            Aufgaben eine{" "}
             <Link href="/" className="text-gold-text hover:underline">
               Pinterest Marketing Agentur
             </Link>{" "}

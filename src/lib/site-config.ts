@@ -109,21 +109,6 @@ export const sitePages = [
     priority: 0.8,
   },
   {
-    path: "/pinterest-marketing-tourismus/",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
-    path: "/pinterest-marketing-food/",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
-    path: "/pinterest-marketing-finanzdienstleister/",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
     path: "/ueber-mich/",
     changeFrequency: "monthly",
     priority: 0.7,

@@ -208,22 +208,7 @@ export default function LohntSichPinterest() {
           Die dritte Voraussetzung ist unspektakulär, aber entscheidend: eine
           eigene Website oder ein Onlineshop, auf die Pins verlinken können.
           Pinterest ist kein Selbstzweck, sondern ein Zubringer – der Wert
-          entsteht erst, wenn Interessierte auf deiner Seite ankommen. Wie
-          das branchenspezifisch aussieht, zeigen die Seiten zu{" "}
-          <Link
-            href="/pinterest-marketing-tourismus/"
-            className="text-gold-text hover:underline"
-          >
-            Pinterest Marketing für touristische Unternehmen
-          </Link>{" "}
-          und{" "}
-          <Link
-            href="/pinterest-marketing-food/"
-            className="text-gold-text hover:underline"
-          >
-            Pinterest Marketing für Food-Marken
-          </Link>
-          .
+          entsteht erst, wenn Interessierte auf deiner Seite ankommen.
         </p>
       </section>
 
