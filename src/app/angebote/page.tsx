@@ -5,10 +5,10 @@ import Breadcrumb from "@/components/Breadcrumb";
 import heroImage from "@/assets/images/angebote/Juliette-Oppel-Online-Business.jpg";
 import laptopImage from "@/assets/images/angebote/Juliette-Oppel-Online-Businessmanagement.jpg";
 import phoneImage from "@/assets/images/angebote/Juliette-Oppel-Pinterest.jpg";
-import kachelAufbau from "@/assets/images/angebote/PinterestAccountAufbau.png";
-import kachelManagement from "@/assets/images/angebote/PinterestAccountManagement.png";
-import kachelStrategie from "@/assets/images/angebote/Pinterest-Strategie-Call.png";
-import kachelAudit from "@/assets/images/angebote/Pinterest-Audit.png";
+import kachelAufbau from "@/assets/images/angebote/DSC01181-scaled.jpg";
+import kachelManagement from "@/assets/images/angebote/DSC01061-scaled.jpg";
+import kachelStrategie from "@/assets/images/angebote/DSC01103-scaled.jpg";
+import kachelAudit from "@/assets/images/angebote/DSC01461-scaled.jpg";
 import fotoDaniela from "@/assets/images/angebote/DanielaBatistadosSantos.jpg";
 import fotoJudithGastner from "@/assets/images/angebote/JudithGastner.jpg";
 import fotoJulia from "@/assets/images/angebote/JuliaKallenborn.jpg";
@@ -59,17 +59,20 @@ const H2_ABSCHLUSS =
 
 // Kachelbeschriftung, am Original gemessen: Arial (NICHT Antic Didone),
 // 30px/50px, Stärke 600, letter-spacing 1.4px, zentriert, #D9D9D9.
-// Unter 768px eine Stufe kleiner, damit die zwei Zeilen in der
-// seitenverhältnis-gebundenen Kachel nicht über deren Rand hinauslaufen.
+// Sie trägt den Angebotstitel jetzt allein — die Kacheln zeigen Fotos ohne
+// eingebrannten Text. Unter 768px eine Stufe kleiner, damit die zwei Zeilen
+// in der seitenverhältnis-gebundenen Kachel nicht über deren Rand hinauslaufen.
 const KACHEL_TITEL =
   "font-body font-semibold tracking-[1.4px] text-gray-light text-[22px] leading-[36px] md:text-[30px] md:leading-[50px]";
 
 // ---------------------------------------------------------------------------
 // Die vier Angebote. Titel und Route kommen aus site-config; hier stehen nur
-// die im Original zweizeilige Kachelbeschriftung und die Kachelgrafik.
-// Es sind die vier eigenen Grafiken des Originals (780×520), per
-// .github/workflows/kachelbilder-holen.yml nachgeladen — im archivierten HTML
-// dieser Seite standen sie nicht, sie kamen aus dem externen Elementor-CSS.
+// die im Original zweizeilige Kachelbeschriftung und das Kachelfoto.
+// ABWEICHUNG vom Original: dort lagen in den Kacheln vier eigene Grafiken
+// (780×520), die Preis UND Angebotstitel ins Bild eingebrannt hatten. Die
+// Seite zeigt grundsätzlich keine Preise, also sind diese Grafiken aus dem
+// Repo entfernt. Stattdessen tragen die Kacheln die Fotos der jeweiligen
+// Angebotsseite; den Titel setzt jetzt allein die HTML-Beschriftung.
 // ---------------------------------------------------------------------------
 const kacheln = [
   {
@@ -457,7 +460,7 @@ export default function AngebotePage() {
           Abschnitte. Am Original gemessen: Hintergrund #FFFFFF,
           Reihe 1 50px/50px, Reihe 2 50px/80px.
           Kachel selbst: 570×373, Eckenradius 0, Innenabstand 10px,
-          Grafik als Hintergrund mit object-cover.
+          Foto als Hintergrund mit object-cover.
           ------------------------------------------------------------------ */}
       {[angebote.slice(0, 2), angebote.slice(2, 4)].map((reihe, reiheIndex) => (
         <section key={reiheIndex} className="bg-surface">
@@ -484,15 +487,15 @@ export default function AngebotePage() {
                   />
                   {/* Im Original-HTML steht in jeder Kachelspalte ein
                       elementor-background-overlay — Farbe und Deckkraft
-                      standen im nicht archivierten CSS. Deshalb bewusst
-                      dezent, nur als leichte Abdunklung. */}
-                  <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/30" />
-                  {/* Die Beschriftung sitzt unten: die gemessene Schriftfarbe
-                      #D9D9D9 ist genau der helle Grauton der oberen
-                      Grafikhälfte und wäre dort unlesbar — im unteren dunklen
-                      Band (#595959) der Grafik trägt sie. Die senkrechte
-                      Position selbst ist nicht nachgemessen. */}
-                  <span className="absolute inset-0 flex items-end justify-center p-[10px] text-center">
+                      standen im nicht archivierten CSS. Auf dem Foto braucht
+                      die helle Schrift Kontrast, deshalb Schwarz mit 35 %,
+                      beim Überfahren 45 %. Kein Bewegungs- oder
+                      Skalierungseffekt. */}
+                  <span className="absolute inset-0 bg-black/35 transition-colors group-hover:bg-black/45" />
+                  {/* Die Beschriftung sitzt waagerecht UND senkrecht zentriert:
+                      im Original stand sie im unteren dunklen Band der
+                      Kachelgrafik, dieses Band gibt es auf dem Foto nicht. */}
+                  <span className="absolute inset-0 flex items-center justify-center p-[10px] text-center">
                     <span className={KACHEL_TITEL}>
                       {angebot.zeilen[0]}
                       <br />
