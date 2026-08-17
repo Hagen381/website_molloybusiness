@@ -44,7 +44,7 @@ export const navigation = {
     { label: "Start", href: "/" },
     {
       label: "Angebote",
-      href: "/",
+      href: "/angebote/",
       children: [
         {
           label: "Pinterest Account Management für Unternehmen",
@@ -73,6 +73,11 @@ export const navigation = {
 // damit sie nicht vergessen wird.
 export const sitePages = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
+  {
+    path: "/angebote/",
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
   {
     path: "/pinterest-account-management/",
     changeFrequency: "monthly",
