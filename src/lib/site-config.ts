@@ -55,12 +55,7 @@ export const navigation = {
           href: "/pinterest-account-aufbau/",
         },
         { label: "Pinterest Strategie Call", href: "/pinterest-strategie-call/" },
-        { label: "Pinterest Workshop", href: "/pinterest-workshop/" },
         { label: "Pinterest Audit", href: "/pinterest-audit/" },
-        {
-          label: "Pinterest Content Paket",
-          href: "/pinterest-content-paket/",
-        },
       ],
     },
     { label: "Über mich", href: "/ueber-mich/" },
@@ -94,17 +89,7 @@ export const sitePages = [
     priority: 0.8,
   },
   {
-    path: "/pinterest-workshop/",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
     path: "/pinterest-audit/",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
-    path: "/pinterest-content-paket/",
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -117,31 +102,6 @@ export const sitePages = [
     path: "/blog/",
     changeFrequency: "weekly",
     priority: 0.7,
-  },
-  {
-    path: "/blog/pinterest-fuer-reiseveranstalter/",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/blog/pinterest-selbst-machen-oder-auslagern/",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/blog/organisch-statt-ads/",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/blog/pinterest-seo-reiseangebote/",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/blog/lohnt-sich-pinterest-fuer-kleine-unternehmen/",
-    changeFrequency: "monthly",
-    priority: 0.6,
   },
   {
     path: "/blog/podcast-pinterest-marketing/",
@@ -245,41 +205,6 @@ export const sitePages = [
 // daraus automatisch auf. `title` wird wortgleich in Übersicht, Breadcrumb
 // und BreadcrumbList-Schema des Artikels verwendet.
 export const blogPosts = [
-  {
-    slug: "pinterest-fuer-reiseveranstalter",
-    title: "Pinterest für Reiseveranstalter: So funktioniert der Einstieg",
-    date: "2026-08-15",
-    excerpt:
-      "Reiseplanung beginnt auf Pinterest – oft Monate vor der Buchung. Wie du als Reiseveranstalter dort startest: Business-Account, Boards, Pin-Design und der Weg vom Pin zur Buchungsanfrage.",
-  },
-  {
-    slug: "pinterest-selbst-machen-oder-auslagern",
-    title: "Pinterest Marketing: selbst machen oder auslagern?",
-    date: "2026-08-15",
-    excerpt:
-      "Selbst betreuen oder abgeben? Ehrliche Kriterien für beide Wege: wie viel laufende Arbeit Pinterest wirklich bedeutet, wann Selbermachen die richtige Wahl ist – und wann Auslagern.",
-  },
-  {
-    slug: "organisch-statt-ads",
-    title: "Pinterest organisch oder mit Werbeanzeigen?",
-    date: "2026-08-15",
-    excerpt:
-      "Organische Pins bleiben auffindbar, Anzeigen enden mit dem Budget. Warum molloy business auf organische Sichtbarkeit setzt – und wann Pinterest Ads trotzdem das richtige Werkzeug sind.",
-  },
-  {
-    slug: "pinterest-seo-reiseangebote",
-    title: "Pinterest SEO: So werden deine Reiseangebote gefunden",
-    date: "2026-08-15",
-    excerpt:
-      "Pinterest ist eine Suchmaschine: Gefunden wird, was beschriftet ist. Wie du die Suchbegriffe deiner Wunschkunden findest und an Profil, Boards und Pins richtig einsetzt.",
-  },
-  {
-    slug: "lohnt-sich-pinterest-fuer-kleine-unternehmen",
-    title: "Lohnt sich Pinterest für kleine Unternehmen?",
-    date: "2026-08-08",
-    excerpt:
-      "Eine ehrliche Einordnung: wann Pinterest für kleine Unternehmen und Selbstständige funktioniert, wann nicht – und wie du mit überschaubarem Aufwand anfängst.",
-  },
   {
     slug: "podcast-pinterest-marketing",
     title: "Podcast Pinterest Marketing: Wie dein Podcast auf Pinterest gefunden wird",
@@ -404,16 +329,6 @@ export const blogPosts = [
 // Leistungen zentral hier pflegen — Kacheln, Leistungsübersicht und
 // Service-Schemas lesen aus diesen Feldern. `scope` ist der prägnante
 // Umfangs-Satz, der überall dort steht, wo früher der Preis stand.
-//
-// NICHT RENDERN — historische Preise, Stand August 2026 (Referenz für eine
-// spätere Reaktivierung):
-//   Pinterest Account Management: 666 € pro Monat — 90 Pins pro Monat · Vorkasse · monatlich kündbar
-//   Pinterest Account Aufbau:     2777 € einmalig — 50 % Vorkasse, 50 % nach Upload aller Pins
-//   Pinterest Strategie Call:     144 € einmalig — 90 Minuten · wird bei einer Zusammenarbeit voll angerechnet
-//   Pinterest Workshop:           250 € einmalig — 1 Stunde online · inkl. Q&A und Factsheet
-//   Pinterest Audit:              333 € einmalig — Vorkasse
-//   Pinterest Content Paket:      444 € pro Monat — 30 Premium-Pins pro Monat
-//   (dazu gehörte: priceVatNote = "Alle Preise in Euro.")
 export const services = [
   {
     title: "Pinterest Account Management",
@@ -440,27 +355,11 @@ export const services = [
       "90 Minuten individuelle Beratung mit konkreten nächsten Schritten für deinen Account.",
   },
   {
-    title: "Pinterest Workshop",
-    description:
-      "Praxisnahes Workshop-Format für Teams und Online-Events rund um Pinterest Marketing. Eine Stunde kompaktes Wissen, verständlich aufbereitet und mit Raum für deine Fragen.",
-    href: "/pinterest-workshop/",
-    scope:
-      "Eine Stunde online für dein Team – inklusive Q&A und Factsheet zum Download.",
-  },
-  {
     title: "Pinterest Audit",
     description:
       "Detaillierte Analyse deines bestehenden Accounts mit konkreten Handlungsempfehlungen. Du erfährst, was bereits funktioniert und an welchen Stellen dein Account Potenzial verschenkt.",
     href: "/pinterest-audit/",
     scope:
       "Analyse von Profil, Boards, Pin-Performance und Wettbewerb – mit priorisierten Empfehlungen.",
-  },
-  {
-    title: "Pinterest Content Paket",
-    description:
-      "SEO-optimierte Pins, Headlines und Beschreibungen – fertig für deinen Redaktionsplan. Du veröffentlichst selbst, molloy business liefert dir den passenden Content.",
-    href: "/pinterest-content-paket/",
-    scope:
-      "30 upload-fertige Premium-Pins pro Monat – markenangepasst, mit Headlines und Beschreibungen.",
   },
 ] as const;

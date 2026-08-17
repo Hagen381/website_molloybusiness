@@ -95,8 +95,6 @@ const kernprodukte = [
   },
   { label: "Pinterest Strategie Call", href: "/pinterest-strategie-call/" },
   { label: "Pinterest Audit", href: "/pinterest-audit/" },
-  { label: "Pinterest Workshop", href: "/pinterest-workshop/" },
-  { label: "Pinterest Content Paket", href: "/pinterest-content-paket/" },
 ];
 
 const pageJsonLd = {
