@@ -7,6 +7,28 @@ import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
 
+// Vorschaubilder der Artikelliste. Statische Imports sind Pflicht, weil
+// next-image-export-optimizer daraus die Bildmaße und die optimierten
+// Varianten baut — der Dateiname selbst steht bei jedem Artikel in
+// `blogPosts` (src/lib/site-config.ts).
+import imgPodcast from "@/assets/images/blog/podcast-pinterest-marketing/podcast-pinterest-3.jpg";
+import imgTelegram from "@/assets/images/blog/telegram-gruppe-pinterest-marketing-profis/pinterest-marketing-profis-3.jpg";
+import imgMereExposure from "@/assets/images/blog/pinterest-mere-exposure-effekt/pommespinterest-2.jpg";
+import imgOpenAi from "@/assets/images/blog/pinterest-openai-learnings/openai_pinterest-4.jpg";
+import imgPredicts2026 from "@/assets/images/blog/pinterest-predicts-report-2026/Pinterest-Predicts-Report-5.jpg";
+import imgObm from "@/assets/images/blog/online-business-management/Online-Business-Management-5.jpg";
+import imgOnlineBusiness from "@/assets/images/blog/online-business-vs-realitaet/Online-Business-2.png";
+import imgSelbststaendigkeit from "@/assets/images/blog/selbststaendigkeit-unsichtbare-arbeit/Selbststaendigkeit-6.png";
+import imgSchuelerpraktika from "@/assets/images/blog/online-schuelerpraktika/Online-Fachkraeftegewinnung-1.png";
+import imgJahresrueckblick from "@/assets/images/blog/10-dinge-im-online-business/Jahresrueckblick-6.png";
+import imgGeschenkideen from "@/assets/images/blog/geschenkideen-homeoffice/WeihnachtsgeschenkefuersHomeoffice-2.png";
+import imgAffiliate from "@/assets/images/blog/affiliate-marketing/AffiliateMarketing-3.png";
+import imgSocialMedia from "@/assets/images/blog/social-media-strategie-chatgpt/SocialMediaStrategiemitChatGPT-5.png";
+import imgFormel60 from "@/assets/images/blog/formel-60-minuten-arbeitszeit/Blog60MinutenFormel.jpg";
+import imgKundenAbgelehnt from "@/assets/images/blog/kunden-abgelehnt/Kundenabgelehnt-2.png";
+import imgPinterestMarketing from "@/assets/images/blog/pinterest-marketing/PinterestPredictsFotos-1-1.png";
+import imgWebsite from "@/assets/images/blog/website-fuer-dein-business/BlogWebsite-2.png";
+
 const path = "/blog/";
 
 export const metadata: Metadata = {
@@ -40,16 +62,29 @@ const H3_ABSCHLUSS =
   "text-center font-normal tracking-[1.4px] text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
 
 // ---------------------------------------------------------------------------
-// Vorschaubilder der Artikelliste. Die Beitragsbilder des Originals liegen noch
-// NICHT im Repo (siehe docs/fehlende-bilder.md) — bis sie nachgeladen sind,
-// steht in der Karte eine graue Fläche in exakt der Zielgröße 326×217, damit
-// das Layout schon jetzt dem Original entspricht. Sobald eine Datei da ist,
-// hier nur den Import unter dem passenden Slug eintragen.
+// Dateiname (aus `blogPosts`) → statisch importiertes Bild. Der Schlüssel ist
+// bewusst der Dateiname und nicht der Slug, damit `image` in site-config.ts
+// die einzige Stelle bleibt, an der die Bildauswahl je Artikel steht.
 // ---------------------------------------------------------------------------
-const vorschaubilder: Record<
-  string,
-  { src: StaticImageData; alt: string } | undefined
-> = {};
+const vorschaubilder: Record<string, StaticImageData> = {
+  "podcast-pinterest-3.jpg": imgPodcast,
+  "pinterest-marketing-profis-3.jpg": imgTelegram,
+  "pommespinterest-2.jpg": imgMereExposure,
+  "openai_pinterest-4.jpg": imgOpenAi,
+  "Pinterest-Predicts-Report-5.jpg": imgPredicts2026,
+  "Online-Business-Management-5.jpg": imgObm,
+  "Online-Business-2.png": imgOnlineBusiness,
+  "Selbststaendigkeit-6.png": imgSelbststaendigkeit,
+  "Online-Fachkraeftegewinnung-1.png": imgSchuelerpraktika,
+  "Jahresrueckblick-6.png": imgJahresrueckblick,
+  "WeihnachtsgeschenkefuersHomeoffice-2.png": imgGeschenkideen,
+  "AffiliateMarketing-3.png": imgAffiliate,
+  "SocialMediaStrategiemitChatGPT-5.png": imgSocialMedia,
+  "Blog60MinutenFormel.jpg": imgFormel60,
+  "Kundenabgelehnt-2.png": imgKundenAbgelehnt,
+  "PinterestPredictsFotos-1-1.png": imgPinterestMarketing,
+  "BlogWebsite-2.png": imgWebsite,
+};
 
 const pageJsonLd = {
   "@context": "https://schema.org",
@@ -141,38 +176,40 @@ export default function Blog() {
         <div className="container-page py-[50px]">
           <div className="flex flex-col gap-[35px]">
             {blogPosts.map((post) => {
-              const bild = vorschaubilder[post.slug];
+              const bild = post.image ? vorschaubilder[post.image] : undefined;
               const href = `/blog/${post.slug}/`;
 
               return (
-                <article key={post.slug} className="sm:flex sm:gap-[30px]">
-                  <Link
-                    href={href}
-                    tabIndex={-1}
-                    aria-hidden="true"
-                    className="block shrink-0"
-                  >
-                    <div className="relative aspect-[326/217] w-full overflow-hidden sm:aspect-auto sm:h-[217px] sm:w-[326px]">
-                      {bild ? (
-                        /* ABWEICHUNG: das Original skaliert die Vorschaubilder
-                           mit object-fit: fill und verzerrt sie dadurch. Hier
-                           object-cover bei gleicher Kachelgröße — gleiche
-                           Optik, ohne Verzerrung. */
+                <article key={post.slug} className="md:flex md:gap-[30px]">
+                  {/* Artikel ohne Aufmacherbild bekommen keine Bildspalte —
+                      Titel und Anriss laufen dann über die volle Breite. */}
+                  {bild && (
+                    <Link
+                      href={href}
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      className="block shrink-0"
+                    >
+                      {/* ABWEICHUNG: das Original skaliert die Vorschaubilder
+                          mit object-fit: fill und verzerrt sie dadurch. Hier
+                          object-cover bei gleicher Kachelgröße 326×217 —
+                          gleiche Optik, ohne Verzerrung. Unter 768px steht das
+                          Bild über dem Text, volle Breite, Seitenverhältnis
+                          326:217. */}
+                      <div className="relative aspect-[326/217] w-full overflow-hidden md:aspect-auto md:h-[217px] md:w-[326px]">
                         <ExportedImage
-                          src={bild.src}
-                          alt={bild.alt}
+                          src={bild}
+                          alt={post.title}
                           fill
                           className="object-cover"
-                          sizes="(min-width: 640px) 326px, 100vw"
+                          sizes="(min-width: 768px) 326px, 100vw"
                           basePath={basePath}
                         />
-                      ) : (
-                        <div className="bg-gray-light h-full w-full" />
-                      )}
-                    </div>
-                  </Link>
+                      </div>
+                    </Link>
+                  )}
 
-                  <div className="mt-4 sm:mt-0">
+                  <div className={`min-w-0 ${bild ? "mt-4 md:mt-0" : ""}`}>
                     {/* Im Original ist der Kartentitel ein h1 — auf einer Seite
                         mit 17 Artikeln ergibt das 18 H1. Hier h2, optisch
                         identisch. */}

@@ -209,13 +209,32 @@ export const sitePages = [
 // (plus eigener Eintrag in sitePages oben), Übersicht und Schema bauen
 // daraus automatisch auf. `title` wird wortgleich in Übersicht, Breadcrumb
 // und BreadcrumbList-Schema des Artikels verwendet.
-export const blogPosts = [
+//
+// `image` ist der Dateiname des Vorschaubilds für die Karte auf /blog/ — es
+// ist das Aufmacherbild des Artikels, also das Bild, das im Artikel als
+// erstes vorkommt. Die Datei liegt unter
+// `src/assets/images/blog/<slug>/<image>`; den zugehörigen Import hält
+// `src/app/blog/page.tsx` (statische Imports müssen literal sein). Artikel
+// ohne eigenes Bild lassen das Feld weg — ihre Karte läuft dann ohne
+// Bildspalte über die volle Breite. Deshalb ist die Liste explizit typisiert
+// statt `as const`: nur so bleibt `post.image` auch dann lesbar, wenn ein
+// Artikel das Feld nicht setzt.
+export type BlogPost = {
+  readonly slug: string;
+  readonly title: string;
+  readonly date: string;
+  readonly excerpt: string;
+  readonly image?: string;
+};
+
+export const blogPosts: readonly BlogPost[] = [
   {
     slug: "podcast-pinterest-marketing",
     title: "Podcast Pinterest Marketing: Wie dein Podcast auf Pinterest gefunden wird",
     date: "2026-06-30",
     excerpt:
       "Warum „neue Podcastfolge online“ selten jemanden interessiert – und wie dein Podcast über Themen statt Folgen auf Pinterest langfristig gefunden wird.",
+    image: "podcast-pinterest-3.jpg",
   },
   {
     slug: "telegram-gruppe-pinterest-marketing-profis",
@@ -223,6 +242,7 @@ export const blogPosts = [
     date: "2026-06-17",
     excerpt:
       "Viele Communities richten sich an Einsteiger. Die Telegram-Gruppe „Pinterest Marketing Profis“ vernetzt erfahrene Dienstleister für echten Fach-Austausch.",
+    image: "pinterest-marketing-profis-3.jpg",
   },
   {
     slug: "pinterest-mere-exposure-effekt",
@@ -230,6 +250,7 @@ export const blogPosts = [
     date: "2026-05-20",
     excerpt:
       "Warum wiederholte Bilder Kaufentscheidungen prägen: der Mere-Exposure-Effekt, erklärt am Beispiel Loaded Fries – und was Marken daraus für Pinterest lernen.",
+    image: "pommespinterest-2.jpg",
   },
   {
     slug: "pinterest-openai-learnings",
@@ -237,6 +258,7 @@ export const blogPosts = [
     date: "2026-01-19",
     excerpt:
       "Ob OpenAI Pinterest übernimmt, ist offen. Spannend ist etwas anderes: was das Gerücht über den Wert visueller Suche und Suchintention für Unternehmen verrät.",
+    image: "openai_pinterest-4.jpg",
   },
   {
     slug: "pinterest-predicts-report-2026",
@@ -244,6 +266,7 @@ export const blogPosts = [
     date: "2026-01-05",
     excerpt:
       "Der Pinterest Predicts Report zeigt, was morgen gesucht wird. So nutzt du die Trends 2026 strategisch für deine Inhalte, Produkte und Boards.",
+    image: "Pinterest-Predicts-Report-5.jpg",
   },
   {
     slug: "online-business-management",
@@ -251,6 +274,7 @@ export const blogPosts = [
     date: "2025-11-29",
     excerpt:
       "Online Business Management war lange Teil von molloy business. Die Geschichte einer Fokus-Entscheidung: warum OBM nicht mehr zur Vision passte und Pinterest zum Kern wurde.",
+    image: "Online-Business-Management-5.jpg",
   },
   {
     slug: "online-business-vs-realitaet",
@@ -258,6 +282,7 @@ export const blogPosts = [
     date: "2025-07-08",
     excerpt:
       "Laptop, Freiheit, Selbstbestimmung – der Traum vom Online-Business klingt verlockend. Warum die Realität oft anders aussieht und wie aus dem Wunsch ein tragfähiges Konzept wird.",
+    image: "Online-Business-2.png",
   },
   {
     slug: "selbststaendigkeit-unsichtbare-arbeit",
@@ -265,6 +290,7 @@ export const blogPosts = [
     date: "2025-05-12",
     excerpt:
       "Aufbauen, lernen, planen – und am Monatsende kein Gehalt. Warum sich die Anfangszeit der Selbstständigkeit so seltsam anfühlt und was sich mit dem ersten Kunden verändert.",
+    image: "Selbststaendigkeit-6.png",
   },
   {
     slug: "online-schuelerpraktika",
@@ -272,6 +298,7 @@ export const blogPosts = [
     date: "2025-02-28",
     excerpt:
       "Transkript des Gastauftritts bei Local Lights: Wie Unternehmen mit Online-Schülerpraktika früh Nachwuchs gewinnen – mit Antworten auf typische Vorurteile und fünf Tipps für den Start.",
+    image: "Online-Fachkraeftegewinnung-1.png",
   },
   {
     slug: "10-dinge-im-online-business",
@@ -279,6 +306,7 @@ export const blogPosts = [
     date: "2024-12-23",
     excerpt:
       "Für eine Bank gearbeitet, einen Videokurs erstellt, das Firmenkonto bis auf 92 Cent ausgereizt: ein ehrlicher Jahresrückblick über zehn Premieren im Online-Business.",
+    image: "Jahresrueckblick-6.png",
   },
   {
     slug: "geschenkideen-homeoffice",
@@ -286,6 +314,7 @@ export const blogPosts = [
     date: "2024-11-12",
     excerpt:
       "Von der Zwitscherbox bis zum Massage-Sitzkissen: 15 durchdachte Geschenkideen für alle, die im Homeoffice arbeiten oder ihr eigenes Online-Business führen.",
+    image: "WeihnachtsgeschenkefuersHomeoffice-2.png",
   },
   {
     slug: "affiliate-marketing",
@@ -293,6 +322,7 @@ export const blogPosts = [
     date: "2024-09-26",
     excerpt:
       "Was Affiliate Marketing bedeutet, wie das Provisionsmodell funktioniert und worin es sich vom Network Marketing unterscheidet – nüchtern erklärt, ohne große Einnahme-Versprechen.",
+    image: "AffiliateMarketing-3.png",
   },
   {
     slug: "social-media-strategie-chatgpt",
@@ -300,6 +330,7 @@ export const blogPosts = [
     date: "2024-09-13",
     excerpt:
       "Eine Rolle, drei Prompts, ein kompletter Action-Plan: wie ChatGPT eine Social-Media-Strategie samt 4-Wochen-Zeitplan erstellt hat – mit allen Prompts zum Nachmachen.",
+    image: "SocialMediaStrategiemitChatGPT-5.png",
   },
   {
     slug: "formel-60-minuten-arbeitszeit",
@@ -307,6 +338,7 @@ export const blogPosts = [
     date: "2024-07-08",
     excerpt:
       "1 Stunde Arbeitszeit = 1 Stunde Lebenszeit. Warum es keine unterschiedlichen Stundensätze für „einfache“ und „schwere“ Aufgaben braucht – und wie du deinen Preis findest.",
+    image: "Blog60MinutenFormel.jpg",
   },
   {
     slug: "kunden-abgelehnt",
@@ -314,6 +346,7 @@ export const blogPosts = [
     date: "2024-05-28",
     excerpt:
       "Kein einziger Auftrag – und trotzdem Nein gesagt: warum Bauchgefühl und klare Grenzen wichtiger sind als der erste Umsatz und was ein fauler Apfel damit zu tun hat.",
+    image: "Kundenabgelehnt-2.png",
   },
   {
     slug: "pinterest-marketing",
@@ -321,6 +354,7 @@ export const blogPosts = [
     date: "2024-04-23",
     excerpt:
       "Pinterest ist keine Social-Media-Plattform, sondern eine visuelle Suchmaschine. Was Pinterest Marketing bedeutet und wie deine Inhalte dort gefunden werden.",
+    image: "PinterestPredictsFotos-1-1.png",
   },
   {
     slug: "website-fuer-dein-business",
@@ -328,8 +362,9 @@ export const blogPosts = [
     date: "2024-03-08",
     excerpt:
       "Instagram reicht doch – oder? Warum eine eigene Website das Zuhause deines Business ist und Social-Media-Kanäle nur Cafés sind: eine persönliche Antwort auf eine alte Streitfrage.",
+    image: "BlogWebsite-2.png",
   },
-] as const;
+];
 
 // Leistungen zentral hier pflegen — Kacheln, Leistungsübersicht und
 // Service-Schemas lesen aus diesen Feldern. `scope` ist der prägnante
