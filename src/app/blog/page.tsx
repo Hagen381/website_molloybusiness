@@ -7,6 +7,10 @@ import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
 
+// Hero-Bild der rechten Spalte und Hintergrundfoto des Abschluss-Blocks.
+import heroBild from "@/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg";
+import abschlussHintergrund from "@/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg";
+
 // Vorschaubilder der Artikelliste. Statische Imports sind Pflicht, weil
 // next-image-export-optimizer daraus die Bildmaße und die optimierten
 // Varianten baut — der Dateiname selbst steht bei jedem Artikel in
@@ -150,15 +154,26 @@ export default function Blog() {
               </p>
             </div>
 
-            {/* Im Original steht hier das Foto Juliette-Oppel-Pinterest-Blog.jpg
-                (780×520). Die Datei fehlt noch im Repo, siehe
-                docs/fehlende-bilder.md — vorläufig hält eine weiße Fläche im
-                Seitenverhältnis des Originals den Platz. */}
+            {/* Bild rechts. Ab 1024px feste 436×500px — das ist die volle
+                Breite der 456px-Spalte abzüglich der 10px
+                Elementor-Spalteninnenabstand je Seite (COL), das Bild steht
+                also mittig in der Spalte. Eckenradius 200px oben wie auf der
+                Startseite. Darunter volle Breite im Seitenverhältnis 436:500.
+                Quelle 780×520 (quer), Ausschnitt hochkant: cover skaliert auf
+                die Höhe von 500px, also 750px Breite — sizes folgt der
+                sichtbaren Breite, die Quelle ist ohnehin kleiner. */}
             <div className={`self-center ${COL}`}>
-              <div
-                aria-hidden="true"
-                className="bg-surface aspect-[780/520] w-full"
-              />
+              <div className="relative mx-auto aspect-[436/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:h-[500px] lg:w-[436px] lg:max-w-full">
+                <ExportedImage
+                  src={heroBild}
+                  alt="Juliette sitzt mit offenem Laptop auf einer Couch. Finger liegen auf der Tastatur."
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 436px, 100vw"
+                  basePath={basePath}
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -240,21 +255,34 @@ export default function Blog() {
       </section>
 
       {/* ------------------------------------------------------------------
-          3) ABSCHLUSS — am Original gemessen: 80px/80px, Inhaltsbreite 770px
-          zentriert, Überschrift zentriert.
+          3) ABSCHLUSS — am Original gemessen: Hintergrundfoto
+          (Juliette-Oppel-Header-Kontakt-Pinterest.jpg, cover, Position
+          50% 50%) mit einem Schleier in #D9D9D9 bei 21 % Deckkraft darüber.
+          80px/80px, Inhaltsbreite 770px zentriert, Überschrift zentriert und
+          weiß, Fließtext ebenfalls weiß.
 
-          vorläufig ohne Hintergrundfoto, Datei
-          Juliette-Oppel-Header-Kontakt-Pinterest.jpg fehlt noch
-
-          Im Original liegt hier ein Foto mit einem hellgrauen Schleier
-          (#D9D9D9 bei 21 % Deckkraft) und weißer Überschrift. Solange die
-          Datei fehlt: flächiges #D9D9D9 und Überschrift in #595959, damit sie
-          lesbar bleibt.
+          Das Foto kommt wie im Zitat-Block von /angebote/ über
+          next-image-export-optimizer (absolut, formatfüllend) statt als
+          CSS-Hintergrund ins Layout.
           ------------------------------------------------------------------ */}
-      <section className="bg-gray-light">
+      <section className="relative isolate overflow-hidden">
+        <ExportedImage
+          src={abschlussHintergrund}
+          alt=""
+          aria-hidden="true"
+          fill
+          className="-z-10 object-cover object-[50%_50%]"
+          sizes="100vw"
+          basePath={basePath}
+        />
+        {/* Schleier: #D9D9D9 bei 21 % Deckkraft */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[rgba(217,217,217,0.21)]"
+        />
         <div className="container-page py-[80px]">
-          <div className="mx-auto w-full max-w-[770px]">
-            <h3 className={`text-heading ${H3_ABSCHLUSS}`}>
+          <div className="mx-auto w-full max-w-[770px] text-white">
+            <h3 className={`text-white ${H3_ABSCHLUSS}`}>
               Du möchtest mit mir zusammenarbeiten?
             </h3>
 
@@ -280,7 +308,7 @@ export default function Blog() {
                 href={siteConfig.calendly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary"
+                className="btn btn-secondary"
               >
                 schreib&apos; mir!
               </a>

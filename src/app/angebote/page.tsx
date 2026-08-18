@@ -16,6 +16,7 @@ import fotoJulia from "@/assets/images/angebote/JuliaKallenborn.jpg";
 import fotoNathalie from "@/assets/images/angebote/Nathalie-Weimar.jpg";
 import fotoPostFinance from "@/assets/images/angebote/Bild-PostFinance.svg";
 import fotoJudithKenk from "@/assets/images/angebote/Judith-Kenk.jpg";
+import zitatHintergrund from "@/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg";
 import { services, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
@@ -46,12 +47,15 @@ const KICKER =
 const BODY = "font-body";
 const COL = "lg:px-[10px]";
 
-// Zitat-Trenner. Der Abschnitt hat KEINEN eigenen Hintergrund (der creme
-// Body-Grund scheint durch), deshalb trägt die Zeile die normale dunkle
-// Überschriftenfarbe — das vorherige helle Grau war auf den fälschlich
-// angenommenen dunklen Grund gemünzt. Die Farbe ist nicht nachgemessen.
+// Zitat-Trenner. Am Original gemessen: Antic Didone 38px/53px, Stärke 400,
+// letter-spacing 1.4px, Farbe #595959, zentriert. Im Original erscheint dort
+// Times New Roman, weil die Schriftzuweisung nicht greift — ein Fehler der
+// alten Seite, deshalb hier bewusst die Hausschrift.
+// Der Wert unterhalb von 768px ist NICHT nachgemessen (nur der 1536px-Stand
+// lag vor); 27px/38px hält dieselbe Proportion und verhindert, dass die zwei
+// Zeilen auf schmalen Screens zu Blöcken zerfallen.
 const H2_ZITAT =
-  "font-heading font-normal tracking-[1.4px] text-heading text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
+  "font-heading font-normal tracking-[1.4px] text-heading text-[27px] leading-[38px] md:text-[38px] md:leading-[53px]";
 
 // Abschluss-Abschnitt auf Goldhell: am Original gemessen 28px/40px, Stärke 400,
 // letter-spacing 1.4px, weiß und linksbündig.
@@ -414,16 +418,40 @@ export default function AngebotePage() {
       </section>
 
       {/* ------------------------------------------------------------------
-          4) Zitat-Trenner — am Original gemessen: KEIN eigener Hintergrund,
-          der creme Body-Grund (#F2EDE7) scheint durch. 80px oben / 115px
-          unten, einspaltig, Inhaltsbreite 1000px zentriert.
+          4) Zitat-Trenner — am Original gemessen: Hintergrundfoto
+          (katsia-jazwinska-…, cover, Position 0% 0%) mit einem Schleier in
+          #D9D9D9 bei 62 % Deckkraft darüber. 80px oben / 115px unten,
+          einspaltig, Inhaltsbreite 1000px zentriert.
+
+          Das Foto liegt mit 2560×1707 weit über der Darstellungsgröße und
+          steckt hinter einem hellen Schleier — es kommt deshalb über
+          next-image-export-optimizer (absolut, formatfüllend) statt als
+          CSS-Hintergrund ins Layout, damit es in optimierten Größen
+          ausgeliefert wird.
           ------------------------------------------------------------------ */}
-      <section>
+      <section className="relative isolate overflow-hidden">
+        <ExportedImage
+          src={zitatHintergrund}
+          alt=""
+          aria-hidden="true"
+          fill
+          className="-z-10 object-cover object-[0%_0%]"
+          sizes="100vw"
+          basePath={basePath}
+        />
+        {/* Schleier: #D9D9D9 bei 62 % Deckkraft */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[rgba(217,217,217,0.62)]"
+        />
         <div className="container-page pt-[80px] pb-[115px]">
           <div className="mx-auto max-w-[1000px] text-center">
+            {/* Im Original ein Font-Awesome-Icon (fa-quote-right); da das
+                Projekt keine Icon-Bibliothek einbindet, steht hier das
+                typografische Zeichen in denselben 38px und in #AC8343. */}
             <p
               aria-hidden="true"
-              className="font-heading text-gold-light text-[48px] leading-none"
+              className="font-heading text-gold text-[38px] leading-none"
             >
               ”
             </p>

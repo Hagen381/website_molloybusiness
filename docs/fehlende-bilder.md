@@ -7,6 +7,12 @@ bereits, es fehlt nur die Datei. Diese Liste wird spaeter in einem
 Durchgang nachgeladen; danach nur noch den Import an der im Code
 vermerkten Stelle eintragen.
 
+## Stand
+
+**Offen ist nur noch eine Gruppe: die 17 Vorschaubilder der Artikelliste**
+(unterste Tabelle). Die drei Hintergrundbilder sind nachgeladen **und
+eingebaut** — siehe den naechsten Abschnitt.
+
 ## Wie die Dateien ins Repo kommen
 
 Die Entwicklungsumgebung hat keinen Netzzugang zur alten Domain. Geholt
@@ -35,38 +41,29 @@ angekommen sind. Ist es keins, schreibt er HTTP-Status, Content-Type und den
 Anfang der Antwort in die Zusammenfassung des Laufs, loescht die Datei und
 laesst den Lauf rot enden.
 
-## Hintergrundbilder — vom Workflow abgedeckt, **liegen im Repo**
+## Hintergrundbilder — **erledigt**
 
 Diese drei Dateien holt "Hintergrundbilder nachladen". Sie sind mit Commit
-`97393f7` im Repo angekommen und geprueft (echte JPEG-Daten):
+`97393f7` im Repo angekommen, geprueft (echte JPEG-Daten) und inzwischen an
+allen drei Stellen eingebaut. Hier steht nichts mehr offen.
 
-| Zielpfad im Repo | Dateigroesse | Pixelmasse | gebraucht als |
+| Zielpfad im Repo | Pixelmasse | eingebaut in | Stand |
 | --- | --- | --- | --- |
-| `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | 626.1 KB | 2560 x 1707 px | Hintergrundfoto des Zitat-Blocks oberhalb der Angebots-Kacheln auf /angebote/ |
-| `src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg` | 202.2 KB | 1920 x 1280 px | Hintergrundfoto im Abschluss-Block von /blog/ |
-| `src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg` | 173.9 KB | 780 x 520 px | Bild in der rechten Spalte des /blog/-Hero |
+| `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | 2560 x 1707 px | `src/app/angebote/page.tsx` — Hintergrundfoto des Zitat-Blocks oberhalb der Angebots-Kacheln (cover, Position 0% 0%, Schleier #D9D9D9 bei 62 %) | erledigt |
+| `src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg` | 780 x 520 px | `src/app/blog/page.tsx` — rechte Spalte des Hero (436x500, Eckenradius 200px oben) | erledigt |
+| `src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg` | 1920 x 1280 px | `src/app/blog/page.tsx` — Hintergrundfoto des Abschluss-Blocks (cover, Position 50% 50%, Schleier #D9D9D9 bei 21 %, Ueberschrift und Fliesstext weiss) | erledigt |
 
-**Noch offen: der Einbau.** Die Dateien liegen da, werden im Code aber noch
-nirgends importiert. Die Einbau-Details je Stelle stehen unveraendert in den
-Abschnitten darunter.
+Alle drei kommen ueber `next-image-export-optimizer` ins Layout (die beiden
+Hintergruende absolut und formatfuellend hinter dem Inhalt, `sizes="100vw"`,
+`alt=""`), nicht als CSS-Hintergrund.
 
-## /angebote/ — Zitat-Block oberhalb der Kacheln
-
-| Original-URL | Zielpfad im Repo | gebraucht als |
-| --- | --- | --- |
-| https://molloybusiness.com/wp-content/uploads/2024/03/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg | `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | Hintergrundfoto hinter dem Zitat "Das geht nicht!, sagten sie alle." — der Nachbau zeigt dort bis dahin den cremen Body-Grund |
-
-## /blog/ — Abschluss-Block
-
-| Original-URL | Zielpfad im Repo | gebraucht als |
-| --- | --- | --- |
-| https://molloybusiness.com/wp-content/uploads/2024/03/Juliette-Oppel-Header-Kontakt-Pinterest.jpg | `src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg` | Hintergrundfoto im Abschluss-Block von /blog/ (im Original mit hellgrauem Schleier #D9D9D9 bei 21 % Deckkraft, Ueberschrift weiss) |
-
-## /blog/ — Hero
-
-| Original-URL | Zielpfad im Repo | gebraucht als |
-| --- | --- | --- |
-| https://molloybusiness.com/wp-content/uploads/2024/04/Juliette-Oppel-Pinterest-Blog.jpg | `src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg` | Bild in der rechten Spalte des /blog/-Hero (780x520), alt-Text: "Juliette sitzt mit offenem Laptop auf einer Couch. Finger liegen auf der Tastatur." |
+**Anmerkung zum Kontrast** (bei 1536px nachgemessen, nichts geaendert): die
+weisse Ueberschrift im Abschluss-Block von /blog/ liegt ueber die Breite der
+Zeile gemittelt bei 5.9:1, faellt an der hellsten Stelle des Fotos aber auf
+1.57:1 — rund 44 % der Zeilenflaeche liegen unter 4.5:1. Der Link "Pinterest
+Angebote" im Fliesstext steht unveraendert in #856434 und kommt dort im Mittel
+auf 1.88:1. Das entspricht dem Original; eine Aenderung braucht einen eigenen
+Auftrag.
 
 ## /blog/ — Vorschaubilder der Artikelliste
 
