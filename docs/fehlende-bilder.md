@@ -25,6 +25,16 @@ wird nichts committet.
 Die Vorschaubilder der Artikelliste (unterste Tabelle) sind **nicht** Teil
 dieses Workflows.
 
+**Stolperstein, schon einmal aufgetreten:** Mit dem Standard-User-Agent von
+`curl` antwortet der Host mit HTTP 200, liefert aber kein Bild, sondern eine
+HTML-Seite. `--fail` greift erst ab HTTP 400 und laesst das durch — die Datei
+landet dann mit richtigem Namen, aber falschem Inhalt im Repo. Der Workflow
+sendet deshalb denselben Browser-User-Agent wie `scripts/archiv-holen.py` und
+prueft nach jedem Download per `file --mime-type`, ob wirklich Bilddaten
+angekommen sind. Ist es keins, schreibt er HTTP-Status, Content-Type und den
+Anfang der Antwort in die Zusammenfassung des Laufs, loescht die Datei und
+laesst den Lauf rot enden.
+
 ## Hintergrundbilder — vom Workflow abgedeckt
 
 Diese drei Dateien holt "Hintergrundbilder nachladen":

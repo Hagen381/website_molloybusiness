@@ -7,6 +7,12 @@ name: Hintergrundbilder nachladen
 # Hintergrund: Die Entwicklungsumgebung hat keinen Netzzugang zur alten Domain,
 # der Runner schon. Bricht ein Download ab, endet der Lauf mit Fehler, damit
 # keine halbe Lieferung committet wird.
+#
+# Zum User-Agent: Mit dem Standard-UA von curl antwortet der Host mit HTTP 200,
+# liefert aber kein Bild (Block-/Challenge-Seite). `--fail` greift erst ab
+# HTTP 400 und wuerde das durchlassen. Deshalb derselbe Browser-UA wie in
+# scripts/archiv-holen.py — und zusaetzlich eine Inhaltspruefung, die jede
+# Antwort verwirft, die kein Bild ist, samt Diagnose im Log.
 
 on:
   workflow_dispatch:
@@ -24,19 +30,66 @@ jobs:
         with:
           ref: main
 
-      - name: Bilder herunterladen
+      - name: Bilder herunterladen und pruefen
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
+
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 molloybusiness-archiv/1.0"
 
           mkdir -p src/assets/images/angebote src/assets/images/blog
+
+          fehler=0
 
           hole() {
             url="$1"
             ziel="$2"
             echo "Lade $url -> $ziel"
-            curl --fail --retry 3 --retry-delay 5 --location --silent --show-error \
-              --output "$ziel" "$url"
+
+            if ! meta=$(curl --fail --retry 3 --retry-delay 5 --location \
+              --silent --show-error \
+              --user-agent "$UA" \
+              --header "Accept: image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8" \
+              --header "Accept-Language: de-DE,de;q=0.9" \
+              --header "Referer: https://molloybusiness.com/" \
+              --write-out '%{http_code} %{content_type} %{size_download}' \
+              --output "$ziel" "$url"); then
+              echo "::error::Download fehlgeschlagen: $url"
+              rm -f "$ziel"
+              fehler=1
+              return
+            fi
+
+            echo "  HTTP/Content-Type/Bytes: $meta"
+
+            # Inhaltspruefung: Der Host antwortet auf blockierte Anfragen mit
+            # HTTP 200 und einer HTML-Seite. Nur echte Bilddaten duerfen bleiben.
+            typ=$(file --mime-type --brief "$ziel" 2>/dev/null || echo "unbekannt")
+            if [[ "$typ" != image/* ]]; then
+              echo "::error::Keine Bilddaten von $url — erkannter Typ: $typ"
+              {
+                echo "### Fehlgeschlagen: \`$url\`"
+                echo ""
+                echo "- Antwort (HTTP / Content-Type / Bytes): \`$meta\`"
+                echo "- Erkannter Dateityp der Antwort: \`$typ\`"
+                echo ""
+                echo "Anfang der Antwort:"
+                echo ""
+                echo '```'
+                head --bytes=400 "$ziel" | tr -d '\000' || true
+                echo ""
+                echo '```'
+              } >> "$GITHUB_STEP_SUMMARY"
+              echo "--- Anfang der Antwort ---"
+              head --bytes=400 "$ziel" | tr -d '\000' || true
+              echo ""
+              echo "--- Ende ---"
+              rm -f "$ziel"
+              fehler=1
+              return
+            fi
+
+            echo "  ok — $typ"
           }
 
           hole \
@@ -50,6 +103,11 @@ jobs:
           hole \
             "https://molloybusiness.com/wp-content/uploads/2024/04/Juliette-Oppel-Pinterest-Blog.jpg" \
             "src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg"
+
+          if [[ "$fehler" -ne 0 ]]; then
+            echo "::error::Mindestens eine Datei konnte nicht geladen werden — kein Commit."
+            exit 1
+          fi
 
       - name: Pillow installieren
         run: pip install --quiet Pillow
