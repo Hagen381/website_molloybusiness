@@ -182,22 +182,47 @@ export default function UeberMich() {
 
       {/* ------------------------------------------------------------------
           2) "Warum molloy? Und warum eine Jurte?" — #FFFFFF, 100px/100px,
-          Spalten 456/684. Links das Markenlogo als Bildfläche, rechts
-          Kicker, Überschrift und Fließtext. Unter 1024px steht der Text
-          zuerst, deshalb liegt er im Markup vorn.
+          Spalten 456/684. Links Kicker, Überschrift, goldene Trennlinie und
+          darunter das Markenlogo; rechts ausschließlich der Fließtext.
+          Unter 1024px stapelt sich beides in Markup-Reihenfolge, die
+          Überschrift steht also weiterhin vor dem Text.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
         <div className="container-page py-[100px]">
           {/* 40 % / 60 % — im Original 456px / 684px bei 1140px Rahmen */}
           <div className="grid gap-10 lg:grid-cols-[40%_60%] lg:gap-x-0">
-            <div className={`lg:col-start-2 lg:row-start-1 ${COL}`}>
+            {/* Linke Spalte (456px): Kicker, Überschrift, Trennlinie, Logo. */}
+            <div className={COL}>
               <p className={KICKER}>molloy business</p>
 
               <h2 className={`${H2_GOLD} mt-2`}>
                 Warum molloy? Und warum eine Jurte?
               </h2>
 
-              <p className={`${BODY} mt-6`}>
+              {/* Trennlinie zwischen H2 und Logo: 1.6px solid #AC8343
+                  (das kräftige Button-Gold, NICHT #C49C5E), 371px breit,
+                  linksbündig. `w-full max-w-[371px]` statt `w-[371px]`: eine
+                  feste Breite wäre die min-content-Größe der Grid-Spalte und
+                  würde auf 390px-Screens den Abschnitt überlaufen lassen. */}
+              <hr className="mt-6 w-full max-w-[371px] border-0 border-t-[1.6px] border-solid border-gold" />
+
+              {/* Markenlogo als Bildfläche: 292×292px, keine abgerundeten
+                  Ecken, LINKSBÜNDIG in der 456px-Spalte (10px Abstand zum
+                  linken Spaltenrand = Elementor-Spalteninnenabstand). */}
+              <ExportedImage
+                src={logoImage}
+                alt="Das Bild zeigt das Logo von molloy business. Es hat eine Jurte und den Schriftzug molloy business darunter"
+                width={292}
+                height={292}
+                className="mt-6 h-auto w-[292px] max-w-full lg:mr-auto lg:ml-0"
+                sizes="(min-width: 1024px) 292px, 100vw"
+                basePath={basePath}
+              />
+            </div>
+
+            {/* Rechte Spalte (684px): ausschließlich der Fließtext. */}
+            <div className={COL}>
+              <p className={BODY}>
                 Die Geschichte zum Namen und dem Logo habe ich schon auf meiner
                 vorherigen Website erzählt, bei Instagram und in Workshops. Da
                 sie überall so gut ankommt, erzähle ich sie hier auch.
@@ -254,21 +279,6 @@ export default function UeberMich() {
                   molloy_crew
                 </a>
               </p>
-            </div>
-
-            {/* Markenlogo als Bildfläche: 292×292px, keine abgerundeten Ecken,
-                LINKSBÜNDIG in der 456px-Spalte (10px Abstand zum linken
-                Spaltenrand = Elementor-Spalteninnenabstand). */}
-            <div className={`lg:col-start-1 lg:row-start-1 ${COL}`}>
-              <ExportedImage
-                src={logoImage}
-                alt="Das Bild zeigt das Logo von molloy business. Es hat eine Jurte und den Schriftzug molloy business darunter"
-                width={292}
-                height={292}
-                className="h-auto w-[292px] max-w-full lg:mr-auto lg:ml-0"
-                sizes="(min-width: 1024px) 292px, 100vw"
-                basePath={basePath}
-              />
             </div>
           </div>
         </div>
@@ -333,15 +343,18 @@ export default function UeberMich() {
 
       {/* ------------------------------------------------------------------
           4) "Warum ist mir das Online Business so wichtig?" — #FFFFFF,
-          50px/50px. Im archivierten Original steht der Fließtext in der
-          BREITEN linken Spalte und die Überschrift allein in der schmalen
-          rechten — genau so ist es hier übernommen.
+          50px/50px. Im Original steht der Fließtext in der BREITEN linken
+          Spalte und die Überschrift allein in der schmalen rechten.
+          ACHTUNG: Dieser eine Abschnitt nutzt NICHT den sonst üblichen
+          1140px-Rahmen, sondern 1200px — deshalb hier ein eigener Container
+          statt `container-page`. Alle anderen Abschnitte bleiben bei 1140px.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
-        <div className="container-page py-[50px]">
-          {/* Verhältnis 804 : 396 aus der Messung, auf den 1140px-Rahmen
-              umgelegt (67 % / 33 %) — 804+396 = 1200 passt nicht in den
-              Rahmen, siehe Zusammenfassung. */}
+        {/* 1200px-Rahmen, zentriert. Wie `container-page` greift unterhalb von
+            1248px (1200 + 2×24) ein 24px-Seitenabstand, damit der Text auf
+            schmalen Screens nicht am Fensterrand klebt. */}
+        <div className="mx-auto w-full max-w-[1200px] px-6 py-[50px] min-[1248px]:px-0">
+          {/* 804 : 396 im 1200px-Rahmen = exakt 67 % / 33 % */}
           <div className="grid gap-10 lg:grid-cols-[67%_33%] lg:gap-x-0">
             {/* Unter 1024px steht die Überschrift zuerst (im Original
                 "elementor-reverse-mobile"), deshalb liegt sie im Markup vorn
