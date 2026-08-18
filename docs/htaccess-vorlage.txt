@@ -174,8 +174,12 @@ RewriteRule ^tag/                                         /blog/ [R=301,L]
 RewriteRule ^author/                                      /blog/ [R=301,L]
 
 # --- Zweite, dritte ... Seite der alten Blog-Uebersicht ---------------------
-# Neu steht alles auf einer Seite.
-RewriteRule ^blog/[0-9]+/?$                               /blog/ [R=301,L]
+# KEINE Regel mehr. Hier stand frueher
+#   RewriteRule ^blog/[0-9]+/?$   /blog/ [R=301,L]
+# aus der Zeit, als der Nachbau alle Artikel auf einer Seite zeigte. Inzwischen
+# blaettert die Artikelliste wie das Original (sechs Artikel je Seite), und
+# /blog/2/ sowie /blog/3/ existieren als eigene Seiten. Die Regel wuerde sie
+# per 301 auf /blog/ umleiten und damit unerreichbar machen.
 # Blog-Uebersicht ohne Schraegstrich (auf sich selbst wird NICHT umgeleitet):
 RewriteRule ^blog$                                        /blog/ [R=301,L]
 

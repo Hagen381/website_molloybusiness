@@ -161,10 +161,18 @@ Schlagwörter erwischt werden, die im Archiv nicht auftauchen.
 | --- | --- | --- |
 | `/author/molloy/` | `/blog/` | Autoren-Archiv, im Nachbau nicht vorhanden — **von mir ergänzt** |
 | `/author/britta/` | `/blog/` | Autoren-Archiv, im Nachbau nicht vorhanden — **von mir ergänzt** |
-| `/blog/2/` | `/blog/` | Zweite Seite der alten Blog-Übersicht, im Nachbau steht alles auf einer Seite — **von mir ergänzt** |
 
-Auch hier fängt die `.htaccess` `/author/` und `/blog/<Zahl>/` jeweils komplett
-ab, nicht nur die zwei bzw. eine gefundene Adresse.
+Die `.htaccess` fängt `/author/` komplett ab, nicht nur die zwei gefundenen
+Adressen.
+
+**Für `/blog/<Zahl>/` gibt es bewusst keine Weiterleitung mehr.** Hier stand
+früher eine Regel `^blog/[0-9]+/?$ → /blog/`, weil der Nachbau alle Artikel auf
+einer Seite zeigte. Inzwischen blättert die Artikelliste wie das Original
+(sechs Artikel je Seite), und `/blog/2/` sowie `/blog/3/` existieren als eigene
+Seiten. Die Regel würde sie per 301 auf `/blog/` umleiten und damit
+unerreichbar machen — sie ist deshalb aus dieser Liste und aus
+`htaccess-vorlage.txt` entfernt. Die alten Blätter-Adressen zeigen jetzt auf
+die gleichnamigen neuen Seiten und brauchen keine Umleitung.
 
 ### 5d. RSS-Feeds
 
