@@ -26,10 +26,11 @@ modernisiert, das Erscheinungsbild bleibt erhalten.
   damit `src/app/sitemap.ts` sie automatisch mit aufnimmt.
 - `trailingSlash: true` in `next.config.ts` ist Pflicht (alle URLs enden auf
   `/`, wichtig für die späteren 301-Redirects von den alten WordPress-URLs).
-- Jede neue Unterseite bekommt die `Breadcrumb`-Komponente
-  (`src/components/Breadcrumb.tsx`) oberhalb der H1, mit demselben
-  Seitennamen wie im `BreadcrumbList`-Schema der Seite (am sichersten durch
-  Übergabe derselben Variable, die auch im `pageJsonLd` verwendet wird).
+- **Kein sichtbarer Brotkrumenpfad.** Das Original zeigt auf keiner Seite
+  einen, deshalb hat auch der Nachbau keinen (die frühere Komponente
+  `src/components/Breadcrumb.tsx` ist gelöscht). Das `BreadcrumbList`-Schema
+  im `pageJsonLd` jeder Unterseite bleibt dagegen Pflicht — es ist unsichtbar
+  und für die Suche nützlich.
 
 ## Vorschau-Kanal: GitHub Pages
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
-import Breadcrumb from "@/components/Breadcrumb";
 import TableOfContents from "@/components/TableOfContents";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
@@ -94,8 +93,6 @@ const toc = [
 export default function ZehnDingeImOnlineBusiness() {
   return (
     <>
-      <Breadcrumb pageName={post.title} parent={{ label: "Blog", href: "/blog/" }} />
-
       {/* Intro */}
       <section className="article-column pt-10 pb-[30px]">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">

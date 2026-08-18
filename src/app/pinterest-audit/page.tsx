@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Breadcrumb from "@/components/Breadcrumb";
 import { services, siteConfig } from "@/lib/site-config";
 
 const audit = services.find((s) => s.title === "Pinterest Audit")!;
@@ -123,8 +122,6 @@ const pageJsonLd = {
 export default function PinterestAudit() {
   return (
     <>
-      <Breadcrumb pageName={audit.title} />
-
       {/* Intro */}
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">

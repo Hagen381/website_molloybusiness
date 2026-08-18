@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
-import Breadcrumb from "@/components/Breadcrumb";
 import heroImage from "@/assets/images/angebote/Juliette-Oppel-Online-Business.jpg";
 import laptopImage from "@/assets/images/angebote/Juliette-Oppel-Online-Businessmanagement.jpg";
 import phoneImage from "@/assets/images/angebote/Juliette-Oppel-Pinterest.jpg";
@@ -224,8 +223,6 @@ const pageJsonLd = {
 export default function AngebotePage() {
   return (
     <>
-      <Breadcrumb pageName={pageName} />
-
       {/* ------------------------------------------------------------------
           1) HERO — am Original gemessen: Hintergrund #D9D9D9, 80px/80px,
           Spalten 684/456 (60/40), Text links, Bild rechts.
@@ -482,8 +479,12 @@ export default function AngebotePage() {
           von je 570px OHNE Spaltenabstand — bei vier Kacheln also zwei
           Abschnitte. Am Original gemessen: Hintergrund #FFFFFF,
           Reihe 1 50px/50px, Reihe 2 50px/80px.
-          Kachel selbst: 570×373, Eckenradius 0, Innenabstand 10px,
-          Grafik als Hintergrund mit object-cover.
+          Kachel selbst: Grafikfläche 530×373, Eckenradius 0, mittig in der
+          570er Spalte — links und rechts bleiben je 20px des weißen
+          Abschnittshintergrunds (#FFFFFF) frei. Das ist keine eigene
+          Rahmenlinie, sondern genau der Rand, der beim Überfahren als weißer
+          Rahmen um die abgedunkelte Kachel sichtbar wird.
+          Innenabstand 10px, Grafik als Hintergrund mit object-cover.
           ------------------------------------------------------------------ */}
       {[angebote.slice(0, 2), angebote.slice(2, 4)].map((reihe, reiheIndex) => (
         <section key={reiheIndex} className="bg-surface">
@@ -498,26 +499,27 @@ export default function AngebotePage() {
                   key={angebot.href}
                   href={angebot.href}
                   aria-label={angebot.title}
-                  className="group relative block aspect-[570/373] overflow-hidden p-[10px]"
+                  className="group relative mx-[20px] block aspect-[530/373] overflow-hidden p-[10px]"
                 >
-                  {/* Die Grafik ist 780×520, die Kachel 570×373 — object-cover
-                      beschneidet deshalb oben und unten je rund 5 Bildpixel.
-                      Das ist gewollt und lässt den goldenen Titel oben links
-                      unangetastet (er beginnt erst bei y≈60). */}
+                  {/* Die Grafik ist 780×520 (3:2), die Kachel 530×373 —
+                      object-cover beschneidet deshalb links und rechts je rund
+                      20 Bildpixel, die volle Höhe bleibt sichtbar. Der goldene
+                      Titel bleibt unangetastet: er sitzt zwischen x≈54 und
+                      x≈584 der Grafik. */}
                   <ExportedImage
                     src={angebot.bild}
                     alt={angebot.title}
                     fill
                     className="object-cover"
-                    sizes="(min-width: 1188px) 570px, (min-width: 1024px) 50vw, 100vw"
+                    sizes="(min-width: 1188px) 530px, (min-width: 1024px) 50vw, 100vw"
                     basePath={basePath}
                   />
-                  {/* Schleier — am Original gemessen: #545454, Deckkraft 0.9,
+                  {/* Schleier — am Original gemessen: #595959, Deckkraft 0.9,
                       Übergang 0.3s. Im Ruhezustand komplett durchsichtig, die
                       Grafik bleibt also unangetastet. */}
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-[#545454] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
+                    className="pointer-events-none absolute inset-0 bg-[#595959] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
                   />
                   {/* Beschriftung — am Original gemessen: Arial, 30px/50px,
                       Stärke 600, letter-spacing 1.4px, #D9D9D9, waagerecht und

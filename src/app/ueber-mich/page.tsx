@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
-import Breadcrumb from "@/components/Breadcrumb";
 import heroImage from "@/assets/images/hero-juliette.jpg";
 import { siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
@@ -62,8 +61,6 @@ const pageJsonLd = {
 export default function UeberMich() {
   return (
     <>
-      <Breadcrumb pageName={pageName} />
-
       {/* Intro */}
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">

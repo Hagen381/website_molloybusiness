@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import type { StaticImageData } from "next/image";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
-import Breadcrumb from "@/components/Breadcrumb";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
@@ -128,8 +127,6 @@ const pageJsonLd = {
 export default function Blog() {
   return (
     <>
-      <Breadcrumb pageName="Blog" />
-
       {/* ------------------------------------------------------------------
           1) HERO — am Original gemessen: Hintergrund #D9D9D9, 80px oben /
           50px unten, Spalten 684/456 (60/40), Text links, Bild rechts.
@@ -142,7 +139,10 @@ export default function Blog() {
                 Blog
               </p>
 
-              <h1 className={H1}>Pinterest Marketing Blog</h1>
+              {/* Wortlaut wie im Original — Kleinschreibung und Klammern gehören
+                  dazu. Meta-Title und -Description bleiben davon unberührt,
+                  die sind für die Suche formuliert. */}
+              <h1 className={H1}>(molloy) business blog</h1>
 
               <p className="font-body mt-6">
                 Hier schreibt molloy business über Pinterest Marketing für
@@ -160,8 +160,10 @@ export default function Blog() {
                 also mittig in der Spalte. Eckenradius 200px oben wie auf der
                 Startseite. Darunter volle Breite im Seitenverhältnis 436:500.
                 Quelle 780×520 (quer), Ausschnitt hochkant: cover skaliert auf
-                die Höhe von 500px, also 750px Breite — sizes folgt der
-                sichtbaren Breite, die Quelle ist ohnehin kleiner. */}
+                die Höhe von 500px, also rund 750px Breite. `sizes` muss dieser
+                gerenderten Breite folgen, nicht der sichtbaren 436px — sonst
+                lädt der Browser die 640er-Variante und rechnet sie um rund
+                17 % hoch. */}
             <div className={`self-center ${COL}`}>
               <div className="relative mx-auto aspect-[436/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:h-[500px] lg:w-[436px] lg:max-w-full">
                 <ExportedImage
@@ -169,7 +171,7 @@ export default function Blog() {
                   alt="Juliette sitzt mit offenem Laptop auf einer Couch. Finger liegen auf der Tastatur."
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 436px, 100vw"
+                  sizes="(min-width: 1024px) 750px, 100vw"
                   basePath={basePath}
                   priority
                 />

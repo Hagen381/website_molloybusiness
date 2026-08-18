@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Breadcrumb from "@/components/Breadcrumb";
 import { siteConfig } from "@/lib/site-config";
 
 const path = "/datenschutz/";
@@ -40,8 +39,6 @@ const pageJsonLd = {
 export default function Datenschutz() {
   return (
     <>
-      <Breadcrumb pageName={pageName} />
-
       <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
         <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
           {pageName}
