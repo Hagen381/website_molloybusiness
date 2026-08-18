@@ -273,14 +273,15 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
           3) BLÄTTERLEISTE — am Original gemessen: eigener Abschnitt,
           Hintergrund #FFFFFF, 50px oben / 50px unten, Inhaltsbreite 1120px
           zentriert, Leistenhöhe rund 40px. Nur "« Voriger" und "Nächster »",
-          keine Seitenzahlen. Auf der ersten Seite ist "« Voriger" nicht
-          anklickbar, auf der letzten "Nächster »".
+          keine Seitenzahlen, Abstand zwischen beiden Elementen 18px. Auf der
+          ersten Seite ist "« Voriger" nicht anklickbar, auf der letzten
+          "Nächster »".
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
         <div className="container-page pt-[50px] pb-[50px]">
           <nav
             aria-label="Weitere Artikel"
-            className="mx-auto flex min-h-[40px] w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-10 gap-y-2"
+            className="mx-auto flex min-h-[40px] w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-[18px] gap-y-2"
           >
             {hatVoriger ? (
               <Link href={seitenPfad(seite - 1)} className={BLAETTERN_AKTIV}>
@@ -351,19 +352,13 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
               deinen Bedürfnissen passt.
             </p>
 
-            {/* Im Original zeigt der Button auf /kontakt-pinterest-marketing/.
-                Hier steht unverändert der Calendly-Link — ob er inzwischen auf
-                die neue /kontakt/-Seite zeigen soll, ist eine eigene
-                Entscheidung und nicht Teil dieser Aufgabe. */}
+            {/* Im Original zeigt der Button auf /kontakt-pinterest-marketing/
+                — im Nachbau also auf die eigene Kontaktseite /kontakt/. Interne
+                Route, deshalb next/link und kein target="_blank". */}
             <div className="mt-8 text-center">
-              <a
-                href={siteConfig.calendly}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-              >
+              <Link href="/kontakt/" className="btn btn-secondary">
                 schreib&apos; mir!
-              </a>
+              </Link>
             </div>
           </div>
         </div>
