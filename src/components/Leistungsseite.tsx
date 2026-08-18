@@ -147,8 +147,11 @@ export default function Leistungsseite({
                 <p className={`${CARD_SCOPE} text-center`}>{scope}</p>
               </div>
 
-              {/* c) Merkmalsliste — zentriert, ohne Trennlinien. */}
-              <ul className={`${BODY} text-heading`}>
+              {/* c) Merkmalsliste — zentriert, ohne Trennlinien. Am Original
+                  nachgemessen: 15px zwischen den Merkmalen (Oberkante zu
+                  Oberkante 45px bei 30px Zeilenhöhe), kein Abstand vor dem
+                  ersten und nach dem letzten Eintrag. */}
+              <ul className={`${BODY} space-y-[15px] text-heading`}>
                 {features.map((feature) => (
                   <li
                     key={feature}
@@ -167,8 +170,12 @@ export default function Leistungsseite({
                   wie eine Zusammenarbeit zu dir passt.
                 </p>
                 <div className="mt-6">
+                  {/* Der Hinweissatz darüber kündigt das Erstgespräch an, der
+                      Button führt deshalb direkt zur Terminbuchung. */}
                   <a
-                    href={`mailto:${siteConfig.email}`}
+                    href={siteConfig.calendly}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn btn-primary"
                   >
                     {buttonLabel}
