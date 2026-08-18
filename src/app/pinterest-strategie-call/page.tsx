@@ -1,82 +1,45 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import heroImage from "@/assets/images/angebote/DSC01103-scaled.jpg";
+import Leistungsseite, { BODY } from "@/components/Leistungsseite";
 import { services, siteConfig } from "@/lib/site-config";
 
-const call = services.find((s) => s.title === "Pinterest Strategie Call")!;
+const angebot = services.find((s) => s.title === "Pinterest Strategie Call")!;
 
 const path = "/pinterest-strategie-call/";
 
+// Meta-Title und -Description stammen wörtlich aus dem Original, nur ohne
+// Emoji (die dort als Trenner dienten) und ohne Preisangaben.
 export const metadata: Metadata = {
-  title: "Pinterest Strategie Call für Unternehmen",
+  title: {
+    absolute: "Pinterest Strategie-Call für Unternehmen | Für mehr Klarheit",
+  },
   description:
-    "Pinterest Strategie Call: individuelle Pinterest Beratung in 90 Minuten zu Ausgangslage, Boards und Pin-Themen – mit konkreten nächsten Schritten.",
+    "Pinterest Strategie-Call für Unternehmen, KMU & Lifestyle-Marken: klare Einschätzung, Strategieideen, Orientierung für dein Business.",
   alternates: {
     canonical: path,
   },
 };
 
-const leistungen = [
-  {
-    title: "90-minütiger Videocall",
-    text: "persönliches Gespräch, in dem Zeit für alle deine Pinterest-Fragen ist.",
-  },
-  {
-    title: "Analyse der Ausgangslage",
-    text: "Thema, Zielgruppe, Website und Produkte werden gemeinsam eingeordnet.",
-  },
-  {
-    title: "Konkrete Strategie-Impulse für den Start",
-    text: "abgestimmt auf deine Situation, nicht nach Schema F.",
-  },
-  {
-    title: "Ideen für erste Boards und Pin-Themen",
-    text: "erste Anhaltspunkte für den Aufbau oder die Ausrichtung deines Accounts.",
-  },
-  {
-    title: "Antworten ohne Fachchinesisch",
-    text: "offene Pinterest-Fragen werden verständlich erklärt, nicht nur angerissen.",
-  },
-];
-
-const processSteps = [
-  {
-    title: "Terminfindung & Vorbereitung",
-    text: "Der Termin für den 90-minütigen Videocall wird vereinbart. Vorab schickst du kurze Infos zu Thema, Zielgruppe, Website und Produkten, damit im Call keine Zeit für Grundlagen verloren geht.",
-  },
-  {
-    title: "Der Call",
-    text: "Deine Ausgangslage wird analysiert, konkrete Strategie-Impulse für den Start werden besprochen, dazu erste Ideen für Boards und Pin-Themen. Alle offenen Pinterest-Fragen werden direkt beantwortet.",
-  },
-  {
-    title: "Nächste Schritte",
-    text: "Du gehst mit konkreten Impulsen für den Start aus dem Call. Ob du sie eigenständig umsetzt oder eine weitere Zusammenarbeit mit molloy business startest, entscheidest du danach in Ruhe.",
-  },
-];
-
-// FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
-const faq = [
-  {
-    question: "Wie bereite ich mich am besten auf den Strategie Call vor?",
-    answer:
-      "Viel Vorbereitung braucht es nicht – am wertvollsten ist, wenn du vorab deine dringendsten Fragen sammelst und dir überlegst, welches Ziel Pinterest für dein Unternehmen erfüllen soll. Je klarer diese Punkte sind, desto konkreter können die 90 Minuten auf deine Situation eingehen, statt bei allgemeinen Grundlagen zu bleiben.",
-  },
-  {
-    question:
-      "Sollte ich mit dem Strategie Call oder dem Pinterest Workshop starten?",
-    answer:
-      "Der Workshop vermittelt Grundlagenwissen in einer Stunde und richtet sich an Teams und Events, während der Strategie Call 90 Minuten lang ausschließlich auf deine konkrete Ausgangslage eingeht. Vereinfacht gesagt: Der Workshop beantwortet, wie Pinterest grundsätzlich funktioniert – der Call beantwortet, was das für dein Unternehmen bedeutet und womit du startest.",
-  },
-  {
-    question:
-      "Was passiert, wenn sich im Call zeigt, dass Pinterest nicht zu meinem Unternehmen passt?",
-    answer:
-      "Dann sprechen wir das offen aus – der Call ist eine ehrliche Einschätzung, kein Verkaufsgespräch. Du erfährst in dem Fall, warum Pinterest für deine Ausgangslage gerade nicht der richtige Kanal ist, und ersparst dir eine größere Fehlinvestition. Genau diese Klarheit vor einer Entscheidung ist der eigentliche Zweck der 90 Minuten.",
-  },
-];
+// Merkmalsliste wörtlich aus dem Original.
+const features = [
+  "90 Minuten Video-Call",
+  "Analyse deiner Ausgangslage (Thema, Zielgruppe, Website, Produkte)",
+  "Konkrete Strategie-Impulse für deinen Start",
+  "Ideen für erste Pinnwände & Pin-Themen",
+  "Antworten auf alle deine Pinterest-Fragen – ohne Fachchinesisch",
+] as const;
 
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}${path}#webpage`,
+      url: `${siteConfig.url}${path}`,
+      name: "Pinterest Strategie-Call für Unternehmen",
+      about: { "@id": `${siteConfig.url}/#organization` },
+    },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -89,28 +52,23 @@ const pageJsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: call.title,
+          name: "Angebote",
+          item: `${siteConfig.url}/angebote/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: angebot.title,
           item: `${siteConfig.url}${path}`,
         },
       ],
     },
     {
       "@type": "Service",
-      name: call.title,
-      description: call.description,
+      name: angebot.title,
+      description: angebot.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: faq.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
-        },
-      })),
     },
   ],
 };
@@ -118,164 +76,58 @@ const pageJsonLd = {
 export default function PinterestStrategieCall() {
   return (
     <>
-      {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
-          Pinterest Strategie Call
-        </p>
-        <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
-          Pinterest Strategie Call für Unternehmen
-        </h1>
-        <p className="font-body mt-6 text-lg">
-          Der Pinterest Strategie Call bei molloy business ist ein
-          90-minütiger Videocall, in dem deine Ausgangslage – Thema,
-          Zielgruppe, Website und Produkte – analysiert wird und du konkrete
-          Strategie-Impulse für den Start sowie erste Ideen für Boards und
-          Pin-Themen bekommst. Offene Pinterest-Fragen werden dabei
-          verständlich und ohne Fachchinesisch beantwortet.
-        </p>
-      </section>
-
-      {/* Was du bekommst */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was du bekommst
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Der Pinterest Strategie Call von molloy business bringt Klarheit
-            in deine Ausgangslage und gibt dir konkrete nächste Schritte an
-            die Hand:
+      <Leistungsseite
+        h1="Pinterest Strategie-Call – Klarheit, Fokus & Orientierung für dein Business"
+        image={heroImage}
+        imageAlt="Pinterest strategie"
+        /* Quelle 2560×1707 (querformatig): object-fit: cover skaliert auf
+           500px Höhe, also ~750px Breite, von denen 401px sichtbar sind —
+           `sizes` folgt dieser internen Skalierung, nicht der sichtbaren
+           Breite (siehe src/app/page.tsx). */
+        imageSizes="(min-width: 1024px) 750px, 100vw"
+        cardTitle="Pinterest Strategie-Call"
+        scope={angebot.scope}
+        features={features}
+        buttonLabel="jetzt call buchen"
+        outro={
+          <p>
+            <strong>Du willst deine Pinterest-Strategie direkt umsetzen?</strong>
+            <br />
+            Dann empfehle ich dir meinen{" "}
+            <Link
+              href="/pinterest-account-aufbau/"
+              className="text-gold-text underline"
+            >
+              <strong>Pinterest Account Aufbau für Unternehmen</strong>
+            </Link>{" "}
+            – dort kümmere ich mich um die vollständige technische und
+            strategische Einrichtung deines Accounts.
           </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {leistungen.map((item) => (
-              <li key={item.title}>
-                <strong className="text-heading">{item.title}:</strong>{" "}
-                {item.text}
-              </li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Alle Impulse aus dem Call gehören dir – du kannst sie
-            eigenständig umsetzen oder als Grundlage für eine weitere
-            Zusammenarbeit mit molloy business nutzen.
-          </p>
-        </div>
-      </section>
+        }
+        intro={
+          <>
+            <p className={`${BODY} mt-6`}>
+              Du möchtest verstehen, ob Pinterest der richtige Marketingkanal
+              für dein Unternehmen ist – ohne dich durch widersprüchliche
+              Blogartikel und veraltete Tipps zu kämpfen?
+              <br />
+              Im <em>Pinterest Strategie-Call</em> bekommst du in kurzer Zeit
+              genau das, was dir fehlt: Klarheit, Orientierung und eine
+              realistische Einschätzung, wie Pinterest für dein Business
+              funktionieren kann.
+            </p>
 
-      {/* Für wen sich das eignet */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Für wen sich das eignet
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Der Pinterest Strategie Call eignet sich für Unternehmen, die noch
-          ganz am Anfang stehen und wissen wollen, ob und wie Pinterest für
-          sie funktioniert, genauso wie für Unternehmen mit bestehendem
-          Account, die ihre Strategie überprüfen lassen möchten. Besonders
-          gefragt ist der Call bei touristischen Unternehmen, Food-Marken und
-          Finanzdienstleistern, weil hier eine klare Ausrichtung von Anfang
-          an über die spätere Sichtbarkeit entscheidet. Ebenso passt er für
-          KMU und Selbstständige, die vor einer größeren Investition erst
-          einmal eine fundierte Einschätzung wollen.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Ein bestehender Pinterest-Account ist für den Call keine
-          Voraussetzung. Vorausgesetzt ist lediglich eine eigene Website oder
-          ein Onlineshop, auf den spätere Pins verlinken können.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Auf der Startseite von molloy business als{" "}
-          <Link href="/" className="text-gold-text hover:underline">
-            Pinterest Marketing Agentur
-          </Link>{" "}
-          sind alle Leistungen im Überblick zusammengestellt. Führt der Call
-          zu einem Neuaufbau deines Accounts, ist der{" "}
-          <Link
-            href="/pinterest-account-aufbau/"
-            className="text-gold-text hover:underline"
-          >
-            Pinterest Account Aufbau
-          </Link>{" "}
-          der passende nächste Schritt.
-        </p>
-      </section>
-
-      {/* So läuft es ab */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            So läuft es ab
-          </h2>
-          <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
-            {processSteps.map((step) => (
-              <li key={step.title}>
-                <strong className="text-heading">{step.title}:</strong>{" "}
-                {step.text}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Umfang */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Dein Strategie Call im Überblick
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Der Pinterest Strategie Call ist ein{" "}
-          <strong className="text-heading">
-            einmaliges Beratungsformat
-          </strong>
-          : 90 Minuten Videocall, in denen deine Ausgangslage analysiert wird
-          und du konkrete Strategie-Impulse sowie erste Ideen für Boards und
-          Pin-Themen bekommst – verständlich beantwortet, ohne
-          Fachchinesisch.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
-          bekommst du im Erstgespräch.
-        </p>
-      </section>
-
-      {/* FAQ */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Häufige Fragen zum Pinterest Strategie Call
-          </h2>
-          <div className="mt-8 space-y-10">
-            {faq.map((item) => (
-              <div key={item.question}>
-                <h3 className="text-[22px] leading-tight">{item.question}</h3>
-                <p className="font-body mt-3 text-lg">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Lass uns über deine Pinterest Strategie sprechen
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          In einem unverbindlichen Strategie Call schauen wir gemeinsam, wie
-          Pinterest für dein Unternehmen aussehen kann.
-        </p>
-        <div className="mt-8">
-          <a
-            href={siteConfig.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            strategie call vereinbaren
-          </a>
-        </div>
-      </section>
+            <p className={`${BODY} mt-6`}>
+              Gemeinsam schauen wir uns an, wie deine Themen auf Pinterest
+              performen, welche Formate sinnvoll sind und welche ersten Schritte
+              dir wirklich Ergebnisse bringen.
+              <br />
+              90 Minuten, die dir Zeit sparen, Fehlentscheidungen vermeiden und
+              dir helfen, mit einem klaren Plan weiterzugehen.
+            </p>
+          </>
+        }
+      />
 
       <script
         type="application/ld+json"

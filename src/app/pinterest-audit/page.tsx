@@ -1,86 +1,46 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import heroImage from "@/assets/images/angebote/DSC01461-scaled.jpg";
+import Leistungsseite, { BODY, H2 } from "@/components/Leistungsseite";
 import { services, siteConfig } from "@/lib/site-config";
 
-const audit = services.find((s) => s.title === "Pinterest Audit")!;
+const angebot = services.find((s) => s.title === "Pinterest Audit")!;
 
 const path = "/pinterest-audit/";
 
+// Meta-Title und -Description stammen wörtlich aus dem Original, nur ohne
+// Emoji (die dort als Trenner dienten) und ohne Preisangaben.
 export const metadata: Metadata = {
-  title: "Pinterest Audit & Account Analyse",
+  title: {
+    absolute: "Pinterest Audit für Unternehmen | Pinterest Account Analyse",
+  },
   description:
-    "Pinterest Audit für Unternehmen: Analyse von Profil, Boards, Pin-Performance und Wettbewerb – mit konkreten, priorisierten Handlungsempfehlungen.",
+    "Professionelles Pinterest Audit für deinen bestehenden Business-Account: Performance-Check, Mitbewerberanalyse, Tipps & Strategie.",
   alternates: {
     canonical: path,
   },
 };
 
-const leistungen = [
-  {
-    title: "Erstgespräch zur Ausgangslage",
-    text: "Klärung, wo dein Account aktuell steht und worauf das Audit den Fokus legen soll.",
-  },
-  {
-    title: "Analyse von Profil und Boards",
-    text: "Struktur, Beschreibungen und Aufbau werden im Detail geprüft.",
-  },
-  {
-    title: "Auswertung der Pin-Performance",
-    text: "welche Pins funktionieren, und woran das liegt.",
-  },
-  {
-    title: "Durchsicht der Pinterest Analytics",
-    text: "Kennzahlen werden eingeordnet und im Zusammenhang bewertet.",
-  },
-  {
-    title: "Wettbewerbsanalyse",
-    text: "Einblick, wie vergleichbare Accounts in deiner Branche aufgestellt sind.",
-  },
-  {
-    title: "Abschlussgespräch mit Handlungsempfehlungen",
-    text: "konkrete nächste Schritte für deinen Account, klar priorisiert.",
-  },
-];
-
-const processSteps = [
-  {
-    title: "Erstgespräch",
-    text: "Deine Ausgangslage und der Fokus des Audits werden gemeinsam geklärt, damit die Analyse gezielt auf deine Fragen eingeht.",
-  },
-  {
-    title: "Analyse",
-    text: "Profil, Boards, Pin-Performance, Pinterest Analytics und die Wettbewerbssituation werden geprüft und ausgewertet.",
-  },
-  {
-    title: "Abschlussgespräch",
-    text: "Die Ergebnisse werden vorgestellt und in konkrete Handlungsempfehlungen für deinen Account übersetzt.",
-  },
-];
-
-// FAQPage-Schema wird wortgleich aus `answer` gebaut — Text nur hier ändern.
-const faq = [
-  {
-    question: "Reicht nicht ein Strategie Call statt eines kompletten Audits?",
-    answer:
-      "Der Strategie Call ist ein Beratungsgespräch, das auch ohne bestehenden Account funktioniert und die grobe Richtung klärt. Das Audit geht deutlich tiefer: Es wertet deinen vorhandenen Account samt Zahlen und Wettbewerbsumfeld im Detail aus. Kurz gesagt klärt der Call, wohin die Reise gehen soll – das Audit zeigt, warum dein Account bisher hinter den Erwartungen bleibt.",
-  },
-  {
-    question:
-      "Was passiert mit den Ergebnissen, wenn ich danach nicht mit molloy business weiterarbeite?",
-    answer:
-      "Die Handlungsempfehlungen gehören dir und sind bewusst so formuliert, dass du sie eigenständig oder mit deinem Team umsetzen kannst – eine Folgebeauftragung ist keine Bedingung. Das Audit ist damit auch als einmalige, unabhängige Standortbestimmung nutzbar, bevor du entscheidest, ob und mit wem du dein Pinterest Marketing weiterentwickelst.",
-  },
-  {
-    question:
-      "Welche Zugänge und Unterlagen muss ich für das Audit bereitstellen?",
-    answer:
-      "Für die Analyse braucht molloy business vor allem Einblick in deine Pinterest Analytics, denn öffentlich sichtbare Pins erzählen nur die halbe Geschichte. Wie dieser Zugriff eingerichtet wird, klären wir unkompliziert im Erstgespräch. Aufwendige Unterlagen musst du nicht vorbereiten – deine eigene Einschätzung der bisherigen Ziele ist hilfreicher als jedes Dokument.",
-  },
-];
+// Merkmalsliste wörtlich aus dem Original.
+const features = [
+  "Einstiegs-Call zur Aufnahme des Status Quo",
+  "Profil & Pinnwand Analyse",
+  "Pin Analyse",
+  "Performance Analyse anhand von Pinterest Analytics",
+  "Wettbewerbs-Check",
+  "Abschluss-Call mit Handlungsempfehlung",
+] as const;
 
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}${path}#webpage`,
+      url: `${siteConfig.url}${path}`,
+      name: "Pinterest Audit für Unternehmen",
+      about: { "@id": `${siteConfig.url}/#organization` },
+    },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -93,28 +53,23 @@ const pageJsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: audit.title,
+          name: "Angebote",
+          item: `${siteConfig.url}/angebote/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: angebot.title,
           item: `${siteConfig.url}${path}`,
         },
       ],
     },
     {
       "@type": "Service",
-      name: audit.title,
-      description: audit.description,
+      name: angebot.title,
+      description: angebot.description,
       provider: { "@id": `${siteConfig.url}/#organization` },
       areaServed: ["DE", "AT", "CH"],
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: faq.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
-        },
-      })),
     },
   ],
 };
@@ -122,164 +77,81 @@ const pageJsonLd = {
 export default function PinterestAudit() {
   return (
     <>
-      {/* Intro */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 sm:pt-20">
-        <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
-          Pinterest Audit
-        </p>
-        <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
-          Pinterest Audit und Account Analyse für Unternehmen
-        </h1>
-        <p className="font-body mt-6 text-lg">
-          Das Pinterest Audit bei molloy business ist eine detaillierte
-          Analyse deines bestehenden Accounts: Nach einem Erstgespräch zur
-          Ausgangslage werden Profil, Boards, Pin-Performance, Pinterest
-          Analytics und die Wettbewerbssituation geprüft. Im
-          Abschlussgespräch bekommst du konkrete, umsetzbare
-          Handlungsempfehlungen für deinen weiteren Weg auf Pinterest.
-        </p>
-      </section>
-
-      {/* Was du bekommst */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Was du bekommst
-          </h2>
-          <p className="font-body mt-6 text-lg">
-            Das Pinterest Audit von molloy business nimmt deinen bestehenden
-            Account vollständig unter die Lupe:
+      <Leistungsseite
+        h1="Pinterest Audit für Unternehmen – Analyse & für deinen Business Account"
+        image={heroImage}
+        imageAlt="Pinterest audit"
+        /* Quelle 2560×1707 (querformatig): object-fit: cover skaliert auf
+           500px Höhe, also ~750px Breite, von denen 401px sichtbar sind —
+           `sizes` folgt dieser internen Skalierung, nicht der sichtbaren
+           Breite (siehe src/app/page.tsx). */
+        imageSizes="(min-width: 1024px) 750px, 100vw"
+        cardTitle="Pinterest Audit"
+        scope={angebot.scope}
+        features={features}
+        buttonLabel="jetzt pinterest audit sichern"
+        outro={
+          <p>
+            <strong>Du willst nach dem Audit die Betreuung abgeben?</strong>
+            <br />
+            Dann ist mein Angebot{" "}
+            <Link
+              href="/pinterest-account-management/"
+              className="text-gold-text underline"
+            >
+              <em>
+                <strong>„Pinterest Account Management für Unternehmen“</strong>
+              </em>
+            </Link>{" "}
+            ideal für dich.
           </p>
-          <ul className="font-body mt-4 list-disc space-y-2 pl-6 text-lg">
-            {leistungen.map((item) => (
-              <li key={item.title}>
-                <strong className="text-heading">{item.title}:</strong>{" "}
-                {item.text}
-              </li>
-            ))}
-          </ul>
-          <p className="font-body mt-6 text-lg">
-            Am Ende steht kein anonymer Report, sondern ein persönliches
-            Abschlussgespräch, in dem die Ergebnisse eingeordnet und in
-            konkrete, priorisierte nächste Schritte übersetzt werden.
-          </p>
-        </div>
-      </section>
+        }
+        intro={
+          <>
+            <p className={`${BODY} mt-6`}>
+              Du hast bereits einen Pinterest Business Account, aber bist
+              unsicher, warum deine Pins keine Reichweite aufbauen oder warum
+              der Traffic ausbleibt? Dann ist das{" "}
+              <strong>Pinterest Audit</strong> genau das richtige Angebot für
+              dich.
+            </p>
 
-      {/* Für wen sich das eignet */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Für wen sich das eignet
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Das Pinterest Audit passt für Unternehmen mit bestehendem Account,
-          bei denen die Reichweite gering ist, die passenden Keywords fehlen
-          oder die Strategie insgesamt unklar geworden ist. Besonders
-          hilfreich ist es in Branchen, deren Themen sich schnell
-          weiterentwickeln – etwa im Tourismus, bei Food-Marken oder in der
-          Finanzkommunikation –, weil sich Fehlausrichtungen im Account dort
-          besonders bemerkbar machen. Ebenso geeignet ist es für KMU und Selbstständige, die
-          ihren bestehenden Account einordnen lassen wollen, bevor sie
-          weiter investieren.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Voraussetzung für das Audit ist ein bestehender Pinterest-Account
-          mit einer gewissen Grundlage an Boards und Pins, damit sich
-          Performance und Wettbewerb überhaupt sinnvoll auswerten lassen.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Alle Leistungen als{" "}
-          <Link href="/" className="text-gold-text hover:underline">
-            Pinterest Marketing Agentur
-          </Link>{" "}
-          im Überblick finden sich auf der Startseite von molloy business.
-          Sollen die Ergebnisse des Audits laufend umgesetzt werden,
-          übernimmt im Anschluss das{" "}
-          <Link
-            href="/pinterest-account-management/"
-            className="text-gold-text hover:underline"
-          >
-            Pinterest Account Management
-          </Link>{" "}
-          die weitere Betreuung.
-        </p>
-      </section>
+            <p className={`${BODY} mt-6`}>
+              Ich analysiere deinen Account gründlich, identifiziere Fehler,
+              Lücken und Potenziale – und gebe dir einen klaren Fahrplan an die
+              Hand, wie du Pinterest strategisch und nachhaltig verbessern
+              kannst.
+            </p>
 
-      {/* So läuft es ab */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            So läuft es ab
-          </h2>
-          <ol className="font-body mt-8 list-decimal space-y-6 pl-6 text-lg">
-            {processSteps.map((step) => (
-              <li key={step.title}>
-                <strong className="text-heading">{step.title}:</strong>{" "}
-                {step.text}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+            <h2 className={`${H2} mt-12`}>
+              Warum eine Pinterest Account Analyse sinnvoll ist
+            </h2>
 
-      {/* Umfang */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Dein Audit im Überblick
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          Das Pinterest Audit ist eine{" "}
-          <strong className="text-heading">
-            einmalige Standortbestimmung für deinen bestehenden Account
-          </strong>
-          : Profil, Boards, Pin-Performance, Pinterest Analytics und
-          Wettbewerb werden geprüft – mit einem persönlichen
-          Abschlussgespräch, in dem du konkrete, priorisierte
-          Handlungsempfehlungen bekommst.
-        </p>
-        <p className="font-body mt-4 text-lg">
-          Ein konkretes, auf dein Unternehmen zugeschnittenes Angebot
-          bekommst du im Erstgespräch.
-        </p>
-      </section>
+            <p className={`${BODY} mt-6`}>
+              Viele Unternehmen starten mit Pinterest, ohne zu wissen, was
+              wirklich funktioniert. Typische Probleme sind:
+            </p>
 
-      {/* FAQ */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <h2 className="text-center text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-            Häufige Fragen zum Pinterest Audit
-          </h2>
-          <div className="mt-8 space-y-10">
-            {faq.map((item) => (
-              <div key={item.question}>
-                <h3 className="text-[22px] leading-tight">{item.question}</h3>
-                <p className="font-body mt-3 text-lg">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            <ul className={`${BODY} mt-2 list-disc space-y-2 pl-6`}>
+              <li>kaum Reichweite oder stagnierende Zahlen</li>
+              <li>falsche oder fehlende Keywords</li>
+              <li>unsichtbare Boards oder chaotische Strukturen</li>
+              <li>inkonsistente Designs</li>
+              <li>fehlende Strategie</li>
+              <li>unklare Zielgruppenansprache</li>
+              <li>keine SEO-Optimierung</li>
+            </ul>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h2 className="text-[28px] sm:text-[37px] sm:leading-[51.8px]">
-          Lass uns über dein Pinterest Audit sprechen
-        </h2>
-        <p className="font-body mt-6 text-lg">
-          In einem unverbindlichen Strategie Call schauen wir gemeinsam, ob
-          ein Audit für deinen Account der richtige nächste Schritt ist.
-        </p>
-        <div className="mt-8">
-          <a
-            href={siteConfig.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            strategie call vereinbaren
-          </a>
-        </div>
-      </section>
+            <p className={`${BODY} mt-6`}>
+              Durch meine Erfahrung bekommst du <strong>Transparenz</strong>,{" "}
+              <strong>Klarheit</strong> und{" "}
+              <strong>konkrete Handlungsschritte</strong>, die du direkt umsetzen
+              kannst – egal, ob du später selbst weitermachst oder mir die
+              Betreuung übergibst.
+            </p>
+          </>
+        }
+      />
 
       <script
         type="application/ld+json"
