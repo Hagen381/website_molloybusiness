@@ -85,8 +85,8 @@ hinterlegt). Alle 17 Dateien sind mit Commit `6bb54d1` im Repo angekommen,
 geprueft (echte Bilddaten, je 1200 x 800 px) und in
 `src/components/BlogUebersicht.tsx` unter `vorschaubilder` eingetragen. Die
 Karten der Artikelliste zeigen damit das Beitragsbild und nicht mehr das erste
-Bild aus dem Artikeltext. In der Karte werden sie auf 326x217 zugeschnitten
-(`object-cover`).
+Bild aus dem Artikeltext. In der Karte des dreispaltigen Rasters werden sie
+auf 323x213 zugeschnitten (`object-cover`, oben 50px Eckenradius).
 
 Der Schluessel in `vorschaubilder` ist der Dateiname; welcher Artikel welches
 Bild bekommt, steht bei `blogPosts` in `src/lib/site-config.ts` im Feld

@@ -7,7 +7,6 @@ import {
   artikelDerSeite,
   seitenPfad,
 } from "@/lib/blog-seiten";
-import { formatDateDe } from "@/lib/format";
 import { basePath } from "@/lib/base-path";
 
 // Hero-Bild der rechten Spalte und Hintergrundfoto des Abschluss-Blocks.
@@ -45,14 +44,35 @@ import imgWebsite from "@/assets/images/blog/website-fuer-dein-business/BlogWebs
 const H1 = "text-[34px] leading-[47.6px] md:text-[47px] md:leading-[65.8px]";
 const COL = "lg:px-[10px]";
 
-// Artikelkarte, am Original gemessen: Titel in Antic Didone 24px/33.6px,
-// Stärke 600, Laufweite 1px, Goldhell #C49C5E, linksbündig.
+// ---------------------------------------------------------------------------
+// Artikelkarte des Rasters, am Original bei 1536px nachgemessen.
+// ---------------------------------------------------------------------------
+
+// Titel: Antic Didone 24px/33.6px, Stärke 600, Laufweite 1px, Goldhell
+// #C49C5E, linksbündig.
 const KARTEN_TITEL =
   "font-heading font-semibold tracking-[1px] text-gold-light text-[24px] leading-[33.6px]";
 
-// Anrisstext, am Original gemessen: Arial 16px/30px in #777777 — bewusst
-// kleiner und heller als der normale Fließtext (18px/30px, #545454).
-const KARTEN_ANRISS = "font-body text-[16px] leading-[30px] text-[#777777]";
+// Meta-Zeile: Arial 18px/30px, Stärke 400, Laufweite 1.4px in sehr hellem
+// Grau #D9D9D9 (= --gray-light). Auf weißem Grund ist das im Original kaum
+// lesbar — bewusst so übernommen, siehe Hinweis in der Aufgabenübergabe.
+const KARTEN_META =
+  "font-body font-normal tracking-[1.4px] text-[18px] leading-[30px] text-gray-light";
+
+// Autorenname der Meta-Zeile. Im Original trägt jeder Artikel denselben
+// Namen, deshalb hier eine Konstante statt eines Feldes je Artikel.
+const KARTEN_AUTOR = "Juliette";
+
+// Anrisstext: Arial 18px/30px, Stärke 400, Laufweite 1.4px, #545454 — also
+// derselbe Stil wie der normale Fließtext. (Die früher hier notierten
+// 16px/#777777 waren am falschen Element gemessen.)
+const KARTEN_ANRISS =
+  "font-body font-normal tracking-[1.4px] text-[18px] leading-[30px] text-text";
+
+// Weiterlesen-Link: Antic Didone 18px/30px, Stärke 400, Laufweite 1.4px,
+// Gold #AC8343 (= --gold).
+const KARTEN_WEITERLESEN =
+  "font-heading font-normal tracking-[1.4px] text-[18px] leading-[30px] text-gold hover:underline";
 
 // Abschluss-Abschnitt, am Original gemessen: Antic Didone 37px/40px,
 // Stärke 400, Laufweite 1.4px, zentriert.
@@ -194,74 +214,95 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
       </section>
 
       {/* ------------------------------------------------------------------
-          2) ARTIKELLISTE — am Original gemessen: Hintergrund #FFFFFF,
-          50px/50px, einspaltig über die volle Rahmenbreite. Zeilenabstand
-          35px (aus dem Archiv: classic_row_gap des Elementor-Posts-Widgets).
+          2) ARTIKELRASTER — am Original bei 1536px nachgemessen:
+          Hintergrund #FFFFFF, 50px oben / 50px unten. Im 1140px-Inhaltsrahmen
+          steht ein 1120px breites CSS-Grid mit drei Spalten zu je 340px,
+          Spaltenabstand 50px, Reihenabstand 35px (3×340 + 2×50 = 1120).
+          Sechs Artikel je Seite ergeben zwei Reihen zu drei Karten; auf der
+          letzten Seite (fünf Artikel) bleibt die sechste Position leer, die
+          Karten rücken nicht nach — das macht die Zeilenfüllung des Grids von
+          allein.
 
-          Die Karte hat KEINEN eigenen Hintergrund, keinen Rahmen und keinen
-          Eckenradius: Vorschaubild 326×217 links, Text rechts daneben.
-          Sechs Artikel je Seite, wie im Original.
+          Die Karte hat KEINEN eigenen Hintergrund, keinen Rahmen, keinen
+          Eckenradius und keinen Innenabstand. Inhalt untereinander und
+          linksbündig: Vorschaubild, Titel, Meta-Zeile, Anriss, Weiterlesen.
+
+          Die Spalten stehen bewusst als `1fr` statt als feste 340px: bei
+          exakt 1120px Rasterbreite ergibt das rechnerisch dieselben 340px,
+          unterhalb davon (ab 1024px bis rund 1188px Fensterbreite) schrumpfen
+          sie mit, statt aus dem Rahmen zu laufen.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
         <div className="container-page py-[50px]">
-          <div className="flex flex-col gap-[35px]">
+          <div className="mx-auto grid w-full max-w-[1120px] grid-cols-1 gap-x-[50px] gap-y-[35px] md:grid-cols-2 lg:grid-cols-3">
             {artikel.map((post) => {
               const bild = post.image ? vorschaubilder[post.image] : undefined;
               const href = `/blog/${post.slug}/`;
 
               return (
-                <article key={post.slug} className="md:flex md:gap-[30px]">
-                  {/* Artikel ohne Beitragsbild bekommen keine Bildspalte —
-                      Titel und Anriss laufen dann über die volle Breite. */}
+                // `min-w-0`, damit ein langes Wort im Titel die Spalte nicht
+                // aufzieht und das Raster über den Rahmen schiebt.
+                <article key={post.slug} className="min-w-0">
+                  {/* Artikel ohne Beitragsbild bekommen keine Bildfläche —
+                      Titel und Anriss beginnen dann oben. */}
                   {bild && (
                     <Link
                       href={href}
                       tabIndex={-1}
                       aria-hidden="true"
-                      className="block shrink-0"
+                      className="block"
                     >
-                      {/* ABWEICHUNG: das Original skaliert die Vorschaubilder
+                      {/* Bildfläche 323×213, oben mit 50px Eckenradius. Sie ist
+                          17px schmaler als die 340px-Karte — rechts bleibt im
+                          Original genau dieser Streifen frei. Die 323px sind
+                          eine Obergrenze und gelten erst ab 1024px: darunter
+                          füllt die Fläche die Karte, das Seitenverhältnis
+                          323:213 bleibt in jedem Fall.
+
+                          ABWEICHUNG: das Original skaliert die Vorschaubilder
                           mit object-fit: fill und verzerrt sie dadurch. Hier
-                          object-cover bei gleicher Kachelgröße 326×217 —
-                          gleiche Optik, ohne Verzerrung. Unter 768px steht das
-                          Bild über dem Text, volle Breite, Seitenverhältnis
-                          326:217. */}
-                      <div className="relative aspect-[326/217] w-full overflow-hidden md:aspect-auto md:h-[217px] md:w-[326px]">
+                          object-cover bei gleicher Kachelgröße — gleiche Optik,
+                          ohne Verzerrung. */}
+                      <div className="relative aspect-[323/213] w-full overflow-hidden rounded-t-[50px] lg:max-w-[323px]">
                         <ExportedImage
                           src={bild}
                           alt={post.title}
                           fill
                           className="object-cover"
-                          sizes="(min-width: 768px) 326px, 100vw"
+                          sizes="(min-width: 1024px) 323px, 100vw"
                           basePath={basePath}
                         />
                       </div>
                     </Link>
                   )}
 
-                  <div className={`min-w-0 ${bild ? "mt-4 md:mt-0" : ""}`}>
-                    {/* Im Original ist der Kartentitel ein h1 — auf einer Seite
-                        mit mehreren Artikeln ergibt das mehrere H1. Hier h2,
-                        optisch identisch. */}
-                    <h2 className={KARTEN_TITEL}>
-                      <Link href={href} className="hover:underline">
-                        {post.title}
-                      </Link>
-                    </h2>
-
-                    <p className="font-body text-text mt-1 text-sm">
-                      {formatDateDe(post.date)}
-                    </p>
-
-                    <p className={`${KARTEN_ANRISS} mt-2`}>{post.excerpt}</p>
-
-                    <Link
-                      href={href}
-                      className="text-gold-text font-body mt-2 inline-block text-sm hover:underline"
-                    >
-                      weiterlesen →
+                  {/* Im Original ist der Kartentitel ein h1 — auf einer Seite
+                      mit mehreren Artikeln ergäbe das mehrere H1. Hier h2,
+                      optisch identisch. */}
+                  <h2 className={`${KARTEN_TITEL} ${bild ? "mt-[19px]" : ""}`}>
+                    <Link href={href} className="hover:underline">
+                      {post.title}
                     </Link>
-                  </div>
+                  </h2>
+
+                  {/* Meta-Zeile wie im Original: Autorenname, Leerzeichen,
+                      Datum im technischen Format (2026-06-30). Bewusst NICHT
+                      `formatDateDe` — das Original zeigt hier das ISO-Datum. */}
+                  <p className={`${KARTEN_META} mb-[13px]`}>
+                    {KARTEN_AUTOR} {post.date}
+                  </p>
+
+                  <p className={`${KARTEN_ANRISS} mb-[10px]`}>{post.excerpt}</p>
+
+                  {/* 10px unter dem Anriss + 14px über dem Link = 24px Abstand.
+                      Der Link ist inline-block, deshalb fallen die beiden
+                      Abstände nicht zusammen (kein margin-collapsing). */}
+                  <Link
+                    href={href}
+                    className={`${KARTEN_WEITERLESEN} mt-[14px] inline-block`}
+                  >
+                    Weiterlesen »
+                  </Link>
                 </article>
               );
             })}
