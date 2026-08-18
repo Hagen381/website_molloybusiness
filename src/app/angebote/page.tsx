@@ -381,14 +381,23 @@ export default function AngebotePage() {
                 dauerhaft für dich läuft.
               </p>
 
-              {/* Im Original die alte Kontaktseite — die Adresse kommt jetzt
-                  aus siteConfig. Primär-Button wie die beiden anderen dieser
-                  Seite: der sekundäre (#D9D9D9) wäre auf dem #D9D9D9-Grund
-                  dieses Abschnitts unsichtbar, und im Original tragen alle
-                  drei Buttons dieselben Elementor-Klassen. */}
+              {/* Im Original die alte Kontaktseite — der Button führt jetzt
+                  in die Terminbuchung, deshalb steht der Hinweissatz zum
+                  kostenfreien Erstgespräch darüber (nicht im Original).
+                  Primär-Button wie die beiden anderen dieser Seite: der
+                  sekundäre (#D9D9D9) wäre auf dem #D9D9D9-Grund dieses
+                  Abschnitts unsichtbar, und im Original tragen alle drei
+                  Buttons dieselben Elementor-Klassen. */}
+              <p className={`${BODY} mt-6`}>
+                In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
+                wie eine Zusammenarbeit zu dir passt.
+              </p>
+
               <div className="mt-8">
                 <a
-                  href={`mailto:${siteConfig.email}`}
+                  href={siteConfig.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-primary"
                 >
                   let´s start
@@ -655,10 +664,17 @@ export default function AngebotePage() {
               </p>
 
               {/* Im Original ein mailto — bei einer Terminvereinbarung ist der
-                  Calendly-Link das richtige Ziel. Dunkelgrauer Button
+                  Calendly-Link das richtige Ziel; der Hinweissatz zum
+                  kostenfreien Erstgespräch darüber steht nicht im Original.
+                  Dunkelgrauer Button
                   (.btn-dark): auf dem goldhellen Grund dieses Abschnitts
                   gingen sowohl der goldene Primär- als auch der graue
                   Sekundär-Button unter. */}
+              <p className={`${BODY} mt-6 text-white`}>
+                In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
+                wie eine Zusammenarbeit zu dir passt.
+              </p>
+
               <div className="mt-8">
                 <a
                   href={siteConfig.calendly}
