@@ -1,0 +1,224 @@
+# ============================================================================
+# .htaccess fuer molloybusiness.com  —  Vorlage fuer den Livegang
+# ============================================================================
+#
+# WAS IST DAS?
+# Diese Datei sagt dem Webserver (Apache), was er tun soll, wenn jemand eine
+# alte Adresse der WordPress-Seite aufruft. Statt einer Fehlermeldung ("404 —
+# Seite nicht gefunden") schickt er den Besucher automatisch zur passenden
+# neuen Seite. Das nennt man eine "301-Weiterleitung": die 301 sagt Google
+# "diese Adresse ist dauerhaft umgezogen", damit die Platzierung in der Suche
+# auf die neue Adresse uebergeht.
+#
+# WARUM IST DAS WICHTIG?
+# Die alten Adressen stehen bei Google im Index und sind in allen bereits
+# veroeffentlichten Pinterest-Pins hinterlegt. Diese Pins laufen jahrelang
+# weiter. Ohne die Weiterleitungen landen alle diese Klicks im Nichts.
+#
+# WOHIN GEHOERT DIE DATEI?
+# Auf SiteGround: Site Tools  ->  Site  ->  File Manager  ->  Ordner
+# "public_html" (bzw. "www/molloybusiness.com/public_html"). Dort liegt die
+# Datei "\.htaccess" — genau mit dem Punkt am Anfang. Falls sie nicht sichtbar
+# ist: im File Manager oben rechts die versteckten Dateien einblenden.
+#
+# WIE EINBAUEN?
+#  1. Vorher eine Sicherheitskopie der bestehenden .htaccess anlegen
+#     (herunterladen oder im File Manager zu ".htaccess.backup" kopieren).
+#  2. Den Inhalt dieser Vorlage in die .htaccess einfuegen — und zwar GANZ
+#     OBEN, vor allem, was schon drinsteht.
+#  3. Speichern und im Browser zwei, drei alte Adressen ausprobieren.
+#
+# WENN ETWAS SCHIEFGEHT
+# Bei einem Fehler zeigt die Seite "500 Internal Server Error". Dann einfach
+# die Sicherungskopie zurueckspielen — die Seite ist sofort wieder da. Nichts
+# an dieser Datei ist dauerhaft kaputt zu machen.
+#
+# ----------------------------------------------------------------------------
+# Stand: siehe docs/weiterleitungen.md im Repo (dort steht die vollstaendige
+# Liste mit Begruendung fuer jede einzelne Zeile).
+# ----------------------------------------------------------------------------
+
+
+# ============================================================================
+# TEIL 1 — Immer https und immer ohne "www"
+# ============================================================================
+# Sorgt dafuer, dass es die Seite nur unter EINER Adresse gibt:
+# https://molloybusiness.com/...  —  verschluesselt und ohne "www." davor.
+# Vier Schreibweisen derselben Seite sind sonst vier Adressen fuer Google.
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# http  ->  https
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://molloybusiness.com/$1 [R=301,L]
+
+# www.molloybusiness.com  ->  molloybusiness.com
+RewriteCond %{HTTP_HOST} ^www\.molloybusiness\.com$ [NC]
+RewriteRule ^(.*)$ https://molloybusiness.com/$1 [R=301,L]
+
+# HINWEIS falls die Seite nach dem Einbau in einer Endlosschleife haengt
+# ("zu viele Weiterleitungen"): Manche Hosting-Setups reichen die
+# Verschluesselung ueber einen vorgelagerten Server durch, dann kennt Apache
+# %{HTTPS} nicht. In dem Fall die obere Bedingung ersetzen durch:
+#   RewriteCond %{HTTP:X-Forwarded-Proto} !https
+
+
+# ============================================================================
+# TEIL 2 — Weiterleitungen der alten Seiten
+# ============================================================================
+# Aufbau jeder Zeile:
+#   RewriteRule ^alte-adresse/?$ /neue-adresse/ [R=301,L]
+# Das "/?$" am Ende bedeutet: der Schraegstrich am Schluss darf da sein oder
+# fehlen — beides wird weitergeleitet.
+# Alle neuen Adressen enden auf einen Schraegstrich (trailingSlash: true).
+
+# --- Angebote --------------------------------------------------------------
+RewriteRule ^pinterest-marketing-angebote/?$              /angebote/ [R=301,L]
+RewriteRule ^angebote-pinterest-marketing/?$              /angebote/ [R=301,L]
+
+# Diese beiden Angebote gibt es nicht mehr -> Uebersicht
+RewriteRule ^pinterest-marketing-workshops/?$             /angebote/ [R=301,L]
+RewriteRule ^pinterest-content-paket-unternehmen/?$       /angebote/ [R=301,L]
+
+# --- Einzelne Leistungsseiten ----------------------------------------------
+RewriteRule ^pinterest-account-aufbau-fuer-unternehmen/?$ /pinterest-account-aufbau/ [R=301,L]
+RewriteRule ^pinterest-strategie-call-unternehmen/?$      /pinterest-strategie-call/ [R=301,L]
+RewriteRule ^pinterest-audit-pinterest-account-analyse/?$ /pinterest-audit/ [R=301,L]
+
+# /pinterest-account-management/ heisst neu genauso wie alt. Deshalb hier
+# KEINE Weiterleitung auf sich selbst (das waere eine Endlosschleife) —
+# nur die Schreibweise ohne Schraegstrich wird ergaenzt.
+RewriteRule ^pinterest-account-management$                /pinterest-account-management/ [R=301,L]
+
+# --- Ueber mich und Kontakt ------------------------------------------------
+RewriteRule ^ueber-pinterest-marketing-expertin/?$        /ueber-mich/ [R=301,L]
+# Tippfehler-Link aus dem "rueber huepfen"-Button der alten Startseite:
+RewriteRule ^ueber-pinterest-marketing-expertin/l/?$      /ueber-mich/ [R=301,L]
+
+RewriteRule ^kontakt-pinterest-marketing/?$               /kontakt/ [R=301,L]
+# Zwei alte Fusszeilen-Links, die es als Seite nie gab (einer mit Tippfehler):
+RewriteRule ^zusammenarbeit/?$                            /kontakt/ [R=301,L]
+RewriteRule ^zussammenarbeit/?$                           /kontakt/ [R=301,L]
+
+# --- Rechtliches -----------------------------------------------------------
+# Alter Fusszeilen-Link mit grossem D (Apache unterscheidet Gross-/Kleinschreibung):
+RewriteRule ^Datenschutz/?$                               /datenschutz/ [R=301,L]
+# Cookie-Richtlinie entfaellt, Inhalt steckt jetzt in der Datenschutzerklaerung:
+RewriteRule ^cookie-richtlinie-eu/?$                      /datenschutz/ [R=301,L]
+# /impressum/ und /datenschutz/ heissen neu genauso wie alt -> nur die
+# Schreibweise ohne Schraegstrich ergaenzen, sonst Endlosschleife:
+RewriteRule ^impressum$                                   /impressum/ [R=301,L]
+RewriteRule ^datenschutz$                                 /datenschutz/ [R=301,L]
+
+# --- Ehemalige Seite, jetzt Blogartikel ------------------------------------
+RewriteRule ^online-schulerpraktikum-innovativer-arbeitgeber/?$ /blog/online-schuelerpraktika/ [R=301,L]
+
+
+# ============================================================================
+# TEIL 3 — Weiterleitungen der Blogartikel
+# ============================================================================
+# Frueher lagen die Artikel direkt unter der Domain, jetzt liegen sie alle
+# unter /blog/. Deshalb braucht JEDER Artikel eine Zeile — auch die, deren
+# Name sich sonst nicht aendert.
+
+RewriteRule ^podcast-pinterest-marketing/?$               /blog/podcast-pinterest-marketing/ [R=301,L]
+RewriteRule ^telegram-gruppe-pinterest-marketing-profis/?$ /blog/telegram-gruppe-pinterest-marketing-profis/ [R=301,L]
+RewriteRule ^pinterest-mere-exposure-effekt/?$            /blog/pinterest-mere-exposure-effekt/ [R=301,L]
+RewriteRule ^pinterest-openai-learnings/?$                /blog/pinterest-openai-learnings/ [R=301,L]
+RewriteRule ^pinterest-predicts-report-2026/?$            /blog/pinterest-predicts-report-2026/ [R=301,L]
+RewriteRule ^affiliatemarketing/?$                        /blog/affiliate-marketing/ [R=301,L]
+RewriteRule ^blogartikel-pinterest-marketing/?$           /blog/pinterest-marketing/ [R=301,L]
+RewriteRule ^formel-fuer-60-minuten-arbeitszeit/?$        /blog/formel-60-minuten-arbeitszeit/ [R=301,L]
+RewriteRule ^social-media-strategie-von-chatgptzumnachmachen/?$ /blog/social-media-strategie-chatgpt/ [R=301,L]
+RewriteRule ^warum-ich-einen-kunden-abgelehnt-habe/?$     /blog/kunden-abgelehnt/ [R=301,L]
+RewriteRule ^blogartikel-website-fuer-dein-business/?$    /blog/website-fuer-dein-business/ [R=301,L]
+RewriteRule ^10-dinge-im-online-business-zum-1-mal/?$     /blog/10-dinge-im-online-business/ [R=301,L]
+RewriteRule ^online-schuelerpraktika/?$                   /blog/online-schuelerpraktika/ [R=301,L]
+RewriteRule ^selbststaendigkeitundunsichtbarearbeit/?$    /blog/selbststaendigkeit-unsichtbare-arbeit/ [R=301,L]
+RewriteRule ^blogartikel-online-business-vs-realitaet/?$  /blog/online-business-vs-realitaet/ [R=301,L]
+RewriteRule ^online-business-management-fuer-unternehmen/?$ /blog/online-business-management/ [R=301,L]
+RewriteRule ^blogartikl-15-geschenkideen-fuers-homeoffice/?$ /blog/geschenkideen-homeoffice/ [R=301,L]
+
+
+# ============================================================================
+# TEIL 4 — Artikel, die nicht uebernommen wurden
+# ============================================================================
+# Diese drei Texte gibt es im neuen Auftritt nicht mehr. Damit die alten
+# Adressen trotzdem nicht ins Leere laufen, zeigen sie auf die Blog-Uebersicht.
+
+RewriteRule ^blogartikel-1-jahr-in-thailand-leben/?$      /blog/ [R=301,L]
+RewriteRule ^fakelifeofinsta/?$                           /blog/ [R=301,L]
+RewriteRule ^work-and-travel-mit-kindern-online-business/?$ /blog/ [R=301,L]
+
+
+# ============================================================================
+# TEIL 5 — WordPress-Reste: Kategorien, Schlagworte, Autoren, Blaettern, Feeds
+# ============================================================================
+# Der neue Auftritt hat keine Kategorie-, Schlagwort- und Autorenseiten und
+# keinen RSS-Feed mehr. Alles davon geht auf die Blog-Uebersicht.
+
+# --- Kategorie-Archive (lagen ohne "category" direkt unter der Domain) ------
+RewriteRule ^online-business/?$                           /blog/ [R=301,L]
+RewriteRule ^pinterest-marketing/?$                       /blog/ [R=301,L]
+RewriteRule ^privat/?$                                    /blog/ [R=301,L]
+RewriteRule ^reisen/?$                                    /blog/ [R=301,L]
+RewriteRule ^virtuelle-assistenz/?$                       /blog/ [R=301,L]
+# Achtung: /pinterest-marketing/ ist das alte KATEGORIE-Archiv und zeigt
+# deshalb auf /blog/. Der neue Artikel /blog/pinterest-marketing/ ist der
+# Nachfolger von /blogartikel-pinterest-marketing/ (siehe Teil 3).
+
+# --- Schlagwort- und Autorenseiten (alle auf einen Schlag) ------------------
+RewriteRule ^tag/                                         /blog/ [R=301,L]
+RewriteRule ^author/                                      /blog/ [R=301,L]
+
+# --- Zweite, dritte ... Seite der alten Blog-Uebersicht ---------------------
+# Neu steht alles auf einer Seite.
+RewriteRule ^blog/[0-9]+/?$                               /blog/ [R=301,L]
+# Blog-Uebersicht ohne Schraegstrich (auf sich selbst wird NICHT umgeleitet):
+RewriteRule ^blog$                                        /blog/ [R=301,L]
+
+# --- RSS-Feeds -------------------------------------------------------------
+# Faengt /feed/, /comments/feed/ und alle Artikel-Feeds mit einer Regel ab.
+RewriteRule ^(.+/)?feed/?$                                /blog/ [R=301,L]
+
+# --- Alte Sitemaps ---------------------------------------------------------
+# Der neue Auftritt hat genau eine Sitemap unter /sitemap.xml.
+RewriteRule ^(sitemap_index|page-sitemap|post-sitemap)\.xml$ /sitemap.xml [R=301,L]
+
+</IfModule>
+
+
+# ============================================================================
+# TEIL 6 — Eigene Fehlerseite
+# ============================================================================
+# Falls doch einmal eine Adresse uebrig bleibt, die es nicht mehr gibt, zeigt
+# der Server die gestaltete Fehlerseite des neuen Auftritts statt der nackten
+# Apache-Meldung.
+
+ErrorDocument 404 /404.html
+
+
+# ============================================================================
+# ABSICHTLICH NICHT WEITERGELEITET
+# ============================================================================
+# /wp-content/... , /wp-includes/... , /wp-json/... , /xmlrpc.php
+# Das sind alte WordPress-Innereien (Bilder, Skripte, Schnittstellen). Die
+# sollen sauber mit "nicht gefunden" beantwortet werden. Eine Weiterleitung
+# wuerde hier alte Bild-Adressen auf HTML-Seiten schicken, was Google als
+# Fehler wertet.
+#
+# ============================================================================
+# ZUM NACHPRUEFEN NACH DEM UMZUG
+# ============================================================================
+# Im Terminal (oder ueber ein Online-Werkzeug wie httpstatus.io) pruefen:
+#
+#   curl -I https://molloybusiness.com/pinterest-marketing-angebote/
+#     -> muss "HTTP/2 301" und "location: /angebote/" zeigen
+#
+#   curl -IL https://molloybusiness.com/affiliatemarketing/
+#     -> darf nur EINE Weiterleitung brauchen und muss mit "200" enden
+#
+# Wichtig: es muss ueberall 301 stehen, nicht 302. Nur die 301 gibt die
+# Google-Platzierung an die neue Adresse weiter.

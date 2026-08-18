@@ -1,5 +1,10 @@
 # Offene 301-Weiterleitungen für den Livegang
 
+> **Überholt.** Die vollständige Liste steht jetzt in
+> [`weiterleitungen.md`](weiterleitungen.md), die fertige Apache-Vorlage in
+> [`htaccess-vorlage.txt`](htaccess-vorlage.txt). Diese Datei bleibt nur als
+> Notiz zu den fünf Adressen erhalten, bei denen ein Inhalt ersatzlos entfällt.
+
 Merkliste — hier ist **nichts konfiguriert**. Die Einträge werden erst beim
 Umzug auf SiteGround in der `.htaccess` (oder im Hosting-Panel) angelegt.
 
