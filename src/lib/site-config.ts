@@ -62,10 +62,10 @@ export const navigation = {
     },
     { label: "Über mich", href: "/ueber-mich/" },
     { label: "Blog", href: "/blog/" },
-    { label: "Kontakt", href: `mailto:${siteConfig.email}` },
+    { label: "Kontakt", href: "/kontakt/" },
   ],
   legal: [
-    { label: "Kontakt", href: `mailto:${siteConfig.email}` },
+    { label: "Kontakt", href: "/kontakt/" },
     { label: "Impressum", href: "/impressum/" },
     { label: "Datenschutz", href: "/datenschutz/" },
   ],
@@ -109,6 +109,11 @@ export const sitePages = [
     path: "/blog/",
     changeFrequency: "weekly",
     priority: 0.7,
+  },
+  {
+    path: "/kontakt/",
+    changeFrequency: "monthly",
+    priority: 0.6,
   },
   {
     path: "/blog/podcast-pinterest-marketing/",
