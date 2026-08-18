@@ -35,7 +35,9 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/molloy_business/",
     facebook: "https://www.facebook.com/profile.php?id=61554803184566",
     linkedin: "https://www.linkedin.com/in/juliette-oppel-b8a112245/",
-    pinterest: "https://www.pinterest.de/julietteoppel/",
+    // Markenprofil, nicht das persönliche Profil — so verlinkt es auch die
+    // Live-Seite (Fusszeile aller Originalseiten, siehe docs/original/html/).
+    pinterest: "https://www.pinterest.de/molloybusinesspinterest/",
   },
 } as const;
 

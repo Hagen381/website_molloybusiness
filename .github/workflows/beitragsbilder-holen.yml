@@ -1,0 +1,175 @@
+name: Beitragsbilder nachladen
+
+# Laedt die 17 Beitragsbilder der Blogartikel aus der alten WordPress-Seite
+# molloybusiness.com nach — die Bilder, die das Original ueber jedem Artikel
+# und als `og:image` fuehrt und die auf /blog/ die Karten der Artikelliste
+# bebildern sollen. Laeuft ausschliesslich auf manuellen Zuruf.
+#
+# Quelle der Liste unten: die Tabelle "Vorschaubilder der Artikelliste" in
+# docs/fehlende-bilder.md. Dateinamen bleiben unveraendert.
+#
+# Die bereits vorhandenen Bilder unter src/assets/images/blog/<slug>/ werden
+# NICHT angeruehrt — sie stecken in den Artikeltexten. Die neuen Dateien
+# kommen daneben.
+#
+# Zum User-Agent: Mit dem Standard-UA von curl antwortet der Host mit HTTP 200,
+# liefert aber kein Bild (Block-/Challenge-Seite). `--fail` greift erst ab
+# HTTP 400 und wuerde das durchlassen. Deshalb derselbe Browser-UA wie in
+# scripts/archiv-holen.py — und zusaetzlich eine Inhaltspruefung, die jede
+# Antwort verwirft, die kein Bild ist, samt Diagnose in der Zusammenfassung.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  nachladen:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Bilder herunterladen und pruefen
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 molloybusiness-archiv/1.0"
+
+          # Liste aus docs/fehlende-bilder.md, Abschnitt "Vorschaubilder der
+          # Artikelliste": Original-URL|Zielpfad im Repo.
+          BILDER=(
+            "https://molloybusiness.com/wp-content/uploads/2026/06/podcast-pinterest-1.jpg|src/assets/images/blog/podcast-pinterest-marketing/podcast-pinterest-1.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2026/06/pinterest-marketing-profis-1.jpg|src/assets/images/blog/telegram-gruppe-pinterest-marketing-profis/pinterest-marketing-profis-1.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2026/05/pommespinterest-5.jpg|src/assets/images/blog/pinterest-mere-exposure-effekt/pommespinterest-5.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2026/01/openai_pinterest-1.jpg|src/assets/images/blog/pinterest-openai-learnings/openai_pinterest-1.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2025/12/Pinterest-Predicts-Report-2.jpg|src/assets/images/blog/pinterest-predicts-report-2026/Pinterest-Predicts-Report-2.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2025/11/Online-Business-Management-1.jpg|src/assets/images/blog/online-business-management/Online-Business-Management-1.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2025/07/Online-Business-1.png|src/assets/images/blog/online-business-vs-realitaet/Online-Business-1.png"
+            "https://molloybusiness.com/wp-content/uploads/2025/05/Selbststaendigkeit-1.png|src/assets/images/blog/selbststaendigkeit-unsichtbare-arbeit/Selbststaendigkeit-1.png"
+            "https://molloybusiness.com/wp-content/uploads/2025/02/Online-Fachkraeftegewinnung-5.png|src/assets/images/blog/online-schuelerpraktika/Online-Fachkraeftegewinnung-5.png"
+            "https://molloybusiness.com/wp-content/uploads/2024/12/Jahresrueckblick-1.png|src/assets/images/blog/10-dinge-im-online-business/Jahresrueckblick-1.png"
+            "https://molloybusiness.com/wp-content/uploads/2024/11/WeihnachtsgeschenkefuersHomeoffice-3.png|src/assets/images/blog/geschenkideen-homeoffice/WeihnachtsgeschenkefuersHomeoffice-3.png"
+            "https://molloybusiness.com/wp-content/uploads/2024/09/AffiliateMarketing-2.png|src/assets/images/blog/affiliate-marketing/AffiliateMarketing-2.png"
+            "https://molloybusiness.com/wp-content/uploads/2024/09/SocialMediaStrategiemitChatGPT-3.png|src/assets/images/blog/social-media-strategie-chatgpt/SocialMediaStrategiemitChatGPT-3.png"
+            "https://molloybusiness.com/wp-content/uploads/2024/07/60MinutenFormel-3.jpg|src/assets/images/blog/formel-60-minuten-arbeitszeit/60MinutenFormel-3.jpg"
+            "https://molloybusiness.com/wp-content/uploads/2024/05/Kundenabgelehnt-1.png|src/assets/images/blog/kunden-abgelehnt/Kundenabgelehnt-1.png"
+            "https://molloybusiness.com/wp-content/uploads/2024/04/CoverbildPinterestArtikel.png|src/assets/images/blog/pinterest-marketing/CoverbildPinterestArtikel.png"
+            "https://molloybusiness.com/wp-content/uploads/2022/03/BlogWebsite-3.png|src/assets/images/blog/website-fuer-dein-business/BlogWebsite-3.png"
+          )
+
+          # Zielpfade fuer den Zusammenfassungs-Schritt, damit die Liste nur an
+          # einer Stelle steht.
+          : > "$RUNNER_TEMP/beitragsbilder.txt"
+
+          fehler=0
+
+          hole() {
+            url="$1"
+            ziel="$2"
+            echo "Lade $url -> $ziel"
+            mkdir -p "$(dirname "$ziel")"
+
+            if ! meta=$(curl --fail --retry 3 --retry-delay 5 --location \
+              --silent --show-error \
+              --user-agent "$UA" \
+              --header "Accept: image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8" \
+              --header "Accept-Language: de-DE,de;q=0.9" \
+              --header "Referer: https://molloybusiness.com/" \
+              --write-out '%{http_code} %{content_type} %{size_download}' \
+              --output "$ziel" "$url"); then
+              echo "::error::Download fehlgeschlagen: $url"
+              rm -f "$ziel"
+              fehler=1
+              return
+            fi
+
+            echo "  HTTP/Content-Type/Bytes: $meta"
+
+            # Inhaltspruefung: Der Host antwortet auf blockierte Anfragen mit
+            # HTTP 200 und einer HTML-Seite. Nur echte Bilddaten duerfen bleiben.
+            typ=$(file --mime-type --brief "$ziel" 2>/dev/null || echo "unbekannt")
+            if [[ "$typ" != image/* ]]; then
+              echo "::error::Keine Bilddaten von $url — erkannter Typ: $typ"
+              {
+                echo "### Fehlgeschlagen: \`$url\`"
+                echo ""
+                echo "- Antwort (HTTP / Content-Type / Bytes): \`$meta\`"
+                echo "- Erkannter Dateityp der Antwort: \`$typ\`"
+                echo ""
+                echo "Anfang der Antwort:"
+                echo ""
+                echo '```'
+                head --bytes=400 "$ziel" | tr -d '\000' || true
+                echo ""
+                echo '```'
+              } >> "$GITHUB_STEP_SUMMARY"
+              echo "--- Anfang der Antwort ---"
+              head --bytes=400 "$ziel" | tr -d '\000' || true
+              echo ""
+              echo "--- Ende ---"
+              rm -f "$ziel"
+              fehler=1
+              return
+            fi
+
+            echo "  ok — $typ"
+            printf '%s\n' "$ziel" >> "$RUNNER_TEMP/beitragsbilder.txt"
+          }
+
+          for eintrag in "${BILDER[@]}"; do
+            hole "${eintrag%%|*}" "${eintrag##*|}"
+          done
+
+          if [[ "$fehler" -ne 0 ]]; then
+            echo "::error::Mindestens eine Datei konnte nicht geladen werden — kein Commit."
+            exit 1
+          fi
+
+      - name: Pillow installieren
+        run: pip install --quiet Pillow
+
+      - name: Groesse und Pixelmasse in die Zusammenfassung schreiben
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import os
+          from PIL import Image
+
+          with open(os.environ["RUNNER_TEMP"] + "/beitragsbilder.txt", encoding="utf-8") as f:
+              dateien = [z.strip() for z in f if z.strip()]
+
+          print("## Nachgeladene Beitragsbilder")
+          print()
+          print(f"{len(dateien)} Dateien.")
+          print()
+          print("| Datei | Groesse | Pixelmasse |")
+          print("| --- | --- | --- |")
+          for pfad in dateien:
+              kb = os.path.getsize(pfad) / 1024
+              with Image.open(pfad) as bild:
+                  breite, hoehe = bild.size
+              print(f"| `{pfad}` | {kb:.1f} KB | {breite} x {hoehe} px |")
+          PY
+
+      - name: Ergebnis committen und pushen
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/images/blog
+          if git diff --cached --quiet; then
+            echo "Keine Aenderungen — kein Commit noetig."
+            exit 0
+          fi
+          git commit -m "Beitragsbilder der Blogartikel nachgeladen"
+          git push origin HEAD:main

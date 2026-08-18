@@ -18,28 +18,35 @@ eingebaut** — siehe den naechsten Abschnitt.
 Die Entwicklungsumgebung hat keinen Netzzugang zur alten Domain. Geholt
 werden die Dateien deshalb auf einem GitHub-Runner, per Hand gestartet:
 
-**Actions → "Hintergrundbilder nachladen" → "Run workflow" (Branch `main`).**
+**Actions → Workflow in der linken Spalte waehlen → "Run workflow"
+(Branch `main`).** Es gibt zwei davon:
 
-Der Workflow (`.github/workflows/hintergrundbilder-holen.yml`) laedt die drei
-unten unter "Hintergrundbilder" gelisteten Dateien mit unveraenderten
-Dateinamen, schreibt Groesse und Pixelmasse jeder Datei in die
-Zusammenfassung des Laufs und committet sie als `github-actions[bot]` mit der
-Nachricht "Fehlende Hintergrundbilder nachgeladen" — nur, wenn es tatsaechlich
-Aenderungen gibt. Schlaegt ein Download fehl, endet der Lauf mit Fehler und es
+| Workflow | laedt | Stand |
+| --- | --- | --- |
+| "Hintergrundbilder nachladen" (`.github/workflows/hintergrundbilder-holen.yml`) | die drei Dateien unter "Hintergrundbilder" | erledigt, muss nicht noch einmal laufen |
+| "Beitragsbilder nachladen" (`.github/workflows/beitragsbilder-holen.yml`) | die 17 Dateien unter "Vorschaubilder der Artikelliste" | noch nicht gestartet |
+
+Beide arbeiten gleich. Sie laden die jeweils gelisteten Dateien mit
+unveraenderten Dateinamen, schreiben Groesse und Pixelmasse jeder Datei in die
+Zusammenfassung des Laufs und committen sie als `github-actions[bot]` — nur,
+wenn es tatsaechlich Aenderungen gibt. Commit-Nachricht ist "Fehlende
+Hintergrundbilder nachgeladen" beziehungsweise "Beitragsbilder der Blogartikel
+nachgeladen". Schlaegt ein Download fehl, endet der Lauf mit Fehler und es
 wird nichts committet.
 
-Die Vorschaubilder der Artikelliste (unterste Tabelle) sind **nicht** Teil
-dieses Workflows.
+"Beitragsbilder nachladen" legt seine Dateien **neben** die schon vorhandenen
+Bilder unter `src/assets/images/blog/<slug>/` — dort wird nichts geloescht oder
+ueberschrieben, die vorhandenen Dateien stecken in den Artikeltexten.
 
 **Stolperstein, schon einmal aufgetreten:** Mit dem Standard-User-Agent von
 `curl` antwortet der Host mit HTTP 200, liefert aber kein Bild, sondern eine
 HTML-Seite. `--fail` greift erst ab HTTP 400 und laesst das durch — die Datei
-landet dann mit richtigem Namen, aber falschem Inhalt im Repo. Der Workflow
-sendet deshalb denselben Browser-User-Agent wie `scripts/archiv-holen.py` und
-prueft nach jedem Download per `file --mime-type`, ob wirklich Bilddaten
-angekommen sind. Ist es keins, schreibt er HTTP-Status, Content-Type und den
-Anfang der Antwort in die Zusammenfassung des Laufs, loescht die Datei und
-laesst den Lauf rot enden.
+landet dann mit richtigem Namen, aber falschem Inhalt im Repo. Beide Workflows
+senden deshalb denselben Browser-User-Agent wie `scripts/archiv-holen.py` und
+pruefen nach jedem Download per `file --mime-type`, ob wirklich Bilddaten
+angekommen sind. Ist es keins, schreiben sie HTTP-Status, Content-Type und den
+Anfang der Antwort in die Zusammenfassung des Laufs, loeschen die Datei und
+lassen den Lauf rot enden.
 
 ## Hintergrundbilder — **erledigt**
 
@@ -68,8 +75,10 @@ Auftrag.
 ## /blog/ — Vorschaubilder der Artikelliste
 
 Je Artikel das Beitragsbild des Originals (dort auch als `og:image`
-hinterlegt). In der Karte auf 326x217 zugeschnitten. Nach dem Nachladen
-in `src/app/blog/page.tsx` unter `vorschaubilder` eintragen.
+hinterlegt). In der Karte auf 326x217 zugeschnitten. Geholt werden sie vom
+Workflow "Beitragsbilder nachladen" — er liest genau diese Tabelle. Nach dem
+Nachladen in `src/app/blog/page.tsx` unter `vorschaubilder` eintragen; bis
+dahin zeigen die Karten weiter das jeweils erste Bild aus dem Artikeltext.
 
 | Artikel | Original-URL | Zielpfad im Repo |
 | --- | --- | --- |
