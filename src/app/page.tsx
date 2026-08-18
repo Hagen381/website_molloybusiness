@@ -140,8 +140,8 @@ export default function Home() {
 
               <p className={`${BODY} mt-6`}>
                 Ich bin <strong>Juliette Oppel</strong>,
-                Pinterest-Marketing-Expertin und Strukturprofi für
-                Lifestyle-Marken und KMU.
+                Pinterest-Marketing-Expertin und Strukturprofi mit
+                Schwerpunkt Touristik.
                 <br />
                 Ich helfe dir, Pinterest als{" "}
                 <strong>langfristigen Sichtbarkeitskanal</strong> zu nutzen –
@@ -175,6 +175,11 @@ export default function Home() {
                   dauerhaft Traffic, Reichweite und Kundenanfragen
                 </strong>{" "}
                 generieren – auch Monate nach dem Posting.
+                <br />
+                Für Reiseveranstalter heißt das: Die Reiseplanung beginnt auf
+                Pinterest oft Monate vor der Buchung – und deine Pins bleiben
+                über diesen ganzen Zeitraum auffindbar, statt im schnellen
+                Feed unterzugehen.
               </p>
 
               <p className={`${BODY} mt-6`}>Ich unterstütze dich dabei,</p>
@@ -333,6 +338,15 @@ export default function Home() {
                 Ich stehe für{" "}
                 <strong>Ehrlichkeit, Struktur und Weitblick</strong> – und
                 arbeite nur mit Marken, die dieselben Werte teilen.
+              </p>
+
+              {/* Der Button führt in die Terminbuchung, deshalb steht der
+                  Hinweissatz zum kostenfreien Erstgespräch darüber —
+                  wortgleich mit /angebote/, /kontakt/ und den
+                  Leistungsseiten (nicht im Original). */}
+              <p className={`${BODY} mt-6`}>
+                In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
+                wie eine Zusammenarbeit zu dir passt.
               </p>
 
               <div className="mt-8">
