@@ -35,17 +35,20 @@ angekommen sind. Ist es keins, schreibt er HTTP-Status, Content-Type und den
 Anfang der Antwort in die Zusammenfassung des Laufs, loescht die Datei und
 laesst den Lauf rot enden.
 
-## Hintergrundbilder — vom Workflow abgedeckt
+## Hintergrundbilder — vom Workflow abgedeckt, **liegen im Repo**
 
-Diese drei Dateien holt "Hintergrundbilder nachladen":
+Diese drei Dateien holt "Hintergrundbilder nachladen". Sie sind mit Commit
+`97393f7` im Repo angekommen und geprueft (echte JPEG-Daten):
 
-| Original-URL | Zielpfad im Repo | gebraucht als |
-| --- | --- | --- |
-| https://molloybusiness.com/wp-content/uploads/2024/03/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg | `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | Hintergrundfoto des Zitat-Blocks oberhalb der Angebots-Kacheln auf /angebote/ |
-| https://molloybusiness.com/wp-content/uploads/2024/03/Juliette-Oppel-Header-Kontakt-Pinterest.jpg | `src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg` | Hintergrundfoto im Abschluss-Block von /blog/ |
-| https://molloybusiness.com/wp-content/uploads/2024/04/Juliette-Oppel-Pinterest-Blog.jpg | `src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg` | Bild in der rechten Spalte des /blog/-Hero |
+| Zielpfad im Repo | Dateigroesse | Pixelmasse | gebraucht als |
+| --- | --- | --- | --- |
+| `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | 626.1 KB | 2560 x 1707 px | Hintergrundfoto des Zitat-Blocks oberhalb der Angebots-Kacheln auf /angebote/ |
+| `src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg` | 202.2 KB | 1920 x 1280 px | Hintergrundfoto im Abschluss-Block von /blog/ |
+| `src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg` | 173.9 KB | 780 x 520 px | Bild in der rechten Spalte des /blog/-Hero |
 
-Die Einbau-Details je Stelle stehen unveraendert in den Abschnitten darunter.
+**Noch offen: der Einbau.** Die Dateien liegen da, werden im Code aber noch
+nirgends importiert. Die Einbau-Details je Stelle stehen unveraendert in den
+Abschnitten darunter.
 
 ## /angebote/ — Zitat-Block oberhalb der Kacheln
 
