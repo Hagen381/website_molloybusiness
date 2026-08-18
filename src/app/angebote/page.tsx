@@ -528,8 +528,19 @@ export default function AngebotePage() {
                       sr-only-Text; keine Bewegung, keine Skalierung.
                       `group-hover` steckt in Tailwind v4 in @media (hover: hover)
                       — auf Geräten ohne Mauszeiger bleibt die Beschriftung
-                      also unsichtbar, dort trägt der Titel in der Grafik. */}
-                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
+                      also unsichtbar, dort trägt der Titel in der Grafik.
+
+                      Dazu gehört der Rahmen des Originals: 1.6px solid #D9D9D9,
+                      Eckenradius 0, auf der Innenkante des 10px-Innenabstands
+                      der Kachel (`inset-[10px]` → 510×373−20 = 510×353 bei
+                      voller Kachelgröße). Er ist Teil DIESER Fläche und blendet
+                      deshalb mit derselben Deckkraft-Animation über 1.5s ein —
+                      kein eigener Effekt, keine eigene Dauer. Innenabstände im
+                      Rahmen ab 768px die gemessenen 125px oben/unten und 50px
+                      links/rechts; darunter ist die Kachel schmaler, dort
+                      halten 40px/20px die Beschriftung frei von den Kanten,
+                      ohne sie zu quetschen. */}
+                  <span className="pointer-events-none absolute inset-[10px] flex items-center justify-center border-[1.6px] border-[#D9D9D9] px-[20px] py-[40px] text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 md:px-[50px] md:py-[125px]">
                     <span>
                       {angebot.beschriftung.map((zeile, zeilenIndex) => (
                         <Fragment key={zeile}>
