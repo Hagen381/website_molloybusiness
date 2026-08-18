@@ -1,0 +1,96 @@
+name: Hintergrundbilder nachladen
+
+# Laedt die drei noch fehlenden Hintergrundbilder aus der alten WordPress-Seite
+# molloybusiness.com nach. Laeuft ausschliesslich auf manuellen Zuruf —
+# kein Zeitplan, kein Push-Trigger.
+#
+# Hintergrund: Die Entwicklungsumgebung hat keinen Netzzugang zur alten Domain,
+# der Runner schon. Bricht ein Download ab, endet der Lauf mit Fehler, damit
+# keine halbe Lieferung committet wird.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  nachladen:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Bilder herunterladen
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p src/assets/images/angebote src/assets/images/blog
+
+          hole() {
+            url="$1"
+            ziel="$2"
+            echo "Lade $url -> $ziel"
+            curl --fail --retry 3 --retry-delay 5 --location --silent --show-error \
+              --output "$ziel" "$url"
+          }
+
+          hole \
+            "https://molloybusiness.com/wp-content/uploads/2024/03/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg" \
+            "src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg"
+
+          hole \
+            "https://molloybusiness.com/wp-content/uploads/2024/03/Juliette-Oppel-Header-Kontakt-Pinterest.jpg" \
+            "src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg"
+
+          hole \
+            "https://molloybusiness.com/wp-content/uploads/2024/04/Juliette-Oppel-Pinterest-Blog.jpg" \
+            "src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg"
+
+      - name: Pillow installieren
+        run: pip install --quiet Pillow
+
+      - name: Groesse und Pixelmasse in die Zusammenfassung schreiben
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import os
+          from PIL import Image
+
+          dateien = [
+              "src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg",
+              "src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg",
+              "src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg",
+          ]
+
+          print("## Nachgeladene Hintergrundbilder")
+          print()
+          print("| Datei | Groesse | Pixelmasse |")
+          print("| --- | --- | --- |")
+          for pfad in dateien:
+              kb = os.path.getsize(pfad) / 1024
+              with Image.open(pfad) as bild:
+                  breite, hoehe = bild.size
+              print(f"| `{pfad}` | {kb:.1f} KB | {breite} x {hoehe} px |")
+          PY
+
+      - name: Ergebnis committen und pushen
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/images/angebote src/assets/images/blog
+          if git diff --cached --quiet; then
+            echo "Keine Aenderungen — kein Commit noetig."
+            exit 0
+          fi
+          git commit -m "Fehlende Hintergrundbilder nachgeladen"
+          git push origin HEAD:main

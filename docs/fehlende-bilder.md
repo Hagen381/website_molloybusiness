@@ -7,6 +7,42 @@ bereits, es fehlt nur die Datei. Diese Liste wird spaeter in einem
 Durchgang nachgeladen; danach nur noch den Import an der im Code
 vermerkten Stelle eintragen.
 
+## Wie die Dateien ins Repo kommen
+
+Die Entwicklungsumgebung hat keinen Netzzugang zur alten Domain. Geholt
+werden die Dateien deshalb auf einem GitHub-Runner, per Hand gestartet:
+
+**Actions → "Hintergrundbilder nachladen" → "Run workflow" (Branch `main`).**
+
+Der Workflow (`.github/workflows/hintergrundbilder-holen.yml`) laedt die drei
+unten unter "Hintergrundbilder" gelisteten Dateien mit unveraenderten
+Dateinamen, schreibt Groesse und Pixelmasse jeder Datei in die
+Zusammenfassung des Laufs und committet sie als `github-actions[bot]` mit der
+Nachricht "Fehlende Hintergrundbilder nachgeladen" — nur, wenn es tatsaechlich
+Aenderungen gibt. Schlaegt ein Download fehl, endet der Lauf mit Fehler und es
+wird nichts committet.
+
+Die Vorschaubilder der Artikelliste (unterste Tabelle) sind **nicht** Teil
+dieses Workflows.
+
+## Hintergrundbilder — vom Workflow abgedeckt
+
+Diese drei Dateien holt "Hintergrundbilder nachladen":
+
+| Original-URL | Zielpfad im Repo | gebraucht als |
+| --- | --- | --- |
+| https://molloybusiness.com/wp-content/uploads/2024/03/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg | `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | Hintergrundfoto des Zitat-Blocks oberhalb der Angebots-Kacheln auf /angebote/ |
+| https://molloybusiness.com/wp-content/uploads/2024/03/Juliette-Oppel-Header-Kontakt-Pinterest.jpg | `src/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg` | Hintergrundfoto im Abschluss-Block von /blog/ |
+| https://molloybusiness.com/wp-content/uploads/2024/04/Juliette-Oppel-Pinterest-Blog.jpg | `src/assets/images/blog/Juliette-Oppel-Pinterest-Blog.jpg` | Bild in der rechten Spalte des /blog/-Hero |
+
+Die Einbau-Details je Stelle stehen unveraendert in den Abschnitten darunter.
+
+## /angebote/ — Zitat-Block oberhalb der Kacheln
+
+| Original-URL | Zielpfad im Repo | gebraucht als |
+| --- | --- | --- |
+| https://molloybusiness.com/wp-content/uploads/2024/03/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg | `src/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg` | Hintergrundfoto hinter dem Zitat "Das geht nicht!, sagten sie alle." — der Nachbau zeigt dort bis dahin den cremen Body-Grund |
+
 ## /blog/ — Abschluss-Block
 
 | Original-URL | Zielpfad im Repo | gebraucht als |

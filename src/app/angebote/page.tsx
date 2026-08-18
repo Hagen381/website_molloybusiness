@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
@@ -59,22 +60,40 @@ const H2_ABSCHLUSS =
 
 // ---------------------------------------------------------------------------
 // Die vier Angebote. Titel und Route kommen aus site-config; hier steht nur
-// noch die Kachelgrafik. Es sind die Originalgrafiken der alten Seite (780×520)
-// mit eingebranntem Angebotstitel — gold, oben links. Aus ihnen wurden Preise
-// und Zahlungskonditionen entfernt, sonst sind sie unverändert.
-// Weil der Titel Teil der Grafik ist, trägt die Kachel KEINE HTML-Beschriftung
-// mehr; für Screenreader und Suchmaschinen steht er im aria-label, im alt-Text
-// und zusätzlich als sr-only-Text im Link.
+// noch die Kachelgrafik und die Beschriftung. Es sind die Originalgrafiken der
+// alten Seite (780×520) mit eingebranntem Angebotstitel — gold, oben links. Aus
+// ihnen wurden Preise und Zahlungskonditionen entfernt, sonst sind sie
+// unverändert.
+// `beschriftung` ist die HTML-Beschriftung des Originals, Zeile für Zeile und
+// mit dessen Zeilenumbruch (dort ein <br> in der verlinkten Überschrift). Sie
+// liegt im Ruhezustand auf Deckkraft 0 — sichtbar ist dann nur der goldene
+// Titel in der Grafik — und blendet beim Überfahren ein.
 // ---------------------------------------------------------------------------
 const kacheln = [
-  { href: "/pinterest-account-aufbau/", bild: kachelAufbau },
-  { href: "/pinterest-account-management/", bild: kachelManagement },
-  { href: "/pinterest-strategie-call/", bild: kachelStrategie },
-  { href: "/pinterest-audit/", bild: kachelAudit },
+  {
+    href: "/pinterest-account-aufbau/",
+    bild: kachelAufbau,
+    beschriftung: ["PINTEREST", "ACCOUNT AUFBAU"],
+  },
+  {
+    href: "/pinterest-account-management/",
+    bild: kachelManagement,
+    beschriftung: ["PINTEREST ACCOUNT", "MANAGEMENT"],
+  },
+  {
+    href: "/pinterest-strategie-call/",
+    bild: kachelStrategie,
+    beschriftung: ["PINTEREST", "STRATEGIE CALL"],
+  },
+  {
+    href: "/pinterest-audit/",
+    bild: kachelAudit,
+    beschriftung: ["PINTEREST", "AUDIT"],
+  },
 ] as const;
 
 // Titel aus dem services-Array lesen, statt sie neu einzutippen — derselbe
-// Titel bedient aria-label, alt-Text und den sr-only-Text.
+// Titel bedient aria-label und alt-Text.
 const angebote = kacheln.map((kachel) => {
   const service = services.find((s) => s.href === kachel.href);
   if (!service) {
@@ -461,18 +480,35 @@ export default function AngebotePage() {
                     src={angebot.bild}
                     alt={angebot.title}
                     fill
-                    className="object-cover transition-[filter] duration-300 ease-out group-hover:brightness-95"
+                    className="object-cover"
                     sizes="(min-width: 1188px) 570px, (min-width: 1024px) 50vw, 100vw"
                     basePath={basePath}
                   />
-                  {/* Kein Overlay mehr: es diente allein der Lesbarkeit der
-                      früheren HTML-Beschriftung auf dem Foto und würde die
-                      Grafik jetzt nur abdunkeln. Beim Überfahren bleibt ein
-                      sehr dezenter Effekt — Helligkeit auf 95 %, weich
-                      überblendet, ohne Bewegung, Skalierung oder Farbschleier. */}
-                  {/* Der Titel steht gold in der Grafik. Damit er trotzdem im
-                      Text der Seite vorkommt, hier zusätzlich visuell versteckt. */}
-                  <span className="sr-only">{angebot.title}</span>
+                  {/* Schleier — am Original gemessen: #545454, Deckkraft 0.9,
+                      Übergang 0.3s. Im Ruhezustand komplett durchsichtig, die
+                      Grafik bleibt also unangetastet. */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[#545454] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
+                  />
+                  {/* Beschriftung — am Original gemessen: Arial, 30px/50px,
+                      Stärke 600, letter-spacing 1.4px, #D9D9D9, waagerecht und
+                      senkrecht zentriert, Deckkraft 0 → 1 über 1.5s. Sie ist
+                      echter Text im Link und ersetzt damit den früheren
+                      sr-only-Text; keine Bewegung, keine Skalierung.
+                      `group-hover` steckt in Tailwind v4 in @media (hover: hover)
+                      — auf Geräten ohne Mauszeiger bleibt die Beschriftung
+                      also unsichtbar, dort trägt der Titel in der Grafik. */}
+                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <span>
+                      {angebot.beschriftung.map((zeile, zeilenIndex) => (
+                        <Fragment key={zeile}>
+                          {zeilenIndex > 0 && <br />}
+                          {zeile}
+                        </Fragment>
+                      ))}
+                    </span>
+                  </span>
                 </Link>
               ))}
             </div>
