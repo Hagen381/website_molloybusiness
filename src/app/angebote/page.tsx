@@ -5,10 +5,10 @@ import Breadcrumb from "@/components/Breadcrumb";
 import heroImage from "@/assets/images/angebote/Juliette-Oppel-Online-Business.jpg";
 import laptopImage from "@/assets/images/angebote/Juliette-Oppel-Online-Businessmanagement.jpg";
 import phoneImage from "@/assets/images/angebote/Juliette-Oppel-Pinterest.jpg";
-import kachelAufbau from "@/assets/images/angebote/DSC01181-scaled.jpg";
-import kachelManagement from "@/assets/images/angebote/DSC01061-scaled.jpg";
-import kachelStrategie from "@/assets/images/angebote/DSC01103-scaled.jpg";
-import kachelAudit from "@/assets/images/angebote/DSC01461-scaled.jpg";
+import kachelAufbau from "@/assets/images/angebote/PinterestAccountAufbau.png";
+import kachelManagement from "@/assets/images/angebote/PinterestAccountManagement.png";
+import kachelStrategie from "@/assets/images/angebote/Pinterest-Strategie-Call.png";
+import kachelAudit from "@/assets/images/angebote/Pinterest-Audit.png";
 import fotoDaniela from "@/assets/images/angebote/DanielaBatistadosSantos.jpg";
 import fotoJudithGastner from "@/assets/images/angebote/JudithGastner.jpg";
 import fotoJulia from "@/assets/images/angebote/JuliaKallenborn.jpg";
@@ -57,48 +57,24 @@ const H2_ZITAT =
 const H2_ABSCHLUSS =
   "font-heading font-normal tracking-[1.4px] text-white text-[28px] leading-[40px]";
 
-// Kachelbeschriftung, am Original gemessen: Arial (NICHT Antic Didone),
-// 30px/50px, Stärke 600, letter-spacing 1.4px, zentriert, #D9D9D9.
-// Sie trägt den Angebotstitel jetzt allein — die Kacheln zeigen Fotos ohne
-// eingebrannten Text. Unter 768px eine Stufe kleiner, damit die zwei Zeilen
-// in der seitenverhältnis-gebundenen Kachel nicht über deren Rand hinauslaufen.
-const KACHEL_TITEL =
-  "font-body font-semibold tracking-[1.4px] text-gray-light text-[22px] leading-[36px] md:text-[30px] md:leading-[50px]";
-
 // ---------------------------------------------------------------------------
-// Die vier Angebote. Titel und Route kommen aus site-config; hier stehen nur
-// die im Original zweizeilige Kachelbeschriftung und das Kachelfoto.
-// ABWEICHUNG vom Original: dort lagen in den Kacheln vier eigene Grafiken
-// (780×520), die Preis UND Angebotstitel ins Bild eingebrannt hatten. Die
-// Seite zeigt grundsätzlich keine Preise, also sind diese Grafiken aus dem
-// Repo entfernt. Stattdessen tragen die Kacheln die Fotos der jeweiligen
-// Angebotsseite; den Titel setzt jetzt allein die HTML-Beschriftung.
+// Die vier Angebote. Titel und Route kommen aus site-config; hier steht nur
+// noch die Kachelgrafik. Es sind die Originalgrafiken der alten Seite (780×520)
+// mit eingebranntem Angebotstitel — gold, oben links. Aus ihnen wurden Preise
+// und Zahlungskonditionen entfernt, sonst sind sie unverändert.
+// Weil der Titel Teil der Grafik ist, trägt die Kachel KEINE HTML-Beschriftung
+// mehr; für Screenreader und Suchmaschinen steht er im aria-label, im alt-Text
+// und zusätzlich als sr-only-Text im Link.
 // ---------------------------------------------------------------------------
 const kacheln = [
-  {
-    href: "/pinterest-account-aufbau/",
-    zeilen: ["PINTEREST", "ACCOUNT AUFBAU"],
-    bild: kachelAufbau,
-  },
-  {
-    href: "/pinterest-account-management/",
-    zeilen: ["PINTEREST ACCOUNT", "MANAGEMENT"],
-    bild: kachelManagement,
-  },
-  {
-    href: "/pinterest-strategie-call/",
-    zeilen: ["PINTEREST", "STRATEGIE CALL"],
-    bild: kachelStrategie,
-  },
-  {
-    href: "/pinterest-audit/",
-    zeilen: ["PINTEREST", "AUDIT"],
-    bild: kachelAudit,
-  },
+  { href: "/pinterest-account-aufbau/", bild: kachelAufbau },
+  { href: "/pinterest-account-management/", bild: kachelManagement },
+  { href: "/pinterest-strategie-call/", bild: kachelStrategie },
+  { href: "/pinterest-audit/", bild: kachelAudit },
 ] as const;
 
-// Titel aus dem services-Array lesen, statt sie neu einzutippen — die Kachel
-// zeigt die Original-Beschriftung, das aria-label den gepflegten Titel.
+// Titel aus dem services-Array lesen, statt sie neu einzutippen — derselbe
+// Titel bedient aria-label, alt-Text und den sr-only-Text.
 const angebote = kacheln.map((kachel) => {
   const service = services.find((s) => s.href === kachel.href);
   if (!service) {
@@ -460,7 +436,7 @@ export default function AngebotePage() {
           Abschnitte. Am Original gemessen: Hintergrund #FFFFFF,
           Reihe 1 50px/50px, Reihe 2 50px/80px.
           Kachel selbst: 570×373, Eckenradius 0, Innenabstand 10px,
-          Foto als Hintergrund mit object-cover.
+          Grafik als Hintergrund mit object-cover.
           ------------------------------------------------------------------ */}
       {[angebote.slice(0, 2), angebote.slice(2, 4)].map((reihe, reiheIndex) => (
         <section key={reiheIndex} className="bg-surface">
@@ -475,33 +451,28 @@ export default function AngebotePage() {
                   key={angebot.href}
                   href={angebot.href}
                   aria-label={angebot.title}
-                  className="group relative block aspect-[570/373] overflow-hidden"
+                  className="group relative block aspect-[570/373] overflow-hidden p-[10px]"
                 >
+                  {/* Die Grafik ist 780×520, die Kachel 570×373 — object-cover
+                      beschneidet deshalb oben und unten je rund 5 Bildpixel.
+                      Das ist gewollt und lässt den goldenen Titel oben links
+                      unangetastet (er beginnt erst bei y≈60). */}
                   <ExportedImage
                     src={angebot.bild}
-                    alt=""
+                    alt={angebot.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-[filter] duration-300 ease-out group-hover:brightness-95"
                     sizes="(min-width: 1188px) 570px, (min-width: 1024px) 50vw, 100vw"
                     basePath={basePath}
                   />
-                  {/* Im Original-HTML steht in jeder Kachelspalte ein
-                      elementor-background-overlay — Farbe und Deckkraft
-                      standen im nicht archivierten CSS. Auf dem Foto braucht
-                      die helle Schrift Kontrast, deshalb Schwarz mit 35 %,
-                      beim Überfahren 45 %. Kein Bewegungs- oder
-                      Skalierungseffekt. */}
-                  <span className="absolute inset-0 bg-black/35 transition-colors group-hover:bg-black/45" />
-                  {/* Die Beschriftung sitzt waagerecht UND senkrecht zentriert:
-                      im Original stand sie im unteren dunklen Band der
-                      Kachelgrafik, dieses Band gibt es auf dem Foto nicht. */}
-                  <span className="absolute inset-0 flex items-center justify-center p-[10px] text-center">
-                    <span className={KACHEL_TITEL}>
-                      {angebot.zeilen[0]}
-                      <br />
-                      {angebot.zeilen[1]}
-                    </span>
-                  </span>
+                  {/* Kein Overlay mehr: es diente allein der Lesbarkeit der
+                      früheren HTML-Beschriftung auf dem Foto und würde die
+                      Grafik jetzt nur abdunkeln. Beim Überfahren bleibt ein
+                      sehr dezenter Effekt — Helligkeit auf 95 %, weich
+                      überblendet, ohne Bewegung, Skalierung oder Farbschleier. */}
+                  {/* Der Titel steht gold in der Grafik. Damit er trotzdem im
+                      Text der Seite vorkommt, hier zusätzlich visuell versteckt. */}
+                  <span className="sr-only">{angebot.title}</span>
                 </Link>
               ))}
             </div>
