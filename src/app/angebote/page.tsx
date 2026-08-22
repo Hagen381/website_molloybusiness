@@ -15,17 +15,33 @@ import fotoJulia from "@/assets/images/angebote/JuliaKallenborn.jpg";
 import fotoNathalie from "@/assets/images/angebote/Nathalie-Weimar.jpg";
 import fotoPostFinance from "@/assets/images/angebote/Bild-PostFinance.svg";
 import fotoJudithKenk from "@/assets/images/angebote/Judith-Kenk.jpg";
-import zitatHintergrund from "@/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg";
 import { services, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 const path = "/angebote/";
 const pageName = "Angebote";
 
+// Von der Markeninhaberin freigegeben; der Titel steht absolut (also ohne die
+// Vorlage aus layout.tsx), die Description wird auch vom WebPage-Schema unten
+// gelesen.
+const pageTitle =
+  "Pinterest Marketing Angebote für Unternehmen | molloy business";
+const pageDescription =
+  "Pinterest strategisch aufbauen, optimieren oder komplett auslagern: Pinterest SEO, Content-Strategie, Design und Analyse für dein Unternehmen.";
+
 export const metadata: Metadata = {
-  title: "Pinterest Marketing Angebote für Unternehmen",
-  description:
-    "Pinterest Marketing Angebote für Unternehmen und KMU: Account Aufbau, Account Management, Strategie Call und Audit – organische Sichtbarkeit statt Anzeigen.",
+  title: {
+    absolute: pageTitle,
+  },
+  description: pageDescription,
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
+  },
   alternates: {
     canonical: path,
   },
@@ -39,22 +55,16 @@ export const metadata: Metadata = {
 const H1 = "text-[34px] leading-[47.6px] md:text-[47px] md:leading-[65.8px]";
 const H2_GOLD =
   "font-normal tracking-[1.4px] text-gold-light text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
-const H3_CENTERED =
+const H2_CENTERED =
   "text-center tracking-[1.4px] text-[27px] leading-[30px] md:text-[37px] md:leading-[40px]";
+// H3-Größe innerhalb eines Abschnitts — Antic Didone 24/40, 500, ls 1.4px,
+// #C49C5E (wie die Wert-Titel der Startseite).
+const H3_INLINE =
+  "font-heading font-medium tracking-[1.4px] text-gold-light text-[21px] leading-[32px] md:text-[24px] md:leading-[40px]";
 const KICKER =
   "font-heading font-medium tracking-[1.4px] text-[18px] leading-[28px] md:text-[20px] md:leading-[30px]";
 const BODY = "font-body";
 const COL = "lg:px-[10px]";
-
-// Zitat-Trenner. Am Original gemessen: Antic Didone 38px/53px, Stärke 400,
-// letter-spacing 1.4px, Farbe #595959, zentriert. Im Original erscheint dort
-// Times New Roman, weil die Schriftzuweisung nicht greift — ein Fehler der
-// alten Seite, deshalb hier bewusst die Hausschrift.
-// Der Wert unterhalb von 768px ist NICHT nachgemessen (nur der 1536px-Stand
-// lag vor); 27px/38px hält dieselbe Proportion und verhindert, dass die zwei
-// Zeilen auf schmalen Screens zu Blöcken zerfallen.
-const H2_ZITAT =
-  "font-heading font-normal tracking-[1.4px] text-heading text-[27px] leading-[38px] md:text-[38px] md:leading-[53px]";
 
 // Abschluss-Abschnitt auf Goldhell: am Original gemessen 28px/40px, Stärke 400,
 // letter-spacing 1.4px, weiß und linksbündig.
@@ -106,44 +116,55 @@ const angebote = kacheln.map((kachel) => {
 });
 
 // ---------------------------------------------------------------------------
+// Branchen-Abschnitt — freigegebene Texte, Reihenfolge wie in der Vorlage.
+// Ab 768px stehen die Blöcke zweispaltig, damit der Abschnitt nicht endlos
+// lang wird; die Lesereihenfolge bleibt dabei erhalten.
+// ---------------------------------------------------------------------------
+const branchen = [
+  {
+    titel: "Online-Shops und E-Commerce",
+    text: "Produkte, Kollektionen, Kategorien und Ratgeber lassen sich über Pinterest langfristig auffindbar machen und gezielt mit den passenden Seiten im Shop verknüpfen.",
+  },
+  {
+    titel: "Reiseveranstalter, Destinationen und Hospitality-Unternehmen",
+    text: "Reisen werden oft lange vor der eigentlichen Buchung geplant. Pinterest bietet die Möglichkeit, potenzielle Gäste bereits während der Inspirations- und Planungsphase mit Destinationen, Reiseideen, Routen und Angeboten zu erreichen.",
+  },
+  {
+    titel: "Food- und Lebensmittelmarken",
+    text: "Rezepte, Produkte, saisonale Themen, Inspiration und erklärungsbedürftige Lebensmittel bieten zahlreiche Suchanlässe und können langfristig auf relevante Website-Inhalte verweisen.",
+  },
+  {
+    titel: "Interior-, Wohn-, Garten- und Lifestyle-Marken",
+    text: "Pinterest wird intensiv zur Planung und Inspiration rund um Wohnen, Einrichtung, Garten, DIY und Lifestyle genutzt. Visuelle Produkte und Inhalte lassen sich deshalb besonders gut in eine Pinterest-SEO-Strategie integrieren.",
+  },
+  {
+    titel: "Beauty-, Fashion- und Wellness-Unternehmen",
+    text: "Looks, Trends, Routinen, Produkte und saisonale Themen bieten viele Möglichkeiten, potenzielle Kunden bereits während Recherche und Inspiration zu erreichen.",
+  },
+  {
+    titel: "Finanzdienstleister und Versicherungen",
+    text: "Auch weniger visuelle Branchen können Pinterest sinnvoll einsetzen, wenn sie über hilfreiche Inhalte verfügen. Ratgeber, Erklärartikel und langfristig relevante Finanzthemen können über die Pinterest-Suche neue Kontaktpunkte mit potenziellen Kunden schaffen.",
+  },
+  {
+    titel: "Content-getriebene Unternehmen und Publisher",
+    text: "Unternehmen mit einem größeren Bestand an Blogartikeln, Ratgebern, Magazininhalten, Videos oder Podcasts können vorhandenen Content über Pinterest immer wieder neu sichtbar machen und gezielt Besucher auf ihre Website führen.",
+  },
+];
+
+// Die Aufzählung im Arbeitsweise-Abschnitt — freigegebener Wortlaut.
+const arbeitsweiseListe = [
+  "wonach deine potenziellen Kunden suchen,",
+  "welche Inhalte bereits vorhanden sind,",
+  "welche Seiten deiner Website gezielt sichtbar werden sollen",
+  "und wann relevante Themen auf Pinterest an Bedeutung gewinnen.",
+];
+
+// ---------------------------------------------------------------------------
 // Kundenstimmen — wortgleich aus dem Original übernommen, Freigaben liegen vor.
+// Reihenfolge nach Pinterest-Bezug (PostFinance zuerst).
 // Bewusst NUR sichtbarer Text: kein Review-/AggregateRating-Schema.
 // ---------------------------------------------------------------------------
 const kundenstimmen = [
-  {
-    text: '"Ich liebe es mit Juliette zu arbeiten. Man merkt ihre langjährige Erfahrung, sie denkt mit und bringt immer neue tolle Ideen ins Unternehmen. Sie hat ein sehr gutes Feingefühl, versteht Zusammenhänge sehr schnell und erkennt wo im Unternehmen noch verborgene Potenziale sind. Die Zusammenarbeit macht immer Spaß und Freude. Sie bringt eine Energie mit für die ich sehr dankbar bin. Danke für alles meine Liebe."',
-    name: "Daniela Batista dos Santos",
-    rolle: "CEO | The Circle of Wonderwomen LLC",
-    foto: fotoDaniela,
-    alt: "Daniela Batista dos Santos",
-    contain: false,
-  },
-  {
-    text: '"Juliette ist eine wunderbare Mischung aus Professionalität, Kompetenz, Zuverlässigkeit, Neugier, Liebenswürdigkeit, Offenheit, Flexibilität, Hartnäckigkeit und Kreativität. Mit ihr zusammenzuarbeiten, kann ich nur jedem empfehlen bzw. wünschen! :-)"',
-    name: "Dr. Judith Gastner",
-    rolle: "Geschäftsführerin | PaarBalance GmbH",
-    foto: fotoJudithGastner,
-    alt: "JudithGastner",
-    contain: false,
-  },
-  {
-    text: "“Ich liebe die Zusammenarbeit mit Juliette sehr! Sowohl menschlich aber auch auf professioneller Ebene könnte ich mir keine bessere OBM vorstellen. Danke für dich!”",
-    name: "Julia Kallenborn",
-    rolle: "Geschäftsführerin | Licht und Liebe Media GmbH",
-    foto: fotoJulia,
-    alt: "JuliaKallenborn",
-    contain: false,
-  },
-  {
-    // Im Original hing an "Videokurs" ein Udemy-Link mit Affiliate-Kennung;
-    // der Satz bleibt, die Verlinkung ist ersatzlos entfernt.
-    text: '"Dank der kompetenten Beratung von Juliette habe ich das Thema Pinterest Marketing endlich verstanden und konnte es auch erfolgreich umsetzen. Tolle Tipps auf was man achten muss usw. Ich kann die Zusammenarbeit nur jedem ans Herz legen und wer nur einmal kurz reinschnuppern mag. Schaut euch den kurzen Videokurs an. "',
-    name: "Nathalie Weimar",
-    rolle: "Ringana Partnerin",
-    foto: fotoNathalie,
-    alt: "Nathalie Weimar zum Thema Pinterest Marketing",
-    contain: false,
-  },
   {
     // Die Linkadresse war im Original fehlerhaft (doppeltes „h“ im Schema)
     // und lief ins Leere — hier korrigiert.
@@ -167,15 +188,40 @@ const kundenstimmen = [
     alt: "Judith Kenk zum Pinterest Workshop",
     contain: false,
   },
-];
-
-// Die Aufzählung im zweiten Abschnitt — wortgleich aus dem Original, ohne die
-// beiden entfallenen Angebote.
-const angebotsListe = [
-  "Pinterest Account Aufbau",
-  "Pinterest Account Management",
-  "Pinterest Strategie & Beratung",
-  "Pinterest Audit",
+  {
+    // Im Original hing an "Videokurs" ein Udemy-Link mit Affiliate-Kennung;
+    // der Satz bleibt, die Verlinkung ist ersatzlos entfernt.
+    text: '"Dank der kompetenten Beratung von Juliette habe ich das Thema Pinterest Marketing endlich verstanden und konnte es auch erfolgreich umsetzen. Tolle Tipps auf was man achten muss usw. Ich kann die Zusammenarbeit nur jedem ans Herz legen und wer nur einmal kurz reinschnuppern mag. Schaut euch den kurzen Videokurs an. "',
+    name: "Nathalie Weimar",
+    rolle: "Ringana Partnerin",
+    foto: fotoNathalie,
+    alt: "Nathalie Weimar zum Thema Pinterest Marketing",
+    contain: false,
+  },
+  {
+    text: '"Juliette ist eine wunderbare Mischung aus Professionalität, Kompetenz, Zuverlässigkeit, Neugier, Liebenswürdigkeit, Offenheit, Flexibilität, Hartnäckigkeit und Kreativität. Mit ihr zusammenzuarbeiten, kann ich nur jedem empfehlen bzw. wünschen! :-)"',
+    name: "Dr. Judith Gastner",
+    rolle: "Geschäftsführerin | PaarBalance GmbH",
+    foto: fotoJudithGastner,
+    alt: "JudithGastner",
+    contain: false,
+  },
+  {
+    text: '"Ich liebe es mit Juliette zu arbeiten. Man merkt ihre langjährige Erfahrung, sie denkt mit und bringt immer neue tolle Ideen ins Unternehmen. Sie hat ein sehr gutes Feingefühl, versteht Zusammenhänge sehr schnell und erkennt wo im Unternehmen noch verborgene Potenziale sind. Die Zusammenarbeit macht immer Spaß und Freude. Sie bringt eine Energie mit für die ich sehr dankbar bin. Danke für alles meine Liebe."',
+    name: "Daniela Batista dos Santos",
+    rolle: "CEO | The Circle of Wonderwomen LLC",
+    foto: fotoDaniela,
+    alt: "Daniela Batista dos Santos",
+    contain: false,
+  },
+  {
+    text: "“Ich liebe die Zusammenarbeit mit Juliette sehr! Sowohl menschlich aber auch auf professioneller Ebene könnte ich mir keine bessere OBM vorstellen. Danke für dich!”",
+    name: "Julia Kallenborn",
+    rolle: "Geschäftsführerin | Licht und Liebe Media GmbH",
+    foto: fotoJulia,
+    alt: "JuliaKallenborn",
+    contain: false,
+  },
 ];
 
 const pageJsonLd = {
@@ -186,7 +232,7 @@ const pageJsonLd = {
       "@id": `${siteConfig.url}${path}#webpage`,
       url: `${siteConfig.url}${path}`,
       name: "Pinterest Marketing Angebote für Unternehmen",
-      description: metadata.description,
+      description: pageDescription,
       isPartOf: { "@id": `${siteConfig.url}/#organization` },
     },
     {
@@ -232,41 +278,39 @@ export default function AngebotePage() {
           <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-x-0">
             <div className={COL}>
               <h1 className={H1}>
-                4 Pinterest Marketing Angebote für Unternehmen – mehr
-                Reichweite, Traffic &amp; Wachstum
+                Pinterest Marketing Angebote für Unternehmen
               </h1>
 
-              <p className={`${BODY} mt-6`}>
-                Mit professionellem Pinterest Marketing holst du dir einen
-                Marketingkanal ins Business, der langfristig Traffic,
-                Sichtbarkeit und Kunden bringt – ohne tägliches Posten, ohne
-                Algorithmus-Stress und ohne ständiges Bespielen dutzender
-                Kanäle.
+              <p className={`${KICKER} text-gold-light mt-4`}>
+                Pinterest strategisch aufbauen, optimieren oder komplett
+                auslagern.
               </p>
 
               <p className={`${BODY} mt-6`}>
-                Als Pinterest-Marketing-Expertin unterstütze ich dich beim{" "}
-                <strong>Aufbau</strong>, <strong>Management</strong>, der{" "}
-                <strong>Strategieentwicklung</strong> und beim{" "}
-                <strong>Audit</strong>, sodass du Pinterest endlich so nutzt,
-                wie es gedacht ist:
-                <br />
-                als visuelle Suchmaschine, die dein Unternehmen gezielt nach
-                vorn bringt.
+                Du möchtest Pinterest professionell für dein Unternehmen nutzen,
+                weißt aber noch nicht, ob du Unterstützung bei Strategie,
+                Aufbau, Optimierung oder der kompletten Betreuung brauchst?
               </p>
 
               <p className={`${BODY} mt-6`}>
-                Mein Ziel ist eine Zusammenarbeit, die dich wirklich entlastet –
-                damit du dich wieder auf dein Kernbusiness konzentrieren kannst,
-                während Pinterest für dich arbeitet.
+                Als Pinterest Marketing Agentur verbinden wir Pinterest SEO,
+                Content-Strategie, Design und Analyse zu einem organischen
+                Marketingkanal, der auf langfristige Sichtbarkeit und
+                Website-Traffic ausgerichtet ist.
               </p>
 
-              {/* Im Original zeigt der Button auf /angebote-pinterest-marketing/#angebote —
-                  diese Seite gibt es nicht. Richtig ist der Sprung zum
-                  Kachelbereich dieser Seite. */}
+              <p className={`${BODY} mt-6`}>
+                Dabei geht es nicht darum, möglichst viel neuen Content zu
+                produzieren. Wir nutzen vor allem das, was in deinem Unternehmen
+                bereits vorhanden ist: Produkte, Angebote, Bilder, Blogartikel,
+                Ratgeber, Videos, Podcastfolgen oder andere Inhalte, die sich
+                gezielt für die Pinterest-Suche aufbereiten lassen.
+              </p>
+
+              {/* Sprung zu den Angebotskacheln am Seitenende. */}
               <div className="mt-8">
                 <a href="#angebote" className="btn btn-primary">
-                  zeig mir deine pinterest marketing angebote
+                  Pinterest Marketing Angebote ansehen
                 </a>
               </div>
             </div>
@@ -291,48 +335,73 @@ export default function AngebotePage() {
       </section>
 
       {/* ------------------------------------------------------------------
-          2) "Hast du…" — am Original gemessen: Hintergrund #FFFFFF,
-          100px/100px, Spalten 456/684 (40/60): links der Überschriftenblock
-          mit Trennlinie, rechts Fließtext und Aufzählung.
+          2) Branchen — Hintergrund #FFFFFF, 100px/100px, einspaltig im
+          1140er Rahmen. Die H3-Blöcke stehen ab 768px zweispaltig.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
         <div className="container-page py-[100px]">
-          <div className="grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-x-0">
-            <div className={COL}>
-              <p className={`${KICKER} text-gold-light`}>Hast du…</p>
+          <div className={COL}>
+            <h2 className={H2_GOLD}>
+              Für welche Unternehmen eignet sich Pinterest Marketing?
+            </h2>
 
-              <h2 className={`${H2_GOLD} mt-4`}>
-                ...schonmal darüber nachgedacht, dass...
-              </h2>
+            <p className={`${BODY} mt-6`}>
+              Pinterest ist besonders interessant für Unternehmen, deren
+              Produkte, Angebote oder Inhalte gesucht, verglichen, geplant oder
+              visuell entdeckt werden.
+            </p>
 
-              <hr className="border-gold-light mt-6 w-[330px] max-w-full border-t-[1.6px]" />
+            <p className={`${BODY} mt-6`}>
+              Besonders gute Möglichkeiten sehen wir unter anderem für:
+            </p>
+
+            <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
+              {branchen.map((branche) => (
+                <div key={branche.titel}>
+                  <h3 className={H3_INLINE}>{branche.titel}</h3>
+                  <p className={`${BODY} mt-2`}>{branche.text}</p>
+                </div>
+              ))}
             </div>
 
-            <div className={COL}>
-              <p className={BODY}>
-                …Pinterest einer der wenigen Marketingkanäle ist, der Inhalte
-                monatelang — oft jahrelang — sichtbar hält?
-                <br />
-                Während Posts auf anderen Plattformen innerhalb von Stunden
-                verschwinden, kann ein guter Pin dein Unternehmen dauerhaft
-                Reichweite, Klicks und Kunden bringen.
-              </p>
+            <p className={`${BODY} mt-10`}>
+              Entscheidend ist dabei nicht allein die Branche.
+            </p>
+
+            <p className={`${BODY} mt-6`}>
+              Besonders gute Voraussetzungen für Pinterest Marketing bestehen,
+              wenn dein Unternehmen über eine eigene Website mit mehreren
+              relevanten Zielseiten verfügt – zum Beispiel Produktseiten,
+              Kategorien, Angebote, Blogartikel, Ratgeber, Podcastfolgen oder
+              Landingpages – und bereits Bilder, Texte oder andere Inhalte
+              vorhanden sind.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          3) Wie wir arbeiten — am Original gemessen: Hintergrund #D9D9D9,
+          50px oben / 100px unten, Spalten 570/570. Bild links, Text rechts.
+          Unter 1024px steht der Text zuerst, deshalb liegt er im Markup vorn.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="container-page pt-[50px] pb-[100px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
+            <div className={`lg:col-start-2 lg:row-start-1 ${COL}`}>
+              <h2 className={H2_GOLD}>Wie wir Pinterest Marketing angehen</h2>
 
               <p className={`${BODY} mt-6`}>
-                Für nachhaltiges Wachstum lohnt es sich, bestimmte
-                Marketing-Aufgaben abzugeben oder professionell aufsetzen zu
-                lassen. So kannst du dich auf das Wesentliche konzentrieren,
-                während Pinterest im Hintergrund beständig arbeitet.
+                Gutes Pinterest Marketing beginnt für uns nicht mit der Frage,
+                wie viele Pins pro Monat veröffentlicht werden sollen.
               </p>
 
-              <p className={`${BODY} mt-6`}>
-                Das sind meine 4 Pinterest Marketing Angebote für Unternehmen,
-                KMU und Lifestyle-Marken:
-              </p>
+              <p className={`${BODY} mt-6`}>Wir schauen zuerst darauf,</p>
 
-              {/* Im Original eine Elementor-Icon-Liste mit fa-chevron-right. */}
+              {/* Icon-Liste im Stil der Angebotsliste: fa-chevron-right des
+                  Originals als typografisches Zeichen. */}
               <ul className={`${BODY} mt-4 space-y-2`}>
-                {angebotsListe.map((eintrag) => (
+                {arbeitsweiseListe.map((eintrag) => (
                   <li key={eintrag} className="flex gap-3">
                     <span aria-hidden="true" className="text-gold-light">
                       ›
@@ -341,73 +410,43 @@ export default function AngebotePage() {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------------
-          3) "Stell dir vor…" — am Original gemessen: Hintergrund #D9D9D9,
-          50px oben / 100px unten, Spalten 570/570.
-          Im Original Bild links, Text rechts. Unter 1024px steht der Text
-          zuerst, deshalb liegt er im Markup vorn.
-          ------------------------------------------------------------------ */}
-      <section className="bg-gray-light">
-        <div className="container-page pt-[50px] pb-[100px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
-            <div className={`lg:col-start-2 lg:row-start-1 ${COL}`}>
-              <p className={`${KICKER} text-gold-light`}>Stell dir vor…</p>
-
-              <h2 className={`${H2_GOLD} mt-4`}>
-                ...du hebst deinen Markenauftritt auf´s nächste Level
-              </h2>
 
               <p className={`${BODY} mt-6`}>
-                Wenn dein Pinterest-Account professionell aufgesetzt ist und
-                strategisch für dich arbeitet, musst du nicht mehr täglich
-                Content produzieren, um sichtbar zu bleiben.
-                <br />
-                Du bekommst konstant Reichweite, Website-Traffic und Anfragen —
-                selbst dann, wenn du gerade in Ruhe an deinem nächsten Projekt
-                arbeitest.
+                Darauf bauen wir die Pinterest Strategie auf.
               </p>
 
               <p className={`${BODY} mt-6`}>
-                Pinterest bringt dir zuverlässig Menschen, die{" "}
-                <strong>aktiv nach Lösungen wie deinen suchen</strong>.
-                <br />
-                Du gewinnst Zeit, Energie und Fokus zurück – und dein Business
-                entwickelt sich automatisch weiter, weil dein Marketing
-                dauerhaft für dich läuft.
+                Dazu gehören je nach Angebot Keyword-Recherche, Themen- und
+                Content-Planung, Pinterest SEO, Pin-Design, Pinterest-Texte,
+                Veröffentlichung, Analyse und laufende Optimierung.
               </p>
 
-              {/* Im Original die alte Kontaktseite — der Button führt jetzt
-                  in die Terminbuchung, deshalb steht der Hinweissatz zum
-                  kostenfreien Erstgespräch darüber (nicht im Original).
-                  Primär-Button wie die beiden anderen dieser Seite: der
-                  sekundäre (#D9D9D9) wäre auf dem #D9D9D9-Grund dieses
-                  Abschnitts unsichtbar, und im Original tragen alle drei
-                  Buttons dieselben Elementor-Klassen. */}
               <p className={`${BODY} mt-6`}>
-                In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
-                wie eine Zusammenarbeit zu dir passt.
+                Auch Saisonalität und Pinterest Trends fließen in die Planung
+                ein. Denn viele Suchanfragen entstehen nicht erst dann, wenn ein
+                Thema seinen Höhepunkt erreicht. Inhalte können gezielt früher
+                veröffentlicht werden, damit sie bereits auffindbar sind, wenn
+                das Interesse steigt.
               </p>
 
-              <div className="mt-8">
-                <a
-                  href={siteConfig.calendly}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  let´s start
-                </a>
-              </div>
+              <p className={`${BODY} mt-6`}>
+                So wird vorhandener Content nicht einfach nur erneut
+                veröffentlicht, sondern für das Suchverhalten auf Pinterest
+                aufbereitet und mit den passenden Inhalten deiner Website
+                verbunden.
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Je nachdem, wo dein Unternehmen aktuell steht, kannst du deine
+                Pinterest Strategie mit uns entwickeln, einen Account
+                professionell aufbauen oder überprüfen lassen oder das laufende
+                Pinterest Account Management vollständig an uns abgeben.
+              </p>
             </div>
 
             {/* Quelle 800×533 (quer) — volle Spaltenbreite, Seitenverhältnis
                 erhalten. */}
-            <div className={`lg:col-start-1 lg:row-start-1 ${COL}`}>
+            <div className={`lg:col-start-1 lg:row-start-1 lg:self-center ${COL}`}>
               <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
                 <ExportedImage
                   src={laptopImage}
@@ -424,66 +463,162 @@ export default function AngebotePage() {
       </section>
 
       {/* ------------------------------------------------------------------
-          4) Zitat-Trenner — am Original gemessen: Hintergrundfoto
-          (katsia-jazwinska-…, cover, Position 0% 0%) mit einem Schleier in
-          #D9D9D9 bei 62 % Deckkraft darüber. 80px oben / 115px unten,
-          einspaltig, Inhaltsbreite 1000px zentriert.
-
-          Das Foto liegt mit 2560×1707 weit über der Darstellungsgröße und
-          steckt hinter einem hellen Schleier — es kommt deshalb über
-          next-image-export-optimizer (absolut, formatfüllend) statt als
-          CSS-Hintergrund ins Layout, damit es in optimierten Größen
-          ausgeliefert wird.
+          4) Kundenstimmen-Kopf — am Original gemessen: Hintergrund #D9D9D9,
+          50px oben / 0px unten, einspaltig.
           ------------------------------------------------------------------ */}
-      <section className="relative isolate overflow-hidden">
-        <ExportedImage
-          src={zitatHintergrund}
-          alt=""
-          aria-hidden="true"
-          fill
-          className="-z-10 object-cover object-[0%_0%]"
-          sizes="100vw"
-          basePath={basePath}
-        />
-        {/* Schleier: #D9D9D9 bei 62 % Deckkraft */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[rgba(217,217,217,0.62)]"
-        />
-        <div className="container-page pt-[80px] pb-[115px]">
-          <div className="mx-auto max-w-[1000px] text-center">
-            {/* Im Original ein Font-Awesome-Icon (fa-quote-right); da das
-                Projekt keine Icon-Bibliothek einbindet, steht hier das
-                typografische Zeichen in denselben 38px und in #AC8343. */}
-            <p
-              aria-hidden="true"
-              className="font-heading text-gold text-[38px] leading-none"
-            >
-              ”
-            </p>
-            <p className={`${H2_ZITAT} mt-4`}>
-              “Das geht nicht!”, sagten sie alle.
-              <br />
-              Da kam einer und der hat´s gemacht.
-            </p>
+      <section className="bg-gray-light">
+        <div className="container-page pt-[50px] text-center">
+          <h2 className={`${H2_CENTERED} text-gold-light`}>
+            Pinterest Marketing mit Erfahrung und klarer Strategie
+          </h2>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          5) Die Kundenstimmen selbst — am Original gemessen: Hintergrund
+          #D9D9D9, 50px/50px, einspaltig. Jedes Zitat steht in einer eigenen
+          weißen Karte über die volle Inhaltsbreite (NICHT zweispaltig):
+          Kartengrund #FFFDFD, 1064px breit im 1140er Rahmen, Innenabstand
+          53px, Eckenradius 0, Foto 160×160 rund, Zitat Arial 18/30 in #545454
+          linksbündig, 50px Abstand zwischen den Karten.
+          Im Original ist das ein Swiper-Karussell, das zweimal im Markup steht
+          (Desktop- und Mobilfassung); hier stehen die sechs Karten
+          untereinander.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="container-page py-[50px]">
+          <div className="mx-auto max-w-[1064px] space-y-[50px]">
+            {kundenstimmen.map((stimme) => (
+              <figure
+                key={stimme.name}
+                className="flex flex-col items-center gap-8 bg-[#FFFDFD] p-[26px] sm:flex-row sm:items-start md:p-[53px]"
+              >
+                <div className="relative h-[160px] w-[160px] shrink-0 overflow-hidden rounded-full bg-surface">
+                  <ExportedImage
+                    src={stimme.foto}
+                    alt={stimme.alt}
+                    fill
+                    className={
+                      stimme.contain ? "object-contain p-4" : "object-cover"
+                    }
+                    sizes="160px"
+                    basePath={basePath}
+                    unoptimized={stimme.contain}
+                  />
+                </div>
+                <div>
+                  <blockquote className={`${BODY} text-text text-left`}>
+                    {stimme.text}
+                    {stimme.link && (
+                      <>
+                        <a
+                          href={stimme.link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gold-text hover:underline"
+                        >
+                          {stimme.link.label}
+                        </a>
+                        {stimme.textEnde}
+                      </>
+                    )}
+                  </blockquote>
+                  {/* Diese Zeile ist am Original NICHT nachgemessen —
+                      bewusst schlicht gehalten. */}
+                  <figcaption className={`${BODY} mt-4 text-left`}>
+                    <span className="text-heading font-bold">
+                      {stimme.name}
+                    </span>
+                    <br />
+                    {stimme.rolle}
+                  </figcaption>
+                </div>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------------
-          5) Überschrift über den Kacheln — am Original gemessen: Hintergrund
-          #FFFFFF, 80px oben / 0px unten, einspaltig, zentriert.
+          6) Abschluss/CTA — am Original gemessen: Hintergrund Goldhell
+          #C49C5E (NICHT weiß), 80px/80px, Spalten 570/570. Text links,
+          Bild rechts. Dunkelgrauer Button (.btn-dark): auf dem goldhellen
+          Grund gingen sowohl der goldene Primär- als auch der graue
+          Sekundär-Button unter.
           ------------------------------------------------------------------ */}
-      <section id="angebote" className="bg-surface scroll-mt-24">
-        <div className="container-page pt-[80px]">
-          <h3 className={`${H3_CENTERED} text-gold-light`}>
-            Meine Pinterest Marketing Angebote für Unternehmen
-          </h3>
+      <section className="bg-gold-light">
+        <div className="container-page py-[80px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
+            <div className={`self-center ${COL}`}>
+              <h2 className={H2_ABSCHLUSS}>
+                Welches Pinterest Angebot passt zu deinem Unternehmen?
+              </h2>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Nicht jedes Unternehmen braucht das gleiche Pinterest-Setup.
+              </p>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Vielleicht möchtest du Pinterest ganz neu aufbauen. Vielleicht
+                ist dein Account bereits aktiv, aber Strategie und SEO fehlen.
+                Oder du möchtest Pinterest professionell nutzen, ohne dich
+                intern um Keyword-Recherche, Content-Planung, Designs und
+                Veröffentlichung kümmern zu müssen.
+              </p>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Genau dafür gibt es unterschiedliche Möglichkeiten der
+                Zusammenarbeit.
+              </p>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Wenn du noch nicht weißt, welches Angebot zu deiner
+                Ausgangssituation passt, können wir das in einem kostenfreien
+                Erstgespräch gemeinsam klären.
+              </p>
+
+              <div className="mt-8">
+                <a
+                  href={siteConfig.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-dark"
+                >
+                  Kostenfreies Erstgespräch vereinbaren
+                </a>
+              </div>
+            </div>
+
+            <div className={COL}>
+              <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
+                <ExportedImage
+                  src={phoneImage}
+                  alt="Juliette stütz eine Hand in die Hüfte, mit der anderen hält sie ihr Handy ans Ohr"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 550px, 100vw"
+                  basePath={basePath}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------------
-          6) + 7) Die vier Angebots-Kacheln. Im Original steht jede Kachel als
+          7) Überschrift über den Kacheln — am Original gemessen: Hintergrund
+          #FFFFFF, 80px oben / 0px unten, einspaltig, zentriert.
+          ------------------------------------------------------------------ */}
+      <section id="angebote" className="bg-surface scroll-mt-24">
+        <div className="container-page pt-[80px]">
+          <h2 className={`${H2_CENTERED} text-gold-light`}>
+            Meine Pinterest Marketing Angebote für Unternehmen
+          </h2>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          8) + 9) Die vier Angebots-Kacheln. Im Original steht jede Kachel als
           eigene Spalte (elementor-col-50) in einem Abschnitt mit zwei Spalten
           von je 570px OHNE Spaltenabstand — bei vier Kacheln also zwei
           Abschnitte. Am Original gemessen: Hintergrund #FFFFFF,
@@ -565,143 +700,6 @@ export default function AngebotePage() {
           </div>
         </section>
       ))}
-
-      {/* ------------------------------------------------------------------
-          8) Kundenstimmen-Kopf — am Original gemessen: Hintergrund #D9D9D9,
-          50px oben / 0px unten, einspaltig.
-          ------------------------------------------------------------------ */}
-      <section className="bg-gray-light">
-        <div className="container-page pt-[50px] text-center">
-          <p className={`${KICKER} text-gold-light`}>Kundenstimmen</p>
-          <h3 className={`${H3_CENTERED} text-gold-light mt-2`}>
-            Feedback ist ein Geschenk
-          </h3>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------------
-          9) Die Kundenstimmen selbst — am Original gemessen: Hintergrund
-          #D9D9D9, 50px/50px, einspaltig. Jedes Zitat steht in einer eigenen
-          weißen Karte über die volle Inhaltsbreite (NICHT zweispaltig):
-          Kartengrund #FFFDFD, 1064px breit im 1140er Rahmen, Innenabstand
-          53px, Eckenradius 0, Foto 160×160 rund, Zitat Arial 18/30 in #545454
-          linksbündig, 50px Abstand zwischen den Karten.
-          Im Original ist das ein Swiper-Karussell, das zweimal im Markup steht
-          (Desktop- und Mobilfassung); hier stehen die sechs Karten
-          untereinander.
-          ------------------------------------------------------------------ */}
-      <section className="bg-gray-light">
-        <div className="container-page py-[50px]">
-          <div className="mx-auto max-w-[1064px] space-y-[50px]">
-            {kundenstimmen.map((stimme) => (
-              <figure
-                key={stimme.name}
-                className="flex flex-col items-center gap-8 bg-[#FFFDFD] p-[26px] sm:flex-row sm:items-start md:p-[53px]"
-              >
-                <div className="relative h-[160px] w-[160px] shrink-0 overflow-hidden rounded-full bg-surface">
-                  <ExportedImage
-                    src={stimme.foto}
-                    alt={stimme.alt}
-                    fill
-                    className={
-                      stimme.contain ? "object-contain p-4" : "object-cover"
-                    }
-                    sizes="160px"
-                    basePath={basePath}
-                    unoptimized={stimme.contain}
-                  />
-                </div>
-                <div>
-                  <blockquote className={`${BODY} text-text text-left`}>
-                    {stimme.text}
-                    {stimme.link && (
-                      <>
-                        <a
-                          href={stimme.link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gold-text hover:underline"
-                        >
-                          {stimme.link.label}
-                        </a>
-                        {stimme.textEnde}
-                      </>
-                    )}
-                  </blockquote>
-                  {/* Diese Zeile ist am Original NICHT nachgemessen —
-                      bewusst schlicht gehalten. */}
-                  <figcaption className={`${BODY} mt-4 text-left`}>
-                    <span className="text-heading font-bold">{stimme.name}</span>
-                    <br />
-                    {stimme.rolle}
-                  </figcaption>
-                </div>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------------
-          10) Abschluss — am Original gemessen: Hintergrund Goldhell #C49C5E
-          (NICHT weiß), 80px/80px, Spalten 570/570. Text links, Bild rechts.
-          ------------------------------------------------------------------ */}
-      <section className="bg-gold-light">
-        <div className="container-page py-[80px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
-            <div className={`self-center ${COL}`}>
-              <h2 className={H2_ABSCHLUSS}>
-                Ich würde mich freuen, wenn auch du bald unter den
-                Kundenstimmen zu sehen bist.
-              </h2>
-
-              <p className={`${BODY} mt-6 text-white`}>
-                Lass uns in einem ersten Gespräch herausfinden, wie ich dich und
-                dein Businesswachstum unterstützen kann. Es war noch nicht das
-                richtige Angebot für dich ersichtlich? Kein Problem. Erzähl mir
-                mehr von dir und deinem Unternehmen und ich sende dir ein
-                individuelles Angebot zu.
-              </p>
-
-              {/* Im Original ein mailto — bei einer Terminvereinbarung ist der
-                  Calendly-Link das richtige Ziel; der Hinweissatz zum
-                  kostenfreien Erstgespräch darüber steht nicht im Original.
-                  Dunkelgrauer Button
-                  (.btn-dark): auf dem goldhellen Grund dieses Abschnitts
-                  gingen sowohl der goldene Primär- als auch der graue
-                  Sekundär-Button unter. */}
-              <p className={`${BODY} mt-6 text-white`}>
-                In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
-                wie eine Zusammenarbeit zu dir passt.
-              </p>
-
-              <div className="mt-8">
-                <a
-                  href={siteConfig.calendly}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-dark"
-                >
-                  jetzt termin vereinbaren
-                </a>
-              </div>
-            </div>
-
-            <div className={COL}>
-              <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
-                <ExportedImage
-                  src={phoneImage}
-                  alt="Juliette stütz eine Hand in die Hüfte, mit der anderen hält sie ihr Handy ans Ohr"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 550px, 100vw"
-                  basePath={basePath}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <script
         type="application/ld+json"
