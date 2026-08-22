@@ -1,25 +1,30 @@
 import type { ReactNode } from "react";
 import type { StaticImageData } from "next/image";
+import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import { siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 // ---------------------------------------------------------------------------
 // Gemeinsame Darstellung der vier Leistungsseiten (Account Aufbau, Account
-// Management, Strategie Call, Audit). Im Original sind die vier Seiten
-// baugleich: ein zweispaltiger Hero auf #D9D9D9 und darunter ein Abschnitt auf
-// dem cremen Body-Grund mit der Angebotskarte. Diese Datei hält den Aufbau,
-// die vier `page.tsx` liefern nur noch die Datensätze.
+// Management, Strategie Call, Audit). Die vier Seiten sind baugleich: Hero auf
+// #D9D9D9, darunter der Zielgruppen-Abschnitt auf dem cremen Body-Grund, die
+// Angebotskarte, ein Cross-Sell-Abschnitt und der Abschluss-CTA. Diese Datei
+// hält den Aufbau, die vier `page.tsx` liefern nur noch die Datensätze.
 //
-// Alle Werte sind am Original bei 1536px nachgemessen. NICHT ohne
+// Alle Maße sind am Original bei 1536px nachgemessen. NICHT ohne
 // ausdrücklichen Auftrag ändern.
 // ---------------------------------------------------------------------------
 
 // H1 — Antic Didone 47/65.8, 600, ls 1px, #595959 (Default aus globals.css).
 // Der Basiswert ist die mobile Verkleinerung (~72 %) wie auf der Startseite.
 export const H1 = "text-[34px] leading-[47.6px] md:text-[47px] md:leading-[65.8px]";
-// H2 im Textteil des Hero — Antic Didone 37/51.8, 600, ls 1px, #595959.
+// H2 im Textteil — Antic Didone 37/51.8, 600, ls 1px, #595959.
 export const H2 = "text-[27px] leading-[37.8px] md:text-[37px] md:leading-[51.8px]";
+// Subline unter der H1 — Kicker-Stil wie auf Startseite und Angebotsübersicht:
+// Antic Didone 20/30, 500, ls 1.4px, #C49C5E.
+export const KICKER =
+  "font-heading font-medium tracking-[1.4px] text-gold-light text-[18px] leading-[28px] md:text-[20px] md:leading-[30px]";
 // Fließtext: 18/30, ls 1.4px, #545454 — kommt aus den <body>-Regeln in
 // globals.css, hier nur die Schriftfamilie absichern.
 export const BODY = "font-body";
@@ -52,9 +57,11 @@ function CheckIcon() {
 }
 
 export type LeistungsseiteProps = {
-  /** Überschrift des Hero, wörtlich aus dem Original. */
+  /** Überschrift des Hero — je Seite die einzige H1. */
   h1: string;
-  /** Textteil des Hero (Absätze, Zwischenüberschrift, Listen) — wörtlich. */
+  /** Subline direkt unter der H1, im goldenen Kicker-Stil. */
+  subline: string;
+  /** Intro-Absätze des Hero — wörtlich aus den freigegebenen Texten. */
   intro: ReactNode;
   image: StaticImageData;
   imageAlt: string;
@@ -65,32 +72,54 @@ export type LeistungsseiteProps = {
    * hochskalierte Breite (~750px) — sonst wird das Bild unscharf.
    */
   imageSizes: string;
-  /** Titel im goldenen Kopfbalken der Karte. */
+  /** Abschnitt „Für wen …“ auf dem cremen Grund. */
+  zielgruppe: {
+    heading: string;
+    /** Einleitungssatz über der Liste. */
+    lead: ReactNode;
+    /** Listenpunkte mit dem goldenen › — wörtlich. */
+    items: readonly string[];
+    /** Optionaler Schlussabsatz unter der Liste. */
+    outro?: ReactNode;
+  };
+  /** H2 im goldenen Kopfbalken der Karte („… – das ist enthalten“). */
   cardTitle: string;
-  /** Umfangs-Satz aus `services[].scope` — steht dort, wo früher der Preis stand. */
-  scope: string;
-  /** Merkmalsliste, wörtlich aus dem Original. */
+  /** Umfangs-Satz aus `services[].scope` — steht dort, wo früher der Preis
+   *  stand. Seiten ohne vorgegebenen Umfangs-Satz lassen ihn weg. */
+  scope?: string;
+  /** Merkmalsliste, wörtlich. */
   features: readonly string[];
-  /** Beschriftung des Buttons, wörtlich aus dem Original (klein geschrieben). */
-  buttonLabel: string;
-  /** Zusatztext des Originals unterhalb des Buttons (optional). */
-  cardNote?: ReactNode;
-  /** Absatz des Originals unterhalb der Karte (optional). */
-  outro?: ReactNode;
+  /** Absatz unterhalb der Karte (optional). */
+  cardOutro?: ReactNode;
+  /** Cross-Sell auf das jeweils passende Nachbarangebot (interner Link). */
+  crossSell: {
+    heading: string;
+    body: ReactNode;
+    buttonLabel: string;
+    href: string;
+  };
+  /** Abschluss-CTA zur Terminbuchung. */
+  abschluss: {
+    heading: string;
+    body: ReactNode;
+    buttonLabel: string;
+  };
 };
 
 export default function Leistungsseite({
   h1,
+  subline,
   intro,
   image,
   imageAlt,
   imageSizes,
+  zielgruppe,
   cardTitle,
   scope,
   features,
-  buttonLabel,
-  cardNote,
-  outro,
+  cardOutro,
+  crossSell,
+  abschluss,
 }: LeistungsseiteProps) {
   return (
     <>
@@ -104,6 +133,7 @@ export default function Leistungsseite({
           <div className="grid gap-10 lg:grid-cols-[60%_40%] lg:gap-x-0">
             <div className={COL}>
               <h1 className={H1}>{h1}</h1>
+              <p className={`${KICKER} mt-4`}>{subline}</p>
               {intro}
             </div>
 
@@ -128,9 +158,40 @@ export default function Leistungsseite({
       </section>
 
       {/* ------------------------------------------------------------------
-          2) INHALTSABSCHNITT — kein eigener Hintergrund, der creme
-          Body-Grund #F2EDE7 bleibt sichtbar. 50px oben / 50px unten,
-          einspaltig, Inhaltsrahmen 1140px, Karte 1120px breit.
+          2) ZIELGRUPPE — kein eigener Hintergrund, der creme Body-Grund
+          #F2EDE7 bleibt sichtbar. Einspaltig im 1140er Rahmen.
+          ------------------------------------------------------------------ */}
+      <section>
+        <div className="container-page pt-[50px]">
+          <div className={COL}>
+            <h2 className={H2}>{zielgruppe.heading}</h2>
+
+            <div className={`${BODY} mt-6`}>{zielgruppe.lead}</div>
+
+            {/* Icon-Liste wie auf der Angebotsübersicht: fa-chevron-right des
+                Originals als typografisches Zeichen. */}
+            <ul className={`${BODY} mt-4 space-y-2`}>
+              {zielgruppe.items.map((eintrag) => (
+                <li key={eintrag} className="flex gap-3">
+                  <span aria-hidden="true" className="text-gold-light">
+                    ›
+                  </span>
+                  <span>{eintrag}</span>
+                </li>
+              ))}
+            </ul>
+
+            {zielgruppe.outro ? (
+              <div className={`${BODY} mt-6`}>{zielgruppe.outro}</div>
+            ) : null}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          3) ANGEBOTSKARTE — weiterhin auf dem cremen Grund, Karte 1120px
+          breit, goldener Kopfbalken. Der Kopfbalken trägt jetzt die H2
+          „… – das ist enthalten“.
           ------------------------------------------------------------------ */}
       <section>
         <div className="container-page py-[50px]">
@@ -142,50 +203,81 @@ export default function Leistungsseite({
                 <h2 className={`${CARD_TITLE} text-center`}>{cardTitle}</h2>
               </div>
 
-              {/* b) Umfangs-Block — hier stand im Original der Preis. */}
-              <div className="py-[40px]">
-                <p className={`${CARD_SCOPE} text-center`}>{scope}</p>
-              </div>
+              {/* b) Umfangs-Block — hier stand im Original der Preis. Fehlt er,
+                  beginnt die Merkmalsliste mit demselben Abstand. */}
+              {scope ? (
+                <div className="py-[40px]">
+                  <p className={`${CARD_SCOPE} text-center`}>{scope}</p>
+                </div>
+              ) : null}
 
               {/* c) Merkmalsliste — zentriert, ohne Trennlinien. Am Original
                   nachgemessen: 15px zwischen den Merkmalen (Oberkante zu
-                  Oberkante 45px bei 30px Zeilenhöhe), kein Abstand vor dem
-                  ersten und nach dem letzten Eintrag. */}
-              <ul className={`${BODY} space-y-[15px] text-heading`}>
-                {features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start justify-center gap-[10px] text-left"
-                  >
-                    <CheckIcon />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* d) Fußbereich */}
-              <div className={`${BODY} py-[30px] text-center`}>
-                <p>
-                  In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
-                  wie eine Zusammenarbeit zu dir passt.
-                </p>
-                <div className="mt-6">
-                  {/* Der Hinweissatz darüber kündigt das Erstgespräch an, der
-                      Button führt deshalb direkt zur Terminbuchung. */}
-                  <a
-                    href={siteConfig.calendly}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                  >
-                    {buttonLabel}
-                  </a>
-                </div>
-                {cardNote ? <div className="mt-6">{cardNote}</div> : null}
+                  Oberkante 45px bei 30px Zeilenhöhe). */}
+              <div className={scope ? "" : "pt-[40px]"}>
+                <ul className={`${BODY} space-y-[15px] text-heading`}>
+                  {features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start justify-center gap-[10px] text-left"
+                    >
+                      <CheckIcon />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {outro ? <div className={`${BODY} mt-10`}>{outro}</div> : null}
+            {cardOutro ? (
+              <div className={`${BODY} mt-10`}>{cardOutro}</div>
+            ) : null}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          4) CROSS-SELL — Hintergrund #FFFFFF, damit der Abschnittsrhythmus
+          (creme / weiß) der Website erhalten bleibt. Interner Link im
+          sekundären Button-Stil (#D9D9D9 auf Weiß).
+          ------------------------------------------------------------------ */}
+      <section className="bg-surface">
+        <div className="container-page py-[80px]">
+          <div className={`${COL} mx-auto max-w-[820px] text-center`}>
+            <h2 className={H2}>{crossSell.heading}</h2>
+
+            <div className={`${BODY} mt-6`}>{crossSell.body}</div>
+
+            <div className="mt-8">
+              <Link href={crossSell.href} className="btn btn-secondary">
+                {crossSell.buttonLabel}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          5) ABSCHLUSS-CTA — zurück auf den cremen Grund, primärer Button
+          (#AC8343) zur Terminbuchung bei Calendly.
+          ------------------------------------------------------------------ */}
+      <section>
+        <div className="container-page py-[80px]">
+          <div className={`${COL} mx-auto max-w-[820px] text-center`}>
+            <h2 className={H2}>{abschluss.heading}</h2>
+
+            <div className={`${BODY} mt-6`}>{abschluss.body}</div>
+
+            <div className="mt-8">
+              <a
+                href={siteConfig.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                {abschluss.buttonLabel}
+              </a>
+            </div>
           </div>
         </div>
       </section>

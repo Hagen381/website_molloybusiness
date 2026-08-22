@@ -394,33 +394,33 @@ export const services = [
   {
     title: "Pinterest Account Management",
     description:
-      "Laufende Betreuung deines Pinterest-Accounts: Content, Pins und Strategie aus einer Hand. Du gibst den Kanal komplett ab und bekommst jeden Monat frische, SEO-optimierte Pins samt Auswertung.",
+      "Laufende Betreuung deines Pinterest Business Accounts: Keyword-Recherche, Content-Planung, Pin-Design, Texte, Veröffentlichung und Auswertung aus einer Hand.",
     href: "/pinterest-account-management/",
     scope:
-      "90 SEO-optimierte Pins pro Monat – Einplanung, Recherche und Auswertung inklusive.",
+      "90 SEO-optimierte Pins pro Monat – inklusive Planung, Recherche und Auswertung.",
   },
   {
     title: "Pinterest Account Aufbau",
     description:
-      "Professioneller Neuaufbau deines Accounts mit klarer Struktur von Anfang an. Von Profil und Boards bis zu den ersten Pins entsteht ein Fundament, auf dem dein Pinterest Marketing langfristig aufbaut.",
+      "Kompletter Aufbau deines Pinterest Business Accounts: Keyword-Recherche, Pinterest SEO, Profil, Pinnwände und die ersten Pins als strategische Grundlage.",
     href: "/pinterest-account-aufbau/",
     scope:
-      "Profil, 8 strategische Boards und 50 gestaltete Pins – inklusive zwei Korrekturschleifen.",
+      "Profil, 8 strategische Pinnwände und 50 gestaltete Pins – inklusive zwei Korrekturschleifen.",
   },
   {
     title: "Pinterest Strategie Call",
     description:
-      "Individuelle Beratung, um deine Pinterest-Strategie auf den Punkt zu bringen. In 90 Minuten klären wir deine Fragen und du bekommst konkrete nächste Schritte für deinen Account.",
+      "Individuelle Pinterest Beratung in 90 Minuten: Wir schauen auf deine Ausgangslage, geben strategische Empfehlungen und klären deine Pinterest-Fragen.",
     href: "/pinterest-strategie-call/",
     scope:
-      "90 Minuten individuelle Beratung mit konkreten nächsten Schritten für deinen Account.",
+      "90 Minuten individuelle Beratung mit konkreten nächsten Schritten für dein Pinterest Marketing.",
   },
   {
     title: "Pinterest Audit",
     description:
-      "Detaillierte Analyse deines bestehenden Accounts mit konkreten Handlungsempfehlungen. Du erfährst, was bereits funktioniert und an welchen Stellen dein Account Potenzial verschenkt.",
+      "Strategische Analyse deines bestehenden Pinterest Business Accounts: Profil, Pinnwände, Pins, Keywords, Performance und Wettbewerb mit priorisierten Empfehlungen.",
     href: "/pinterest-audit/",
     scope:
-      "Analyse von Profil, Boards, Pin-Performance und Wettbewerb – mit priorisierten Empfehlungen.",
+      "Analyse von Profil, Pinnwänden, Pins, Performance und Wettbewerb – mit konkreten Empfehlungen für die nächsten Schritte.",
   },
 ] as const;

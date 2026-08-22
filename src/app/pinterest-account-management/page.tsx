@@ -1,37 +1,60 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import heroImage from "@/assets/images/angebote/DSC01061-scaled.jpg";
-import Leistungsseite, { BODY, H2 } from "@/components/Leistungsseite";
+import Leistungsseite, { BODY } from "@/components/Leistungsseite";
 import { services, siteConfig } from "@/lib/site-config";
 
 const angebot = services.find((s) => s.title === "Pinterest Account Management")!;
 
 const path = "/pinterest-account-management/";
 
-// Meta-Title und -Description stammen wörtlich aus dem Original, nur ohne
-// Emoji (die dort als Trenner dienten) und ohne Preisangaben.
+// Von der Markeninhaberin freigegeben; der Titel steht absolut, die
+// Description ist aus den Intro-Sätzen der Seite gebildet und wird auch vom
+// WebPage-Schema unten gelesen.
+const pageTitle =
+  "Pinterest Account Management für Unternehmen | molloy business";
+const pageDescription =
+  "Laufende Pinterest Betreuung für Unternehmen: Keyword-Recherche, Content-Planung, Pin-Design, Texte, Veröffentlichung und Auswertung aus einer Hand.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "Pinterest Account Management für Unternehmen | Hier anfragen",
+    absolute: pageTitle,
   },
-  description:
-    "Pinterest Account Management für KMU & Lifestyle-Marken: Done-for-you-Service, Keywords & Texte, Design & Pin-Upload.",
+  description: pageDescription,
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
+  },
   alternates: {
     canonical: path,
   },
 };
 
-// Merkmalsliste wörtlich aus dem Original. Beim Punkt zum Planungstool ist
-// nur der Klammerzusatz zur Preisabgrenzung entfallen.
+// Merkmalsliste wörtlich aus den freigegebenen Texten.
 const features = [
-  "90 Pins pro Monat (3 pro Tag)",
-  "90 Headlines und Beschreibungen – suchoptimiert anhand neuer Keywords und Interessen",
-  "Tägliches Pinnen von 3 Pins via Planungstool",
-  "Regelmäßige Keyword- und Interessenrecherche",
-  "Hinweise zu Trends und möglichen Content-Strategien",
-  "Auswertung der Pinterest Analytics mit klaren Handlungsempfehlungen",
+  "90 Pins pro Monat",
+  "90 Headlines und Pinterest-Beschreibungen, optimiert anhand relevanter Keywords und Suchinteressen",
+  "regelmäßige Veröffentlichung über ein Planungstool",
+  "laufende Keyword- und Interessenrecherche",
+  "Beobachtung von Pinterest Trends und saisonalen Themen",
+  "Hinweise zu relevanten Content-Themen und Potenzialen",
+  "Auswertung der Pinterest Analytics mit konkreten Handlungsempfehlungen",
 ] as const;
 
+// Zielgruppen-Liste wörtlich, inklusive der Satzzeichen am Zeilenende.
+const zielgruppeItems = [
+  "bereits einen professionell eingerichteten Pinterest Business Account haben,",
+  "regelmäßig neuen Pinterest Content veröffentlichen möchten,",
+  "Pinterest Strategie und Umsetzung vollständig auslagern wollen,",
+  "bestehenden Content langfristig weiterverwenden möchten,",
+  "und Pinterest SEO kontinuierlich weiterentwickeln wollen.",
+] as const;
+
+// WebPage + Service (ohne offers, ohne Review/AggregateRating) sowie der
+// unsichtbare BreadcrumbList — siehe CLAUDE.md.
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -40,6 +63,7 @@ const pageJsonLd = {
       "@id": `${siteConfig.url}${path}#webpage`,
       url: `${siteConfig.url}${path}`,
       name: "Pinterest Account Management für Unternehmen",
+      description: pageDescription,
       about: { "@id": `${siteConfig.url}/#organization` },
     },
     {
@@ -80,6 +104,7 @@ export default function PinterestAccountManagement() {
     <>
       <Leistungsseite
         h1="Pinterest Account Management für Unternehmen"
+        subline="Strategische Pinterest Betreuung – von Content und SEO bis zur Veröffentlichung und Analyse."
         image={heroImage}
         imageAlt="pinterest account management für unternehmen"
         /* Quelle 2560×1707 (querformatig): object-fit: cover skaliert auf
@@ -87,63 +112,78 @@ export default function PinterestAccountManagement() {
            `sizes` folgt dieser internen Skalierung, nicht der sichtbaren
            Breite (siehe src/app/page.tsx). */
         imageSizes="(min-width: 1024px) 750px, 100vw"
-        cardTitle="Pinterest Account Management für Unternehmen"
-        scope={angebot.scope}
-        features={features}
-        buttonLabel="jetzt pinterest account management anfragen"
-        cardNote={
-          <p>
-            Hinweis: Pinterest empfiehlt je nach Branche 3–5 frische Pins pro
-            Tag. Mit diesem Paket decken wir bereits eine wirkungsvolle und
-            nachhaltige Basis ab, die bei vielen Unternehmen zu kontinuierlichem
-            Wachstum führt.
-          </p>
-        }
         intro={
           <>
             <p className={`${BODY} mt-6`}>
               Du hast bereits einen Pinterest Business Account, aber im Alltag
-              fehlt dir die Zeit, ihn konsequent zu bespielen? Du möchtest
-              regelmäßig pinnen, ohne dich selbst um Grafiken, Texte, Keywords
-              und Analytics kümmern zu müssen?
+              fehlt dir die Zeit, ihn konsequent und strategisch
+              weiterzuführen?
             </p>
 
             <p className={`${BODY} mt-6`}>
-              Mit meinem{" "}
-              <strong>Pinterest Account Management für Unternehmen</strong>{" "}
-              übernehme ich die komplette laufende Betreuung deines Profils –
-              strategisch, suchoptimiert und passend zu deiner Marke. Ideal für
-              KMU und Lifestyle-Brands, die Pinterest als nachhaltigen
-              Marketingkanal nutzen wollen, ohne ein eigenes Team aufzubauen.
+              Als Pinterest Marketing Agentur übernehmen wir mit unserem
+              Pinterest Account Management die laufende Betreuung deines
+              Profils – inklusive Keyword-Recherche, Content-Planung,
+              Pin-Design, Texten, Veröffentlichung und Auswertung.
             </p>
 
             <p className={`${BODY} mt-6`}>
-              Du erhältst jeden Monat 90 hochwertige Pins, klare Strukturen und
-              eine verlässliche Umsetzung, die deine Reichweite langfristig
-              stärkt.
-            </p>
-
-            <h2 className={`${H2} mt-12`}>
-              Noch keinen Pinterest Business Account?
-            </h2>
-
-            <p className={`${BODY} mt-6`}>
-              Kein Problem!
-              <br />
-              Wenn du Pinterest komplett neu starten möchtest, schau dir gern
-              mein Angebot{" "}
-              <Link
-                href="/pinterest-account-aufbau/"
-                className="text-gold-text underline"
-              >
-                <em>„Pinterest Account Aufbau für Unternehmen“</em>
-              </Link>{" "}
-              an. Dort richte ich deinen gesamten Pinterest Business Account
-              professionell ein – inklusive Strategie, Pinnwänden, Profil und 50
-              fertigen Pins.
+              Dabei nutzen wir vorhandene Inhalte gezielt weiter und bereiten
+              sie für die Pinterest-Suche auf. So wird Pinterest zu einem
+              langfristigen organischen Marketingkanal, ohne dass du die
+              Umsetzung intern übernehmen musst.
             </p>
           </>
         }
+        zielgruppe={{
+          heading: "Für wen eignet sich das Pinterest Account Management?",
+          lead: <p>Das Angebot passt zu Unternehmen, die:</p>,
+          items: zielgruppeItems,
+        }}
+        cardTitle="Pinterest Account Management – das ist enthalten"
+        scope={angebot.scope}
+        features={features}
+        cardOutro={
+          <p>
+            Die Strategie wird dabei regelmäßig anhand von Suchverhalten,
+            Trends und Performance weiterentwickelt.
+          </p>
+        }
+        crossSell={{
+          heading: "Noch keinen Pinterest Business Account?",
+          body: (
+            <>
+              <p>
+                Wenn du Pinterest komplett neu starten möchtest, ist zunächst
+                unser Pinterest Account Aufbau das passende Angebot.
+              </p>
+              <p className="mt-6">
+                Wir entwickeln dort die strategische Grundlage, richten Profil
+                und Pinnwände ein und erstellen die ersten Pins für deinen
+                Start.
+              </p>
+            </>
+          ),
+          buttonLabel: "Zum Pinterest Account Aufbau",
+          href: "/pinterest-account-aufbau/",
+        }}
+        abschluss={{
+          heading: "Pinterest Management komplett auslagern",
+          body: (
+            <>
+              <p>
+                Du möchtest Pinterest langfristig nutzen, Strategie und
+                laufende Umsetzung aber nicht selbst übernehmen?
+              </p>
+              <p className="mt-6">
+                In einem kostenfreien Erstgespräch schauen wir uns deinen
+                bestehenden Account und deine Inhalte an und klären, ob unser
+                Pinterest Account Management zu deinem Unternehmen passt.
+              </p>
+            </>
+          ),
+          buttonLabel: "Pinterest Account Management anfragen",
+        }}
       />
 
       <script

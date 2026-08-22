@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import heroImage from "@/assets/images/angebote/DSC01103-scaled.jpg";
 import Leistungsseite, { BODY } from "@/components/Leistungsseite";
 import { services, siteConfig } from "@/lib/site-config";
@@ -8,28 +7,52 @@ const angebot = services.find((s) => s.title === "Pinterest Strategie Call")!;
 
 const path = "/pinterest-strategie-call/";
 
-// Meta-Title und -Description stammen wörtlich aus dem Original, nur ohne
-// Emoji (die dort als Trenner dienten) und ohne Preisangaben.
+// Von der Markeninhaberin freigegeben; der Titel steht absolut, die
+// Description ist aus den Intro-Sätzen der Seite gebildet und wird auch vom
+// WebPage-Schema unten gelesen.
+const pageTitle = "Pinterest Strategie-Call für Unternehmen | molloy business";
+const pageDescription =
+  "90 Minuten individuelle Pinterest Beratung: Wir schauen auf deine Ausgangslage und klären, welche Rolle Pinterest in deinem Marketing spielen kann.";
+
 export const metadata: Metadata = {
   title: {
-    absolute: "Pinterest Strategie-Call für Unternehmen | Für mehr Klarheit",
+    absolute: pageTitle,
   },
-  description:
-    "Pinterest Strategie-Call für Unternehmen, KMU & Lifestyle-Marken: klare Einschätzung, Strategieideen, Orientierung für dein Business.",
+  description: pageDescription,
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
+  },
   alternates: {
     canonical: path,
   },
 };
 
-// Merkmalsliste wörtlich aus dem Original.
+// Merkmalsliste wörtlich aus den freigegebenen Texten.
 const features = [
   "90 Minuten Video-Call",
-  "Analyse deiner Ausgangslage (Thema, Zielgruppe, Website, Produkte)",
-  "Konkrete Strategie-Impulse für deinen Start",
-  "Ideen für erste Pinnwände & Pin-Themen",
-  "Antworten auf alle deine Pinterest-Fragen – ohne Fachchinesisch",
+  "Analyse deiner Ausgangslage – Thema, Zielgruppe, Website, Produkte oder Angebote",
+  "strategische Empfehlungen für deinen Pinterest-Auftritt",
+  "Ideen für relevante Pinnwände und Pin-Themen",
+  "Impulse zu Pinterest SEO, Keywords und Content",
+  "Antworten auf deine individuellen Pinterest-Fragen",
 ] as const;
 
+// Zielgruppen-Liste wörtlich, inklusive der Satzzeichen am Zeilenende.
+const zielgruppeItems = [
+  "herausfinden möchtest, ob Pinterest für dein Unternehmen sinnvoll ist,",
+  "bereits Pinterest nutzt, aber keine klare Strategie hast,",
+  "wissen möchtest, welche Themen und Inhalte sich für Pinterest eignen,",
+  "deine nächsten Schritte priorisieren möchtest,",
+  "oder Pinterest künftig selbst bzw. intern umsetzen willst.",
+] as const;
+
+// WebPage + Service (ohne offers, ohne Review/AggregateRating) sowie der
+// unsichtbare BreadcrumbList — siehe CLAUDE.md.
 const pageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -38,6 +61,7 @@ const pageJsonLd = {
       "@id": `${siteConfig.url}${path}#webpage`,
       url: `${siteConfig.url}${path}`,
       name: "Pinterest Strategie-Call für Unternehmen",
+      description: pageDescription,
       about: { "@id": `${siteConfig.url}/#organization` },
     },
     {
@@ -77,7 +101,8 @@ export default function PinterestStrategieCall() {
   return (
     <>
       <Leistungsseite
-        h1="Pinterest Strategie-Call – Klarheit, Fokus & Orientierung für dein Business"
+        h1="Pinterest Strategie-Call für Unternehmen"
+        subline="90 Minuten individuelle Pinterest Beratung für Klarheit, Orientierung und einen konkreten nächsten Schritt."
         image={heroImage}
         imageAlt="Pinterest strategie"
         /* Quelle 2560×1707 (querformatig): object-fit: cover skaliert auf
@@ -85,48 +110,73 @@ export default function PinterestStrategieCall() {
            `sizes` folgt dieser internen Skalierung, nicht der sichtbaren
            Breite (siehe src/app/page.tsx). */
         imageSizes="(min-width: 1024px) 750px, 100vw"
-        cardTitle="Pinterest Strategie-Call"
-        scope={angebot.scope}
-        features={features}
-        buttonLabel="jetzt call buchen"
-        outro={
-          <p>
-            <strong>Du willst deine Pinterest-Strategie direkt umsetzen?</strong>
-            <br />
-            Dann empfehle ich dir meinen{" "}
-            <Link
-              href="/pinterest-account-aufbau/"
-              className="text-gold-text underline"
-            >
-              <strong>Pinterest Account Aufbau für Unternehmen</strong>
-            </Link>{" "}
-            – dort kümmere ich mich um die vollständige technische und
-            strategische Einrichtung deines Accounts.
-          </p>
-        }
         intro={
           <>
             <p className={`${BODY} mt-6`}>
-              Du möchtest verstehen, ob Pinterest der richtige Marketingkanal
-              für dein Unternehmen ist – ohne dich durch widersprüchliche
-              Blogartikel und veraltete Tipps zu kämpfen?
-              <br />
-              Im <em>Pinterest Strategie-Call</em> bekommst du in kurzer Zeit
-              genau das, was dir fehlt: Klarheit, Orientierung und eine
-              realistische Einschätzung, wie Pinterest für dein Business
-              funktionieren kann.
+              Du möchtest wissen, ob Pinterest zu deinem Unternehmen passt,
+              welche Chancen deine Themen auf der Plattform haben und wie du
+              sinnvoll starten oder deinen bestehenden Account weiterentwickeln
+              kannst?
             </p>
 
             <p className={`${BODY} mt-6`}>
-              Gemeinsam schauen wir uns an, wie deine Themen auf Pinterest
-              performen, welche Formate sinnvoll sind und welche ersten Schritte
-              dir wirklich Ergebnisse bringen.
-              <br />
-              90 Minuten, die dir Zeit sparen, Fehlentscheidungen vermeiden und
-              dir helfen, mit einem klaren Plan weiterzugehen.
+              Im Pinterest Strategie-Call schauen wir gemeinsam auf deine
+              Ausgangslage, deine Zielgruppe, deine Website und deine Inhalte.
+              Du bekommst eine realistische Einschätzung, welche Rolle
+              Pinterest in deinem Marketing spielen kann und worauf du dich bei
+              der Umsetzung konzentrieren solltest.
+            </p>
+
+            <p className={`${BODY} mt-6`}>
+              Als Pinterest Marketing Agentur verbinden wir dabei strategisches
+              Pinterest Marketing mit Pinterest SEO, Suchverhalten und
+              Content-Planung – statt dir allgemeine Standardtipps mitzugeben.
             </p>
           </>
         }
+        zielgruppe={{
+          heading: "Für wen eignet sich der Pinterest Strategie-Call?",
+          lead: <p>Der Call passt zu dir, wenn du:</p>,
+          items: zielgruppeItems,
+        }}
+        cardTitle="Pinterest Strategie-Call – das ist enthalten"
+        scope={angebot.scope}
+        features={features}
+        cardOutro={
+          <p>
+            Nach dem Call weißt du, welche nächsten Schritte für dein
+            Unternehmen sinnvoll sind und worauf du dich bei deiner Pinterest
+            Strategie konzentrieren solltest.
+          </p>
+        }
+        crossSell={{
+          heading: "Du möchtest die Strategie nicht selbst umsetzen?",
+          body: (
+            <p>
+              Wenn du Pinterest professionell starten möchtest, die technische
+              und strategische Einrichtung aber nicht selbst übernehmen willst,
+              ist unser Pinterest Account Aufbau der passende nächste Schritt.
+            </p>
+          ),
+          buttonLabel: "Zum Pinterest Account Aufbau",
+          href: "/pinterest-account-aufbau/",
+        }}
+        abschluss={{
+          heading: "Pinterest Strategie besprechen",
+          body: (
+            <>
+              <p>
+                Du möchtest herausfinden, wie Pinterest sinnvoll in dein
+                Marketing integriert werden kann?
+              </p>
+              <p className="mt-6">
+                In einem kostenfreien Erstgespräch klären wir zunächst, ob der
+                Pinterest Strategie-Call zu deiner Ausgangssituation passt.
+              </p>
+            </>
+          ),
+          buttonLabel: "Pinterest Strategie-Call anfragen",
+        }}
       />
 
       <script
