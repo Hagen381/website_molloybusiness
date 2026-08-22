@@ -60,7 +60,9 @@ export const navigation = {
         { label: "Pinterest Audit", href: "/pinterest-audit/" },
       ],
     },
-    { label: "Über mich", href: "/ueber-mich/" },
+    // Beschriftung "Über uns" (Marke im Vordergrund), Route bleibt
+    // /ueber-mich/ — die alte URL ist indexiert und wird nicht geändert.
+    { label: "Über uns", href: "/ueber-mich/" },
     { label: "Blog", href: "/blog/" },
     { label: "Kontakt", href: "/kontakt/" },
   ],
