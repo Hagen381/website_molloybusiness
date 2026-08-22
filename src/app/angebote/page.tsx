@@ -255,7 +255,7 @@ const pageJsonLd = {
     {
       // Nur die Angebotsnamen und ihre Seiten — bewusst ohne Offer/Preis.
       "@type": "ItemList",
-      name: "Meine Pinterest Marketing Angebote für Unternehmen",
+      name: "Unsere Pinterest Marketing Angebote für Unternehmen",
       itemListElement: angebote.map((angebot, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -612,7 +612,7 @@ export default function AngebotePage() {
       <section id="angebote" className="bg-surface scroll-mt-24">
         <div className="container-page pt-[80px]">
           <h2 className={`${H2_CENTERED} text-gold-light`}>
-            Meine Pinterest Marketing Angebote für Unternehmen
+            Unsere Pinterest Marketing Angebote für Unternehmen
           </h2>
         </div>
       </section>

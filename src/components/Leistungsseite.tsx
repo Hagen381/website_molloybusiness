@@ -239,7 +239,8 @@ export default function Leistungsseite({
       {/* ------------------------------------------------------------------
           4) CROSS-SELL — Hintergrund #FFFFFF, damit der Abschnittsrhythmus
           (creme / weiß) der Website erhalten bleibt. Interner Link im
-          sekundären Button-Stil (#D9D9D9 auf Weiß).
+          primären Button-Stil (#AC8343, weiße Schrift) — auf Weiß deutlich
+          sichtbarer als die frühere sekundäre Variante.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
         <div className="container-page py-[80px]">
@@ -249,7 +250,7 @@ export default function Leistungsseite({
             <div className={`${BODY} mt-6`}>{crossSell.body}</div>
 
             <div className="mt-8">
-              <Link href={crossSell.href} className="btn btn-secondary">
+              <Link href={crossSell.href} className="btn btn-primary">
                 {crossSell.buttonLabel}
               </Link>
             </div>
