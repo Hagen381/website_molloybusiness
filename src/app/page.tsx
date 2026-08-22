@@ -13,6 +13,8 @@ import { basePath } from "@/lib/base-path";
 // Absoluter Title (ohne titleTemplate aus layout.tsx) — von der
 // Markeninhaberin freigegeben, wird auch vom WebPage-Schema unten gelesen.
 const pageTitle = "Pinterest Marketing Agentur | molloy business";
+const pageDescription =
+  "molloy business ist eine spezialisierte Pinterest Marketing Agentur für Unternehmen und Marken. Pinterest SEO, Strategie, Content, Design und Account Management für langfristige organische Sichtbarkeit.";
 
 // Jede Seite setzt ihr eigenes Canonical-Tag (siehe CLAUDE.md) — sonst
 // erben Unterseiten das globale "/" aus layout.tsx und deklarieren sich
@@ -21,8 +23,18 @@ export const metadata: Metadata = {
   title: {
     absolute: pageTitle,
   },
-  description:
-    "molloy business ist eine spezialisierte Pinterest Marketing Agentur für Unternehmen und Marken. Pinterest SEO, Strategie, Content, Design und Account Management für langfristige organische Sichtbarkeit.",
+  description: pageDescription,
+  // Ohne diese beiden Blöcke erbt die Startseite og:title und og:description
+  // aus layout.tsx — dort steht noch der alte, seitenweite Text. Geteilte
+  // Links würden also etwas anderes anzeigen als die Seite selbst.
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
+  },
   alternates: {
     canonical: "/",
   },
