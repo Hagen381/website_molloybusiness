@@ -134,73 +134,84 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-[60%_40%] lg:gap-x-0">
             <div className={COL}>
               <h1 className={H1}>
-                Pinterest Marketing mit Struktur – für Marken, die sichtbar
-                bleiben wollen
+                Pinterest Marketing Agentur für nachhaltige Sichtbarkeit
               </h1>
 
-              <p className={`${BODY} mt-6`}>
-                Ich bin <strong>Juliette Oppel</strong>,
-                Pinterest-Marketing-Expertin und Strukturprofi mit
-                Schwerpunkt Touristik.
-                <br />
-                Ich helfe dir, Pinterest als{" "}
-                <strong>langfristigen Sichtbarkeitskanal</strong> zu nutzen –
-                mit klarer Strategie, professionellen Designs und ehrlicher
-                Umsetzung.
+              {/* Kicker-Zeile direkt unter der H1 — Antic Didone 20px,
+                  #C49C5E (KICKER = die Standardgröße 20/30). */}
+              <p className={`${KICKER} text-gold-light mt-4`}>
+                Pinterest Marketing mit Struktur – für Marken, die nicht nur
+                heute sichtbar sein wollen.
               </p>
 
               <p className={`${BODY} mt-6`}>
-                Du möchtest dich wieder auf dein <strong>Kerngeschäft</strong>{" "}
-                konzentrieren, statt dich in Social-Media-Hektik zu verlieren?
-                <br />
-                Dann bist du hier richtig. Ich übernehme{" "}
-                <strong>Strategie, Design, Texte und Umsetzung</strong>, damit
-                Pinterest <strong>für dich arbeitet – nicht umgekehrt.</strong>
+                molloy business ist eine spezialisierte Pinterest Marketing
+                Agentur für Unternehmen und Marken, die Pinterest als
+                langfristigen, organischen Sichtbarkeits- und Traffic-Kanal
+                nutzen möchten.
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Wir verbinden Pinterest SEO, klare Strategien, professionelles
+                Pin-Design und strukturierte Umsetzung. So wird aus bestehendem
+                Content ein nachhaltiger Marketingkanal, über den Inhalte auch
+                lange nach ihrer Veröffentlichung gefunden werden können.
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Wir übernehmen für dich Strategie, Keyword-Recherche,
+                Content-Planung, Design, Texte und Pinterest Management – damit
+                Pinterest für dein Unternehmen arbeitet und nicht umgekehrt.
               </p>
 
               {/* 2) — gleicher Hintergrund, kein neuer Abschnitt */}
               <h2 className={`${H2_STANDARD} mt-12`}>
-                Pinterest Marketing für Unternehmen – sichtbar werden mit Plan
+                Pinterest Marketing für Unternehmen – organisch, suchbasiert
+                und langfristig
               </h2>
 
               <p className={`${BODY} mt-6`}>
-                Pinterest ist keine Social-Media-Plattform, sondern eine{" "}
-                <strong>
-                  Suchmaschine für Ideen, Produkte und Inspiration
-                </strong>
-                .
-                <br />
-                Richtig genutzt, kann sie für dich{" "}
-                <strong>
-                  dauerhaft Traffic, Reichweite und Kundenanfragen
-                </strong>{" "}
-                generieren – auch Monate nach dem Posting.
-                <br />
-                Für Reiseveranstalter heißt das: Die Reiseplanung beginnt auf
-                Pinterest oft Monate vor der Buchung – und deine Pins bleiben
-                über diesen ganzen Zeitraum auffindbar, statt im schnellen
-                Feed unterzugehen.
+                Pinterest ist eine visuelle Such- und Inspirationsplattform.
+                Nutzer verwenden sie, um Ideen zu entdecken, Produkte zu
+                recherchieren und zukünftige Entscheidungen zu planen.
               </p>
 
-              <p className={`${BODY} mt-6`}>Ich unterstütze dich dabei,</p>
+              <p className={`${BODY} mt-6`}>
+                Genau darin liegt der Unterschied zu schnelllebigem
+                Social-Media-Content: Ein gut optimierter Pin kann über die
+                Pinterest-Suche über einen langen Zeitraum auffindbar bleiben
+                und immer wieder neue Nutzer auf deine Website führen.
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Mit einer strategischen Pinterest-SEO-Strategie wirst du
+                bereits dann sichtbar, wenn potenzielle Kunden anfangen, nach
+                Lösungen, Produkten oder Inspiration zu suchen – und nicht
+                erst, wenn sie deine Marke schon kennen.
+              </p>
+
+              <p className={`${BODY} mt-6`}>Wir unterstützen dich dabei,</p>
 
               <ul className={`${BODY} mt-2 list-disc space-y-2 pl-6`}>
                 <li>
-                  die <strong>richtige Pinterest-Strategie</strong> für deine
-                  Marke zu entwickeln,
+                  eine Pinterest-Strategie auf Basis deiner Ziele und deiner
+                  Zielgruppe zu entwickeln,
+                </li>
+                <li>bestehende Inhalte gezielt für Pinterest weiterzuverwenden,</li>
+                <li>SEO-optimierte Pins und Pinterest-Texte zu erstellen,</li>
+                <li>
+                  relevante Suchbegriffe und Themen frühzeitig zu erkennen,
                 </li>
                 <li>
-                  <strong>SEO-optimierte Pins</strong> zu gestalten,
-                </li>
-                <li>
-                  und einen <strong>Ablauf zu schaffen</strong>, der sich
-                  einfach in deinen Alltag integrieren lässt.
+                  und einen nachhaltigen Pinterest-Kanal aufzubauen, der
+                  kontinuierlich auf deine Website einzahlt.
                 </li>
               </ul>
 
               <p className={`${BODY} mt-6`}>
-                📌 <strong>Ergebnis:</strong> Mehr Sichtbarkeit, weniger
-                Stress, nachhaltiges Marketing.
+                Das Ergebnis: langfristige Sichtbarkeit, qualifizierter
+                Website-Traffic und ein Marketingkanal, der nicht jeden Tag
+                neuen Content verlangt.
               </p>
 
               {/* Interne Route statt der alten WordPress-URL. */}
@@ -242,7 +253,7 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          3) "Wie bist du hier gelandet?" — Hintergrund #FFFFFF, 100px/100px
+          3) "Was du von uns erwarten kannst" — Hintergrund #FFFFFF, 100px/100px
           Links Überschriftenblock mit Trennlinie, rechts der Fließtext.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
@@ -250,11 +261,13 @@ export default function Home() {
           {/* 45 % / 55 % — im Original 513px / 627px */}
           <div className="grid gap-10 lg:grid-cols-[45%_55%] lg:gap-x-0">
             <div className={COL}>
-              <p className={`${KICKER} text-gold-light`}>
-                Was erwartet dich hier?
-              </p>
+              <h2 className={H2_GOLD}>Was du von uns erwarten kannst</h2>
 
-              <h2 className={`${H2_GOLD} mt-4`}>Wie bist du hier gelandet?</h2>
+              {/* Die H3 steht links unter der H2, gleiche Schriftfamilie,
+                  eine Stufe kleiner (H5-Größe) und in der Fließtextfarbe. */}
+              <h3 className={`${H5_VALUE} text-heading mt-4`}>
+                Pinterest Marketing, das langfristig gedacht ist
+              </h3>
 
               {/* Trennlinie: 1.6px, #C49C5E, 330px breit, linksbündig */}
               <hr className="border-gold-light mt-6 w-[330px] max-w-full border-t-[1.6px]" />
