@@ -53,11 +53,12 @@ const COL = "lg:px-[10px]";
 const KARTEN_TITEL =
   "font-heading font-semibold tracking-[1px] text-gold-light text-[24px] leading-[33.6px]";
 
-// Meta-Zeile: Arial 18px/30px, Stärke 400, Laufweite 1.4px in sehr hellem
-// Grau #D9D9D9 (= --gray-light). Auf weißem Grund ist das im Original kaum
-// lesbar — bewusst so übernommen, siehe Hinweis in der Aufgabenübergabe.
+// Meta-Zeile: Arial 18px/30px, Stärke 400, Laufweite 1.4px. Das Original
+// setzt hier #D9D9D9, was auf weißem Grund kaum lesbar ist — bewusste
+// Abweichung: Format und Maße bleiben exakt, nur die Farbe wird auf #777777
+// gehoben (das Grau des Anrisstextes der alten Übersicht).
 const KARTEN_META =
-  "font-body font-normal tracking-[1.4px] text-[18px] leading-[30px] text-gray-light";
+  "font-body font-normal tracking-[1.4px] text-[18px] leading-[30px] text-[#777777]";
 
 // Autorenname der Meta-Zeile. Im Original trägt jeder Artikel denselben
 // Namen, deshalb hier eine Konstante statt eines Feldes je Artikel.
@@ -376,20 +377,20 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
         <div className="container-page py-[80px]">
           <div className="mx-auto w-full max-w-[770px] text-white">
             <h3 className={`text-white ${H3_ABSCHLUSS}`}>
-              Du möchtest mit mir zusammenarbeiten?
+              Du möchtest mit uns zusammenarbeiten?
             </h3>
 
             <p className="font-body mt-6 text-center">
-              Habe ich dein Interesse geweckt? Gerne unterstütze ich dich dabei
-              dein Unternehmen auf Pinterest sichtbar zu machen. Schau dir dazu
-              meine verschiedenen{" "}
+              Haben wir dein Interesse geweckt? Gerne unterstützen wir dich
+              dabei, dein Unternehmen auf Pinterest sichtbar zu machen. Schau
+              dir dazu unsere verschiedenen{" "}
               <Link
                 href="/angebote/"
                 className="text-gold-text font-bold italic underline"
               >
                 Pinterest Angebote
               </Link>{" "}
-              an oder schreib mir und wir schauen, was am besten zu dir und
+              an oder schreib uns und wir schauen, was am besten zu dir und
               deinen Bedürfnissen passt.
             </p>
 
@@ -398,7 +399,7 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
                 Route, deshalb next/link und kein target="_blank". */}
             <div className="mt-8 text-center">
               <Link href="/kontakt/" className="btn btn-secondary">
-                schreib&apos; mir!
+                schreib&apos; uns!
               </Link>
             </div>
           </div>

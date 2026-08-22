@@ -9,9 +9,10 @@ export const siteConfig = {
   // Ohne www — die Live-Domain läuft auf molloybusiness.com, www leitet dorthin um.
   url: "https://molloybusiness.com",
   titleTemplate: "%s | molloy business",
-  defaultTitle: "Pinterest Marketing Agentur für Unternehmen | molloy business",
+  defaultTitle: "Pinterest Marketing Agentur | molloy business",
+  // Globaler Fallback für Seiten ohne eigene Description — Marken-Text.
   description:
-    "Pinterest Marketing Agentur im deutschsprachigen Raum: organisch statt Ads – Strategie, Pin-Design und laufende Betreuung für dein Unternehmen.",
+    "molloy business ist eine spezialisierte Pinterest Marketing Agentur für Unternehmen und Marken. Pinterest SEO, Strategie, Content, Design und Account Management für langfristige organische Sichtbarkeit.",
   email: "info@molloybusiness.com",
   phone: "+49 15678 196744",
   locations: "Deutschland, Schweiz, Österreich & weltweit (remote)",
@@ -19,6 +20,9 @@ export const siteConfig = {
   // und JSON-LD lesen ausschließlich aus diesem Block (keine Duplikate in
   // Komponenten).
   legal: {
+    // Eigene Nummer NUR fürs Impressum (Rechtsträger molloy Management OÜ).
+    // Footer, Kontaktseite und JSON-LD nutzen weiterhin siteConfig.phone.
+    legalPhone: "+49 15679 636325",
     street: "Sepapaja tn 6",
     zip: "15551",
     city: "Tallinn",
@@ -38,8 +42,22 @@ export const siteConfig = {
     // Markenprofil, nicht das persönliche Profil — so verlinkt es auch die
     // Live-Seite (Fusszeile aller Originalseiten, siehe docs/original/html/).
     pinterest: "https://www.pinterest.de/molloybusinesspinterest/",
+    // Direktnachricht, kein Social-Profil — deshalb bewusst NICHT im sameAs
+    // des Organization-Schemas (siehe `schemaSameAs` unten).
+    whatsapp: "https://wa.me/4915678196744",
   },
 } as const;
+
+// sameAs des Organization-/ProfessionalService-Schemas. Bewusst eine
+// explizite Liste statt Object.values(siteConfig.social): der WhatsApp-Link
+// (wa.me) ist ein Nachrichtenweg und kein Social-Profil und gehört deshalb
+// nicht ins sameAs.
+export const schemaSameAs = [
+  siteConfig.social.instagram,
+  siteConfig.social.facebook,
+  siteConfig.social.pinterest,
+  siteConfig.social.linkedin,
+] as const;
 
 export const navigation = {
   main: [

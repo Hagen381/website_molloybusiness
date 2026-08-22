@@ -10,14 +10,30 @@ const path = "/kontakt/";
 // Original auf keiner Seite, siehe CLAUDE.md).
 const pageName = "Kontakt";
 
-// Titel und Beschreibung wörtlich aus dem Original
-// (/kontakt-pinterest-marketing/), nur ohne die dortigen Emoji.
+const pageTitle = "Kontakt zu molloy business | Pinterest Marketing Agentur";
+const pageDescription =
+  "Du suchst eine Pinterest Marketing Agentur, die Strategie und Umsetzung übernimmt – oder möchtest herausfinden, ob Pinterest zu deinem Unternehmen passt?";
+
 export const metadata: Metadata = {
-  title: "Kontakt | Pinterest Marketing & Struktur",
-  description:
-    "Kontaktiere Juliette Oppel – Pinterest Marketing Expertin & Strukturprofi. Anfrage für Zusammenarbeit oder Fragen zu molloy business.",
+  // Absolut, damit die globale Titelvorlage "%s | molloy business" hier
+  // nicht greift — der Markenname steht schon im Titel.
+  title: { absolute: pageTitle },
+  description: pageDescription,
   alternates: {
     canonical: path,
+  },
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    url: `${siteConfig.url}${path}`,
+    siteName: siteConfig.name,
+    title: pageTitle,
+    description: pageDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
   },
 };
 
@@ -58,9 +74,8 @@ const pageJsonLd = {
       "@type": ["WebPage", "ContactPage"],
       "@id": `${siteConfig.url}${path}#webpage`,
       url: `${siteConfig.url}${path}`,
-      name: "Kontakt | Pinterest Marketing & Struktur",
-      description:
-        "Kontaktiere Juliette Oppel – Pinterest Marketing Expertin & Strukturprofi. Anfrage für Zusammenarbeit oder Fragen zu molloy business.",
+      name: pageTitle,
+      description: pageDescription,
       about: { "@id": `${siteConfig.url}/#organization` },
       isPartOf: { "@id": `${siteConfig.url}/#organization` },
     },
@@ -96,62 +111,21 @@ export default function Kontakt() {
       <section className="bg-gray-light">
         <div className="container-page pt-[80px] pb-[50px]">
           <div className="mx-auto w-full max-w-[770px] text-center">
-            <h1 className={H1}>Kontakt – Pinterest Marketing</h1>
+            <h1 className={H1}>Kontakt zu molloy business</h1>
 
             <p className={`${BODY} mt-6`}>
-              Du möchtest mit mir über <strong>Pinterest Marketing</strong> oder
-              eine mögliche Zusammenarbeit sprechen?
+              Du suchst eine Pinterest Marketing Agentur, die Strategie und
+              Umsetzung übernimmt – oder möchtest zunächst herausfinden, ob
+              Pinterest zu deinem Unternehmen passt?
             </p>
 
-            <p className={`${BODY} mt-6`}>
-              <strong>Hier bist du richtig.</strong>
-            </p>
+            <p className={`${BODY} mt-6`}>Dann melde dich gern bei uns.</p>
 
             <p className={`${BODY} mt-6`}>
-              Ich bin <strong>Juliette Oppel</strong>, Pinterest Marketing
-              Expertin &amp; Strukturprofi für Lifestyle-Marken und KMU.
-              <br />
-              Schreib mir, wenn du Pinterest{" "}
-              <strong>professionell, ehrlich und langfristig wirksam</strong>{" "}
-              nutzen möchtest – oder prüfen willst, ob ich die passende
-              Partnerin für dein Projekt bin.
-            </p>
-
-            <p className={`${BODY} mt-6`}>
-              Wähle den Weg, der für dich am angenehmsten ist:
-            </p>
-
-            {/* Im Original stehen Adresse und Nummer hier als reiner Text
-                (die Mailadresse trägt zwar ein <a>, aber ohne href).
-                Beides ist hier anklickbar — gleicher Wortlaut, nur nutzbar. */}
-            <p className={`${BODY} mt-6`}>
-              📩 <strong>E-Mail:</strong>{" "}
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="text-gold-text hover:underline"
-              >
-                {siteConfig.email}
-              </a>
-            </p>
-
-            <p className={`${BODY} mt-6`}>
-              📞 <strong>Telefon / WhatsApp:</strong>{" "}
-              <a href={telHref} className="text-gold-text hover:underline">
-                {siteConfig.phone}
-              </a>
-            </p>
-
-            <p className={`${BODY} mt-6`}>
-              🌍 <strong>Remote:</strong> Betreuung für Kunden in Deutschland,
-              Schweiz, Österreich &amp; weltweit
-            </p>
-
-            <p className={`${BODY} mt-6`}>
-              🕒 Ich antworte dir in der Regel innerhalb von einem Werktag.
-            </p>
-
-            <p className={`${BODY} mt-6`}>
-              <em>(Fax gibt’s nicht 😉)</em>
+              Ob du Pinterest neu aufbauen, einen bestehenden Account optimieren
+              oder dein laufendes Pinterest Marketing komplett auslagern
+              möchtest: Wir schauen uns deine Ausgangssituation an und finden
+              heraus, welche Form der Zusammenarbeit sinnvoll ist.
             </p>
           </div>
         </div>
@@ -164,6 +138,8 @@ export default function Kontakt() {
           trackerfrei und verarbeitet keine Formulardaten (ein Formular
           bräuchte eine erweiterte Datenschutzerklärung und ggf. ein
           Cookie-Banner). An seiner Stelle stehen die direkten Kontaktwege.
+          E-Mail-Adresse und Telefonnummer stehen NUR hier — im Kopfbereich
+          bewusst nicht noch einmal.
           Unter 1024px stapeln die Spalten in Markup-Reihenfolge, der Text
           steht also vor dem Bild.
           ------------------------------------------------------------------ */}
@@ -171,16 +147,7 @@ export default function Kontakt() {
         <div className="container-page py-[80px]">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
             <div className={COL}>
-              {/* Einleitungssatz des Originals über dem Formular — er trägt
-                  auch ohne Formular. Der Satz "Oder du nutzt dieses Formular
-                  hier." entfällt ersatzlos, deshalb rückt dieser an dessen
-                  Stelle über die Überschrift. */}
-              <p className={BODY}>
-                Du hast Fragen zu meinen Angeboten oder möchtest direkt ein
-                Projekt anfragen?
-              </p>
-
-              <h2 className={`${H2_GOLD} mt-6`}>Anfrage Pinterest Marketing</h2>
+              <h2 className={H2_GOLD}>So erreichst du uns</h2>
 
               <p className={`${BODY} mt-6`}>
                 <strong>E-Mail:</strong>{" "}
@@ -193,15 +160,36 @@ export default function Kontakt() {
               </p>
 
               <p className={`${BODY} mt-2`}>
-                <strong>Telefon:</strong>{" "}
+                <strong>Telefon / WhatsApp:</strong>{" "}
                 <a href={telHref} className="text-gold-text hover:underline">
                   {siteConfig.phone}
                 </a>
               </p>
 
               <p className={`${BODY} mt-6`}>
-                In einem kostenfreien Erstgespräch klären wir in Ruhe, ob und
-                wie eine Zusammenarbeit zu dir passt.
+                Zusammenarbeit: vollständig digital und ortsunabhängig – für
+                Unternehmen in Deutschland, Österreich, der Schweiz und
+                international
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                Wir antworten in der Regel innerhalb eines Werktages.
+              </p>
+
+              <h2 className={`${H2_GOLD} mt-10`}>
+                Pinterest Marketing anfragen
+              </h2>
+
+              <p className={`${BODY} mt-6`}>
+                Du interessierst dich für Pinterest Account Aufbau, Pinterest
+                Account Management, einen Strategie-Call oder Pinterest Audit?
+              </p>
+
+              <p className={`${BODY} mt-6`}>
+                In einem kostenfreien Erstgespräch besprechen wir dein
+                Unternehmen, deinen bisherigen Pinterest-Stand und deine Ziele.
+                Anschließend können wir dir sagen, welches Angebot zu deiner
+                Situation passt.
               </p>
 
               <div className="mt-8">
@@ -223,7 +211,7 @@ export default function Kontakt() {
               <div className="relative mx-auto aspect-[396/500] w-full overflow-hidden rounded-t-[150px] lg:mr-0 lg:ml-auto lg:aspect-auto lg:h-[500px] lg:w-[396px] lg:max-w-full">
                 <ExportedImage
                   src={kontaktImage}
-                  alt="pinterest marketing"
+                  alt="Juliette Oppel steht in einem hellen Raum und telefoniert mit dem Handy"
                   fill
                   className="object-cover"
                   /* Quelle 1694×2236 (hochkant), Ausschnitt 396×500 ebenfalls

@@ -7,7 +7,7 @@ import juliettePortraitImage from "@/assets/images/start/DSC01285-scaled.jpg";
 import iconAuthenzitaet from "@/assets/images/start/Authenzitaet.png";
 import iconVerlaesslichkeit from "@/assets/images/start/1.png";
 import iconWeitblick from "@/assets/images/start/3.png";
-import { siteConfig } from "@/lib/site-config";
+import { schemaSameAs, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 // Absoluter Title (ohne titleTemplate aus layout.tsx) — von der
@@ -113,7 +113,7 @@ const pageJsonLd = {
         "@type": "Person",
         name: siteConfig.brandFace,
       },
-      sameAs: Object.values(siteConfig.social),
+      sameAs: schemaSameAs,
     },
   ],
 };

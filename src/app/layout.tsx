@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Antic_Didone } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { siteConfig } from "@/lib/site-config";
+import { schemaSameAs, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 import "./globals.css";
 
@@ -64,7 +64,7 @@ const jsonLd = {
         addressCountry: siteConfig.legal.countryCode,
       },
       vatID: siteConfig.legal.vatId,
-      sameAs: Object.values(siteConfig.social),
+      sameAs: schemaSameAs,
     },
   ],
 };

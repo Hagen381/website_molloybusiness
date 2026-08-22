@@ -69,7 +69,7 @@ export default function Impressum() {
 
         <h2 className="mt-10 text-[22px] leading-tight">Kontakt</h2>
         <p className="font-body mt-3 text-lg">
-          Telefon: {siteConfig.phone}
+          Telefon: {siteConfig.legal.legalPhone}
           <br />
           E-Mail: {siteConfig.email}
         </p>

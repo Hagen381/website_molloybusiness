@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { navigation, siteConfig } from "@/lib/site-config";
 
+// Reihenfolge wie in der Fusszeile des Originals: Instagram, Facebook,
+// WhatsApp, Pinterest, LinkedIn.
 const socialLinks = [
   { label: "Instagram", href: siteConfig.social.instagram },
   { label: "Facebook", href: siteConfig.social.facebook },
+  { label: "WhatsApp", href: siteConfig.social.whatsapp },
   { label: "Pinterest", href: siteConfig.social.pinterest },
   { label: "Linkedin", href: siteConfig.social.linkedin },
 ];
