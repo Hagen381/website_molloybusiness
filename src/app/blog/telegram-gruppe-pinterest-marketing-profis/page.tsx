@@ -135,7 +135,7 @@ export default function TelegramGruppePinterestMarketingProfis() {
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
           Blog
         </p>
-        <h1 className="text-[32px] leading-[1.25] sm:text-[40px] sm:leading-[1.2] lg:text-[47px] lg:leading-[65.8px]">
+        <h1 className="article-h1">
           {h1}
         </h1>
         <p className="font-body mt-3 text-sm">

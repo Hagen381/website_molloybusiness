@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Pinterest Marketing Blog für Unternehmen – Seite ${nummer}`,
     description:
-      "Der Pinterest Marketing Blog von molloy business: verständliche Ratgeber zu Kosten, Strategie und organischer Sichtbarkeit für Unternehmen.",
+      "Der Blog von molloy business: Pinterest Marketing für Unternehmen – Strategie, " +
+      "SEO, Content – plus Online-Business, Selbstständigkeit und Agenturalltag.",
     alternates: {
       // Jede Blätterseite ist auf sich selbst kanonisch — sonst würde sie sich
       // fälschlich als /blog/ ausgeben.
