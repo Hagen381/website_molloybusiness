@@ -178,12 +178,10 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
               <h1 className={H1}>(molloy) business blog</h1>
 
               <p className="font-body mt-6">
-                Hier schreibt molloy business über Pinterest Marketing für
-                Unternehmen: verständlich, konkret und ohne Fachchinesisch. Die
-                Artikel beantworten die Fragen, die in Erstgesprächen am
-                häufigsten gestellt werden – damit du eine fundierte
-                Entscheidung treffen kannst, ob und wie Pinterest zu deinem
-                Unternehmen passt.
+                Im molloy business Blog schreiben wir über Pinterest Marketing
+                für Unternehmen — Strategie, SEO, Content und Trends. Dazu
+                kommen Themen rund um Online-Business, Selbstständigkeit und den
+                Arbeitsalltag hinter der Agentur.
               </p>
             </div>
 

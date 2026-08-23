@@ -242,10 +242,11 @@ export default function KundenstimmenKarussell({
       </div>
 
       {/* Punkte-Navigation — am Original gemessen: 8px, Schwarz mit 20 %
-          Deckkraft, der aktive Punkt Schwarz. Die Trefferfläche ist über ein
-          unsichtbares `before` auf 24px vergrößert, ohne dass sich am Bild
-          etwas ändert. */}
-      <div className="mt-[30px] flex justify-center gap-[12px]">
+          Deckkraft, der aktive Punkt Schwarz, 20px von Mitte zu Mitte (8px
+          Punkt + 12px Abstand) und 5px unter der Kartenunterkante. Die
+          Trefferfläche ist über ein unsichtbares `before` auf 24px vergrößert,
+          ohne dass sich am Bild etwas ändert. */}
+      <div className="mt-[5px] flex justify-center gap-[12px]">
         {stimmen.map((stimme, index) => (
           <button
             key={stimme.name}
