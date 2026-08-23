@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
+import BlogArtikel from "@/components/BlogArtikel";
 import TableOfContents from "@/components/TableOfContents";
 import { blogPosts, siteConfig } from "@/lib/site-config";
 import { formatDateDe } from "@/lib/format";
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-const imageSizes = "(min-width: 896px) 848px, calc(100vw - 48px)";
+const imageSizes = "(min-width: 861px) 813px, calc(100vw - 48px)";
 
 const zentraleFragen = [
   "Bin ich bereit, Raum zu schaffen? Nicht nur auf dem Papier, sondern ganz konkret in meinem Alltag.",
@@ -96,7 +97,7 @@ const toc = [
 
 export default function OnlineBusinessVsRealitaet() {
   return (
-    <>
+    <BlogArtikel post={post}>
       {/* Intro */}
       <section className="article-column pt-10 pb-[30px]">
         <p className="font-body text-gold-text mb-3 text-sm tracking-[2px] uppercase">
@@ -609,6 +610,6 @@ export default function OnlineBusinessVsRealitaet() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
       />
-    </>
+    </BlogArtikel>
   );
 }
