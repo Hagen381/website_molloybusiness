@@ -104,13 +104,22 @@ function VerwandteArtikel({ slug }: { slug: string }) {
   if (artikel.length === 0) return null;
 
   return (
-    // Block-Innenabstand am Original gemessen: oben 30px, unten und seitlich 0.
-    // 846px breit (3×282), zentriert — der 24px-Seitenabstand greift nur
-    // unterhalb von 894px, damit der Block auf schmalen Screens nicht am
-    // Fensterrand klebt.
+    // Innenabstand oben 30px wie am Original gemessen. Darunter 110px bis zum
+    // dunklen Fussbereich — ebenfalls am Original gemessen, deshalb als
+    // Innenabstand unten am Block selbst (zwischen Block und <footer> steht
+    // sonst nichts, der Wert ist also exakt der sichtbare Abstand).
+    //
+    // Waagerecht ist der Block NICHT zentriert, sondern an der Textspalte
+    // ausgerichtet: seine linke Kante liegt 16px links neben der linken Kante
+    // der 813px-Textspalte (Original bei 1200px: Text x=170, Kacheln x=154).
+    // `(100% - 813px) / 2` ist dabei genau der linke Rand der Textspalte —
+    // beide sitzen im selben vollbreiten Elternelement, die Rechnung stimmt
+    // deshalb bei jeder Fensterbreite. Der Versatz gilt nur dort, wo das feste
+    // 282px-Raster greift (ab 894px); darunter bleibt der Block zentriert mit
+    // 24px Seitenabstand, damit er nicht am Fensterrand klebt.
     <section
       aria-labelledby="verwandte-artikel"
-      className="mx-auto w-full max-w-[846px] px-6 pt-[30px] pb-0 min-[894px]:px-0"
+      className="mx-auto w-full max-w-[846px] px-6 pt-[30px] pb-[110px] min-[894px]:mx-0 min-[894px]:ml-[calc((100%_-_813px)_/_2_-_16px)] min-[894px]:px-0"
     >
       <h2 id="verwandte-artikel" className="related-posts-title">
         {VERWANDTE_UEBERSCHRIFT}
