@@ -69,7 +69,7 @@ export default function Footer() {
 
         {/* Spalte 3 — die fünf Social-Icons nebeneinander. Kachel 50×50
             (mobil 40×40), Grund #D9D9D9, Eckenradius 10 %, Symbol 25×25
-            (mobil 20×20) in #69727D, 6px zwischen den Kacheln. */}
+            (mobil 20×20) in Gold #AC8343, 6px zwischen den Kacheln. */}
         <ul className="flex gap-[6px] lg:justify-self-end">
           {socialLinks.map(({ label, href, Icon }) => (
             <li key={label}>
@@ -78,7 +78,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="bg-gray-light text-social-icon flex h-[40px] w-[40px] items-center justify-center rounded-[10%] transition hover:opacity-80 lg:h-[50px] lg:w-[50px]"
+                className="bg-gray-light text-gold flex h-[40px] w-[40px] items-center justify-center rounded-[10%] transition hover:opacity-80 lg:h-[50px] lg:w-[50px]"
               >
                 <Icon className="h-[20px] w-[20px] lg:h-[25px] lg:w-[25px]" />
               </a>

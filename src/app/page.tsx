@@ -4,6 +4,7 @@ import ExportedImage from "next-image-export-optimizer";
 import heroImage from "@/assets/images/start/DSC01156-scaled-e1763214118889.jpg";
 import julietteChairImage from "@/assets/images/start/Juliette-Oppel-Pinterest-Businessmanagement.jpg";
 import juliettePortraitImage from "@/assets/images/start/DSC01285-scaled.jpg";
+import abschlussHintergrund from "@/assets/images/blog/Juliette-Oppel-Header-Kontakt-Pinterest.jpg";
 import iconAuthenzitaet from "@/assets/images/start/Authenzitaet.png";
 import iconVerlaesslichkeit from "@/assets/images/start/1.png";
 import iconWeitblick from "@/assets/images/start/3.png";
@@ -390,6 +391,14 @@ export default function Home() {
                 Einschätzung dessen, was mit Pinterest für dein Unternehmen
                 sinnvoll und realistisch ist.
               </p>
+
+              {/* Im Original steht hier ein goldener Button (primaere
+                  Variante), Ziel ist die Kontaktseite. */}
+              <div className="mt-8">
+                <Link href="/kontakt/" className="btn btn-primary">
+                  let&apos;s talk
+                </Link>
+              </div>
             </div>
 
             {/* Ab 1024px feste 421×500px, LINKSBÜNDIG in der 513px-Spalte (am
@@ -466,7 +475,7 @@ export default function Home() {
               </p>
 
               <div className="mt-8">
-                <Link href="/ueber-mich/" className="btn btn-secondary">
+                <Link href="/ueber-mich/" className="btn btn-primary">
                   Mehr über molloy business
                 </Link>
               </div>
@@ -491,42 +500,66 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          7) "Passt Pinterest zu deinem Unternehmen?"
-          Schließt ohne Farbwechsel an Abschnitt 6 an (#595959).
+          7) "Passt Pinterest zu deinem Unternehmen?" — Abschluss mit
+          Hintergrundfoto (Juliette-Oppel-Header-Kontakt-Pinterest.jpg, cover,
+          Position 50% 50%) und einem Schleier in #D9D9D9 bei 21 % Deckkraft.
+          Abschnitt 80px/80px; darauf mittig die goldene Kachel (#C49C5E,
+          770px breit, 50px oben/unten und 30px links/rechts Innenabstand,
+          keine abgerundeten Ecken). Einbindung des Fotos wie in den anderen
+          Foto-Abschnitten: über next-image-export-optimizer absolut hinter
+          dem Inhalt.
           ------------------------------------------------------------------ */}
-      <section className="bg-footer">
-        <div className="container-page pt-0 pb-[80px] text-center">
-          {/* Wie in Abschnitt 5: zentrierte Überschrift im bisherigen Format,
-              semantisch eine H2. */}
-          <h2 className={`${H3_CENTERED} text-surface`}>
-            Passt Pinterest zu deinem Unternehmen?
-          </h2>
+      <section className="relative isolate overflow-hidden">
+        <ExportedImage
+          src={abschlussHintergrund}
+          alt=""
+          aria-hidden="true"
+          fill
+          className="-z-10 object-cover object-[50%_50%]"
+          sizes="100vw"
+          basePath={basePath}
+        />
+        {/* Schleier: #D9D9D9 bei 21 % Deckkraft */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[rgba(217,217,217,0.21)]"
+        />
+        <div className="container-page py-[80px]">
+          {/* Goldene Kachel. Unter 1024px volle Rahmenbreite, der seitliche
+              Innenabstand fällt dort auf 32px. */}
+          <div className="bg-gold-light mx-auto w-full max-w-[770px] px-[32px] py-[50px] text-center lg:px-[30px]">
+            {/* Wie in Abschnitt 5: zentrierte Überschrift im bisherigen
+                Format, semantisch eine H2. */}
+            <h2 className={`${H3_CENTERED} text-white`}>
+              Passt Pinterest zu deinem Unternehmen?
+            </h2>
 
-          <p className={`${BODY} text-gray-light mx-auto mt-6 max-w-3xl`}>
-            Du möchtest wissen, welches Potenzial Pinterest für dein
-            Unternehmen hat oder dein Pinterest Marketing komplett auslagern?
-          </p>
+            <p className={`${BODY} mt-6 text-white`}>
+              Du möchtest wissen, welches Potenzial Pinterest für dein
+              Unternehmen hat oder dein Pinterest Marketing komplett auslagern?
+            </p>
 
-          <p className={`${BODY} text-gray-light mx-auto mt-6 max-w-3xl`}>
-            In einem kostenfreien Erstgespräch schauen wir gemeinsam darauf, wo
-            du aktuell stehst, was du erreichen möchtest und ob Pinterest der
-            richtige Kanal dafür ist.
-          </p>
+            <p className={`${BODY} mt-6 text-white`}>
+              In einem kostenfreien Erstgespräch schauen wir gemeinsam darauf, wo
+              du aktuell stehst, was du erreichen möchtest und ob Pinterest der
+              richtige Kanal dafür ist.
+            </p>
 
-          <p className={`${BODY} text-gray-light mx-auto mt-6 max-w-3xl`}>
-            Wenn wir zusammenpassen, zeigen wir dir im nächsten Schritt, wie
-            eine Zusammenarbeit aussehen kann.
-          </p>
+            <p className={`${BODY} mt-6 text-white`}>
+              Wenn wir zusammenpassen, zeigen wir dir im nächsten Schritt, wie
+              eine Zusammenarbeit aussehen kann.
+            </p>
 
-          <div className="mt-8">
-            <a
-              href={siteConfig.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-            >
-              Erstgespräch vereinbaren
-            </a>
+            <div className="mt-8">
+              <a
+                href={siteConfig.calendly}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                Erstgespräch vereinbaren
+              </a>
+            </div>
           </div>
         </div>
       </section>
