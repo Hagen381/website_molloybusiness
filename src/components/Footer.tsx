@@ -54,13 +54,15 @@ export default function Footer() {
           </Link>
         </div>
 
-        {/* Spalte 2 — die drei Links nebeneinander, Arial 18px, #333333,
-            zentriert in der Spalte. Mobil brechen sie zweizeilig um, bleiben
-            aber zentriert. */}
-        <ul className="font-body flex flex-wrap justify-center gap-x-8 gap-y-2 text-center text-[18px] text-[#333333]">
+        {/* Spalte 2 — die drei Links nebeneinander, Arial 18px, zentriert in
+            der Spalte. Mobil brechen sie zweizeilig um, bleiben aber
+            zentriert. Schriftfarbe #D9D9D9 (hell), weil der Footergrund
+            #595959 ist — das zuvor hier stehende #333333 war darauf kaum
+            lesbar; beim Ueberfahren Weiss. */}
+        <ul className="font-body flex flex-wrap justify-center gap-x-8 gap-y-2 text-center text-[18px] text-[#D9D9D9]">
           {navigation.legal.map((item) => (
             <li key={item.label}>
-              <Link href={item.href} className="hover:text-gold-light">
+              <Link href={item.href} className="hover:text-white">
                 {item.label}
               </Link>
             </li>

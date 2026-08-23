@@ -5,6 +5,7 @@ import ExportedImage from "next-image-export-optimizer";
 import heroImage from "@/assets/images/angebote/Juliette-Oppel-Online-Business.jpg";
 import laptopImage from "@/assets/images/angebote/Juliette-Oppel-Online-Businessmanagement.jpg";
 import phoneImage from "@/assets/images/angebote/Juliette-Oppel-Pinterest.jpg";
+import zitatHintergrund from "@/assets/images/angebote/katsia-jazwinska-dxiFrXpcyCA-unsplash-scaled.jpg";
 import kachelAufbau from "@/assets/images/angebote/PinterestAccountAufbau.png";
 import kachelManagement from "@/assets/images/angebote/PinterestAccountManagement.png";
 import kachelStrategie from "@/assets/images/angebote/Pinterest-Strategie-Call.png";
@@ -13,8 +14,10 @@ import fotoDaniela from "@/assets/images/angebote/DanielaBatistadosSantos.jpg";
 import fotoJudithGastner from "@/assets/images/angebote/JudithGastner.jpg";
 import fotoJulia from "@/assets/images/angebote/JuliaKallenborn.jpg";
 import fotoNathalie from "@/assets/images/angebote/Nathalie-Weimar.jpg";
-import fotoPostFinance from "@/assets/images/angebote/Bild-PostFinance.svg";
 import fotoJudithKenk from "@/assets/images/angebote/Judith-Kenk.jpg";
+import KundenstimmenKarussell, {
+  type Kundenstimme,
+} from "@/components/KundenstimmenKarussell";
 import { services, siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
@@ -163,8 +166,10 @@ const arbeitsweiseListe = [
 // Kundenstimmen — wortgleich aus dem Original übernommen, Freigaben liegen vor.
 // Reihenfolge nach Pinterest-Bezug (PostFinance zuerst).
 // Bewusst NUR sichtbarer Text: kein Review-/AggregateRating-Schema.
+// Dargestellt werden sie vom Karussell (KundenstimmenKarussell.tsx); alle
+// sechs stehen dort gleichzeitig im HTML.
 // ---------------------------------------------------------------------------
-const kundenstimmen = [
+const kundenstimmen: Kundenstimme[] = [
   {
     // Die Linkadresse war im Original fehlerhaft (doppeltes „h“ im Schema)
     // und lief ins Leere — hier korrigiert.
@@ -176,9 +181,9 @@ const kundenstimmen = [
     textEnde: '."',
     name: "Fabian Christ",
     rolle: "Social Media Manager, PostFinance",
-    foto: fotoPostFinance,
+    // Inline-SVG statt Bilddatei, siehe PostFinanceLogo.tsx.
+    logo: "postfinance",
     alt: "PostFinance zu Pinterest Account Aufbau",
-    contain: true,
   },
   {
     text: '"Ich habe Juliette für einen Online-Workshop zum Thema Pinterest Einsteigerwissen gebucht. Die Teilnehmenden und ich fühlen uns jetzt sehr gut in das Thema mitgenommen. Juliettes Präsentation war sehr interessant und mit vielen Praxisbeispielen ergänzt. Im Fragenteil konnte Juliette ihr umfassendes Fachwissen und ihre Erfahrung einbringen. Mit viel Geduld und vor allem für jede*n verständlich, hat Juliette Pinterest greifbar gemacht. Sollte nochmals Bedarf für dieses Thema aufkommen, würde ich Juliette wieder buchen!"',
@@ -186,7 +191,6 @@ const kundenstimmen = [
     rolle: "Digitalisierungsbotschafterin Mecklenburg-Vorpommern",
     foto: fotoJudithKenk,
     alt: "Judith Kenk zum Pinterest Workshop",
-    contain: false,
   },
   {
     // Im Original hing an "Videokurs" ein Udemy-Link mit Affiliate-Kennung;
@@ -196,7 +200,6 @@ const kundenstimmen = [
     rolle: "Ringana Partnerin",
     foto: fotoNathalie,
     alt: "Nathalie Weimar zum Thema Pinterest Marketing",
-    contain: false,
   },
   {
     text: '"Juliette ist eine wunderbare Mischung aus Professionalität, Kompetenz, Zuverlässigkeit, Neugier, Liebenswürdigkeit, Offenheit, Flexibilität, Hartnäckigkeit und Kreativität. Mit ihr zusammenzuarbeiten, kann ich nur jedem empfehlen bzw. wünschen! :-)"',
@@ -204,7 +207,6 @@ const kundenstimmen = [
     rolle: "Geschäftsführerin | PaarBalance GmbH",
     foto: fotoJudithGastner,
     alt: "JudithGastner",
-    contain: false,
   },
   {
     text: '"Ich liebe es mit Juliette zu arbeiten. Man merkt ihre langjährige Erfahrung, sie denkt mit und bringt immer neue tolle Ideen ins Unternehmen. Sie hat ein sehr gutes Feingefühl, versteht Zusammenhänge sehr schnell und erkennt wo im Unternehmen noch verborgene Potenziale sind. Die Zusammenarbeit macht immer Spaß und Freude. Sie bringt eine Energie mit für die ich sehr dankbar bin. Danke für alles meine Liebe."',
@@ -212,7 +214,6 @@ const kundenstimmen = [
     rolle: "CEO | The Circle of Wonderwomen LLC",
     foto: fotoDaniela,
     alt: "Daniela Batista dos Santos",
-    contain: false,
   },
   {
     text: "“Ich liebe die Zusammenarbeit mit Juliette sehr! Sowohl menschlich aber auch auf professioneller Ebene könnte ich mir keine bessere OBM vorstellen. Danke für dich!”",
@@ -220,7 +221,6 @@ const kundenstimmen = [
     rolle: "Geschäftsführerin | Licht und Liebe Media GmbH",
     foto: fotoJulia,
     alt: "JuliaKallenborn",
-    contain: false,
   },
 ];
 
@@ -307,7 +307,7 @@ export default function AngebotePage() {
                 gezielt für die Pinterest-Suche aufbereiten lassen.
               </p>
 
-              {/* Sprung zu den Angebotskacheln am Seitenende. */}
+              {/* Sprung zu den Angebotskacheln. */}
               <div className="mt-8">
                 <a href="#angebote" className="btn btn-primary">
                   Pinterest Marketing Angebote ansehen
@@ -382,12 +382,37 @@ export default function AngebotePage() {
 
       {/* ------------------------------------------------------------------
           3) Wie wir arbeiten — am Original gemessen: Hintergrund #D9D9D9,
-          50px oben / 100px unten, Spalten 570/570. Bild links, Text rechts.
-          Unter 1024px steht der Text zuerst, deshalb liegt er im Markup vorn.
+          50px oben / 100px unten, Spalten 570/570.
+          Aufteilung wie im Original: das Bild sitzt OBEN LINKS (keine
+          vertikale Zentrierung), rechts daneben stehen Überschrift,
+          Einleitung und die ›-Liste; die restlichen Absätze laufen darunter
+          über die volle Rahmenbreite weiter (im Original ein eigener
+          Abschnitt mit einer 100%-Spalte).
+          Unter 1024px fällt alles in eine Spalte: Bild zuerst, dann der
+          gesamte Text in Lesereihenfolge — dafür steht das Bild im Markup
+          vorn.
           ------------------------------------------------------------------ */}
       <section className="bg-gray-light">
         <div className="container-page pt-[50px] pb-[100px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
+          <div className="grid gap-x-0 gap-y-6 lg:grid-cols-2">
+            {/* Quelle 800×533 (quer) — volle Spaltenbreite, Seitenverhältnis
+                erhalten, bündig mit dem Beginn des Textes. */}
+            <div
+              className={`mb-4 lg:col-start-1 lg:row-start-1 lg:mb-0 lg:self-start ${COL}`}
+            >
+              <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
+                <ExportedImage
+                  src={laptopImage}
+                  alt="Juliette sitzt mit offenem Laptop im Schneidersitz auf einem Bett. Die Finger liegen auf der Tastatur."
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 550px, 100vw"
+                  basePath={basePath}
+                />
+              </div>
+            </div>
+
+            {/* Rechte Spalte — so viel Text, wie neben das Bild gehört. */}
             <div className={`lg:col-start-2 lg:row-start-1 ${COL}`}>
               <h2 className={H2_GOLD}>Wie wir Pinterest Marketing angehen</h2>
 
@@ -414,8 +439,13 @@ export default function AngebotePage() {
               <p className={`${BODY} mt-6`}>
                 Darauf bauen wir die Pinterest Strategie auf.
               </p>
+            </div>
 
-              <p className={`${BODY} mt-6`}>
+            {/* Fortsetzung unter dem Bild, über die volle Rahmenbreite. */}
+            <div
+              className={`lg:col-span-2 lg:col-start-1 lg:row-start-2 ${COL}`}
+            >
+              <p className={BODY}>
                 Dazu gehören je nach Angebot Keyword-Recherche, Themen- und
                 Content-Planung, Pinterest SEO, Pin-Design, Pinterest-Texte,
                 Veröffentlichung, Analyse und laufende Optimierung.
@@ -443,171 +473,59 @@ export default function AngebotePage() {
                 Pinterest Account Management vollständig an uns abgeben.
               </p>
             </div>
-
-            {/* Quelle 800×533 (quer) — volle Spaltenbreite, Seitenverhältnis
-                erhalten. */}
-            <div className={`order-first lg:order-none lg:col-start-1 lg:row-start-1 lg:self-center ${COL}`}>
-              <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
-                <ExportedImage
-                  src={laptopImage}
-                  alt="Juliette sitzt mit offenem Laptop im Schneidersitz auf einem Bett. Die Finger liegen auf der Tastatur."
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 550px, 100vw"
-                  basePath={basePath}
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------------
-          4) Kundenstimmen-Kopf — am Original gemessen: Hintergrund #D9D9D9,
-          50px oben / 0px unten, einspaltig.
+          4) Zitat-Trenner — am Original gemessen: kein eigener Farbgrund,
+          sondern das Foto katsia-jazwinska über die volle Breite (cover,
+          Position obere Kante) mit einem Schleier #D9D9D9 auf 62 % Deckkraft
+          darüber. Innenabstand 80px oben / 115px unten.
+          Darin mittig eine Kachel von 1000px Breite auf Weiß mit 43 %
+          Deckkraft, Innenabstand 50px oben/unten und 30px links/rechts,
+          Ecken ohne Radius. Inhalt: das Anführungszeichen (im Original das
+          Font-Awesome-Symbol fa-quote-right, hier das typografische Zeichen)
+          in Gold, darunter das Zitat in Antic Didone kursiv. Das Zeichen
+          steht bewusst in der Fliesstextschrift: deren Anfuehrungszeichen ist
+          voll ausgefuellt und kommt damit dem massiven Font-Awesome-Symbol des
+          Originals naeher als der Haarstrich der Antic Didone.
           ------------------------------------------------------------------ */}
-      <section className="bg-gray-light">
-        <div className="container-page pt-[50px] text-center">
-          <h2 className={`${H2_CENTERED} text-gold-light`}>
-            Pinterest Marketing mit Erfahrung und klarer Strategie
-          </h2>
-        </div>
-      </section>
+      <section className="relative isolate overflow-hidden">
+        <ExportedImage
+          src={zitatHintergrund}
+          alt=""
+          fill
+          className="-z-10 object-cover object-[left_top]"
+          sizes="100vw"
+          basePath={basePath}
+        />
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[#D9D9D9]/[0.62]"
+        />
 
-      {/* ------------------------------------------------------------------
-          5) Die Kundenstimmen selbst — am Original gemessen: Hintergrund
-          #D9D9D9, 50px/50px, einspaltig. Jedes Zitat steht in einer eigenen
-          weißen Karte über die volle Inhaltsbreite (NICHT zweispaltig):
-          Kartengrund #FFFDFD, 1064px breit im 1140er Rahmen, Innenabstand
-          53px, Eckenradius 0, Foto 160×160 rund, Zitat Arial 18/30 in #545454
-          linksbündig, 50px Abstand zwischen den Karten.
-          Im Original ist das ein Swiper-Karussell, das zweimal im Markup steht
-          (Desktop- und Mobilfassung); hier stehen die sechs Karten
-          untereinander.
-          ------------------------------------------------------------------ */}
-      <section className="bg-gray-light">
-        <div className="container-page py-[50px]">
-          <div className="mx-auto max-w-[1064px] space-y-[50px]">
-            {kundenstimmen.map((stimme) => (
-              <figure
-                key={stimme.name}
-                className="flex flex-col items-center gap-8 bg-[#FFFDFD] p-[26px] sm:flex-row sm:items-start md:p-[53px]"
-              >
-                <div className="relative h-[160px] w-[160px] shrink-0 overflow-hidden rounded-full bg-surface">
-                  <ExportedImage
-                    src={stimme.foto}
-                    alt={stimme.alt}
-                    fill
-                    className={
-                      stimme.contain ? "object-contain p-4" : "object-cover"
-                    }
-                    sizes="160px"
-                    basePath={basePath}
-                    unoptimized={stimme.contain}
-                  />
-                </div>
-                <div>
-                  <blockquote className={`${BODY} text-text text-left`}>
-                    {stimme.text}
-                    {stimme.link && (
-                      <>
-                        <a
-                          href={stimme.link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gold-text hover:underline"
-                        >
-                          {stimme.link.label}
-                        </a>
-                        {stimme.textEnde}
-                      </>
-                    )}
-                  </blockquote>
-                  {/* Diese Zeile ist am Original NICHT nachgemessen —
-                      bewusst schlicht gehalten. */}
-                  <figcaption className={`${BODY} mt-4 text-left`}>
-                    <span className="text-heading font-bold">
-                      {stimme.name}
-                    </span>
-                    <br />
-                    {stimme.rolle}
-                  </figcaption>
-                </div>
-              </figure>
-            ))}
+        <div className="container-page pt-[80px] pb-[115px]">
+          <div className="mx-auto w-full max-w-[1000px] bg-white/[0.43] px-[30px] py-[50px] text-center">
+            <p
+              aria-hidden="true"
+              className="font-body text-gold text-[38px] leading-[38px]"
+            >
+              ”
+            </p>
+            <p className="font-heading mt-4 text-[27px] leading-[38px] text-[#595959] italic md:text-[38px] md:leading-[53px]">
+              “Das geht nicht!”, sagten sie alle.
+              <br />
+              Da kam einer und der hat´s gemacht.
+            </p>
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------------
-          6) Abschluss/CTA — am Original gemessen: Hintergrund Goldhell
-          #C49C5E (NICHT weiß), 80px/80px, Spalten 570/570. Text links,
-          Bild rechts. Dunkelgrauer Button (.btn-dark): auf dem goldhellen
-          Grund gingen sowohl der goldene Primär- als auch der graue
-          Sekundär-Button unter.
-          ------------------------------------------------------------------ */}
-      <section className="bg-gold-light">
-        <div className="container-page py-[80px]">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
-            <div className={`self-center ${COL}`}>
-              <h2 className={H2_ABSCHLUSS}>
-                Welches Pinterest Angebot passt zu deinem Unternehmen?
-              </h2>
-
-              <p className={`${BODY} mt-6 text-white`}>
-                Nicht jedes Unternehmen braucht das gleiche Pinterest-Setup.
-              </p>
-
-              <p className={`${BODY} mt-6 text-white`}>
-                Vielleicht möchtest du Pinterest ganz neu aufbauen. Vielleicht
-                ist dein Account bereits aktiv, aber Strategie und SEO fehlen.
-                Oder du möchtest Pinterest professionell nutzen, ohne dich
-                intern um Keyword-Recherche, Content-Planung, Designs und
-                Veröffentlichung kümmern zu müssen.
-              </p>
-
-              <p className={`${BODY} mt-6 text-white`}>
-                Genau dafür gibt es unterschiedliche Möglichkeiten der
-                Zusammenarbeit.
-              </p>
-
-              <p className={`${BODY} mt-6 text-white`}>
-                Wenn du noch nicht weißt, welches Angebot zu deiner
-                Ausgangssituation passt, können wir das in einem kostenfreien
-                Erstgespräch gemeinsam klären.
-              </p>
-
-              <div className="mt-8">
-                <a
-                  href={siteConfig.calendly}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-dark"
-                >
-                  Kostenfreies Erstgespräch vereinbaren
-                </a>
-              </div>
-            </div>
-
-            <div className={COL}>
-              <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
-                <ExportedImage
-                  src={phoneImage}
-                  alt="Juliette stütz eine Hand in die Hüfte, mit der anderen hält sie ihr Handy ans Ohr"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 550px, 100vw"
-                  basePath={basePath}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------------
-          7) Überschrift über den Kacheln — am Original gemessen: Hintergrund
-          #FFFFFF, 80px oben / 0px unten, einspaltig, zentriert.
+          5) Überschrift über den Kacheln — am Original gemessen: Hintergrund
+          #FFFFFF, 80px oben / 0px unten, einspaltig, zentriert. Ziel des
+          Sprunglinks #angebote aus dem Hero.
           ------------------------------------------------------------------ */}
       <section id="angebote" className="bg-surface scroll-mt-24">
         <div className="container-page pt-[80px]">
@@ -618,7 +536,7 @@ export default function AngebotePage() {
       </section>
 
       {/* ------------------------------------------------------------------
-          8) + 9) Die vier Angebots-Kacheln. Im Original steht jede Kachel als
+          Die vier Angebots-Kacheln. Im Original steht jede Kachel als
           eigene Spalte (elementor-col-50) in einem Abschnitt mit zwei Spalten
           von je 570px OHNE Spaltenabstand — bei vier Kacheln also zwei
           Abschnitte. Am Original gemessen: Hintergrund #FFFFFF,
@@ -700,6 +618,98 @@ export default function AngebotePage() {
           </div>
         </section>
       ))}
+
+      {/* ------------------------------------------------------------------
+          6) Kundenstimmen-Kopf — am Original gemessen: Hintergrund #D9D9D9,
+          50px oben / 0px unten, einspaltig.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="container-page pt-[50px] text-center">
+          <h2 className={`${H2_CENTERED} text-gold-light`}>
+            Pinterest Marketing mit Erfahrung und klarer Strategie
+          </h2>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          Die Kundenstimmen selbst — am Original gemessen: Hintergrund
+          #D9D9D9, 50px/50px, im 1140er Rahmen ein Karussell mit einer
+          sichtbaren Karte von 1064px Breite und einer Punkte-Navigation
+          darunter. Die Karten selbst sind unverändert (#FFFDFD,
+          Innenabstand 53px, Foto 160×160 rund, Zitat Arial 18/30 in #545454
+          linksbündig) — nur ihre Anordnung ist jetzt das Karussell.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gray-light">
+        <div className="container-page py-[50px]">
+          <KundenstimmenKarussell stimmen={kundenstimmen} />
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------
+          7) Abschluss/CTA am Seitenende — am Original gemessen: Hintergrund
+          Goldhell #C49C5E (NICHT weiß), 80px/80px, Spalten 570/570. Text
+          links, Bild rechts. Dunkelgrauer Button (.btn-dark): auf dem
+          goldhellen Grund gingen sowohl der goldene Primär- als auch der
+          graue Sekundär-Button unter.
+          ------------------------------------------------------------------ */}
+      <section className="bg-gold-light">
+        <div className="container-page py-[80px]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
+            <div className={`self-center ${COL}`}>
+              <h2 className={H2_ABSCHLUSS}>
+                Welches Pinterest Angebot passt zu deinem Unternehmen?
+              </h2>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Nicht jedes Unternehmen braucht das gleiche Pinterest-Setup.
+              </p>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Vielleicht möchtest du Pinterest ganz neu aufbauen. Vielleicht
+                ist dein Account bereits aktiv, aber Strategie und SEO fehlen.
+                Oder du möchtest Pinterest professionell nutzen, ohne dich
+                intern um Keyword-Recherche, Content-Planung, Designs und
+                Veröffentlichung kümmern zu müssen.
+              </p>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Genau dafür gibt es unterschiedliche Möglichkeiten der
+                Zusammenarbeit.
+              </p>
+
+              <p className={`${BODY} mt-6 text-white`}>
+                Wenn du noch nicht weißt, welches Angebot zu deiner
+                Ausgangssituation passt, können wir das in einem kostenfreien
+                Erstgespräch gemeinsam klären.
+              </p>
+
+              <div className="mt-8">
+                <a
+                  href={siteConfig.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-dark"
+                >
+                  Kostenfreies Erstgespräch vereinbaren
+                </a>
+              </div>
+            </div>
+
+            <div className={COL}>
+              <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
+                <ExportedImage
+                  src={phoneImage}
+                  alt="Juliette stütz eine Hand in die Hüfte, mit der anderen hält sie ihr Handy ans Ohr"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 550px, 100vw"
+                  basePath={basePath}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <script
         type="application/ld+json"
