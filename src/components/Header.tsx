@@ -45,16 +45,22 @@ export default function Header() {
     <header className="bg-surface relative z-50">
       {/* Gleicher 1140px-Rahmen wie die Inhaltsabschnitte, damit Logo und
           Navigation bündig mit dem Seiteninhalt stehen. */}
-      <div className="container-page flex items-center justify-between gap-6 py-3">
-        <Link href="/" className="flex items-center gap-3 shrink-0">
+      {/* Am Original gemessen: Desktop steht das Logo links und das Menü
+          rechts daneben (Logo 97×97). Unter 1024px steht das Logo mit 188×188
+          zentriert in einer eigenen Zeile, der Menü-Umschalter zentriert
+          darunter — deshalb hier `flex-col` mit `items-center` und erst ab
+          `lg` die bisherige Zeile mit `justify-between`. */}
+      <div className="container-page flex flex-col items-center gap-3 py-3 lg:flex-row lg:justify-between lg:gap-6">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
           <ExportedImage
             src={logo}
             alt="molloy business"
-            width={72}
-            height={72}
+            width={188}
+            height={188}
             priority
             basePath={basePath}
-            className="h-16 w-16 rounded-full"
+            sizes="(min-width: 1024px) 97px, 188px"
+            className="h-[188px] w-[188px] rounded-full lg:h-[97px] lg:w-[97px]"
           />
         </Link>
 
@@ -119,11 +125,13 @@ export default function Header() {
           aria-label="Menü Umschalter"
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
-          className="text-gold flex flex-col gap-1.5 lg:hidden"
+          /* Fläche 34×33px, Symbol rund 23px breit — die Maße des
+             Hamburger-Symbols im Original (Gold #AC8343). */
+          className="text-gold flex h-[33px] w-[34px] flex-col items-center justify-center gap-[5px] lg:hidden"
         >
-          <span className="bg-gold block h-0.5 w-7" />
-          <span className="bg-gold block h-0.5 w-7" />
-          <span className="bg-gold block h-0.5 w-7" />
+          <span className="bg-gold block h-[3px] w-[23px]" />
+          <span className="bg-gold block h-[3px] w-[23px]" />
+          <span className="bg-gold block h-[3px] w-[23px]" />
         </button>
       </div>
 

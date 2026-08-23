@@ -179,8 +179,8 @@ export default function UeberMich() {
             {/* Ab 1024px feste 374×500px, RECHTSBÜNDIG in der 570px-Spalte
                 (10px Abstand zum rechten Spaltenrand = der
                 Elementor-Spalteninnenabstand). Eckenradius 200px oben. */}
-            <div className={COL}>
-              <div className="relative mx-auto aspect-[374/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[374px] lg:max-w-full">
+            <div className={`order-first lg:order-none ${COL}`}>
+              <div className="relative mx-auto h-[365px] w-full overflow-hidden rounded-t-[200px] lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[374px] lg:max-w-full">
                 <ExportedImage
                   src={portraitImage}
                   alt="Juliette Oppel sitzt mit einem Laptop auf einer Rattanbank vor einer Wand mit Trockenblumen"
@@ -372,7 +372,7 @@ export default function UeberMich() {
                 also exakt so hoch wie er. Die Quelle ist mit 800×533
                 querformatig — der Ausschnitt ist nahezu quadratisch, `sizes`
                 folgt der sichtbaren Breite. */}
-            <div className="relative aspect-[570/575] w-full overflow-hidden lg:aspect-auto">
+            <div className="relative order-first aspect-[570/575] w-full overflow-hidden lg:order-none lg:aspect-auto">
               <ExportedImage
                 src={ortsunabhaengigImage}
                 alt="Juliette Oppel liegt mit einem Laptop auf einem Bett und arbeitet"

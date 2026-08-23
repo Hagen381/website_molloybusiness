@@ -232,11 +232,19 @@ export default function Home() {
                 neuen Content verlangt.
               </p>
 
-              {/* Interne Route statt der alten WordPress-URL. */}
+              {/* Freigegeben: der Button führt hier direkt ins
+                  Erstgespräch (Calendly), nicht mehr auf die
+                  Angebotsübersicht — die bleibt über das Menü und den
+                  Abschnitt "Wer steckt hinter…" erreichbar. */}
               <div className="mt-8">
-                <Link href="/angebote/" className="btn btn-primary">
-                  direkt zu den angeboten
-                </Link>
+                <a
+                  href={siteConfig.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  Erstgespräch vereinbaren
+                </a>
               </div>
             </div>
 
@@ -245,8 +253,8 @@ export default function Home() {
                 110px links, 10px rechts — das Bild liegt am äußeren
                 Seitenrand, die 10px sind der Elementor-Spalteninnenabstand).
                 Darunter volle Breite im Seitenverhältnis 336:500. */}
-            <div className={`self-start ${COL}`}>
-              <div className="relative mx-auto aspect-[336/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
+            <div className={`order-first self-start lg:order-none ${COL}`}>
+              <div className="relative mx-auto h-[301px] w-full overflow-hidden rounded-t-[200px] lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
                 <ExportedImage
                   src={heroImage}
                   alt="pinterest marketing"
@@ -388,7 +396,7 @@ export default function Home() {
                 Original nachgemessen: 0px links, 92px rechts). Das Bild liegt
                 bündig am äußeren Seitenrand, also noch vor dem 10px-Innen-
                 abstand der Spalte — daher der negative linke Rand. */}
-            <div className={`lg:col-start-1 lg:row-start-1 ${COL}`}>
+            <div className={`order-first lg:order-none lg:col-start-1 lg:row-start-1 ${COL}`}>
               <div className="relative mx-auto aspect-[421/500] w-full overflow-hidden rounded-tl-[200px] lg:aspect-auto lg:-ml-[10px] lg:h-[500px] lg:w-[421px] lg:max-w-full lg:mr-auto">
                 <ExportedImage
                   src={julietteChairImage}
@@ -422,10 +430,10 @@ export default function Home() {
                 <ExportedImage
                   src={value.icon}
                   alt=""
-                  width={90}
-                  height={90}
-                  className="mx-auto h-auto w-[90px]"
-                  sizes="(min-width: 768px) 90px, 90px"
+                  width={104}
+                  height={104}
+                  className="mx-auto h-auto w-[104px] md:w-[90px]"
+                  sizes="(min-width: 768px) 90px, 104px"
                   basePath={basePath}
                 />
                 <h3 className={`${H5_VALUE} mt-4`}>{value.title}</h3>

@@ -317,8 +317,8 @@ export default function AngebotePage() {
 
             {/* Quelle 533×800 (hochkant), Ausschnitt 336×500 wie im Hero der
                 Startseite. cover skaliert hier auf die Breite. */}
-            <div className={`self-start ${COL}`}>
-              <div className="relative mx-auto aspect-[336/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
+            <div className={`order-first self-start lg:order-none ${COL}`}>
+              <div className="relative mx-auto h-[358px] w-full overflow-hidden rounded-t-[200px] lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[336px] lg:max-w-full">
                 <ExportedImage
                   src={heroImage}
                   alt="pinterest marketing angebote für unternehmen"
@@ -446,7 +446,7 @@ export default function AngebotePage() {
 
             {/* Quelle 800×533 (quer) — volle Spaltenbreite, Seitenverhältnis
                 erhalten. */}
-            <div className={`lg:col-start-1 lg:row-start-1 lg:self-center ${COL}`}>
+            <div className={`order-first lg:order-none lg:col-start-1 lg:row-start-1 lg:self-center ${COL}`}>
               <div className="relative mx-auto aspect-[800/533] w-full overflow-hidden rounded-t-[150px] lg:max-w-[550px]">
                 <ExportedImage
                   src={laptopImage}

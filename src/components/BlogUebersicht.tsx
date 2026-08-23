@@ -197,8 +197,8 @@ export default function BlogUebersicht({ seite }: { seite: number }) {
                 gerenderten Breite folgen, nicht der sichtbaren 436px — sonst
                 lädt der Browser die 640er-Variante und rechnet sie um rund
                 17 % hoch. */}
-            <div className={`self-center ${COL}`}>
-              <div className="relative mx-auto aspect-[436/500] w-full overflow-hidden rounded-t-[200px] lg:aspect-auto lg:h-[500px] lg:w-[436px] lg:max-w-full">
+            <div className={`order-first self-center lg:order-none ${COL}`}>
+              <div className="relative mx-auto h-[301px] w-full overflow-hidden rounded-t-[200px] lg:h-[500px] lg:w-[436px] lg:max-w-full">
                 <ExportedImage
                   src={heroBild}
                   alt="Juliette sitzt mit offenem Laptop auf einer Couch. Finger liegen auf der Tastatur."

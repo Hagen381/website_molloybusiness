@@ -140,8 +140,8 @@ export default function Leistungsseite({
             {/* Bild rechtsbündig in der 456px-Spalte: 401×500px, oben
                 abgerundet (200px), 10px Abstand zum rechten Spaltenrand —
                 das ist der Elementor-Spalteninnenabstand aus COL. */}
-            <div className={`self-start ${COL}`}>
-              <div className="relative mx-auto aspect-[401/500] w-full overflow-hidden rounded-t-[200px] lg:mr-0 lg:ml-auto lg:aspect-auto lg:h-[500px] lg:w-[401px] lg:max-w-full">
+            <div className={`order-first self-start lg:order-none ${COL}`}>
+              <div className="relative mx-auto h-[358px] w-full overflow-hidden rounded-t-[200px] lg:mr-0 lg:ml-auto lg:h-[500px] lg:w-[401px] lg:max-w-full">
                 <ExportedImage
                   src={image}
                   alt={imageAlt}
