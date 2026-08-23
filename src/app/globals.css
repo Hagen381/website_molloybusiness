@@ -89,6 +89,44 @@ body {
   }
 }
 
+/* Breiter Inhaltsrahmen: 1200px statt 1140px. Das Original nutzt ihn dort, wo
+   ein Abschnitt spuerbar weiter laeuft als die uebrigen — u. a. in der
+   Fusszeile (Spalten 240 / 636 / 316) und im 804/396-Abschnitt auf
+   /ueber-mich/. Verhaelt sich ansonsten exakt wie `container-page`: kein
+   eigener Seitenabstand, sobald der volle Rahmen passt; unterhalb von 1248px
+   (1200 + 2x24) greift derselbe 24px-Seitenabstand. */
+@utility container-wide {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 1248px) {
+    padding-inline: 0;
+  }
+}
+
+/* Spalten der Fusszeile. Am Original gemessen (Desktop 1536px): 240 / 636 /
+   316 px im 1200er-Rahmen; die Summe ist 1192px, die restlichen 8px sind der
+   Spaltenzwischenraum, den `space-between` als 2x4px verteilt.
+   Die festen Breiten greifen erst ab 1248px, also sobald der volle 1200er-
+   Rahmen ohne Seitenabstand steht — darunter wuerden sie den dann schmaleren
+   Rahmen ueberlaufen. Zwischen 1024 und 1248px halten `fr`-Anteile dasselbe
+   Verhaeltnis fluide. Als eigene Utility statt als `lg:`/`min-[1248px]:`-
+   Klassenpaar, weil Tailwind arbitraere `min-[...]`-Varianten VOR die
+   benannten Breakpoints sortiert — die 1024er-Regel wuerde die 1248er sonst
+   ueberschreiben. */
+@utility footer-columns {
+  @media (width >= 1024px) {
+    grid-template-columns: 240fr 636fr 316fr;
+  }
+
+  @media (width >= 1248px) {
+    grid-template-columns: 240px 636px 316px;
+    justify-content: space-between;
+  }
+}
+
 /* Textspalte der Artikelseiten. Am Original gemessen: 833px breit, zentriert,
    OHNE eigenen Abschnittshintergrund — die Artikel stehen komplett auf dem
    cremen Body-Grund. Der Fließtext ist dort #595959 (die Überschriftenfarbe),

@@ -26,16 +26,18 @@ const socialLinks = [
 export default function Footer() {
   return (
     // Der Abschnitt selbst bleibt vollbreit #595959, der Inhalt sitzt im
-    // gleichen 1140px-Rahmen wie alle Inhaltsabschnitte.
+    // breiteren 1200px-Rahmen des Originals (nicht im 1140er der uebrigen
+    // Inhaltsabschnitte) — derselbe Rahmen wie der 804/396-Abschnitt auf
+    // /ueber-mich/.
     <footer className="bg-footer mt-auto">
-      {/* Am Original gemessen (Desktop 1536px): drei Spalten im Verhältnis
-          240 / 636 / 316 innerhalb des 1140er-Rahmens — deshalb `fr`-Anteile
-          statt fester Pixelbreiten, so bleibt die Summe exakt 1140px.
-          Unter 1024px stapelt alles zentriert untereinander.
+      {/* Drei Spalten von 240 / 636 / 316 px im 1200er-Rahmen — die genauen
+          Breiten und ihr Umschaltpunkt stecken in der Utility
+          `footer-columns` (siehe globals.css). Unter 1024px stapelt alles
+          zentriert untereinander.
           Weder Telefonnummer noch E-Mail noch eine Copyright-Zeile: das
           Original zeigt im Footer keine davon (Kontaktdaten stehen auf der
           Kontaktseite, die Pflichtangaben im Impressum). */}
-      <div className="container-page flex flex-col items-center gap-8 py-12 lg:grid lg:grid-cols-[240fr_636fr_316fr] lg:items-center lg:gap-0">
+      <div className="container-wide footer-columns flex flex-col items-center gap-8 py-12 lg:grid lg:items-center lg:gap-0">
         {/* Spalte 1 — Logo, verlinkt auf die Startseite. Desktop 130×130,
             mobil 107×107. */}
         <div className="lg:justify-self-start">
