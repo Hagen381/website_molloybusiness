@@ -1,0 +1,208 @@
+name: Deploy zu SiteGround
+
+# Liefert den fertigen Static Export per FTPS an SiteGround aus — das ist der
+# Live-Kanal fuer https://molloybusiness.com.
+#
+# Der GitHub-Pages-Workflow (gh-pages.yml) bleibt davon unberuehrt und laeuft
+# als interner Vorschaukanal weiter.
+#
+# Voraussetzung: die drei Repository-Secrets FTP_SERVER, FTP_USERNAME und
+# FTP_PASSWORD. Solange die fehlen, scheitert der Auslieferungsschritt — der
+# Build und alle Sicherungspruefungen laufen trotzdem durch.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Zwei Deploys duerfen sich nie ueberholen: ein laufender Deploy wird NICHT
+# abgebrochen, der naechste wartet, bis er fertig ist.
+concurrency:
+  group: deploy-siteground
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      # Node-Version aus package.json (engines.node), sonst 20.
+      - name: Node-Version bestimmen
+        id: node
+        shell: bash
+        run: |
+          version="$(node -p "require('./package.json').engines?.node ?? ''" 2>/dev/null || true)"
+          if [ -z "$version" ] || [ "$version" = "undefined" ]; then
+            version="20"
+            echo "package.json nennt keine engines.node — nutze Node $version"
+          else
+            echo "engines.node aus package.json: $version"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node.outputs.version }}
+          cache: npm
+
+      - name: Abhaengigkeiten installieren
+        run: npm ci
+
+      # WICHTIG: Der Live-Build laeuft im Wurzelverzeichnis der Domain.
+      # NEXT_BUILD_BASE_PATH wird deshalb ausdruecklich auf leer gesetzt, damit
+      # ein etwaiger Repository- oder Environment-Default nicht durchschlaegt
+      # und Pfade wie /website_molloybusiness/... in den Export geraten.
+      - name: Static Export bauen
+        run: npm run build
+        env:
+          NEXT_BUILD_BASE_PATH: ""
+
+      # ---------------------------------------------------------------------
+      # Sicherungspruefung. Faellt eine Bedingung durch, endet der Job hier mit
+      # exit 1 und es wird NICHTS hochgeladen — die Live-Seite bleibt in dem
+      # Fall unveraendert stehen.
+      # ---------------------------------------------------------------------
+      - name: Export pruefen
+        shell: bash
+        run: |
+          fehler=0
+
+          echo "::group::a) Rest-Pfad /website_molloybusiness"
+          if treffer=$(grep -rl --binary-files=without-match "/website_molloybusiness" out/); then
+            echo "::error::Der GitHub-Pages-Pfad /website_molloybusiness steht noch im Export."
+            echo "$treffer" | sed 's/^/  /'
+            fehler=1
+          else
+            echo "sauber"
+          fi
+          echo "::endgroup::"
+
+          echo "::group::b) Rest-Host hagen381.github.io"
+          if treffer=$(grep -rl --binary-files=without-match "hagen381.github.io" out/); then
+            echo "::error::Die Vorschau-Domain hagen381.github.io steht noch im Export."
+            echo "$treffer" | sed 's/^/  /'
+            fehler=1
+          else
+            echo "sauber"
+          fi
+          echo "::endgroup::"
+
+          echo "::group::c) out/index.html"
+          if [ -f out/index.html ]; then
+            echo "vorhanden"
+          else
+            echo "::error::out/index.html fehlt — der Export ist unvollstaendig."
+            fehler=1
+          fi
+          echo "::endgroup::"
+
+          echo "::group::d) out/sitemap.xml"
+          if [ -f out/sitemap.xml ]; then
+            echo "vorhanden"
+          else
+            echo "::error::out/sitemap.xml fehlt — der Export ist unvollstaendig."
+            fehler=1
+          fi
+          echo "::endgroup::"
+
+          echo "::group::e) noindex in HTML-Dateien"
+          # Next.js setzt auf seinen eigenen Fehlerseiten ein noindex — das ist
+          # richtig so (eine 404-Seite gehoert nicht in den Index) und deshalb
+          # hier ausgenommen. Jede ANDERE HTML-Datei mit noindex laesst den
+          # Deploy scheitern.
+          alle=$(grep -rl --binary-files=without-match --include="*.html" "noindex" out/ || true)
+          erlaubt='^out/404\.html$|^out/404/index\.html$|^out/_not-found/index\.html$'
+          if [ -n "$alle" ]; then
+            echo "noindex steht in (erwartet nur auf den Fehlerseiten):"
+            echo "$alle" | sed 's/^/  /'
+          fi
+          treffer=$(printf '%s\n' "$alle" | grep -vE "$erlaubt" | grep -v '^$' || true)
+          if [ -n "$treffer" ]; then
+            echo "::error::Mindestens eine echte Seite enthaelt noindex — so darf nichts live gehen."
+            echo "$treffer" | sed 's/^/  /'
+            fehler=1
+          else
+            echo "sauber — kein noindex ausserhalb der Fehlerseiten"
+          fi
+          echo "::endgroup::"
+
+          if [ "$fehler" -ne 0 ]; then
+            echo "Sicherungspruefung fehlgeschlagen — es wird nichts ausgeliefert."
+            exit 1
+          fi
+          echo "Sicherungspruefung bestanden."
+
+      # ---------------------------------------------------------------------
+      # .htaccess: die Vorlage aus docs/ kommt unveraendert und in ihrer
+      # bestehenden Reihenfolge mit, davor nur ein kurzer Grundlagen-Block.
+      # ---------------------------------------------------------------------
+      - name: .htaccess erzeugen
+        shell: bash
+        run: |
+          {
+            echo "# ========================================================================"
+            echo "# Grundeinstellungen — von .github/workflows/deploy-siteground.yml erzeugt."
+            echo "# Alles ab \"TEIL 1\" stammt unveraendert aus docs/htaccess-vorlage.txt."
+            echo "# ========================================================================"
+            echo
+            echo "# Eigene Fehlerseite statt der nackten Apache-Meldung."
+            echo "# (Steht weiter unten in TEIL 6 der Vorlage nochmals mit demselben Wert —"
+            echo "#  eine doppelte, identische Angabe ist unschaedlich.)"
+            echo "ErrorDocument 404 /404.html"
+            echo
+            echo "# Keine Verzeichnis-Auflistung, wenn in einem Ordner keine Indexdatei liegt."
+            echo "Options -Indexes"
+            echo
+            echo
+            cat docs/htaccess-vorlage.txt
+          } > out/.htaccess
+
+          echo "out/.htaccess geschrieben:"
+          echo "  Zeilen gesamt:        $(wc -l < out/.htaccess)"
+          echo "  RewriteRule-Zeilen:   $(grep -c '^RewriteRule' out/.htaccess)"
+          echo "  ErrorDocument-Zeilen: $(grep -c '^ErrorDocument' out/.htaccess)"
+          echo "  Options-Zeilen:       $(grep -c '^Options' out/.htaccess)"
+
+      - name: Per FTPS zu SiteGround ausliefern
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          # Das Wurzelverzeichnis des FTP-Kontos ist bereits public_html.
+          local-dir: ./out/
+          server-dir: ./
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+
+      - name: Zusammenfassung
+        if: always()
+        shell: bash
+        run: |
+          if [ ! -d out ]; then
+            echo "out/ existiert nicht — der Build ist vor dem Export gescheitert."
+            exit 0
+          fi
+          dateien=$(find out -type f | wc -l)
+          groesse=$(du -sh out | cut -f1)
+          echo "Dateien in out/: $dateien"
+          echo "Gesamtgroesse out/: $groesse"
+          echo "Deploy abgeschlossen: https://molloybusiness.com"
+          {
+            echo "## Deploy zu SiteGround"
+            echo
+            echo "- Dateien in \`out/\`: **$dateien**"
+            echo "- Gesamtgroesse \`out/\`: **$groesse**"
+            echo "- Deploy abgeschlossen: https://molloybusiness.com"
+          } >> "$GITHUB_STEP_SUMMARY"
