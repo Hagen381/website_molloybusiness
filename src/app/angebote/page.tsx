@@ -121,10 +121,16 @@ const angebote = kacheln.map((kachel) => {
 // ---------------------------------------------------------------------------
 // Branchen-Abschnitt — freigegebene Texte, wortgleich aus der Vorlage.
 // Ab 768px stehen die Blöcke zweispaltig, damit der Abschnitt nicht endlos
-// lang wird. Die Reihenfolge ist bewusst nach Blockhöhe sortiert (lang →
-// kurz), damit in jeder Rasterzeile zwei möglichst gleich hohe Blöcke stehen
-// und neben den kurzen kein großer Leerraum entsteht. Einspaltig (mobil) hat
-// die Reihenfolge keine gestalterische Wirkung.
+// lang wird.
+//
+// REIHENFOLGE NICHT NACH BLOCKHÖHE ALLEIN SORTIEREN. Maßgeblich ist zuerst,
+// über wie viele Zeilen die Überschrift umbricht: Blöcke mit gleicher
+// Überschriften-Zeilenzahl stehen paarweise nebeneinander, erst innerhalb
+// dieser Gruppen wird nach Blockhöhe sortiert. Stehen in einer Rasterzeile
+// eine zweizeilige und eine einzeilige Überschrift nebeneinander, beginnen
+// die Absätze auf unterschiedlicher Höhe und es entsteht eine sichtbare Stufe.
+// Aktuell: Plätze 1–4 zweizeilig, Plätze 5–7 einzeilig.
+// Einspaltig (mobil) hat die Reihenfolge keine gestalterische Wirkung.
 // ---------------------------------------------------------------------------
 const branchen = [
   {
@@ -140,12 +146,12 @@ const branchen = [
     text: "Unternehmen mit einem größeren Bestand an Blogartikeln, Ratgebern, Magazininhalten, Videos oder Podcasts können vorhandenen Content über Pinterest immer wieder neu sichtbar machen und gezielt Besucher auf ihre Website führen.",
   },
   {
-    titel: "Finanzdienstleister und Versicherungen",
-    text: "Auch weniger visuelle Branchen können Pinterest sinnvoll einsetzen, wenn sie über hilfreiche Inhalte verfügen. Ratgeber, Erklärartikel und langfristig relevante Finanzthemen können über die Pinterest-Suche neue Kontaktpunkte mit potenziellen Kunden schaffen.",
-  },
-  {
     titel: "Beauty-, Fashion- und Wellness-Unternehmen",
     text: "Looks, Trends, Routinen, Produkte und saisonale Themen bieten viele Möglichkeiten, potenzielle Kunden bereits während Recherche und Inspiration zu erreichen.",
+  },
+  {
+    titel: "Finanzdienstleister und Versicherungen",
+    text: "Auch weniger visuelle Branchen können Pinterest sinnvoll einsetzen, wenn sie über hilfreiche Inhalte verfügen. Ratgeber, Erklärartikel und langfristig relevante Finanzthemen können über die Pinterest-Suche neue Kontaktpunkte mit potenziellen Kunden schaffen.",
   },
   {
     titel: "Food- und Lebensmittelmarken",
