@@ -98,11 +98,17 @@ export type LeistungsseiteProps = {
     buttonLabel: string;
     href: string;
   };
-  /** Abschluss-CTA zur Terminbuchung. */
+  /** Abschluss-CTA — Anfrage per E-Mail. */
   abschluss: {
     heading: string;
     body: ReactNode;
     buttonLabel: string;
+    /**
+     * Betreff der vorausgefüllten Anfrage-Mail, z. B.
+     * „Anfrage: Pinterest Audit“. Die Adresse kommt immer aus
+     * `siteConfig.email` — hier steht bewusst nur der Betreff.
+     */
+    mailSubject: string;
   };
 };
 
@@ -260,7 +266,9 @@ export default function Leistungsseite({
 
       {/* ------------------------------------------------------------------
           5) ABSCHLUSS-CTA — zurück auf den cremen Grund, primärer Button
-          (#AC8343) zur Terminbuchung bei Calendly.
+          (#AC8343). Der Anfrage-Button öffnet das Mailprogramm mit
+          vorausgefülltem Betreff (bewusst KEIN target="_blank": bei mailto
+          bliebe sonst in manchen Browsern ein leerer Tab zurück).
           ------------------------------------------------------------------ */}
       <section>
         <div className="container-page py-[80px]">
@@ -271,9 +279,9 @@ export default function Leistungsseite({
 
             <div className="mt-8">
               <a
-                href={siteConfig.calendly}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(
+                  abschluss.mailSubject,
+                )}`}
                 className="btn btn-primary"
               >
                 {abschluss.buttonLabel}

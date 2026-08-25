@@ -183,6 +183,7 @@ export default function PinterestAccountManagement() {
             </>
           ),
           buttonLabel: "Pinterest Account Management anfragen",
+          mailSubject: "Anfrage: Pinterest Account Management",
         }}
       />
 

@@ -176,6 +176,7 @@ export default function PinterestStrategieCall() {
             </>
           ),
           buttonLabel: "Pinterest Strategie-Call anfragen",
+          mailSubject: "Anfrage: Pinterest Strategie-Call",
         }}
       />
 

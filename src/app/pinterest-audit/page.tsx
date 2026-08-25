@@ -170,6 +170,7 @@ export default function PinterestAudit() {
             </p>
           ),
           buttonLabel: "Pinterest Audit anfragen",
+          mailSubject: "Anfrage: Pinterest Audit",
         }}
       />
 

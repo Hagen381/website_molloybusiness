@@ -119,38 +119,41 @@ const angebote = kacheln.map((kachel) => {
 });
 
 // ---------------------------------------------------------------------------
-// Branchen-Abschnitt — freigegebene Texte, Reihenfolge wie in der Vorlage.
+// Branchen-Abschnitt — freigegebene Texte, wortgleich aus der Vorlage.
 // Ab 768px stehen die Blöcke zweispaltig, damit der Abschnitt nicht endlos
-// lang wird; die Lesereihenfolge bleibt dabei erhalten.
+// lang wird. Die Reihenfolge ist bewusst nach Blockhöhe sortiert (lang →
+// kurz), damit in jeder Rasterzeile zwei möglichst gleich hohe Blöcke stehen
+// und neben den kurzen kein großer Leerraum entsteht. Einspaltig (mobil) hat
+// die Reihenfolge keine gestalterische Wirkung.
 // ---------------------------------------------------------------------------
 const branchen = [
   {
-    titel: "Online-Shops und E-Commerce",
-    text: "Produkte, Kollektionen, Kategorien und Ratgeber lassen sich über Pinterest langfristig auffindbar machen und gezielt mit den passenden Seiten im Shop verknüpfen.",
-  },
-  {
     titel: "Reiseveranstalter, Destinationen und Hospitality-Unternehmen",
     text: "Reisen werden oft lange vor der eigentlichen Buchung geplant. Pinterest bietet die Möglichkeit, potenzielle Gäste bereits während der Inspirations- und Planungsphase mit Destinationen, Reiseideen, Routen und Angeboten zu erreichen.",
-  },
-  {
-    titel: "Food- und Lebensmittelmarken",
-    text: "Rezepte, Produkte, saisonale Themen, Inspiration und erklärungsbedürftige Lebensmittel bieten zahlreiche Suchanlässe und können langfristig auf relevante Website-Inhalte verweisen.",
   },
   {
     titel: "Interior-, Wohn-, Garten- und Lifestyle-Marken",
     text: "Pinterest wird intensiv zur Planung und Inspiration rund um Wohnen, Einrichtung, Garten, DIY und Lifestyle genutzt. Visuelle Produkte und Inhalte lassen sich deshalb besonders gut in eine Pinterest-SEO-Strategie integrieren.",
   },
   {
-    titel: "Beauty-, Fashion- und Wellness-Unternehmen",
-    text: "Looks, Trends, Routinen, Produkte und saisonale Themen bieten viele Möglichkeiten, potenzielle Kunden bereits während Recherche und Inspiration zu erreichen.",
+    titel: "Content-getriebene Unternehmen und Publisher",
+    text: "Unternehmen mit einem größeren Bestand an Blogartikeln, Ratgebern, Magazininhalten, Videos oder Podcasts können vorhandenen Content über Pinterest immer wieder neu sichtbar machen und gezielt Besucher auf ihre Website führen.",
   },
   {
     titel: "Finanzdienstleister und Versicherungen",
     text: "Auch weniger visuelle Branchen können Pinterest sinnvoll einsetzen, wenn sie über hilfreiche Inhalte verfügen. Ratgeber, Erklärartikel und langfristig relevante Finanzthemen können über die Pinterest-Suche neue Kontaktpunkte mit potenziellen Kunden schaffen.",
   },
   {
-    titel: "Content-getriebene Unternehmen und Publisher",
-    text: "Unternehmen mit einem größeren Bestand an Blogartikeln, Ratgebern, Magazininhalten, Videos oder Podcasts können vorhandenen Content über Pinterest immer wieder neu sichtbar machen und gezielt Besucher auf ihre Website führen.",
+    titel: "Beauty-, Fashion- und Wellness-Unternehmen",
+    text: "Looks, Trends, Routinen, Produkte und saisonale Themen bieten viele Möglichkeiten, potenzielle Kunden bereits während Recherche und Inspiration zu erreichen.",
+  },
+  {
+    titel: "Food- und Lebensmittelmarken",
+    text: "Rezepte, Produkte, saisonale Themen, Inspiration und erklärungsbedürftige Lebensmittel bieten zahlreiche Suchanlässe und können langfristig auf relevante Website-Inhalte verweisen.",
+  },
+  {
+    titel: "Online-Shops und E-Commerce",
+    text: "Produkte, Kollektionen, Kategorien und Ratgeber lassen sich über Pinterest langfristig auffindbar machen und gezielt mit den passenden Seiten im Shop verknüpfen.",
   },
 ];
 

@@ -173,6 +173,7 @@ export default function PinterestAccountAufbau() {
             </p>
           ),
           buttonLabel: "Pinterest Account Aufbau anfragen",
+          mailSubject: "Anfrage: Pinterest Account Aufbau",
         }}
       />
 
