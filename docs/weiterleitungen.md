@@ -165,6 +165,9 @@ Schlagwörter erwischt werden, die im Archiv nicht auftauchen.
 Die `.htaccess` fängt `/author/` komplett ab, nicht nur die zwei gefundenen
 Adressen.
 
+Die alte WordPress-Blätterung hatte immer `page` im Pfad und wird von einer
+Sammelregel abgefangen (siehe Abschnitt 6).
+
 **Für `/blog/<Zahl>/` gibt es bewusst keine Weiterleitung mehr.** Hier stand
 früher eine Regel `^blog/[0-9]+/?$ → /blog/`, weil der Nachbau alle Artikel auf
 einer Seite zeigte. Inzwischen blättert die Artikelliste wie das Original
@@ -183,6 +186,9 @@ Der Nachbau hat keinen RSS-Feed. Alle alten Feed-Adressen laufen sonst leer.
 | `/feed/` | `/blog/` | Haupt-Feed, im Nachbau nicht vorhanden — **von mir ergänzt** |
 | `/comments/feed/` | `/blog/` | Kommentar-Feed, im Nachbau nicht vorhanden — **von mir ergänzt** |
 | `<beliebiger Pfad>/feed/` | `/blog/` | Artikel-Feeds (20 Stück im Archiv), eine Sammelregel — **von mir ergänzt** |
+
+Die Sammelregel wurde am 07.09.2026 auf die Feed-Spielarten von WordPress
+erweitert (`/feed/atom/`, `/feed/rss2/` …) — siehe Abschnitt 6.
 
 ### 5e. Alte Sitemaps
 
@@ -206,8 +212,64 @@ Für alle anderen Alt-Adressen ist die Variante ohne Schrägstrich in der
 `/warum-ich-einen-kunden-abgelehnt-habe`, das im Archiv ohne Schrägstrich
 vorkommt.
 
-→ **21 Einzeleinträge plus 4 Sammelregeln** (`/tag/`, `/author/`,
-`/blog/<Zahl>/`, `*/feed/`).
+→ **21 Einzeleinträge plus 3 Sammelregeln** (`/tag/`, `/author/`, `*/feed…`).
+Die früher hier mitgezählte Regel für `/blog/<Zahl>/` gibt es nicht mehr (siehe
+5c); die Sammelregel für die alte Blätterung steht in Abschnitt 6.
+
+---
+
+## 6. Nachtrag aus dem Search-Console-Bericht vom 07.09.2026
+
+Alle Einträge dieses Abschnitts stammen aus einem Bericht der Google Search
+Console vom **07.09.2026**: Google meldete für diese alten Adressen einen 404.
+Sie waren in den Abschnitten 1 bis 5 nicht enthalten, sind aber noch im Index
+bzw. von außen verlinkt.
+
+### 6a. Einzelne Adressen
+
+| Alt-URL | Neue URL | Grund |
+| --- | --- | --- |
+| `/ueber-juliette-oppel/` | `/ueber-mich/` | Ältere Über-mich-Seite unter dem Klarnamen — **Search Console 07.09.2026** |
+| `/beratung-online-selbststaendigkeit/` | `/angebote/` | Eingestelltes Beratungsangebot, Seite war indexiert — **Search Console 07.09.2026** |
+| `/audio-blog-erstellen/` | `/blog/` | Entfallener Blogartikel, wird nicht übernommen — **Search Console 07.09.2026** |
+
+### 6b. Alte Blätterung (Sammelregel)
+
+| Alt-URL | Neue URL | Grund |
+| --- | --- | --- |
+| `<beliebiger Pfad>/page/<Zahl>/` | `/blog/` | Blätterung des alten WordPress-Blogs und der Kategorie-Archive — **Search Console 07.09.2026** |
+
+Gemeldet wurden `/blog/page/2/`, `/online-business/page/2/`, `/reisen/page/2/`
+und `/pinterest-marketing/page/2/`. Statt vier Einzelzeilen fängt eine
+Sammelregel alle ab:
+
+```
+RewriteRule ^(.+/)?page/[0-9]+/?$   /blog/ [R=301,L]
+```
+
+> **Wichtig:** Die Regel verlangt das Wort `page` im Pfad. Die Blätterung des
+> Nachbaus läuft über `/blog/2/` und `/blog/3/` **ohne** `page` und wird von
+> ihr deshalb nicht erfasst — diese beiden Seiten bleiben normal erreichbar
+> (siehe 5c). Das ist beim Nachprüfen der wichtigste Punkt.
+
+### 6c. Feeds (bestehende Sammelregel erweitert)
+
+| Alt-URL | Neue URL | Grund |
+| --- | --- | --- |
+| `<beliebiger Pfad>/feed/<Spielart>/` | `/blog/` | `/feed/atom/`, `/feed/rss2/` usw. — **Search Console 07.09.2026** |
+
+Die bisherige Regel endete auf `feed/?$` und traf damit nur `/feed/` selbst.
+Die Feed-Spielarten von WordPress hängen aber noch ein Segment an. Deshalb:
+
+```
+vorher:  RewriteRule ^(.+/)?feed/?$      /blog/ [R=301,L]
+nachher: RewriteRule ^(.+/)?feed(/.*)?$  /blog/ [R=301,L]
+```
+
+Das `(/.*)?` greift nur nach einem Schrägstrich hinter `feed`. Adressen wie
+`/newsfeed/` oder `/blog/feedback/` werden dadurch **nicht** erfasst.
+
+→ **3 Einzelweiterleitungen, 1 neue Sammelregel, 1 erweiterte Sammelregel.**
 
 ---
 

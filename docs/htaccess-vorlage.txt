@@ -115,6 +115,16 @@ RewriteRule ^datenschutz$                                 /datenschutz/ [R=301,L
 # --- Ehemalige Seite, jetzt Blogartikel ------------------------------------
 RewriteRule ^online-schulerpraktikum-innovativer-arbeitgeber/?$ /blog/online-schuelerpraktika/ [R=301,L]
 
+# --- Nachtrag aus der Google Search Console (07.09.2026) --------------------
+# Diese drei Adressen meldete Google als 404. Sie standen bisher in keiner
+# Liste, sind aber offenbar noch im Index bzw. von aussen verlinkt.
+# Alte Ueber-mich-Seite unter dem Klarnamen:
+RewriteRule ^ueber-juliette-oppel/?$                      /ueber-mich/ [R=301,L]
+# Eingestelltes Beratungsangebot -> Angebotsuebersicht:
+RewriteRule ^beratung-online-selbststaendigkeit/?$        /angebote/ [R=301,L]
+# Entfallener Blogartikel -> Blog-Uebersicht:
+RewriteRule ^audio-blog-erstellen/?$                      /blog/ [R=301,L]
+
 
 # ============================================================================
 # TEIL 3 — Weiterleitungen der Blogartikel
@@ -183,9 +193,18 @@ RewriteRule ^author/                                      /blog/ [R=301,L]
 # Blog-Uebersicht ohne Schraegstrich (auf sich selbst wird NICHT umgeleitet):
 RewriteRule ^blog$                                        /blog/ [R=301,L]
 
+# Die ALTE WordPress-Blaetterung hatte dagegen immer "page" im Pfad
+# (/blog/page/2/, /online-business/page/2/, /reisen/page/2/ ...). Die gibt es
+# im Nachbau nicht, deshalb eine Sammelregel fuer alle davon.
+# Sie verlangt das Wort "page" und trifft die neuen Seiten /blog/2/ und
+# /blog/3/ daher ausdruecklich NICHT.
+RewriteRule ^(.+/)?page/[0-9]+/?$                         /blog/ [R=301,L]
+
 # --- RSS-Feeds -------------------------------------------------------------
 # Faengt /feed/, /comments/feed/ und alle Artikel-Feeds mit einer Regel ab.
-RewriteRule ^(.+/)?feed/?$                                /blog/ [R=301,L]
+# Das "(/.*)?" am Ende deckt zusaetzlich die Feed-Spielarten von WordPress ab
+# (/feed/atom/, /feed/rss2/ und so weiter), die sonst ins Leere laufen.
+RewriteRule ^(.+/)?feed(/.*)?$                            /blog/ [R=301,L]
 
 # --- Alte Sitemaps ---------------------------------------------------------
 # Der neue Auftritt hat genau eine Sitemap unter /sitemap.xml.
