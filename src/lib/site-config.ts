@@ -34,7 +34,7 @@ export const siteConfig = {
   // Terminbuchung läuft über einen normalen Link zu Calendly — niemals das
   // Calendly-Widget oder deren JavaScript einbinden (Website bleibt
   // cookie- und trackerfrei). Alle CTA-Buttons lesen NUR aus diesem Feld.
-  calendly: "https://calendly.com/molloybusiness-erstgespraech/30min",
+  calendly: "https://calendly.com/molloybusiness/erstgespraech",
   social: {
     instagram: "https://www.instagram.com/molloy_business/",
     facebook: "https://www.facebook.com/profile.php?id=61554803184566",
