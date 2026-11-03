@@ -13,6 +13,11 @@ import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanFilter
+import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
+import android.os.ParcelUuid
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.Color
@@ -50,11 +55,13 @@ class HrService : Service() {
     }
 
     private val main = Handler(Looper.getMainLooper())
-    private var gatt: BluetoothGatt? = null
+    @Volatile private var gatt: BluetoothGatt? = null
     private var address: String? = null
     private var stopping = false
     private var overlay: LinearLayout? = null
     private var bpmView: TextView? = null
+    private var statusView: TextView? = null
+    private var hrScanning = false
     private var zoneBar: ZoneBar? = null
     private var lastBpm = 0
     private var lastUpdate = 0L
@@ -94,10 +101,12 @@ class HrService : Service() {
         stopping = true
         running = false
         main.removeCallbacksAndMessages(null)
+        stopHrScan()
         closeGatt()
         overlay?.let { try { wm.removeView(it) } catch (_: Exception) {} }
         overlay = null
         bpmView = null
+        statusView = null
         zoneBar = null
         super.onDestroy()
     }
@@ -114,7 +123,60 @@ class HrService : Service() {
         }
         setText("♥ …", Color.GRAY)
         val device = adapter.getRemoteDevice(addr)
+        setStatus("Verbinde mit ${device.name ?: addr} …")
         gatt = device.connectGatt(this, false, callback, BluetoothDevice.TRANSPORT_LE)
+        // Verbindung hängt? Nach 15 s neu versuchen und nach HF-Sendern suchen.
+        main.removeCallbacks(connectTimeout)
+        main.postDelayed(connectTimeout, 15_000)
+        startHrScan()
+    }
+
+    private val connectTimeout = Runnable {
+        if (!stopping) {
+            setStatus("Keine Verbindung – neuer Versuch …")
+            closeGatt(); connect()
+        }
+    }
+
+    private val noDataTimeout = Runnable {
+        if (!stopping && System.currentTimeMillis() - lastUpdate > 10_000) {
+            setStatus("Keine Pulsdaten – neuer Versuch …")
+            closeGatt(); connect()
+        }
+    }
+
+    // ---------- Suche nach einem HF-Sender (Uhr sendet evtl. unter eigener Kennung) ----------
+
+    private val hrScanCallback = object : ScanCallback() {
+        override fun onScanResult(callbackType: Int, result: ScanResult) {
+            val addr = result.device.address
+            main.post {
+                if (stopping || addr == address) return@post
+                if (System.currentTimeMillis() - lastUpdate < 5_000) return@post
+                setStatus("HF-Sender gefunden: ${result.scanRecord?.deviceName ?: result.device.name ?: addr}")
+                address = addr
+                prefs.edit().putString("address", addr).apply()
+                stopHrScan()
+                closeGatt(); connect()
+            }
+        }
+    }
+
+    private fun startHrScan() {
+        if (hrScanning) return
+        val scanner = (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter?.bluetoothLeScanner ?: return
+        try {
+            val filter = ScanFilter.Builder().setServiceUuid(ParcelUuid(HR_SERVICE)).build()
+            val settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
+            scanner.startScan(listOf(filter), settings, hrScanCallback)
+            hrScanning = true
+        } catch (_: Exception) {}
+    }
+
+    private fun stopHrScan() {
+        if (!hrScanning) return
+        hrScanning = false
+        try { (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter?.bluetoothLeScanner?.stopScan(hrScanCallback) } catch (_: Exception) {}
     }
 
     private fun closeGatt() {
@@ -131,7 +193,10 @@ class HrService : Service() {
             if (stopping) return
             if (lastUpdate > 0) {
                 val age = System.currentTimeMillis() - lastUpdate
-                if (age > 5_000) setText("♥ --", Color.GRAY, -1.0) else render()
+                if (age > 5_000) {
+                    setText("♥ --", Color.GRAY, -1.0)
+                    if (age > 10_000) { lastUpdate = 0; main.removeCallbacks(noDataTimeout); main.post(noDataTimeout) }
+                } else render()
             }
             main.postDelayed(this, 1_000)
         }
@@ -145,8 +210,13 @@ class HrService : Service() {
 
     private val callback = object : BluetoothGattCallback() {
         override fun onConnectionStateChange(g: BluetoothGatt, status: Int, newState: Int) {
+            if (gatt != null && g != gatt) return   // Meldung einer alten Verbindung
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                main.post { setText("♥ …", Color.LTGRAY) }
+                main.post {
+                    main.removeCallbacks(connectTimeout)
+                    setText("♥ …", Color.LTGRAY)
+                    setStatus("Verbunden – suche Pulsdienst …")
+                }
                 // Android merkt sich die Dienste gekoppelter Geräte; Cache leeren, damit
                 // eine erst später eingeschaltete HF-Übertragung erkannt wird.
                 try { g.javaClass.getMethod("refresh").invoke(g) } catch (_: Exception) {}
@@ -154,21 +224,27 @@ class HrService : Service() {
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 main.post {
                     setText("♥ --", Color.GRAY)
+                    setStatus("Getrennt (Status $status) – neuer Versuch …")
                     scheduleReconnect()
                 }
             }
         }
 
         override fun onServicesDiscovered(g: BluetoothGatt, status: Int) {
+            if (gatt != null && g != gatt) return
             val ch = g.getService(HR_SERVICE)?.getCharacteristic(HR_MEASUREMENT)
             if (ch == null) {
+                val n = g.services.size
                 main.post {
-                    setText("HF senden an Uhr?", Color.GRAY)
+                    setText("♥ …", Color.GRAY)
+                    setStatus("Kein Pulsdienst ($n Dienste) – suche HF-Sender …")
+                    startHrScan()
                     // erneut versuchen, bis an der Uhr die Übertragung läuft
                     if (!stopping) main.postDelayed(reconnect, 5_000)
                 }
                 return
             }
+            main.post { setStatus("Pulsdienst gefunden – fordere Daten an …") }
             g.setCharacteristicNotification(ch, true)
             val desc = ch.getDescriptor(CCCD) ?: return
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -178,6 +254,15 @@ class HrService : Service() {
                 desc.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
                 @Suppress("DEPRECATION")
                 g.writeDescriptor(desc)
+            }
+        }
+
+        override fun onDescriptorWrite(g: BluetoothGatt, d: BluetoothGattDescriptor, status: Int) {
+            if (gatt != null && g != gatt) return
+            main.post {
+                setStatus(if (status == BluetoothGatt.GATT_SUCCESS) "Warte auf Pulsdaten …" else "Anmeldung abgelehnt (Status $status)")
+                main.removeCallbacks(noDataTimeout)
+                main.postDelayed(noDataTimeout, 10_000)
             }
         }
 
@@ -207,6 +292,8 @@ class HrService : Service() {
         main.post {
             lastBpm = bpm
             lastUpdate = System.currentTimeMillis()
+            stopHrScan()
+            setStatus(null)
             render()
         }
     }
@@ -223,6 +310,11 @@ class HrService : Service() {
             text = "♥ …"
         }
         val bar = ZoneBar(this).apply { zone = -1.0 }
+        val statusText = TextView(this).apply {
+            textSize = 10f
+            setTextColor(Color.LTGRAY)
+            maxWidth = (160 * d).toInt()
+        }
         val view = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER_HORIZONTAL
@@ -233,7 +325,9 @@ class HrService : Service() {
             }
             addView(bpmText)
             addView(bar, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { topMargin = (4 * d).toInt() })
+            addView(statusText)
         }
+        statusView = statusText
         bpmView = bpmText
         zoneBar = bar
         params = WindowManager.LayoutParams(
@@ -268,6 +362,14 @@ class HrService : Service() {
         }
         wm.addView(view, params)
         overlay = view
+    }
+
+    /** Kleiner Statustext unter dem Balken; null blendet ihn aus. */
+    private fun setStatus(msg: String?) {
+        statusView?.apply {
+            text = msg ?: ""
+            visibility = if (msg == null) android.view.View.GONE else android.view.View.VISIBLE
+        }
     }
 
     private fun render() {
