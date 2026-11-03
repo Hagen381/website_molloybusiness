@@ -147,7 +147,10 @@ class HrService : Service() {
         override fun onConnectionStateChange(g: BluetoothGatt, status: Int, newState: Int) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 main.post { setText("♥ …", Color.LTGRAY) }
-                g.discoverServices()
+                // Android merkt sich die Dienste gekoppelter Geräte; Cache leeren, damit
+                // eine erst später eingeschaltete HF-Übertragung erkannt wird.
+                try { g.javaClass.getMethod("refresh").invoke(g) } catch (_: Exception) {}
+                main.postDelayed({ try { g.discoverServices() } catch (_: Exception) {} }, 600)
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 main.post {
                     setText("♥ --", Color.GRAY)
@@ -159,7 +162,11 @@ class HrService : Service() {
         override fun onServicesDiscovered(g: BluetoothGatt, status: Int) {
             val ch = g.getService(HR_SERVICE)?.getCharacteristic(HR_MEASUREMENT)
             if (ch == null) {
-                main.post { setText("kein HF", Color.GRAY) }
+                main.post {
+                    setText("HF senden an Uhr?", Color.GRAY)
+                    // erneut versuchen, bis an der Uhr die Übertragung läuft
+                    if (!stopping) main.postDelayed(reconnect, 5_000)
+                }
                 return
             }
             g.setCharacteristicNotification(ch, true)

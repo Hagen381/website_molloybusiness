@@ -3,7 +3,9 @@ package com.molloy.hroverlay
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
@@ -33,7 +35,7 @@ import androidx.core.content.ContextCompat
 @SuppressLint("MissingPermission")
 class MainActivity : Activity() {
 
-    private data class Found(val address: String, val name: String, val isHr: Boolean, var rssi: Int)
+    private data class Found(val address: String, val name: String, val isHr: Boolean, var rssi: Int, val rank: Int, val tag: String)
 
     private lateinit var status: TextView
     private lateinit var adapter: ArrayAdapter<String>
@@ -43,8 +45,26 @@ class MainActivity : Activity() {
     private var scanning = false
 
     private val prefs by lazy { getSharedPreferences("hr", MODE_PRIVATE) }
-    private val scanner by lazy {
-        (getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter?.bluetoothLeScanner
+    private val btManager by lazy { getSystemService(BLUETOOTH_SERVICE) as BluetoothManager }
+    private val scanner get() = btManager.adapter?.bluetoothLeScanner
+
+    private fun looksLikeWatch(name: String?) = name != null &&
+        Regex("garmin|forerunner|fenix|f\u0113nix|venu|vivo|epix|instinct|enduro", RegexOption.IGNORE_CASE).containsMatchIn(name)
+
+    /** Bereits mit dem Handy verbundene bzw. gekoppelte Geräte (z. B. Uhr über Garmin Connect). */
+    private fun addKnownDevices() {
+        val connected = try { btManager.getConnectedDevices(BluetoothProfile.GATT) } catch (_: Exception) { emptyList() }
+        for (dev in connected) {
+            val name = dev.name ?: dev.address
+            found[dev.address] = Found(dev.address, name, false, 0, if (looksLikeWatch(name)) 3 else 2, "verbunden")
+        }
+        val bonded = try { btManager.adapter?.bondedDevices.orEmpty() } catch (_: Exception) { emptySet() }
+        for (dev in bonded) {
+            if (found.containsKey(dev.address)) continue
+            if (dev.type == BluetoothDevice.DEVICE_TYPE_CLASSIC) continue
+            val name = dev.name ?: dev.address
+            found[dev.address] = Found(dev.address, name, false, 0, if (looksLikeWatch(name)) 2 else 1, "gekoppelt")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -159,11 +179,11 @@ class MainActivity : Activity() {
         if (missingPermissions().isNotEmpty()) { requestRuntimePermissions(); return }
         val s = scanner ?: run { toastStatus("Bluetooth ist ausgeschaltet."); return }
         if (scanning) return
-        found.clear(); render()
+        found.clear(); addKnownDevices(); render()
         scanning = true
         val settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
         s.startScan(null, settings, scanCallback)
-        toastStatus("Suche läuft (15 s)… Geräte mit ❤ senden Herzfrequenz.")
+        toastStatus("Suche läuft (15 s)… ❤ = sendet Herzfrequenz, ⌚ = Garmin-Uhr (auch wenn schon über Garmin Connect verbunden – einfach antippen).")
         handler.postDelayed({ stopScan() }, 15_000)
     }
 
@@ -182,17 +202,22 @@ class MainActivity : Activity() {
             if (name == null && !isHr) return
             val addr = result.device.address
             val existing = found[addr]
-            if (existing != null) existing.rssi = result.rssi
-            else found[addr] = Found(addr, name ?: addr, isHr, result.rssi)
+            if (existing != null && !(isHr && !existing.isHr)) existing.rssi = result.rssi
+            else found[addr] = Found(addr, name ?: existing?.name ?: addr, isHr, result.rssi,
+                if (isHr) 4 else if (looksLikeWatch(name)) 2 else 0, existing?.tag ?: "")
             render()
         }
     }
 
     private fun render() {
         sorted.clear()
-        sorted += found.values.sortedWith(compareByDescending<Found> { it.isHr }.thenByDescending { it.rssi })
+        sorted += found.values.sortedWith(compareByDescending<Found> { it.rank }.thenByDescending { it.rssi })
         adapter.clear()
-        adapter.addAll(sorted.map { (if (it.isHr) "❤ " else "    ") + it.name + "   (${it.rssi} dBm)" })
+        adapter.addAll(sorted.map {
+            val icon = when { it.isHr -> "❤ "; looksLikeWatch(it.name) -> "⌚ "; else -> "    " }
+            val info = if (it.tag.isNotEmpty()) it.tag else "${it.rssi} dBm"
+            "$icon${it.name}   ($info)"
+        })
     }
 
     private fun startOverlay(address: String) {
