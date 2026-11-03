@@ -82,18 +82,37 @@ class MainActivity : Activity() {
             setOnClickListener { onClick() }
             root.addView(this, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         }
-        root.addView(TextView(this).apply { text = "Maximale Herzfrequenz (für die Zonen, wie in Garmin Connect):" })
-        root.addView(EditText(this).apply {
-            inputType = InputType.TYPE_CLASS_NUMBER
-            setText(prefs.getInt("maxHr", 190).toString())
-            addTextChangedListener(object : android.text.TextWatcher {
-                override fun afterTextChanged(e: android.text.Editable?) {
-                    e?.toString()?.toIntOrNull()?.takeIf { it in 100..250 }?.let { prefs.edit().putInt("maxHr", it).apply() }
-                }
-                override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
-                override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
-            })
+        root.addView(TextView(this).apply {
+            text = "Herzfrequenzzonen wie in Garmin Connect (Profil › Herzfrequenzzonen): jeweils Untergrenze in bpm, dazu deine max. HF."
         })
+        val labels = arrayOf("Max") + Zones.keys.map { "Z" + it.substring(1) + " ab" }
+        val prefKeys = arrayOf("maxHr") + Zones.keys
+        val fields = mutableListOf<EditText>()
+        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        for (i in labels.indices) {
+            val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+            col.addView(TextView(this).apply { text = labels[i]; textSize = 12f })
+            val f = EditText(this).apply {
+                inputType = InputType.TYPE_CLASS_NUMBER
+                setText(Zones.bounds(prefs).let { b -> if (i == 0) b[5] else b[i - 1] }.toString())
+                val key = prefKeys[i]
+                addTextChangedListener(object : android.text.TextWatcher {
+                    override fun afterTextChanged(e: android.text.Editable?) {
+                        e?.toString()?.toIntOrNull()?.takeIf { it in 40..250 }?.let { prefs.edit().putInt(key, it).apply() }
+                    }
+                    override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
+                    override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
+                })
+            }
+            fields += f
+            col.addView(f)
+            row.addView(col, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        }
+        root.addView(row)
+        button("Zonen aus max. HF berechnen (Garmin-Standard)") {
+            val max = fields[0].text.toString().toIntOrNull() ?: prefs.getInt("maxHr", 190)
+            Zones.defaultBounds(max).forEachIndexed { i, v -> fields[i + 1].setText(v.toString()) }
+        }
         button("1. Berechtigungen erteilen") { requestRuntimePermissions() }
         button("2. Über anderen Apps anzeigen erlauben") {
             startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))

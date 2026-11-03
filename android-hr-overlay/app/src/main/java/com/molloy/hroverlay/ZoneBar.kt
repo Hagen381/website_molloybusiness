@@ -1,6 +1,7 @@
 package com.molloy.hroverlay
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -19,15 +20,27 @@ object Zones {
         Color.rgb(0xFB, 0x8C, 0x00), // Z4 orange
         Color.rgb(0xE5, 0x39, 0x35), // Z5 rot
     )
-    private val lower = doubleArrayOf(0.50, 0.60, 0.70, 0.80, 0.90)
+    private val defaultPct = doubleArrayOf(0.50, 0.60, 0.70, 0.80, 0.90)
+    val keys = arrayOf("z1", "z2", "z3", "z4", "z5")
+
+    /** Standardgrenzen nach Garmin (% der max. HF): Untergrenzen Z1..Z5. */
+    fun defaultBounds(maxHr: Int) = IntArray(5) { Math.round(maxHr * defaultPct[it]).toInt() }
+
+    /** Untergrenzen Z1..Z5 + max. HF – eigene Werte aus den Einstellungen, sonst Standard. */
+    fun bounds(prefs: SharedPreferences): IntArray {
+        val max = prefs.getInt("maxHr", 190)
+        val def = defaultBounds(max)
+        return IntArray(6) { if (it < 5) prefs.getInt(keys[it], def[it]) else max }
+    }
 
     /** Exakte Zone als Kommazahl wie bei Garmin (z. B. 3.4); 0 = unter Zone 1. */
-    fun zoneOf(bpm: Int, maxHr: Int): Double {
-        val pct = bpm.toDouble() / maxHr
-        if (pct < lower[0]) return 0.0
+    fun zoneOf(bpm: Int, b: IntArray): Double {
+        if (bpm < b[0]) return 0.0
         for (i in 4 downTo 0) {
-            if (pct >= lower[i]) {
-                val frac = ((pct - lower[i]) / 0.10).coerceIn(0.0, 0.99)
+            if (bpm >= b[i]) {
+                val upper = if (i < 4) b[i + 1] else b[5]
+                val span = (upper - b[i]).coerceAtLeast(1)
+                val frac = ((bpm - b[i]).toDouble() / span).coerceIn(0.0, 0.99)
                 return i + 1 + frac
             }
         }

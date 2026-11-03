@@ -150,6 +150,9 @@ class HrService : Service() {
     private val hrScanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             val addr = result.device.address
+            val name = result.scanRecord?.deviceName ?: result.device.name
+            // Nur die eigene Uhr akzeptieren, keine fremden Brustgurte in der Nähe
+            if (!isOwnWatch(addr, name)) return
             main.post {
                 if (stopping || addr == address) return@post
                 if (System.currentTimeMillis() - lastUpdate < 5_000) return@post
@@ -160,6 +163,15 @@ class HrService : Service() {
                 closeGatt(); connect()
             }
         }
+    }
+
+    private val watchNames = Regex("garmin|forerunner|fenix|f\u0113nix|venu|vivo|epix|instinct|enduro", RegexOption.IGNORE_CASE)
+
+    private fun isOwnWatch(addr: String, name: String?): Boolean {
+        if (addr == prefs.getString("hrAddress", null)) return true
+        if (name == null) return false
+        if (name == prefs.getString("hrName", null) || name == prefs.getString("name", null)) return true
+        return watchNames.containsMatchIn(name)
     }
 
     private fun startHrScan() {
@@ -292,6 +304,11 @@ class HrService : Service() {
         main.post {
             lastBpm = bpm
             lastUpdate = System.currentTimeMillis()
+            if (hrScanning || prefs.getString("hrAddress", null) != address) {
+                // Diese Kennung liefert Puls -> als eigene Uhr merken
+                prefs.edit().putString("hrAddress", address)
+                    .putString("hrName", gatt?.device?.name ?: prefs.getString("hrName", null)).apply()
+            }
             stopHrScan()
             setStatus(null)
             render()
@@ -373,8 +390,7 @@ class HrService : Service() {
     }
 
     private fun render() {
-        val maxHr = prefs.getInt("maxHr", 190)
-        val zone = Zones.zoneOf(lastBpm, maxHr)
+        val zone = Zones.zoneOf(lastBpm, Zones.bounds(prefs))
         val color = if (zone >= 1) Zones.colors[zone.toInt().coerceIn(1, 5) - 1] else Color.WHITE
         val label = if (zone >= 1) "  Z" + String.format(java.util.Locale.GERMANY, "%.1f", zone) else ""
         setText("♥ $lastBpm$label", color, zone)
