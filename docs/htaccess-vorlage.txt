@@ -183,6 +183,19 @@ RewriteRule ^virtuelle-assistenz/?$                       /blog/ [R=301,L]
 RewriteRule ^tag/                                         /blog/ [R=301,L]
 RewriteRule ^author/                                      /blog/ [R=301,L]
 
+# --- Kategorie-Archive MIT dem WordPress-Standardpraefix --------------------
+# Das Original fuehrte die Archive ohne "category" (siehe oben). Falls Google
+# zusaetzlich die Standardform /category/<name>/ im Index hat, faengt diese
+# Zeile sie ab. Eine eigene Seite mit diesem Anfang gibt es im Nachbau nicht.
+RewriteRule ^category/                                    /blog/ [R=301,L]
+
+# --- Datums-Archive von WordPress ------------------------------------------
+# /2023/ , /2023/05/ und /2023/05/17/ — die Jahres-, Monats- und Tagesarchive,
+# die WordPress automatisch anlegt. Die Regel trifft NUR rein aus Ziffern
+# bestehende Pfade und kann deshalb keine echte Seite erwischen; die
+# Blaetterung des Nachbaus (/blog/2/) beginnt mit "blog" und bleibt unberuehrt.
+RewriteRule ^[0-9]{4}(/[0-9]{2}){0,2}/?$                  /blog/ [R=301,L]
+
 # --- Zweite, dritte ... Seite der alten Blog-Uebersicht ---------------------
 # KEINE Regel mehr. Hier stand frueher
 #   RewriteRule ^blog/[0-9]+/?$   /blog/ [R=301,L]

@@ -273,6 +273,68 @@ Das `(/.*)?` greift nur nach einem Schrägstrich hinter `feed`. Adressen wie
 
 ---
 
+## 7. Nachtrag aus der Search-Console-Meldung vom 09.11.2026
+
+Google meldete am **09.11.2026** „Some fixes failed for Page indexing issues"
+für die Property `https://molloybusiness.com/`: Die zuvor angeforderte
+Überprüfung der Korrektur für **„Nicht gefunden (404)"** ist fehlgeschlagen,
+es seien weiterhin Seiten betroffen.
+
+### 7a. Was die Live-Prüfung ergeben hat
+
+Geprüft wurden am 09.11.2026 alle 86 Alt-Adressen aus dem Archiv
+(`docs/original/html/`) direkt gegen die Live-Seite. Ergebnis: **jede einzelne
+antwortet mit 301 auf das richtige Ziel** oder mit 200, die `.htaccess` ist
+also aktiv und vollständig. `robots.txt` und `sitemap.xml` (30 Adressen) sind
+ebenfalls in Ordnung.
+
+Mit 404 antworten live nur noch:
+
+| Adresse | Bewertung |
+| --- | --- |
+| `/wp-content/…`, `/wp-includes/…`, `/wp-json/…`, `/xmlrpc.php`, `/wp-login.php`, `/wp-admin/` | **Richtig so, siehe unten** |
+| `/category/<name>/` | Lücke — mit 7b geschlossen |
+| `/2023/`, `/2023/05/` … | Lücke — mit 7b geschlossen |
+
+**Warum die Überprüfung trotzdem fehlschlagen kann:** Die technischen
+WordPress-Pfade werden absichtlich nicht weitergeleitet (Begründung im
+Abschnitt „Adressen aus dem Archiv ohne Weiterleitung"). Sie antworten dauerhaft
+mit 404 — korrekt, aber in der Search Console zählen sie weiter als „betroffen".
+Waren sie beim Klick auf „Korrektur überprüfen" in der Liste, **kann** die
+Überprüfung gar nicht gelingen, ohne dass etwas kaputt wäre. Diese Adressen
+gehören in der Search Console nicht weitergeleitet, sondern ausgelassen.
+
+### 7b. Zwei vorsorgliche Sammelregeln
+
+Beide Muster gab es im Archiv nicht als Link, sie sind aber
+WordPress-Standard und können deshalb im Google-Index stehen:
+
+| Alt-URL | Neue URL | Grund |
+| --- | --- | --- |
+| `/category/<name>/` | `/blog/` | Kategorie-Archive in der Standardschreibweise mit Präfix — **vorsorglich 09.11.2026** |
+| `/<Jahr>/`, `/<Jahr>/<Monat>/`, `/<Jahr>/<Monat>/<Tag>/` | `/blog/` | Datums-Archive, die WordPress automatisch anlegt — **vorsorglich 09.11.2026** |
+
+```
+RewriteRule ^category/                      /blog/ [R=301,L]
+RewriteRule ^[0-9]{4}(/[0-9]{2}){0,2}/?$    /blog/ [R=301,L]
+```
+
+> **Geprüft:** Die Datumsregel trifft nur Pfade, die ausschließlich aus Ziffern
+> bestehen. Alle 30 Adressen der aktuellen Sitemap wurden gegen den kompletten
+> Regelsatz getestet — **keine** davon wird von einer Regel erfasst, die
+> Blätterung `/blog/2/` und `/blog/3/` eingeschlossen.
+
+→ **2 neue Sammelregeln**, keine bestehende Zeile verändert.
+
+### 7c. Offen
+
+Die konkrete Liste der noch betroffenen Adressen steht nur in der Search
+Console selbst (Seitenindexierung → „Nicht gefunden (404)" → Beispiele
+exportieren). Ohne sie ist 7b eine begründete Vermutung, kein Beleg. Mit dem
+Export lässt sich in Minuten sagen, ob noch eine echte Adresse fehlt.
+
+---
+
 ## Prüfergebnis
 
 **Existieren alle Zieladressen?** Ja. Jede in dieser Liste genannte neue
