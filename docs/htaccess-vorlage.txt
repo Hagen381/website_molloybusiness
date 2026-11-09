@@ -125,6 +125,14 @@ RewriteRule ^beratung-online-selbststaendigkeit/?$        /angebote/ [R=301,L]
 # Entfallener Blogartikel -> Blog-Uebersicht:
 RewriteRule ^audio-blog-erstellen/?$                      /blog/ [R=301,L]
 
+# --- Nachtrag aus der Google Search Console (09.11.2026) --------------------
+# Einzige Adresse aus dem 404-Bericht, die noch nicht abgedeckt war. Sie ist
+# im Archiv nicht enthalten, war aber eine eigene Seite: das frueher
+# angebotene Online-Business-Management (klassische VA-Leistung). Seit 11/2025
+# liegt der Fokus voll auf Pinterest, das Angebot entfaellt -> Uebersicht,
+# genau wie bei den anderen eingestellten Angeboten weiter oben.
+RewriteRule ^online-business-managerin/?$                 /angebote/ [R=301,L]
+
 
 # ============================================================================
 # TEIL 3 — Weiterleitungen der Blogartikel

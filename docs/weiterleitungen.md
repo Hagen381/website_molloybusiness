@@ -326,12 +326,79 @@ RewriteRule ^[0-9]{4}(/[0-9]{2}){0,2}/?$    /blog/ [R=301,L]
 
 → **2 neue Sammelregeln**, keine bestehende Zeile verändert.
 
-### 7c. Offen
+### 7c. Stand der offenen Frage
 
-Die konkrete Liste der noch betroffenen Adressen steht nur in der Search
-Console selbst (Seitenindexierung → „Nicht gefunden (404)" → Beispiele
-exportieren). Ohne sie ist 7b eine begründete Vermutung, kein Beleg. Mit dem
-Export lässt sich in Minuten sagen, ob noch eine echte Adresse fehlt.
+Beim Schreiben von 7a/7b war die konkrete Liste der betroffenen Adressen noch
+nicht bekannt — 7b war damit eine begründete Vermutung. Die Liste wurde
+**noch am 09.11.2026** in der Search Console eingesehen; sie steht in 7d.
+
+Ergebnis für 7b: Weder `/category/…` noch ein Datums-Archiv stand im Bericht.
+Die beiden Sammelregeln bleiben trotzdem bestehen — sie kosten nichts, können
+keine echte Seite erfassen (gegengeprüft, siehe 7b) und fangen die Muster ab,
+falls Google sie später doch meldet. Sie sind damit Vorsorge, nicht Reparatur.
+
+### 7d. Der tatsächliche Bericht (eingesehen am 09.11.2026)
+
+Der 404-Bericht wurde in der Search Console direkt eingesehen. Stand des
+Berichts: 06.11.2026, jüngster Crawl 02.11.2026. Die Validierung lief vom
+07.09.2026 bis 07.11.2026 und ist fehlgeschlagen. **7 Adressen** waren
+betroffen:
+
+| Adresse | zuletzt gecrawlt | Live-Status am 09.11.2026 | Bewertung |
+| --- | --- | --- | --- |
+| `/wp-includes/js/wp-emoji-release.min.js?ver=7.0.4` | 02.11.2026 | 404 | **Richtig so** — WordPress-Innereien |
+| `/wp-content/themes/oceanwp/*` | 20.08.2026 | 403 | **Richtig so** — WordPress-Innereien |
+| `/ueber-juliette-oppel/` | 01.09.2026 | 301 → `/ueber-mich/` | Erledigt durch Abschnitt 6a |
+| `/audio-blog-erstellen/` | 30.08.2026 | 301 → `/blog/` | Erledigt durch Abschnitt 6a |
+| `/beratung-online-selbststaendigkeit/` | 20.08.2026 | 301 → `/angebote/` | Erledigt durch Abschnitt 6a |
+| `/zussammenarbeit` | 19.07.2026 | 301 → `/kontakt/` | Erledigt durch Abschnitt 4 |
+| `/online-business-managerin/` | 02.11.2026 | **404** | **Echte Lücke** — mit 7e geschlossen |
+
+**Warum die Validierung fehlschlug:** Vier der sieben Adressen wurden zuletzt
+*vor* dem Nachtrag vom 07.09.2026 gecrawlt — ihre Einträge sind veralteter
+Berichtsstand, keine echten Fehler. Übrig bleiben die zwei WordPress-Pfade,
+die absichtlich mit 404 antworten und das deshalb dauerhaft tun werden, sowie
+die eine echte Lücke.
+
+> **Folgerung für die Zukunft:** Eine Validierung dieses Berichts kann nicht
+> gelingen, solange die WordPress-Innereien darin stehen — unabhängig davon,
+> wie vollständig die Weiterleitungen sind. Das ist kein Mangel. Die
+> veralteten Einträge verschwinden von selbst, sobald Google sie neu crawlt.
+
+### 7e. Die geschlossene Lücke
+
+| Alt-URL | Neue URL | Grund |
+| --- | --- | --- |
+| `/online-business-managerin/` | `/angebote/` | Eigene Seite zum früheren Online-Business-Management (klassische VA-Leistung). Im Archiv nicht enthalten, aber indexiert — **Search Console 09.11.2026** |
+
+```
+RewriteRule ^online-business-managerin/?$   /angebote/ [R=301,L]
+```
+
+Seit dem Update 11/2025 liegt der Fokus voll auf Pinterest-Marketing, das
+Angebot entfällt — deshalb dasselbe Ziel wie bei den anderen eingestellten
+Angeboten (`/pinterest-marketing-workshops/`, `/pinterest-content-paket-unternehmen/`,
+`/beratung-online-selbststaendigkeit/`).
+
+> **Abgrenzung geprüft:** Die Regel kollidiert nicht mit dem Kategorie-Archiv
+> `^online-business/?$` → `/blog/` (das verlangt das Wortende direkt nach
+> `online-business`) und nicht mit dem Blogartikel
+> `/blog/online-business-management/`, der unberührt bleibt.
+
+### 7f. Weiterer Befund: alte Sitemap noch eingereicht
+
+In der Search Console ist neben `/sitemap.xml` (eingereicht 24.08.2026,
+zuletzt gelesen 05.11.2026, „Success", 30 Seiten) weiterhin die alte
+`/sitemap_index.xml` eingetragen (eingereicht 15.11.2025, zuletzt gelesen
+01.11.2026, ebenfalls „Success", 30 Seiten). Beide melden dieselben 30 Seiten,
+weil die alte Adresse per 301 auf die neue zeigt (Regel in Teil 5). Schaden
+richtet das keinen an; der Eintrag kann in der Search Console entfernt werden,
+damit die Liste eindeutig ist. `page-sitemap.xml` und `post-sitemap.xml` sind
+dort gar nicht eingetragen.
+
+Sicherheitsprobleme und manuelle Maßnahmen: jeweils ohne Befund.
+
+→ **1 Einzelweiterleitung.**
 
 ---
 
