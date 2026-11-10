@@ -302,40 +302,64 @@ body:has(.blog-artikel) {
 }
 
 /* Angebotskacheln auf /angebote/ (Auftrag 11/2026): abgerundete Ecken (15px,
-   als Tailwind-Klasse am Element), ein leichter Schatten nach unten und eine
-   Klickanimation. Beim Überfahren wird der Schatten etwas kräftiger, beim
-   Drücken sinkt die Kachel minimal ein (kleiner, Schatten kürzer). Kein
-   Abblassen — dafür sorgt bereits der dunkle Schleier beim Überfahren.
+   als Tailwind-Klasse an `.kachel-flaeche`) und ein plastischer 3D-Effekt.
+   Aufbau: der Link `.kachel` ist die feste Klickfläche und bewegt sich nie;
+   darin liegt die sichtbare Fläche `.kachel-flaeche`, die Schatten und
+   Bewegung trägt. So bleibt die ganze Kachel jederzeit klickbar und nichts
+   flackert, wenn sie sich anhebt.
+   - Ruhe: mehrlagiger Schatten — eine enge, dunklere Lage direkt unter der
+     Kante und weiche, weite Lagen darunter. So wirkt die Kachel, als
+     schwebe sie ein Stück über der Fläche.
+   - Überfahren: die Fläche hebt sich um 8px, der Schatten wird größer und
+     weicher.
+   - Klick: die Fläche drückt sich schnell ein (tiefer, kleiner, Schatten
+     ganz kurz) und federt beim Loslassen mit leichtem Überschwingen zurück
+     (cubic-bezier mit Wert > 1).
+   - Kein Abblassen und keine eigene Skalierung des Links — die globale
+     Klickanimation wird hier bewusst abgeschaltet.
+   - "Bewegung reduzieren": keine Bewegung, nur die Schatten ändern sich.
    `isolation: isolate` hält die abgerundeten Ecken auch in Safari sauber,
-   während die Kachel skaliert. */
-.kachel {
+   während sich die Fläche bewegt. */
+.kachel:active {
+  opacity: 1;
+  transform: none;
+}
+
+.kachel-flaeche {
   isolation: isolate;
   box-shadow:
-    0 6px 16px -4px rgba(0, 0, 0, 0.22),
-    0 2px 4px rgba(0, 0, 0, 0.08);
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 14px 28px -6px rgba(0, 0, 0, 0.3),
+    0 30px 50px -20px rgba(0, 0, 0, 0.35);
   transition:
-    transform 0.18s ease,
-    box-shadow 0.25s ease;
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease;
 }
 
 @media (hover: hover) {
-  .kachel:hover {
+  .kachel:hover .kachel-flaeche {
+    transform: translateY(-8px);
     box-shadow:
-      0 12px 28px -6px rgba(0, 0, 0, 0.3),
-      0 3px 6px rgba(0, 0, 0, 0.1);
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.1),
+      0 24px 40px -8px rgba(0, 0, 0, 0.32),
+      0 46px 70px -24px rgba(0, 0, 0, 0.4);
   }
 }
 
-.kachel:active {
-  opacity: 1;
-  transform: scale(0.98);
+.kachel:active .kachel-flaeche {
+  transform: translateY(2px) scale(0.97);
   box-shadow:
-    0 3px 8px -2px rgba(0, 0, 0, 0.25),
-    0 1px 2px rgba(0, 0, 0, 0.08);
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    0 3px 6px -2px rgba(0, 0, 0, 0.22);
+  transition-duration: 0.08s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kachel:active {
+  .kachel-flaeche,
+  .kachel:hover .kachel-flaeche,
+  .kachel:active .kachel-flaeche {
     transform: none;
   }
 }

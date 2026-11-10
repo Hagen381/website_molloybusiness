@@ -564,11 +564,15 @@ export default function AngebotePage() {
           (links und rechts je 20px), Innenabstand 10px, Grafik als
           Hintergrund mit object-cover.
           Auf Wunsch der Markeninhaberin (11/2026): abgerundete Ecken (15px
-          wie die Buttons), ein leichter Schatten nach unten und eine
-          Klickanimation (kurzes Eindrücken). Der Schatten wird beim
-          Überfahren etwas kräftiger. Unter 1024px stehen die Kacheln
-          untereinander, mit 40px Abstand, damit die Schatten nicht
-          ineinanderlaufen.
+          wie die Buttons), ein plastischer Schatten, damit die Kachel über
+          der Fläche schwebt, beim Überfahren ein Anheben und beim Klick ein
+          Eindrücken mit Zurückfedern — Details in globals.css (.kachel).
+          Bewegt wird nur die innere Fläche `.kachel-flaeche`; der Link
+          bleibt als Klickfläche fest stehen. Sonst rutschte die angehobene
+          Kachel am unteren Rand unter dem Mauszeiger weg — sie flackerte,
+          und ein Klick auf den freigewordenen Streifen ginge ins Leere.
+          Unter 1024px stehen die Kacheln untereinander, mit 40px Abstand,
+          damit die Schatten nicht ineinanderlaufen.
           ------------------------------------------------------------------ */}
       <section className="bg-surface">
         <div className="container-page pt-[50px] pb-[80px]">
@@ -578,56 +582,62 @@ export default function AngebotePage() {
                 <Link
                   href={angebot.href}
                   aria-label={angebot.title}
-                  className="kachel group relative mx-[20px] block aspect-[530/373] overflow-hidden rounded-[15px] p-[10px]"
+                  className="kachel group relative mx-[20px] block aspect-[530/373]"
                 >
-                  {/* Die Grafik ist 780×520 (3:2), die Kachel 530×373 —
-                      object-cover beschneidet deshalb links und rechts je rund
-                      20 Bildpixel, die volle Höhe bleibt sichtbar. Der goldene
-                      Titel bleibt unangetastet: er sitzt zwischen x≈54 und
-                      x≈584 der Grafik. */}
-                  <ExportedImage
-                    src={angebot.bild}
-                    alt={angebot.title}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1188px) 530px, (min-width: 1024px) 50vw, 100vw"
-                    basePath={basePath}
-                  />
-                  {/* Schleier — am Original gemessen: #595959, Deckkraft 0.9,
-                      Übergang 0.3s. Im Ruhezustand komplett durchsichtig, die
-                      Grafik bleibt also unangetastet. */}
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-[#595959] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
-                  />
-                  {/* Beschriftung — am Original gemessen: Arial, 30px/50px,
-                      Stärke 600, letter-spacing 1.4px, #D9D9D9, waagerecht und
-                      senkrecht zentriert, Deckkraft 0 → 1 über 1.5s. Sie ist
-                      echter Text im Link und ersetzt damit den früheren
-                      sr-only-Text; keine Bewegung, keine Skalierung.
-                      `group-hover` steckt in Tailwind v4 in @media (hover: hover)
-                      — auf Geräten ohne Mauszeiger bleibt die Beschriftung
-                      also unsichtbar, dort trägt der Titel in der Grafik.
+                  {/* Die sichtbare Kachel. Sie liegt als eigene Fläche im
+                      Link und bewegt sich allein — der Link selbst bleibt als
+                      Klickfläche fest stehen. So reagiert die ganze Kachel
+                      immer auf Klicks, auch wenn sie gerade angehoben ist. */}
+                  <span className="kachel-flaeche absolute inset-0 block overflow-hidden rounded-[15px]">
+                    {/* Die Grafik ist 780×520 (3:2), die Kachel 530×373 —
+                        object-cover beschneidet deshalb links und rechts je rund
+                        20 Bildpixel, die volle Höhe bleibt sichtbar. Der goldene
+                        Titel bleibt unangetastet: er sitzt zwischen x≈54 und
+                        x≈584 der Grafik. */}
+                    <ExportedImage
+                      src={angebot.bild}
+                      alt={angebot.title}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1188px) 530px, (min-width: 1024px) 50vw, 100vw"
+                      basePath={basePath}
+                    />
+                    {/* Schleier — am Original gemessen: #595959, Deckkraft 0.9,
+                        Übergang 0.3s. Im Ruhezustand komplett durchsichtig, die
+                        Grafik bleibt also unangetastet. */}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-[#595959] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
+                    />
+                    {/* Beschriftung — am Original gemessen: Arial, 30px/50px,
+                        Stärke 600, letter-spacing 1.4px, #D9D9D9, waagerecht und
+                        senkrecht zentriert, Deckkraft 0 → 1 über 1.5s. Sie ist
+                        echter Text im Link und ersetzt damit den früheren
+                        sr-only-Text; keine Bewegung, keine Skalierung.
+                        `group-hover` steckt in Tailwind v4 in @media (hover: hover)
+                        — auf Geräten ohne Mauszeiger bleibt die Beschriftung
+                        also unsichtbar, dort trägt der Titel in der Grafik.
 
-                      Dazu gehört der Rahmen des Originals: 1.6px solid #D9D9D9
-                      (im Original ohne Eckenradius; jetzt 6px, damit er zu den
-                      abgerundeten Kachelecken passt), auf der Innenkante des 10px-Innenabstands
-                      der Kachel (`inset-[10px]` → 510×373−20 = 510×353 bei
-                      voller Kachelgröße). Er ist Teil DIESER Fläche und blendet
-                      deshalb mit derselben Deckkraft-Animation über 1.5s ein —
-                      kein eigener Effekt, keine eigene Dauer. Innenabstände im
-                      Rahmen ab 768px die gemessenen 125px oben/unten und 50px
-                      links/rechts; darunter ist die Kachel schmaler, dort
-                      halten 40px/20px die Beschriftung frei von den Kanten,
-                      ohne sie zu quetschen. */}
-                  <span className="pointer-events-none absolute inset-[10px] flex items-center justify-center rounded-[6px] border-[1.6px] border-[#D9D9D9] px-[20px] py-[40px] text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 md:px-[50px] md:py-[125px]">
-                    <span>
-                      {angebot.beschriftung.map((zeile, zeilenIndex) => (
-                        <Fragment key={zeile}>
-                          {zeilenIndex > 0 && <br />}
-                          {zeile}
-                        </Fragment>
-                      ))}
+                        Dazu gehört der Rahmen des Originals: 1.6px solid #D9D9D9
+                        (im Original ohne Eckenradius; jetzt 6px, damit er zu den
+                        abgerundeten Kachelecken passt), auf der Innenkante des 10px-Innenabstands
+                        der Kachel (`inset-[10px]` → 510×373−20 = 510×353 bei
+                        voller Kachelgröße). Er ist Teil DIESER Fläche und blendet
+                        deshalb mit derselben Deckkraft-Animation über 1.5s ein —
+                        kein eigener Effekt, keine eigene Dauer. Innenabstände im
+                        Rahmen ab 768px die gemessenen 125px oben/unten und 50px
+                        links/rechts; darunter ist die Kachel schmaler, dort
+                        halten 40px/20px die Beschriftung frei von den Kanten,
+                        ohne sie zu quetschen. */}
+                    <span className="pointer-events-none absolute inset-[10px] flex items-center justify-center rounded-[6px] border-[1.6px] border-[#D9D9D9] px-[20px] py-[40px] text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 md:px-[50px] md:py-[125px]">
+                      <span>
+                        {angebot.beschriftung.map((zeile, zeilenIndex) => (
+                          <Fragment key={zeile}>
+                            {zeilenIndex > 0 && <br />}
+                            {zeile}
+                          </Fragment>
+                        ))}
+                      </span>
                     </span>
                   </span>
                 </Link>

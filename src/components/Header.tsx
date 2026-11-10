@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExportedImage from "next-image-export-optimizer";
 import logo from "@/assets/images/logo.png";
 import { navigation } from "@/lib/site-config";
@@ -39,6 +39,17 @@ function isNavItemActive(
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Safari auf iPhone und iPad zeigt den :active-Zustand (und damit die
+  // Klickanimation aus globals.css) nur, wenn die Seite irgendwo einen
+  // touchstart-Listener hat. Der Header steckt in jeder Seite, deshalb sitzt
+  // der leere Listener hier. `passive` hält das Scrollen unbeeinflusst.
+  useEffect(() => {
+    const leer = () => {};
+    document.addEventListener("touchstart", leer, { passive: true });
+    return () => document.removeEventListener("touchstart", leer);
+  }, []);
+
   const pathname = usePathname() ?? "/";
 
   return (
