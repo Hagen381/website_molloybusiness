@@ -10,6 +10,7 @@ import kachelAufbau from "@/assets/images/angebote/PinterestAccountAufbau.png";
 import kachelManagement from "@/assets/images/angebote/PinterestAccountManagement.png";
 import kachelStrategie from "@/assets/images/angebote/Pinterest-Strategie-Call.png";
 import kachelAudit from "@/assets/images/angebote/Pinterest-Audit.png";
+import kachelSchaufenster from "@/assets/images/angebote/PinterestSchaufenster.png";
 import fotoDaniela from "@/assets/images/angebote/DanielaBatistadosSantos.jpg";
 import fotoJudithGastner from "@/assets/images/angebote/JudithGastner.jpg";
 import fotoJulia from "@/assets/images/angebote/JuliaKallenborn.jpg";
@@ -75,11 +76,13 @@ const H2_ABSCHLUSS =
   "font-heading font-normal tracking-[1.4px] text-white text-[28px] leading-[40px]";
 
 // ---------------------------------------------------------------------------
-// Die vier Angebote. Titel und Route kommen aus site-config; hier steht nur
-// noch die Kachelgrafik und die Beschriftung. Es sind die Originalgrafiken der
-// alten Seite (780×520) mit eingebranntem Angebotstitel — gold, oben links. Aus
-// ihnen wurden Preise und Zahlungskonditionen entfernt, sonst sind sie
-// unverändert.
+// Die fünf Angebote. Titel und Route kommen aus site-config; hier steht nur
+// noch die Kachelgrafik und die Beschriftung. Vier davon sind die
+// Originalgrafiken der alten Seite (780×520) mit eingebranntem Angebotstitel —
+// gold, oben links. Aus ihnen wurden Preise und Zahlungskonditionen entfernt,
+// sonst sind sie unverändert. Die fünfte (PinterestSchaufenster.png) ist aus
+// der Account-Aufbau-Grafik abgeleitet: neuer Titel in Antic Didone, auf den
+// Bildschirmen die neue Überschrift sowie 4 Pinnwände und 40 Pins.
 // `beschriftung` ist die HTML-Beschriftung des Originals, Zeile für Zeile und
 // mit dessen Zeilenumbruch (dort ein <br> in der verlinkten Überschrift). Sie
 // liegt im Ruhezustand auf Deckkraft 0 — sichtbar ist dann nur der goldene
@@ -90,6 +93,11 @@ const kacheln = [
     href: "/pinterest-account-aufbau/",
     bild: kachelAufbau,
     beschriftung: ["PINTEREST", "ACCOUNT AUFBAU"],
+  },
+  {
+    href: "/pinterest-schaufenster/",
+    bild: kachelSchaufenster,
+    beschriftung: ["PINTEREST", "SCHAUFENSTER"],
   },
   {
     href: "/pinterest-account-management/",
@@ -545,32 +553,32 @@ export default function AngebotePage() {
       </section>
 
       {/* ------------------------------------------------------------------
-          Die vier Angebots-Kacheln. Im Original steht jede Kachel als
-          eigene Spalte (elementor-col-50) in einem Abschnitt mit zwei Spalten
-          von je 570px OHNE Spaltenabstand — bei vier Kacheln also zwei
-          Abschnitte. Am Original gemessen: Hintergrund #FFFFFF,
-          Reihe 1 50px/50px, Reihe 2 50px/80px.
-          Kachel selbst: Grafikfläche 530×373, Eckenradius 0, mittig in der
-          570er Spalte — links und rechts bleiben je 20px des weißen
-          Abschnittshintergrunds (#FFFFFF) frei. Das ist keine eigene
-          Rahmenlinie, sondern genau der Rand, der beim Überfahren als weißer
-          Rahmen um die abgedunkelte Kachel sichtbar wird.
-          Innenabstand 10px, Grafik als Hintergrund mit object-cover.
+          Die fünf Angebots-Kacheln. Im Original standen die (damals vier)
+          Kacheln als je zwei Spalten von 570px OHNE Spaltenabstand in zwei
+          Abschnitten — Reihe 1 50px/50px, Reihe 2 50px/80px, Hintergrund
+          #FFFFFF. Jetzt ein umbrechendes Raster in EINEM Abschnitt mit
+          denselben Maßen: 50px oben, 80px unten, zwischen den Reihen 100px
+          (= 50px + 50px wie bisher). Je Reihe zwei Kacheln, eine übrige
+          Kachel steht mittig.
+          Kachel selbst: Grafikfläche 530×373, mittig in der 570er Spalte
+          (links und rechts je 20px), Innenabstand 10px, Grafik als
+          Hintergrund mit object-cover.
+          Auf Wunsch der Markeninhaberin (11/2026): abgerundete Ecken (15px
+          wie die Buttons), ein leichter Schatten nach unten und eine
+          Klickanimation (kurzes Eindrücken). Der Schatten wird beim
+          Überfahren etwas kräftiger. Unter 1024px stehen die Kacheln
+          untereinander, mit 40px Abstand, damit die Schatten nicht
+          ineinanderlaufen.
           ------------------------------------------------------------------ */}
-      {[angebote.slice(0, 2), angebote.slice(2, 4)].map((reihe, reiheIndex) => (
-        <section key={reiheIndex} className="bg-surface">
-          <div
-            className={`container-page pt-[50px] ${
-              reiheIndex === 0 ? "pb-[50px]" : "pb-[80px]"
-            }`}
-          >
-            <div className="grid gap-0 lg:grid-cols-2">
-              {reihe.map((angebot) => (
+      <section className="bg-surface">
+        <div className="container-page pt-[50px] pb-[80px]">
+          <div className="flex flex-wrap justify-center gap-y-[40px] lg:gap-y-[100px]">
+            {angebote.map((angebot) => (
+              <div key={angebot.href} className="w-full lg:w-1/2">
                 <Link
-                  key={angebot.href}
                   href={angebot.href}
                   aria-label={angebot.title}
-                  className="group relative mx-[20px] block aspect-[530/373] overflow-hidden p-[10px]"
+                  className="kachel group relative mx-[20px] block aspect-[530/373] overflow-hidden rounded-[15px] p-[10px]"
                 >
                   {/* Die Grafik ist 780×520 (3:2), die Kachel 530×373 —
                       object-cover beschneidet deshalb links und rechts je rund
@@ -601,8 +609,9 @@ export default function AngebotePage() {
                       — auf Geräten ohne Mauszeiger bleibt die Beschriftung
                       also unsichtbar, dort trägt der Titel in der Grafik.
 
-                      Dazu gehört der Rahmen des Originals: 1.6px solid #D9D9D9,
-                      Eckenradius 0, auf der Innenkante des 10px-Innenabstands
+                      Dazu gehört der Rahmen des Originals: 1.6px solid #D9D9D9
+                      (im Original ohne Eckenradius; jetzt 6px, damit er zu den
+                      abgerundeten Kachelecken passt), auf der Innenkante des 10px-Innenabstands
                       der Kachel (`inset-[10px]` → 510×373−20 = 510×353 bei
                       voller Kachelgröße). Er ist Teil DIESER Fläche und blendet
                       deshalb mit derselben Deckkraft-Animation über 1.5s ein —
@@ -611,7 +620,7 @@ export default function AngebotePage() {
                       links/rechts; darunter ist die Kachel schmaler, dort
                       halten 40px/20px die Beschriftung frei von den Kanten,
                       ohne sie zu quetschen. */}
-                  <span className="pointer-events-none absolute inset-[10px] flex items-center justify-center border-[1.6px] border-[#D9D9D9] px-[20px] py-[40px] text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 md:px-[50px] md:py-[125px]">
+                  <span className="pointer-events-none absolute inset-[10px] flex items-center justify-center rounded-[6px] border-[1.6px] border-[#D9D9D9] px-[20px] py-[40px] text-center font-body text-[30px] leading-[50px] font-semibold tracking-[1.4px] text-[#D9D9D9] opacity-0 transition-opacity duration-1500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 md:px-[50px] md:py-[125px]">
                     <span>
                       {angebot.beschriftung.map((zeile, zeilenIndex) => (
                         <Fragment key={zeile}>
@@ -622,11 +631,11 @@ export default function AngebotePage() {
                     </span>
                   </span>
                 </Link>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
       {/* ------------------------------------------------------------------
           6) Kundenstimmen-Kopf — am Original gemessen: Hintergrund #D9D9D9,

@@ -74,6 +74,10 @@ export const navigation = {
           label: "Pinterest Account Aufbau für Unternehmen",
           href: "/pinterest-account-aufbau/",
         },
+        {
+          label: "Pinterest Account als digitales Schaufenster",
+          href: "/pinterest-schaufenster/",
+        },
         { label: "Pinterest Strategie Call", href: "/pinterest-strategie-call/" },
         { label: "Pinterest Audit", href: "/pinterest-audit/" },
       ],
@@ -107,6 +111,11 @@ export const sitePages = [
   },
   {
     path: "/pinterest-account-aufbau/",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/pinterest-schaufenster/",
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -424,6 +433,16 @@ export const services = [
     href: "/pinterest-account-aufbau/",
     scope:
       "Profil, 8 strategische Pinnwände und 50 gestaltete Pins – inklusive zwei Korrekturschleifen.",
+  },
+  {
+    // Kompakte Variante des Account Aufbaus für kleine Unternehmen: dieselben
+    // Leistungen, aber 4 statt 8 Pinnwände und 40 statt 50 Pins.
+    title: "Pinterest Account als digitales Schaufenster",
+    description:
+      "Kompakter Pinterest Account Aufbau für kleine Unternehmen: Mitbewerberanalyse, Keyword-Recherche, Profil, 4 thematisch passende Pinnwände und 40 gestaltete Pins.",
+    href: "/pinterest-schaufenster/",
+    scope:
+      "Profil, 4 thematisch passende Pinnwände und 40 gestaltete Pins – inklusive zwei Korrekturschleifen.",
   },
   {
     title: "Pinterest Strategie Call",

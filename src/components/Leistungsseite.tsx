@@ -6,11 +6,12 @@ import { siteConfig } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 // ---------------------------------------------------------------------------
-// Gemeinsame Darstellung der vier Leistungsseiten (Account Aufbau, Account
-// Management, Strategie Call, Audit). Die vier Seiten sind baugleich: Hero auf
-// #D9D9D9, darunter der Zielgruppen-Abschnitt auf dem cremen Body-Grund, die
-// Angebotskarte, ein Cross-Sell-Abschnitt und der Abschluss-CTA. Diese Datei
-// hält den Aufbau, die vier `page.tsx` liefern nur noch die Datensätze.
+// Gemeinsame Darstellung der fünf Leistungsseiten (Account Aufbau, digitales
+// Schaufenster, Account Management, Strategie Call, Audit). Die Seiten sind
+// baugleich: Hero auf #D9D9D9, darunter der Zielgruppen-Abschnitt auf dem
+// cremen Body-Grund, die Angebotskarte, ein Cross-Sell-Abschnitt und der
+// Abschluss-CTA. Diese Datei hält den Aufbau, die einzelnen `page.tsx`
+// liefern nur noch die Datensätze.
 //
 // Alle Maße sind am Original bei 1536px nachgemessen. NICHT ohne
 // ausdrücklichen Auftrag ändern.
